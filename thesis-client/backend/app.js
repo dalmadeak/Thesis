@@ -57,4 +57,39 @@ app.get('/api/posts',(req, res, next) => {
     });
 });
 
+app.post('/api/hirek', (req, res, next) => {
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
+  });
+  // console.log(post);
+  post.save();
+  res.status(201).json({
+    message: 'Post added successfully'
+  })
+})
+
+app.get('/api/hirek',(req, res, next) => {
+  /*const posts = [
+    {
+      id: '00001',
+      title: 'First post',
+      content: 'First post\'s content from the server'
+    },
+    {
+      id: '00002',
+      title: 'Second post',
+      content: 'Second post\'s content from the server'
+    }
+  ];*/
+  Post.find() // returns all entries
+    .then(documents => {
+      console.log(documents);
+      res.status(200).json({
+        message: 'Posts fetched succesfully',
+        posts: documents
+      });
+    });
+});
+
 module.exports = app;
