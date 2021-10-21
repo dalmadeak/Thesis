@@ -8,7 +8,7 @@ nav {
   font-family: 'Montserrat', sans-serif;
   background-color: #3A3C46;
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -83,4 +83,23 @@ ul li ul li {
 .subnav-item {
   font-size: 14px;
   font-weight: normal;
+}
+
+.arrow {
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: 7px;
+  margin-bottom: 2px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }

@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-body {
-  margin: 0px 0px 0px 0px;
-}
-
 #header {
   background-color: #13294B;
   background-image: url("../../assets/images/header-background.png");
@@ -12,6 +8,8 @@ body {
   background-size: cover;
   height: 120px;
   width: 100%;
+  display: block;
+  overflow: hidden;
 }
 
 #headerContent{
