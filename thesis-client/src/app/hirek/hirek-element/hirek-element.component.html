@@ -1,6 +1,8 @@
 <div class="postContainer">
-  <div *ngFor="let hir of hirekObject" class="post">
-    <!-- this is where one post goes -->
-
-  </div>
+    <div class="post" *ngFor="let hir of hirekObject.slice().reverse()">
+      <!-- this is where one post goes -->
+        <p class="postHeader">{{ hir.title }}</p>
+        <p class="postContent">{{ hir.content }}</p>
+        <p class="postData">{{ hir.date }}</p>
+    </div>
 </div>
