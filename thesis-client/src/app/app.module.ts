@@ -10,6 +10,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HirekComponent } from './hirek/hirek.component';
 import { HirekSliderComponent } from './hirek/hirek-slider/hirek-slider.component';
 import { HirekElementComponent } from './hirek/hirek-element/hirek-element.component';
+import { UlesekComponent } from './ulesek/ulesek.component';
+import { UlesekNavbarComponent } from './ulesek/ulesek-navbar/ulesek-navbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HirekElementComponent } from './hirek/hirek-element/hirek-element.compo
     NavbarComponent,
     HirekComponent,
     HirekSliderComponent,
-    HirekElementComponent
+    HirekElementComponent,
+    UlesekComponent,
+    UlesekNavbarComponent
   ],
   imports: [
     BrowserModule,

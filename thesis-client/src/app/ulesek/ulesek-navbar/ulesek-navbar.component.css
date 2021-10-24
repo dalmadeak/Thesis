@@ -1,0 +1,46 @@
+a {
+  text-decoration: none;
+}
+
+nav {
+  margin: 1rem auto;
+  display: flex;
+}
+
+ul {
+  list-style: none;
+  margin: auto;
+  padding-left: 0;
+}
+
+li {
+  color: #fff;
+  background: #3A3C46;
+  display: inline-block;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.2s;
+}
+
+li a {
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+li:hover,
+li:focus-within {
+  background: #2B2C33;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+li:focus-within a {
+  outline: none;
+}
+
+.nav-item {
+  font-size: 13px;
+  font-weight: bold;
+}
+
