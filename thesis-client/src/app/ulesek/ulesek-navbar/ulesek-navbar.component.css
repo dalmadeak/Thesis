@@ -3,6 +3,7 @@ a {
 }
 
 nav {
+  width: 100%;
   margin: 1rem auto;
   display: flex;
 }
@@ -15,17 +16,18 @@ ul {
 
 li {
   color: #fff;
-  background: #3A3C46;
-  display: inline-block;
+  background-color: #3A3C46;
   padding: 1rem;
   position: relative;
   text-decoration: none;
   transition-duration: 0.2s;
+  float: left;
 }
 
 li a {
   color: #FFFFFF;
   white-space: nowrap;
+  display: block;
 }
 
 li:hover,
@@ -43,4 +45,3 @@ li:focus-within a {
   font-size: 13px;
   font-weight: bold;
 }
-

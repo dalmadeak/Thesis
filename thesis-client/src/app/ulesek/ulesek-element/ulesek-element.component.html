@@ -1,0 +1,27 @@
+<div class="postContainer">
+    <div class="post" *ngFor="let ules of ulesekObject.slice().reverse()">
+      <!-- this is where one post goes -->
+        <p class="postHeader">
+          ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülés - {{ ules.meetingDate }}
+        </p>
+        <div class="postContent">
+            <p>Tisztelt Küldöttek, Tisztségviselők! Kedves Hallgatók!</p>
+
+            <p>Összehívom az ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülését.<br>
+            <b>Időpont:</b> {{ ules.meetingDate }}<br>
+            <b>Helyszín:</b> IK HÖK iroda (1117 Budapest, Pázmány Péter sétány 1/a, -1.66/B).<br></p>
+
+            <p>Az előzetes napirendi pontok a következők:</p>
+            <ol>
+              <li>Tájékoztató</li>
+              <li>Feladatok</li>
+              <li>Egyebek</li>
+            </ol><br>
+          <p>Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat {{ ules.author }} e-mail címre várom.<br></p>
+
+          <p>Tisztelettel,</p>
+          <p>{{ ules.author }}</p>
+        </div>
+        <p class="postData">{{ ules.postDate }}</p>
+    </div>
+</div>
