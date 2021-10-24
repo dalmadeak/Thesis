@@ -16,8 +16,9 @@
               <li>Tájékoztató</li>
               <li>Feladatok</li>
               <li>Egyebek</li>
-            </ol><br>
-          <p>Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat {{ ules.author }} e-mail címre várom.<br></p>
+            </ol>
+          <p *ngIf="['a','e','i','o','u'].includes(ules.author.charAt(0)); else elseBlock">Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat az {{ ules.author }} e-mail címre várom.<br></p>
+          <ng-template #elseBlock>Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat a {{ ules.author }} e-mail címre várom.<br></ng-template>
 
           <p>Tisztelettel,</p>
           <p>{{ ules.author }}</p>

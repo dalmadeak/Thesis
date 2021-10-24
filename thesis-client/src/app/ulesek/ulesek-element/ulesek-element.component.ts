@@ -82,7 +82,7 @@ export class UlesekElementComponent {
     type:  this.ulesTypesArray[1],
     meetingDate: '2021. október 28. 18:00',
     postDate: '2021. október 26. 16:00',
-    author: 'elnok@ikhok.elte.hu'
+    author: 'kulugy@ikhok.elte.hu'
   }];
 
   getProperty(obj : Object, property : string){
