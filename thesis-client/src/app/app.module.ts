@@ -13,6 +13,9 @@ import { HirekElementComponent } from './hirek/hirek-element/hirek-element.compo
 import { UlesekComponent } from './ulesek/ulesek.component';
 import { UlesekNavbarComponent } from './ulesek/ulesek-navbar/ulesek-navbar.component';
 import { UlesekElementComponent } from './ulesek/ulesek-element/ulesek-element.component';
+import { SzervezetComponent } from './szervezet/szervezet.component';
+import { SzervezetElnoksegComponent } from './szervezet/szervezet-elnokseg/szervezet-elnokseg.component';
+import { SzervezetKabinetComponent } from './szervezet/szervezet-kabinet/szervezet-kabinet.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { UlesekElementComponent } from './ulesek/ulesek-element/ulesek-element.c
     HirekElementComponent,
     UlesekComponent,
     UlesekNavbarComponent,
-    UlesekElementComponent
+    UlesekElementComponent,
+    SzervezetComponent,
+    SzervezetElnoksegComponent,
+    SzervezetKabinetComponent
   ],
   imports: [
     BrowserModule,

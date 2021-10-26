@@ -1,0 +1,41 @@
+.container {
+  margin: 30px auto;
+  max-width: 55%;
+  border-collapse: separate;
+  border-spacing: 100px 20px;
+  overflow: hidden;
+}
+
+.profilePicture {
+  width: 300px;
+  height: 380px;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contactInfo {
+  background-color: #F1F2F1;
+  width: 350px;
+  height: auto;
+  padding: 20px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.contactRight {
+  border-left: 15px solid #13294B;
+}
+
+.contactLeft {
+  border-right: 15px solid #13294B;
+}
+
+.name {
+  font-size: 16px;
+}
+
+.info {
+  font-size: 14px;
+}
