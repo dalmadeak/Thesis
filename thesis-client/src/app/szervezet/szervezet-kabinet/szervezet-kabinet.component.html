@@ -1,0 +1,20 @@
+<table class="container">
+  <div *ngFor="let tag of kabinetObject; let odd=odd;" class="elementContainer">
+    <tr *ngIf="odd; else elseBlock">
+      <td><div class="contactInfo contactLeft">
+        <p class="name"><b>{{ tag.name }}</b></p><br>
+        <p class="info">{{ tag.position }}</p>
+        <p class="info">{{ tag.contact }}</p>
+      </div></td>
+      <td><img class="profilePicture" src="{{tag.image}}"></td>
+    </tr>
+    <ng-template #elseBlock>
+      <td><img class="profilePicture" src="{{tag.image}}"></td>
+      <td><div class="contactInfo contactRight">
+        <p class="name"><b>{{ tag.name }}</b></p><br>
+        <p class="info">{{ tag.position }}</p>
+        <p class="info">{{ tag.contact }}</p>
+      </div></td>
+    </ng-template>
+  </div>
+</table>
