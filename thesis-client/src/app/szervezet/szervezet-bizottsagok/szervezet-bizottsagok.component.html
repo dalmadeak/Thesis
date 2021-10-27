@@ -1,0 +1,12 @@
+<div class="container">
+<table *ngFor="let committee of committeesObject">
+    <tr>
+      <th>{{ committee.name }}</th>
+    </tr>
+    <tr *ngFor="let member of committee.members">
+      <td>{{ member.name }}</td>
+      <td>{{ member.position }}</td>
+      <td>{{ member.contact }}</td>
+    </tr>
+</table>
+</div>
