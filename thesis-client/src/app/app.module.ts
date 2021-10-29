@@ -17,7 +17,7 @@ import { SzervezetComponent } from './szervezet/szervezet.component';
 import { SzervezetElnoksegComponent } from './szervezet/szervezet-elnokseg/szervezet-elnokseg.component';
 import { SzervezetKabinetComponent } from './szervezet/szervezet-kabinet/szervezet-kabinet.component';
 import { SzervezetBizottsagokComponent } from './szervezet/szervezet-bizottsagok/szervezet-bizottsagok.component';
-
+import { SzervezetKuldottgyulesComponent } from './szervezet/szervezet-kgy/szervezet-kgy.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { SzervezetBizottsagokComponent } from './szervezet/szervezet-bizottsagok
     SzervezetComponent,
     SzervezetElnoksegComponent,
     SzervezetKabinetComponent,
-    SzervezetBizottsagokComponent
+    SzervezetBizottsagokComponent,
+    SzervezetKuldottgyulesComponent
   ],
   imports: [
     BrowserModule,
