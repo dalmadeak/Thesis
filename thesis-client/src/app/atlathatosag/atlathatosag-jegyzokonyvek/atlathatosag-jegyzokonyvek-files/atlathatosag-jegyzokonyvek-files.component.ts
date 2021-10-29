@@ -1,0 +1,51 @@
+import { Component } from "@angular/core";
+import { faDownload, faFile, faFilePdf, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+
+@Component({
+  selector: 'app-atlathatosag-jegyzokonyvek-files',
+  templateUrl: './atlathatosag-jegyzokonyvek-files.component.html',
+  styleUrls: ['./atlathatosag-jegyzokonyvek-files.component.css']
+})
+export class AtlathatosagJegyzokonyvekFilesComponent {
+  faFile = faFile;
+  faDownload = faDownload;
+  faFilePdf = faFilePdf;
+  faChevronDown = faChevronDown;
+
+  jegyzokonyvekObject = [
+  {
+    name: 'asd.pdf',
+    meetingDate: '2021. október 10.',
+    uploadDate: '2021. október 15.',
+    committee: 'kgy',
+    path: '../../../../assets/images/header-background.png'
+  },
+  {
+    name: 'asd2.pdf',
+    meetingDate: '2021. október 12.',
+    uploadDate: '2021. október 15.',
+    committee: 'elnokseg',
+    path: '../../../../assets/images/header-background.png'
+  },
+  {
+    name: 'asd3.pdf',
+    meetingDate: '2021. október 15.',
+    uploadDate: '2021. október 20.',
+    committee: 'hjb',
+    path: '../../../../assets/images/header-background.png'
+  },
+  {
+    name: 'asd4.pdf',
+    meetingDate: '2021. október 20.',
+    uploadDate: '2021. október 22.',
+    committee: 'elnokseg',
+    path: '../../../../assets/images/header-background.png'
+  },
+  {
+    name: 'asd5.pdf',
+    meetingDate: '2021. október 21.',
+    uploadDate: '2021. október 27.',
+    committee: 'tb',
+    path: '../../../../assets/images/header-background.png'
+  }];
+}
