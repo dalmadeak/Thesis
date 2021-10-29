@@ -16,6 +16,8 @@ import { UlesekElementComponent } from './ulesek/ulesek-element/ulesek-element.c
 import { SzervezetComponent } from './szervezet/szervezet.component';
 import { SzervezetElnoksegComponent } from './szervezet/szervezet-elnokseg/szervezet-elnokseg.component';
 import { SzervezetKabinetComponent } from './szervezet/szervezet-kabinet/szervezet-kabinet.component';
+import { SzervezetBizottsagokComponent } from './szervezet/szervezet-bizottsagok/szervezet-bizottsagok.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { SzervezetKabinetComponent } from './szervezet/szervezet-kabinet/szervez
     UlesekElementComponent,
     SzervezetComponent,
     SzervezetElnoksegComponent,
-    SzervezetKabinetComponent
+    SzervezetKabinetComponent,
+    SzervezetBizottsagokComponent
   ],
   imports: [
     BrowserModule,
