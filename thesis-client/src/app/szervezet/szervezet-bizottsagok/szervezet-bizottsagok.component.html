@@ -1,9 +1,12 @@
 <div class="container">
 <table *ngFor="let committee of committeesObject">
     <tr>
-      <th>{{ committee.name }}</th>
+      <th colspan="3">{{ committee.name }}</th>
     </tr>
-    <tr *ngFor="let member of committee.members">
+    <tr *ngIf="committee.brief.length > 0">
+      <td class="committeeBrief" colspan="3">{{ committee.brief }}</td>
+    </tr>
+    <tr *ngFor="let member of committee.members" class="membersInfo">
       <td>{{ member.name }}</td>
       <td>{{ member.position }}</td>
       <td>{{ member.contact }}</td>
