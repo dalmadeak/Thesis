@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,11 @@ import { SzervezetElnoksegComponent } from './szervezet/szervezet-elnokseg/szerv
 import { SzervezetKabinetComponent } from './szervezet/szervezet-kabinet/szervezet-kabinet.component';
 import { SzervezetBizottsagokComponent } from './szervezet/szervezet-bizottsagok/szervezet-bizottsagok.component';
 import { SzervezetKuldottgyulesComponent } from './szervezet/szervezet-kgy/szervezet-kgy.component';
+import { AtlathatosagComponent } from './atlathatosag/atlathatosag.component';
+import { AtlathatosagNavbarComponent } from './atlathatosag/atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek-navbar/atlathatosag-navbar.component';
+import { AtlathatosagJegyzokonyvekFilesComponent } from './atlathatosag/atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek-files/atlathatosag-jegyzokonyvek-files.component';
+
+
 
 @NgModule({
   declarations: [
@@ -34,13 +40,17 @@ import { SzervezetKuldottgyulesComponent } from './szervezet/szervezet-kgy/szerv
     SzervezetElnoksegComponent,
     SzervezetKabinetComponent,
     SzervezetBizottsagokComponent,
-    SzervezetKuldottgyulesComponent
+    SzervezetKuldottgyulesComponent,
+    AtlathatosagComponent,
+    AtlathatosagNavbarComponent,
+    AtlathatosagJegyzokonyvekFilesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
