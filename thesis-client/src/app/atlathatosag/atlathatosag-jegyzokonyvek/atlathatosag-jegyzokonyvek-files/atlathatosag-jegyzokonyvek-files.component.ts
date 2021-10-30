@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { faDownload, faFile, faFilePdf, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-atlathatosag-jegyzokonyvek-files',
@@ -11,6 +11,7 @@ export class AtlathatosagJegyzokonyvekFilesComponent {
   faDownload = faDownload;
   faFilePdf = faFilePdf;
   faChevronDown = faChevronDown;
+  faFileZip = faFileArchive;
 
   jegyzokonyvekObject = [
   {
@@ -59,5 +60,10 @@ export class AtlathatosagJegyzokonyvekFilesComponent {
 
   onSortByUploadDate(){
     return this.jegyzokonyvekObject.sort((a,b) => (a.uploadDate > b.uploadDate) ? 1 : -1);
+  }
+
+  getFileExtension(fileName : string) {
+    console.log(fileName.substr(fileName.indexOf('.')));
+    return fileName.substr(fileName.indexOf('.'));
   }
 }
