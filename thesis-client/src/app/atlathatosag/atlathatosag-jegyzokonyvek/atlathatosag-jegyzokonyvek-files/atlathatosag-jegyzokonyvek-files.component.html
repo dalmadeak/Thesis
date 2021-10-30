@@ -1,9 +1,9 @@
 <table class="container">
   <tr class="header">
     <th class="centeredClass"><fa-icon [icon]="faFile"></fa-icon></th>
-    <th>Név <fa-icon [icon]="faChevronDown"></fa-icon></th>
-    <th>Ülés dátuma <fa-icon [icon]="faChevronDown"></fa-icon></th>
-    <th>Feltöltés dátuma <fa-icon [icon]="faChevronDown"></fa-icon></th>
+    <th>Név <button (click)="onSortByName()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
+    <th>Ülés dátuma <button (click)="onSortByMeetingDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
+    <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
     <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
   </tr>
   <tr class="filesData" *ngFor="let file of jegyzokonyvekObject">
@@ -11,6 +11,6 @@
     <td>{{file.name}}</td>
     <td>{{file.meetingDate}}</td>
     <td>{{file.uploadDate}}</td>
-    <td><a href="{{file.path}}" download="{{file.name}}">Letöltés</a></td>
+    <td class="centeredClass"><a href="{{file.path}}" download="{{file.name}}">Letöltés</a></td>
   </tr>
 </table>

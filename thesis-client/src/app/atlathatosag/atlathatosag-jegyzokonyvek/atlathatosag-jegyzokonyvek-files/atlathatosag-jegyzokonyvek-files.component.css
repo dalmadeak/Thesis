@@ -13,10 +13,16 @@ fa-icon {
   background-color: #F1F2F1;
 }
 
-.centeredClass, a {
+.centeredClass{
   text-align: center;
 }
 
 td, th{
   padding: 5px;
+}
+
+button {
+  padding: 3px;
+  border: none;
+  cursor: pointer;
 }
