@@ -63,7 +63,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent {
   }
 
   getFileExtension(fileName : string) {
-    console.log(fileName.substr(fileName.indexOf('.')));
     return fileName.substr(fileName.indexOf('.'));
   }
 }
