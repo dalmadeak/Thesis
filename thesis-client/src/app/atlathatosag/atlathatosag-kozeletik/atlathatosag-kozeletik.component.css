@@ -1,0 +1,29 @@
+table {
+  width: 65%;
+  margin: 30px auto;
+  background-color: #F1F2F1;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #13294B;
+  color: white;
+  padding: 10px 0px;
+}
+
+.membersInfo td {
+  padding: 10px 20px;
+  text-align: left;
+  word-wrap: break-word;
+  border-top: 1px solid #DDDDDD;
+}
+
+.membersInfo td:nth-child(2n){
+  padding-right: 20px;
+  text-align: right;
+}
+
+tr:hover{
+  background-color: white;
+}

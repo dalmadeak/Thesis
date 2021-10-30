@@ -27,7 +27,7 @@ import { AtlathatosagPalyazatokComponent } from './atlathatosag/atlathatosag-pal
 import { AtlathatosagPalyazatokFilesComponent } from './atlathatosag/atlathatosag-palyazatok/atlathatosag-palyazatok-files/atlathatosag-palyazatok-files.component';
 import { AtlathatosagBeszamolokComponent } from './atlathatosag/atlathatosag-beszamolok/atlathatosag-beszamolok.component';
 import { AtlathatosagBeszamolokFilesComponent } from './atlathatosag/atlathatosag-beszamolok/atlathatosag-beszamolok-files/atlathatosag-beszamolok-files.component';
-
+import { AtlathatosagKozeletikComponent } from './atlathatosag/atlathatosag-kozeletik/atlathatosag-kozeletik.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { AtlathatosagBeszamolokFilesComponent } from './atlathatosag/atlathatosa
     AtlathatosagPalyazatokComponent,
     AtlathatosagPalyazatokFilesComponent,
     AtlathatosagBeszamolokComponent,
-    AtlathatosagBeszamolokFilesComponent
+    AtlathatosagBeszamolokFilesComponent,
+    AtlathatosagKozeletikComponent
   ],
   imports: [
     BrowserModule,
