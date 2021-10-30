@@ -22,8 +22,9 @@ import { SzervezetKuldottgyulesComponent } from './szervezet/szervezet-kgy/szerv
 import { AtlathatosagComponent } from './atlathatosag/atlathatosag.component';
 import { AtlathatosagNavbarComponent } from './atlathatosag/atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek-navbar/atlathatosag-navbar.component';
 import { AtlathatosagJegyzokonyvekFilesComponent } from './atlathatosag/atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek-files/atlathatosag-jegyzokonyvek-files.component';
-
-
+import { AtlathatosagJegyzokonyvekComponent } from './atlathatosag/atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek.component';
+import { AtlathatosagPalyazatokComponent } from './atlathatosag/atlathatosag-palyazatok/atlathatosag-palyazatok.component';
+import { AtlathatosagPalyazatokFilesComponent } from './atlathatosag/atlathatosag-palyazatok/atlathatosag-palyazatok-files/atlathatosag-palyazatok-files.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,10 @@ import { AtlathatosagJegyzokonyvekFilesComponent } from './atlathatosag/atlathat
     SzervezetKuldottgyulesComponent,
     AtlathatosagComponent,
     AtlathatosagNavbarComponent,
-    AtlathatosagJegyzokonyvekFilesComponent
+    AtlathatosagJegyzokonyvekFilesComponent,
+    AtlathatosagJegyzokonyvekComponent,
+    AtlathatosagPalyazatokComponent,
+    AtlathatosagPalyazatokFilesComponent
   ],
   imports: [
     BrowserModule,
