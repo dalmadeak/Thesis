@@ -1,17 +1,20 @@
-<table class="container">
-  <tr class="header">
-    <th class="centeredClass"><fa-icon [icon]="faFile"></fa-icon></th>
-    <th>Név <button (click)="onSortByName()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
-    <th>Ülés dátuma <button (click)="onSortByMeetingDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
-    <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
-    <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
-  </tr>
-  <tr class="filesData" *ngFor="let file of jegyzokonyvekObject">
-    <td *ngIf="getFileExtension(file.name) === '.pdf'; else elseBlock;" class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
-    <ng-template #elseBlock><td class="centeredClass"><fa-icon [icon]="faFileZip"></fa-icon></td></ng-template>
-    <td>{{file.name}}</td>
-    <td>{{file.meetingDate}}</td>
-    <td>{{file.uploadDate}}</td>
-    <td class="centeredClass"><a href="{{file.path}}" download="{{file.name}}">Letöltés</a></td>
-  </tr>
-</table>
+<div class="mainClass">
+
+  <table class="container">
+    <tr class="fileHeader">
+      <th class="centeredClass"><fa-icon [icon]="faFile"></fa-icon></th>
+      <th>Név <button (click)="onSortByName()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
+      <th>Ülés dátuma <button (click)="onSortByMeetingDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
+      <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
+      <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
+    </tr>
+    <tr class="filesData" *ngFor="let file of jegyzokonyvekObject">
+      <td *ngIf="getFileExtension(file.name) === '.pdf'; else elseBlock;" class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
+      <ng-template #elseBlock><td class="centeredClass"><fa-icon [icon]="faFileZip"></fa-icon></td></ng-template>
+      <td>{{file.name}}</td>
+      <td>{{file.meetingDate}}</td>
+      <td>{{file.uploadDate}}</td>
+      <td class="centeredClass"><a href="{{file.path}}" download="{{file.name}}">Letöltés</a></td>
+    </tr>
+  </table>
+</div>
