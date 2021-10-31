@@ -1,9 +1,14 @@
-<table>
-  <tr>
-    <th colspan="2">Közéleti ösztöndíjak</th>
-  </tr>
-  <tr *ngFor="let member of kozeletikObject" class="membersInfo">
-    <td>{{member.name}}</td>
-    <td>{{member.amount}}</td>
-  </tr>
-</table>
+<div class="mainClass">
+  <div class="header">
+    <h1>Közéleti ösztöndíjak</h1>
+  </div>
+  <table>
+    <tr>
+      <th colspan="2">Közéleti ösztöndíjak</th>
+    </tr>
+    <tr *ngFor="let member of kozeletikObject" class="membersInfo">
+      <td>{{member.name}}</td>
+      <td>{{member.amount}}</td>
+    </tr>
+  </table>
+</div>

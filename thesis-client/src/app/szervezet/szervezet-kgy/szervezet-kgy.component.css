@@ -1,8 +1,19 @@
+h1 {
+  color: #13294B;
+  margin: auto;
+}
+
+.header {
+  max-width: 55%;
+  margin: 30px auto;
+}
+
 table {
   width: 65%;
   margin: 30px auto;
   background-color: #F1F2F1;
   table-layout: fixed;
+  border-collapse: collapse;
 }
 
 th {

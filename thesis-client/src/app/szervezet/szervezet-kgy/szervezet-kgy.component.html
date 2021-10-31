@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="header">
+    <h1>Küldöttgyűlés</h1>
+  </div>
   <table *ngFor="let kgy of kgyObject.slice().reverse()">
       <tr>
         <th colspan="3">Küldöttgyűlés {{kgy.year}}</th>
@@ -8,7 +11,7 @@
       </tr>
       <tr *ngFor="let member of kgy.members" class="membersInfo">
         <td>{{ member.name }}</td>
-        <td *ngIf="member.committees.length == 1; else elseBlock">{{ member.committees }}</td>
+        <td *ngIf="member.committees.length == 1; else elseBlock" class="singleMember">{{ member.committees }}</td>
         <ng-template #elseBlock>
           <td>{{ member.committees[0] }}</td>
           <td>{{ member.committees[1] }}</td>
