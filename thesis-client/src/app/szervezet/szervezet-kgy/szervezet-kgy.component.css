@@ -3,6 +3,7 @@ table {
   margin: 30px auto;
   background-color: #F1F2F1;
   table-layout: fixed;
+  border-collapse: collapse;
 }
 
 th {

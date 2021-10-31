@@ -21,3 +21,13 @@ th {
   text-align: center;
   word-wrap: break-word;
 }
+
+h1 {
+  color: #13294B;
+  margin: auto;
+}
+
+.header {
+  max-width: 55%;
+  margin: 30px auto;
+}

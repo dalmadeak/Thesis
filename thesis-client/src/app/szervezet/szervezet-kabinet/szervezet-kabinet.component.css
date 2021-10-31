@@ -1,3 +1,13 @@
+h1 {
+  color: #13294B;
+  margin: auto;
+}
+
+.header {
+  max-width: 55%;
+  margin: 30px auto;
+}
+
 .container {
   margin: 30px auto;
   max-width: 55%;

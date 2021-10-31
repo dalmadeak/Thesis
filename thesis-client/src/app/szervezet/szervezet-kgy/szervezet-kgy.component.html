@@ -8,7 +8,7 @@
       </tr>
       <tr *ngFor="let member of kgy.members" class="membersInfo">
         <td>{{ member.name }}</td>
-        <td *ngIf="member.committees.length == 1; else elseBlock">{{ member.committees }}</td>
+        <td *ngIf="member.committees.length == 1; else elseBlock" class="singleMember">{{ member.committees }}</td>
         <ng-template #elseBlock>
           <td>{{ member.committees[0] }}</td>
           <td>{{ member.committees[1] }}</td>

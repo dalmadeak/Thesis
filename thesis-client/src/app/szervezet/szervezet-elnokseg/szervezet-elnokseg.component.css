@@ -1,9 +1,18 @@
-.container {
-  margin: 30px auto;
+h1 {
+  color: #13294B;
+  margin: auto;
+}
+
+.header {
   max-width: 55%;
+  margin: 30px auto;
+}
+
+.container {
+  max-width: 55%;
+  margin: 30px auto;
   border-collapse: separate;
   border-spacing: 100px 20px;
-  overflow: hidden;
 }
 
 .profilePicture {
