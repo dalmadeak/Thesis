@@ -5,11 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './osztondijak-rendszoc.component.html',
   styleUrls: ['./osztondijak-rendszoc.component.css']
 })
-export class OsztondijakRendszocComponent implements OnInit {
+export class OsztondijakRendszocComponent{
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  filesObject = [
+    {
+      name: 'Rendszeres_szoctam_21_22.png',
+      path: '../../../assets/images/header-background.png'
+    },
+    {
+      name: 'BNO_kodok.png',
+      path: '../../../assets/images/header-background.png'
+    }
+  ];
 
 }

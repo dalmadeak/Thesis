@@ -17,6 +17,6 @@ ul {
   margin-bottom: 50px;
 }
 
-p {
+p, li {
   text-align: justify;
 }

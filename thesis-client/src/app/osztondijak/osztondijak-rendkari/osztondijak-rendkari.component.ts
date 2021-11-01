@@ -5,11 +5,24 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './osztondijak-rendkari.component.html',
   styleUrls: ['./osztondijak-rendkari.component.css']
 })
-export class OsztondijakRendkariComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class OsztondijakRendkariComponent {
+  filesObject = [
+    {
+      name: 'Rendszeres_sport_21_22.png',
+      path: '../../../assets/images/header-background.png'
+    },
+    {
+      name: 'Rendszeres_kulturalis_21_22.png',
+      path: '../../../assets/images/header-background.png'
+    },
+    {
+      name: 'Rendszeres_tudomanyos_21_22.png',
+      path: '../../../assets/images/header-background.png'
+    },
+    {
+      name: 'Rendszeres_szakmai_21_22.png',
+      path: '../../../assets/images/header-background.png'
+    }
+  ];
 
 }

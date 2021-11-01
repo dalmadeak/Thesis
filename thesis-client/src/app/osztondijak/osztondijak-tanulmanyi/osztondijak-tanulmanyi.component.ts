@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './osztondijak-tanulmanyi.component.html',
   styleUrls: ['./osztondijak-tanulmanyi.component.css']
 })
-export class OsztondijakTanulmanyiComponent implements OnInit {
+export class OsztondijakTanulmanyiComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  file = {
+    name: 'Tanulmanyi_kiszamitasa.pdf',
+    path: '../../../assets/files/Tanulmanyi_kiszamitasa.pdf'
   }
-
 }
