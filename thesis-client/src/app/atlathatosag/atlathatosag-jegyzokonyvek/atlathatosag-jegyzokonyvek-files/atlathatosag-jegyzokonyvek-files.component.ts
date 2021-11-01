@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -7,6 +7,8 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
   styleUrls: ['./atlathatosag-jegyzokonyvek-files.component.css']
 })
 export class AtlathatosagJegyzokonyvekFilesComponent {
+  @Input() data: any;
+
   faFile = faFile;
   faDownload = faDownload;
   faFilePdf = faFilePdf;
@@ -64,5 +66,9 @@ export class AtlathatosagJegyzokonyvekFilesComponent {
 
   getFileExtension(fileName : string) {
     return fileName.substr(fileName.indexOf('.'));
+  }
+
+  filterDocuments(id : any) {
+    console.log(id);
   }
 }
