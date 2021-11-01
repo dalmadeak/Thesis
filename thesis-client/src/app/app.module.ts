@@ -28,6 +28,14 @@ import { AtlathatosagPalyazatokFilesComponent } from './atlathatosag/atlathatosa
 import { AtlathatosagBeszamolokComponent } from './atlathatosag/atlathatosag-beszamolok/atlathatosag-beszamolok.component';
 import { AtlathatosagBeszamolokFilesComponent } from './atlathatosag/atlathatosag-beszamolok/atlathatosag-beszamolok-files/atlathatosag-beszamolok-files.component';
 import { AtlathatosagKozeletikComponent } from './atlathatosag/atlathatosag-kozeletik/atlathatosag-kozeletik.component';
+import { OsztondijakComponent } from './osztondijak/osztondijak.component';
+import { OsztondijakTanulmanyiComponent } from './osztondijak/osztondijak-tanulmanyi/osztondijak-tanulmanyi.component';
+import { OsztondijakRendszocComponent } from './osztondijak/osztondijak-rendszoc/osztondijak-rendszoc.component';
+import { OsztondijakRendkivuliszocComponent } from './osztondijak/osztondijak-rendkivuliszoc/osztondijak-rendkivuliszoc.component';
+import { OsztondijakAlaptamComponent } from './osztondijak/osztondijak-alaptam/osztondijak-alaptam.component';
+import { OsztondijakRendkariComponent } from './osztondijak/osztondijak-rendkari/osztondijak-rendkari.component';
+import { OsztondijakEgyszerikariComponent } from './osztondijak/osztondijak-egyszerikari/osztondijak-egyszerikari.component';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +61,14 @@ import { AtlathatosagKozeletikComponent } from './atlathatosag/atlathatosag-koze
     AtlathatosagPalyazatokFilesComponent,
     AtlathatosagBeszamolokComponent,
     AtlathatosagBeszamolokFilesComponent,
-    AtlathatosagKozeletikComponent
+    AtlathatosagKozeletikComponent,
+    OsztondijakComponent,
+    OsztondijakTanulmanyiComponent,
+    OsztondijakRendszocComponent,
+    OsztondijakRendkivuliszocComponent,
+    OsztondijakAlaptamComponent,
+    OsztondijakRendkariComponent,
+    OsztondijakEgyszerikariComponent
   ],
   imports: [
     BrowserModule,

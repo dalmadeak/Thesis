@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="header">
+    <h1>Egyszeri Kari Ösztöndíjak</h1>
+  </div>
+  <div class="content">
+    <h3>Mik az Egyszeri kari ösztöndíjak?</h3>
+    <p>Az <b>Egyszeri kari ösztöndíjak</b> (ISZTK ösztöndíjak) egyösszegű ösztöndíjakat jelentenek, melyek pályázat útján igényelhetőek. Ezen teljesítmény alapú ösztöndíjakat kari szinten határozzák meg, ezáltal az Informatikai Karon az alábbi támogatások léteznek:</p>
+      <ul>
+        <li>Egyszeri sport és kulturális ösztöndíj,</li>
+        <li>Egyszeri tudományos és szakmai ösztöndíj</li>
+        <li>Egyszeri közéleti ösztöndíj</li>
+      </ul>
+    <p>Az <b>Egyszeri sport és kulturális ösztöndíj</b> célja a hallgató által végzett sport és / vagy kulturális tevékenység támogatása. Ezen ösztöndíjra pályázhat minden, az ELTE Informatikai Karon államilag támogatott/magyar állami (rész)ösztöndíjas és költségtérítéses/önköltséges teljes idejű alap-, mester- és osztatlan képzésben, korábbi rendszerű egyetemi és főiskolai szintű alapképzésben, felsőoktatási szakképzésben vagy felsőfokú szakképzésben, valamint doktori képzésben részt vevő, a pályázás félévében aktív hallgatói jogviszonnyal rendelkező hallgató, aki a Kar hallgatósága érdekében tevékenykedett, és korábban ezért a tevékenységért nem részesült díjazásban.</p>
+    <p>Az <b>Egyszeri tudományos és szakmai ösztöndíj</b> célja a hallgató által végzett tudományos és / vagy szakmai tevékenység támogatása. Ezen ösztöndíjra pályázhat minden, az ELTE Informatikai Karon államilag támogatott/magyar állami (rész)ösztöndíjas és költségtérítéses/önköltséges teljes idejű alap-, mester- és osztatlan képzésben, korábbi rendszerű egyetemi és főiskolai szintű alapképzésben, felsőoktatási szakképzésben vagy felsőfokú szakképzésben, valamint doktori képzésben részt vevő, a pályázás félévében aktív hallgatói jogviszonnyal rendelkező hallgató, aki a Kar hallgatósága érdekében tevékenykedett, és korábban ezért a tevékenységért nem részesült díjazásban. Tudományos témára a költségtérítéses hallgatók is nyújthatnak be pályázatot!</p>
+    <p>Az <b>Egyszeri közéleti ösztöndíj</b> célja a hallgató által végzett közéleti tevékenység támogatása. Ezen ösztöndíjra pályázhat minden, az ELTE Informatikai Karon államilag támogatott/magyar állami (rész)ösztöndíjas és költségtérítéses/önköltséges teljes idejű alap-, mester- és osztatlan képzésben, korábbi rendszerű egyetemi és főiskolai szintű alapképzésben, felsőoktatási szakképzésben vagy felsőfokú szakképzésben, valamint doktori képzésben részt vevő, a pályázás félévében aktív hallgatói jogviszonnyal rendelkező hallgató, aki a Kar hallgatósága érdekében tevékenykedett, és korábban ezért a tevékenységért nem részesült díjazásban.</p>
+    <h3>Hogyan lehet rájuk pályázni?</h3>
+    <p>A Neptun rendszerbe belépve az Ügyintézés -> Kérvények -> Kitöltendő kérvények menüpont alatt megtalálhatjátok őket, és a '+' jelre kattinva kitölthetitek a pályázati kiírásnak megfelelően.</p>
+    <p>A pályázati kiírásokat itt találhatjátok:</p>
+    <div *ngFor="let file of filesObject">
+      <b><a href="{{file.path}}" download="{{file.name}}">{{file.name}}</a></b>
+    </div>
+    <p>A szükséges igazolások listáját, illetve a pályázat egyéb feltételeiről az aktuális információkat az éppen aktuális pályázati kiírásokban találhatjátok meg.</p>
+    <p>Csak már kifizetett összegekre nyújt támogatást a pályázat, valamint tárgyi dolgokra nem igényelhető!</p>
+    <p>Kérdés esetén nyugodtan keressetek minket az osztondij@ikhok.elte.hu e-mail címen!</p>
+  </div>
+</div>
