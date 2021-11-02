@@ -1,0 +1,14 @@
+h1, h3 {
+  color: #13294B;
+  margin: auto;
+}
+
+.header {
+  max-width: 85%;
+  margin: 50px auto;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}

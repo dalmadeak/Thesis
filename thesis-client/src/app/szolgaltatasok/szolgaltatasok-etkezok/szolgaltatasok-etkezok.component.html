@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header">
+    <h1>Büfék, étkezők</h1>
+  </div>
+  <div class="container" *ngFor="let diner of dinerObject">
+    <h3>{{diner.name}}</h3>
+    <p>{{diner.brief}}</p>
+    <p>Nyitvatartás:</p>
+    <ul>
+      <li>Hétfő:{{diner.openHours[0]}}</li>
+      <li>Kedd:{{diner.openHours[1]}}</li>
+      <li>Szerda:{{diner.openHours[2]}}</li>
+      <li>Csütörtök:{{diner.openHours[3]}}</li>
+      <li>Péntek:{{diner.openHours[4]}}</li>
+    </ul>
+  </div>
+</div>

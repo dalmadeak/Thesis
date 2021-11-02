@@ -35,7 +35,11 @@ import { OsztondijakRendkivuliszocComponent } from './osztondijak/osztondijak-re
 import { OsztondijakAlaptamComponent } from './osztondijak/osztondijak-alaptam/osztondijak-alaptam.component';
 import { OsztondijakRendkariComponent } from './osztondijak/osztondijak-rendkari/osztondijak-rendkari.component';
 import { OsztondijakEgyszerikariComponent } from './osztondijak/osztondijak-egyszerikari/osztondijak-egyszerikari.component';
-
+import { SzolgaltatasokComponent } from './szolgaltatasok/szolgaltatasok.component';
+import { SzolgaltatasokBelepokartyaComponent } from './szolgaltatasok/szolgaltatasok-belepokartya/szolgaltatasok-belepokartya.component';
+import { SzolgaltatasokSorompoComponent } from './szolgaltatasok/szolgaltatasok-sorompo/szolgaltatasok-sorompo.component';
+import { SzolgaltatasokEtkezokComponent } from './szolgaltatasok/szolgaltatasok-etkezok/szolgaltatasok-etkezok.component';
+import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltatasok-nyitvatartas/szolgaltatasok-nyitvatartas.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +72,12 @@ import { OsztondijakEgyszerikariComponent } from './osztondijak/osztondijak-egys
     OsztondijakRendkivuliszocComponent,
     OsztondijakAlaptamComponent,
     OsztondijakRendkariComponent,
-    OsztondijakEgyszerikariComponent
+    OsztondijakEgyszerikariComponent,
+    SzolgaltatasokComponent,
+    SzolgaltatasokBelepokartyaComponent,
+    SzolgaltatasokSorompoComponent,
+    SzolgaltatasokEtkezokComponent,
+    SzolgaltatasokNyitvatartasComponent
   ],
   imports: [
     BrowserModule,
