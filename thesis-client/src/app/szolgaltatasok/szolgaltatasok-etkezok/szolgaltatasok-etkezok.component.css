@@ -3,6 +3,10 @@ h1, h3 {
   margin: auto;
 }
 
+h3 {
+  margin-top: 30px;
+}
+
 .header {
   max-width: 85%;
   margin: 50px auto;
@@ -11,4 +15,9 @@ h1, h3 {
 .container {
   width: 80%;
   margin: auto;
+  text-align: justify;
+}
+
+ul {
+  list-style-type: none;
 }
