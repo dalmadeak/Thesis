@@ -41,6 +41,7 @@ import { SzolgaltatasokBelepokartyaComponent } from './szolgaltatasok/szolgaltat
 import { SzolgaltatasokSorompoComponent } from './szolgaltatasok/szolgaltatasok-sorompo/szolgaltatasok-sorompo.component';
 import { SzolgaltatasokEtkezokComponent } from './szolgaltatasok/szolgaltatasok-etkezok/szolgaltatasok-etkezok.component';
 import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltatasok-nyitvatartas/szolgaltatasok-nyitvatartas.component';
+import { PageNotFoundComponent } from './pagenotfound/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltat
     SzolgaltatasokBelepokartyaComponent,
     SzolgaltatasokSorompoComponent,
     SzolgaltatasokEtkezokComponent,
-    SzolgaltatasokNyitvatartasComponent
+    SzolgaltatasokNyitvatartasComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
