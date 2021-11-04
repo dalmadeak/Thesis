@@ -19,9 +19,9 @@ h1, h3 {
   width: 50%;
   margin: auto;
   padding: 20px 40px;
-  border: 1px solid black;
-}
+  border: 1px solid #DDDDDD;
 
+}
 
 input, textarea {
   float: right;
@@ -30,10 +30,16 @@ input, textarea {
   background-color: #F1F2F1;
   width: 60%;
   min-width: 300px;
+  font-size: 16px;
+}
+
+input {
+  height: 25px;
 }
 
 textarea {
   resize: vertical;
+  display: inline-block;
 }
 
 button {
@@ -43,12 +49,47 @@ button {
   padding: 10px 20px;
   margin: 30px auto 0px auto;
   display:block;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+button:hover {
+  background-color: #236192;
+}
+
+button:disabled {
+  background-color: #A7BAD8;
+}
+
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+input:focus, textarea:focus{
+  outline: green;
+}
+
+label {
+  margin: 10px 0;
+  display:inline-block;
 }
 
 @media (max-width: 1250px) {
+  .container {
+    width: 90%;
+  }
+
+  .register {
+    width: 75%;
+  }
+
   input, textarea {
     display: block;
     width: 100%;
     min-width: 0;
+  }
+
+  textarea {
+    margin-bottom: 15px;
   }
 }

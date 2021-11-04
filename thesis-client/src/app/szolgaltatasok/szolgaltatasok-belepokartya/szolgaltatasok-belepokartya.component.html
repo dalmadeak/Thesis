@@ -9,28 +9,59 @@
     <p>Kérdés esetén keressetek minket a gazdasag@ikhok.elte.hu e-mail címen!</p>
   </div>
   <div class="register">
-      <form id="basicForm" (submit)="onSubmit()">
+      <form (ngSubmit)="onSubmit(cardRegisterForm)" #cardRegisterForm="ngForm">
+        <div ngModelGroup="cardRegisterGroup">
         <label>Név: </label>
-        <input type="text" name="name" ngModel>
+        <input
+          type="text"
+          ngModel
+          name="name"
+          required>
         <br>
 
         <label>Neptun-kód: </label>
-        <input type="text" name="neptun" ngModel>
+        <input
+          type="text"
+          ngModel
+          name="neptun"
+          required
+          maxlength="6"
+          minlength="6">
         <br>
 
         <label>E-mail cím: </label>
-        <input type="text" name="email" ngModel>
+        <input
+          type="email"
+          ngModel
+          name="email"
+          required
+          email>
         <br>
 
         <label>Diákigazolvány szám: </label>
-        <input type="text" name="studentId" ngModel>
+        <input
+          type="text"
+          ngModel
+          name="studentId"
+          required
+          maxlength="11"
+          minlength="11"
+          pattern="[0-9]+">
         <br>
 
         <label>Igénylés indoka: </label>
-        <textarea name="reason" ngModel rows="3"></textarea>
+        <textarea
+          ngModel
+          name="reason"
+          rows="3"
+          required>
+        </textarea>
         <br><br>
 
-        <button type="submit">Küldés</button>
+        <button
+          type="submit"
+          [disabled]="!cardRegisterForm.valid">Küldés</button>
+        </div>
       </form>
   </div>
 </div>
