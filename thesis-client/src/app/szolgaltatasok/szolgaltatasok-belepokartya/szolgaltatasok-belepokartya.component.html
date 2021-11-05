@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="header">
+    <h1>Belépőkártya regisztráció</h1>
+  </div>
+  <div class="container">
+    <h3>Mire jó a belépőkártya?</h3>
+    <p>Az ELTE Lágymányosi kampuszának van egy meghatározott nyitvatartási ideje, melyen kívül csak akkor lehet belépni az épületekbe, ha rendelkezel egy aktív belépőkártyával. Ezen kártyán több jogosultság is szerepel attól függően, hogy az épületek mely szolgáltatásait szeretnéd igénybe venni - nyithatja csak az északit, vagy csak a délit, esetleg a Lovardát vagy egy választott termet is akár. Ezen szolgáltatás célja támogatni azon hallgatók tanulmányait, akik különböző okokból kifolyólag szükségelik a Kar számítógépeit vagy azok szoftvereit, melyekhez alapesetben nem férnének hozzá.</p>
+    <p>Figyelem! A Hallgatói Önkormányzatnak korlátozott számú belépőkártyája van, így csak erősen indokolt esetben tudunk kártyát biztosítani. Az alábbi regisztrációt követően a visszaigazolás után személyesen be kell jönni az ELTE IK HÖK északi irodájába, és 2000 Ft ellenében kapható meg a kártya - ezt a 2000 Ft-ot a kártya visszadását követően visszatérítjük.</p>
+    <p>Kérdés esetén keressetek minket a gazdasag@ikhok.elte.hu e-mail címen!</p>
+  </div>
+  <div class="register">
+      <form (ngSubmit)="onSubmit(cardRegisterForm)" #cardRegisterForm="ngForm">
+        <div ngModelGroup="cardRegisterGroup">
+        <label>Név: </label>
+        <input
+          type="text"
+          ngModel
+          name="name"
+          required>
+        <br>
+
+        <label>Neptun-kód: </label>
+        <input
+          type="text"
+          ngModel
+          name="neptun"
+          required
+          maxlength="6"
+          minlength="6">
+        <br>
+
+        <label>E-mail cím: </label>
+        <input
+          type="email"
+          ngModel
+          name="email"
+          required
+          email>
+        <br>
+
+        <label>Diákigazolvány szám: </label>
+        <input
+          type="text"
+          ngModel
+          name="studentId"
+          required
+          maxlength="11"
+          minlength="11"
+          pattern="[0-9]+">
+        <br>
+
+        <label>Igénylés indoka: </label>
+        <textarea
+          ngModel
+          name="reason"
+          rows="3"
+          required>
+        </textarea>
+        <br><br>
+
+        <button
+          type="submit"
+          [disabled]="!cardRegisterForm.valid">Küldés</button>
+        </div>
+      </form>
+  </div>
+</div>
