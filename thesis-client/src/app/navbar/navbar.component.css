@@ -26,11 +26,12 @@ li {
   color: #fff;
   background: #3A3C46;
   display: block;
-  float: left;
   position: relative;
   text-decoration: none;
   transition-duration: 0.2s;
+  float: left;
 }
+
 
 li a {
   color: #FFFFFF;
@@ -54,11 +55,12 @@ ul li ul {
   opacity: 0;
   min-width: 5rem;
   position: absolute;
-  left: 0;
   display: none;
+  left: 0;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
+
 
 ul li:hover > ul,
 ul li:focus-within > ul,
