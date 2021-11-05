@@ -8,8 +8,7 @@ import { Component, Input } from "@angular/core";
 export class AtlathatosagJegyzokonyvekComponent {
   public filterEvent: any;
 
-  onFilterClicked(event : Event) {
+  onFilterClicked(event : Object) {
     this.filterEvent = event;
-    console.log(this.filterEvent);
   }
 }

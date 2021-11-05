@@ -7,8 +7,7 @@ import { Component, EventEmitter, Output } from "@angular/core";
   styleUrls: ['./atlathatosag-navbar.component.css']
 })
 export class AtlathatosagNavbarComponent {
-  @Output() filterDocuments: EventEmitter<any> = new EventEmitter();
-  public alreadyClicked = false;
+  @Output() filterDocuments: EventEmitter<Object> = new EventEmitter();
 
   committeesObject = [
     {
@@ -53,7 +52,7 @@ export class AtlathatosagNavbarComponent {
     }
   ];
 
-  onClick(id : any) {
+  onClick(id : Object): void {
     this.filterDocuments.emit(id);
   }
 }

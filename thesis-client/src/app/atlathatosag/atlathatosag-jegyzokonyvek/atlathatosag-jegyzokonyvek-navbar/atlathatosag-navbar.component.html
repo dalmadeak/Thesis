@@ -1,6 +1,6 @@
 <nav>
   <ul>
-    <li *ngFor="let committee of committeesObject" class="nav-item" (click)="onClick(committee.id)">
+    <li *ngFor="let committee of committeesObject" class="nav-item" (click)="onClick(committee)">
       {{committee.name}}
     </li>
   </ul>

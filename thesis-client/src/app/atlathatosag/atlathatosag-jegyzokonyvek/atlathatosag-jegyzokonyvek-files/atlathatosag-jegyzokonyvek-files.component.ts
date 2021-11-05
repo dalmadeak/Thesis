@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,8 +6,8 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
   templateUrl: './atlathatosag-jegyzokonyvek-files.component.html',
   styleUrls: ['./atlathatosag-jegyzokonyvek-files.component.css']
 })
-export class AtlathatosagJegyzokonyvekFilesComponent {
-  @Input() data: any;
+export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
+  @Input() filterData: any;
 
   faFile = faFile;
   faDownload = faDownload;
@@ -52,6 +52,10 @@ export class AtlathatosagJegyzokonyvekFilesComponent {
     path: '../../../../assets/images/header-background.png'
   }];
 
+  constructor() {}
+
+  ngOnInit() {}
+
   onSortByName(){
     return this.jegyzokonyvekObject.sort((a,b) => (a.name > b.name) ? 1 : -1);
   }
@@ -66,9 +70,5 @@ export class AtlathatosagJegyzokonyvekFilesComponent {
 
   getFileExtension(fileName : string) {
     return fileName.substr(fileName.indexOf('.'));
-  }
-
-  filterDocuments(id : any) {
-    console.log(id);
   }
 }
