@@ -6,5 +6,9 @@ import { Component } from "@angular/core";
   styleUrls: ['./ulesek.component.css']
 })
 export class UlesekComponent {
+  public filterEvent: any;
 
+  onFilterClicked(event : Object) {
+    this.filterEvent = event;
+  }
 }
