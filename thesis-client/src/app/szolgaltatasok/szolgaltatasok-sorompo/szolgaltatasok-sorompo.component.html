@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="header">
+    <h1>Sorompó regisztráció</h1>
+  </div>
+  <div class="container">
+    <h3>Miért szükséges a sorompó regisztráció?</h3>
+    <p>Autóval, esetleg motorral szeretnél bejárni az óráidra, és mindenképpen az egyetem épületei mellett parkolnál? Erre csak akkor van lehetőséged, ha regisztrálod járművedet az épületeüzemeltetésnél.</p>
+    <p>A lent található regisztrációs űrlap megfelelő kitöltésével regisztrálhatod autódat vagy motorodat annak érdekében, hogy az egyetem területén belül is tudj parkolni. A belső parkolót sorompóval zárták el, így amennyiben bekerül rendszámod a rendszerbe, onnantól a portaszolgálat bármikor be fog téged engedni egy gombnyomásra. Amennyiben regisztrálsz, hamarosan megkeresünk Téged, amint sikeresen továbbítottuk igényedet az illetékesek felé!</p>
+    <p>Kérdés esetén keressetek minket a gazdasag@ikhok.elte.hu e-mail címen!</p>
+  </div>
+  <div class="register">
+      <form (ngSubmit)="onSubmit(barRegisterForm)" #barRegisterForm="ngForm">
+        <div ngModelGroup="barRegisterGroup">
+        <label>Név: </label>
+        <input
+          type="text"
+          ngModel
+          name="name"
+          required>
+        <br>
+
+        <label>Neptun-kód: </label>
+        <input
+          type="text"
+          ngModel
+          name="neptun"
+          required
+          maxlength="6"
+          minlength="6">
+        <br>
+
+        <label>E-mail cím: </label>
+        <input
+          type="email"
+          ngModel
+          name="email"
+          required
+          email>
+        <br>
+
+        <label>Telefonszám: </label>
+        <input
+          type="text"
+          ngModel
+          name="mobile"
+          required
+          minlength="10"
+          pattern="[0-9 +]+">
+        <br>
+
+        <label>Rendszám: </label>
+        <input
+          type="text"
+          ngModel
+          name="plate"
+          required
+          maxlength="6"
+          minlength="6">
+        <br>
+
+        <label>Autó típusa: </label>
+        <input
+          type="text"
+          ngModel
+          name="carType"
+          required>
+        <br>
+
+        <label>Belépőkártya száma: </label>
+        <input
+          type="text"
+          ngModel
+          name="studentId"
+          maxlength="11"
+          minlength="11"
+          pattern="[0-9]+">
+        <br>
+
+        <label>Igénylés indoka: </label>
+        <textarea
+          ngModel
+          name="reason"
+          rows="3"
+          required>
+        </textarea>
+        <br><br>
+
+        <button
+          type="submit"
+          [disabled]="!barRegisterForm.valid">Küldés</button>
+        </div>
+      </form>
+  </div>
+</div>

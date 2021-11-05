@@ -1,0 +1,24 @@
+h1, h3 {
+  color: #13294B;
+  margin: auto;
+}
+
+h3 {
+  margin-top: 30px;
+}
+
+.header {
+  max-width: 85%;
+  margin: 50px auto;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  text-align: justify;
+  margin-bottom: 50px;
+}
+
+ul {
+  list-style-type: none;
+}

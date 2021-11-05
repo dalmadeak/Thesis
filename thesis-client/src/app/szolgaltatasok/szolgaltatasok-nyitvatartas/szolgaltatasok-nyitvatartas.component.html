@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header">
+    <h1>Iroda nyitvatartás</h1>
+  </div>
+  <div class="container" *ngFor="let office of officeObject">
+    <h3>{{office.name}}</h3>
+    <p>{{office.brief}}</p>
+    <p>Nyitvatartás:</p>
+    <ul>
+      <li>Hétfő: {{office.openHours[0]}}</li>
+      <li>Kedd: {{office.openHours[1]}}</li>
+      <li>Szerda: {{office.openHours[2]}}</li>
+      <li>Csütörtök: {{office.openHours[3]}}</li>
+      <li>Péntek: {{office.openHours[4]}}</li>
+    </ul>
+  </div>
+</div>

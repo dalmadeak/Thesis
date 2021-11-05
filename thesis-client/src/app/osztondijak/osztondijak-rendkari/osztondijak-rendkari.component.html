@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="header">
+    <h1>Rendszeres Kari Ösztöndíjak</h1>
+  </div>
+  <div class="content">
+    <h3>Mik a Rendszeres kari ösztöndíjak?</h3>
+    <p>Az <b>Rendszeres kari ösztöndíjak</b> (ISZTK ösztöndíjak) havi kiutalású ösztöndíjakat jelentenek, melyek pályázat útján igényelhetőek. Ezen teljesítmény alapú ösztöndíjakat kari szinten határozzák meg, ezáltal az Informatikai Karon az alábbi támogatások léteznek:</p>
+      <ul>
+        <li>Rendszeres sport és kulturális ösztöndíj,</li>
+        <li>Rendszeres tudományos és szakmai ösztöndíj</li>
+        <li>Rendszeres közéleti ösztöndíj</li>
+      </ul>
+    <p>A <b>Rendszeres sport és kulturális ösztöndíj</b> célja a hallgató által végzett sport és / vagy kulturális tevékenység támogatása. Ezen ösztöndíjra pályázhat minden, az ELTE Informatikai Karon államilag támogatott/magyar állami (rész)ösztöndíjas és költségtérítéses/önköltséges teljes idejű alap-, mester- és osztatlan képzésben, korábbi rendszerű egyetemi és főiskolai szintű alapképzésben, felsőoktatási szakképzésben vagy felsőfokú szakképzésben, valamint doktori képzésben részt vevő, a pályázás félévében aktív hallgatói jogviszonnyal rendelkező hallgató, aki rendszeres sport tevékenységet végez olimpiai sportágban, vagy magyar szakszövetséggel vagy bejegyzett egyesülettel rendelkező sportágban, vagy rendszeres kulturális tevékenységet végez.</p>
+    <p>A <b>Rendszeres tudományos és szakmai ösztöndíj</b> célja a hallgató által végzett tudományos és / vagy szakmai tevékenység támogatása. Ezen ösztöndíjra pályázhat minden, az ELTE Informatikai Karon államilag támogatott/magyar állami (rész)ösztöndíjas és költségtérítéses/önköltséges teljes idejű alap-, mester- és osztatlan képzésben, korábbi rendszerű egyetemi és főiskolai szintű alapképzésben, felsőoktatási szakképzésben vagy felsőfokú szakképzésben, valamint doktori képzésben részt vevő, a pályázás félévében aktív hallgatói jogviszonnyal rendelkező hallgató, aki 2021. február 3. és 2021. szeptember 6. között szakmai és/vagy tudományos tevékenységet végzett.</p>
+    <p>A doktori képzésben résztvevő hallgatók a doktori fokozat megszerzéséhez kreditértékkel elismertetett tevékenységükkel nem pályázhatnak! (A tanulmányi követelményeken túlmutató tudományos vagy szakmai tevékenységgel lehet pályázni.)</p>
+    <p>Rendszeres szakmai ösztöndíjra nem pályázhatnak azok, akik Nemzeti Felsőoktatási Ösztöndíjban részesülnek, illetve tudományos pályázatukban sem adható pont a szakmai tevékenységre!</p>
+    <h3>Hogyan lehet rájuk pályázni?</h3>
+    <p>A Neptun rendszerbe belépve az Ügyintézés -> Kérvények -> Kitöltendő kérvények menüpont alatt megtalálhatjátok őket, és a '+' jelre kattinva kitölthetitek a pályázati kiírásnak megfelelően.</p>
+    <p>A pályázati kiírásokat itt találhatjátok:</p>
+    <div *ngFor="let file of filesObject">
+      <b><a href="{{file.path}}" download="{{file.name}}">{{file.name}}</a></b>
+    </div>
+    <p>A szükséges igazolások listáját, illetve a pályázat egyéb feltételeiről az aktuális információkat az éppen aktuális pályázati kiírásokban találhatjátok meg.</p>
+    <p>Kérdés esetén nyugodtan keressetek minket az osztondij@ikhok.elte.hu e-mail címen!</p>
+  </div>
+</div>
