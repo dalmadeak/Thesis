@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 
 @Component({
@@ -7,8 +7,7 @@ import { Component } from "@angular/core";
   styleUrls: ['./ulesek-element.component.css']
 })
 export class UlesekElementComponent {
-  /* committees */
-  /* kgy, elnokseg, kabinet, hjb, kombiz, kb, szb, tb, eb, vb*/
+  @Input() filterData: any;
 
   // Ülések type object for content title
   committeeTypesObject = [
@@ -55,7 +54,8 @@ export class UlesekElementComponent {
 
   ulesTypesArray = ['rendes', 'rendkívüli', 'azonnali'];
 
-  ulesekObject = [{
+  ulesekObject = [
+  {
     id: '0001',
     committee: 'kgy',
     type:  this.ulesTypesArray[0],
