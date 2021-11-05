@@ -56,11 +56,15 @@ ul li ul {
   min-width: 5rem;
   position: absolute;
   display: none;
-  left: 0;
+  left:0;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
+.nav-right ul li ul {
+  left: auto;
+  right: 0;
+}
 
 ul li:hover > ul,
 ul li:focus-within > ul,
