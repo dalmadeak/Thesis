@@ -74,14 +74,27 @@ label {
   display:inline-block;
 }
 
+header {
+  color: white;
+  background-color: #13294B;
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+  padding: 5px 40px;
+  width: 50%;
+  border: 1px solid #13294B;
+}
+
+
 @media (max-width: 1250px) {
   .container {
     width: 90%;
   }
 
-  .register {
+  .register, header {
     width: 75%;
   }
+
 
   input, textarea {
     display: block;
