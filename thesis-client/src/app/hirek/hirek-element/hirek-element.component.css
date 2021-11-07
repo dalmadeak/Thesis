@@ -8,7 +8,6 @@
   flex-direction: row;
 }
 
-
 .post {
   width: 350px;
   min-height: 300px;
@@ -17,7 +16,7 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   flex: 1 0 auto;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .postHeader {
@@ -25,7 +24,8 @@
   margin: 0;
   padding: 10px;
   font-weight: bold;
-  color: white;
+  color: #FFFFFF;
+  font-size: 16px;
 }
 
 .postContent {
@@ -37,9 +37,9 @@
 }
 
 .postData {
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px;
   background-color: #13294B;
-  color: white;
+  color: #FFFFFF;
   font-size: 12px;
   margin: auto;
 }

@@ -4,7 +4,7 @@ import { FormControl, NgForm } from '@angular/forms';
 @Component({
   selector: 'app-szolgaltatasok-sorompo',
   templateUrl: './szolgaltatasok-sorompo.component.html',
-  styleUrls: ['./szolgaltatasok-sorompo.component.css']
+  styleUrls: ['./szolgaltatasok-sorompo.component.css', '../szolgaltatasok.component.css']
 })
 export class SzolgaltatasokSorompoComponent {
   nameControl = new FormControl('');

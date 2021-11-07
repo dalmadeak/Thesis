@@ -1,5 +1,6 @@
 <div class="postContainer">
-    <div class="post" *ngFor="let ules of ulesekObject.slice().reverse()">
+  <ng-container *ngFor="let ules of ulesekObject.slice().reverse()">
+    <div class="post" *ngIf="filterData == undefined || filterData.id == ules.committee">
       <!-- this is where one post goes -->
         <p class="postHeader">
           ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülés - {{ ules.meetingDate }}
@@ -25,4 +26,5 @@
         </div>
         <p class="postData">{{ ules.postDate }}</p>
     </div>
+  </ng-container>
 </div>

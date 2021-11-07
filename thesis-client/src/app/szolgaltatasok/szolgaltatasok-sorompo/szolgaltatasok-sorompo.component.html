@@ -8,6 +8,7 @@
     <p>A lent található regisztrációs űrlap megfelelő kitöltésével regisztrálhatod autódat vagy motorodat annak érdekében, hogy az egyetem területén belül is tudj parkolni. A belső parkolót sorompóval zárták el, így amennyiben bekerül rendszámod a rendszerbe, onnantól a portaszolgálat bármikor be fog téged engedni egy gombnyomásra. Amennyiben regisztrálsz, hamarosan megkeresünk Téged, amint sikeresen továbbítottuk igényedet az illetékesek felé!</p>
     <p>Kérdés esetén keressetek minket a gazdasag@ikhok.elte.hu e-mail címen!</p>
   </div>
+  <header>Sorompó Regisztráció</header>
   <div class="register">
       <form (ngSubmit)="onSubmit(barRegisterForm)" #barRegisterForm="ngForm">
         <div ngModelGroup="barRegisterGroup">
@@ -45,7 +46,8 @@
           name="mobile"
           required
           minlength="10"
-          pattern="[0-9 +]+">
+          pattern="[0-9 +]+"
+          placeholder="+36301234567">
         <br>
 
         <label>Rendszám: </label>
@@ -73,7 +75,8 @@
           name="studentId"
           maxlength="11"
           minlength="11"
-          pattern="[0-9]+">
+          pattern="[0-9]+"
+          placeholder="Ha van">
         <br>
 
         <label>Igénylés indoka: </label>

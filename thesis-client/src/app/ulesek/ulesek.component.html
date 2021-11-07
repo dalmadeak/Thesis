@@ -1,2 +1,2 @@
-<app-ulesek-navbar></app-ulesek-navbar>
-<app-ulesek-element></app-ulesek-element>
+<app-ulesek-navbar (filterDocuments)="onFilterClicked($event)"></app-ulesek-navbar>
+<app-ulesek-element [filterData]="filterEvent || null"></app-ulesek-element>
