@@ -4,7 +4,7 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
 @Component({
   selector: 'app-atlathatosag-jegyzokonyvek-files',
   templateUrl: './atlathatosag-jegyzokonyvek-files.component.html',
-  styleUrls: ['./atlathatosag-jegyzokonyvek-files.component.css']
+  styleUrls: ['../../atlathatosag.component.css']
 })
 export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   @Input() filterData: any;
