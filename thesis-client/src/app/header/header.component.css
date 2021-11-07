@@ -6,11 +6,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 120px;
+  min-height: 120px;
   width: 100%;
+  margin: auto;
   display: block;
-  overflow: hidden;
-  margin: 0 0 0 0;
 }
 
 #headerContent{

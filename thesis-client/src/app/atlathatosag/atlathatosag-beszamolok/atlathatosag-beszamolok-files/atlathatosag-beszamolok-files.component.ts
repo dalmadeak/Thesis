@@ -4,7 +4,7 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
 @Component({
   selector: 'app-atlathatosag-beszamolok-files',
   templateUrl: './atlathatosag-beszamolok-files.component.html',
-  styleUrls: ['./atlathatosag-beszamolok-files.component.css']
+  styleUrls: ['../../atlathatosag.component.css']
 })
 export class AtlathatosagBeszamolokFilesComponent {
   faFile = faFile;
