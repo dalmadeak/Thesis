@@ -31,18 +31,25 @@ table {
   text-align: center;
 }
 
+.breakableData {
+  word-break: break-word;
+}
+
 a {
+  padding-top: 5px;
+  display: block;
   color: #13294B;
   font-weight: bold;
   text-decoration: none;
 }
 
+th {
+  text-align: center;
+}
+
 td, th{
   padding: 5px;
   max-width: 350px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 tr:hover {

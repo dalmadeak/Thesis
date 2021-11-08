@@ -10,7 +10,7 @@
       <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
     </tr>
-    <ng-container *ngFor="let file of jegyzokonyvekObject">
+    <ng-container *ngFor="let file of jegyzokonyvekObject.slice().reverse()">
       <tr class="filesData" *ngIf="filterData == undefined || filterData.id == file.committee">
         <td *ngIf="getFileExtension(file.name) === '.pdf'; else elseBlock;" class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
         <ng-template #elseBlock><td class="centeredClass"><fa-icon [icon]="faFileZip"></fa-icon></td></ng-template>
