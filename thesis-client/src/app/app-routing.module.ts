@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./szolgaltatasok/szolgaltatasok.module').then(m => m.SzolgaltatasokModule),
   },
   {
+    path: 'sidenav',
+    loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavModule)
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
