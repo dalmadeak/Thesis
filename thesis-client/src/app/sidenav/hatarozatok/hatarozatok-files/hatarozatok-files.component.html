@@ -1,0 +1,30 @@
+<div class="mainClass">
+  <div class="header">
+    <h1>Határozatok</h1>
+  </div>
+  <table class="container">
+    <tr class="filesHeader">
+      <th>Sorszám</th>
+      <th>Dátum</th>
+      <th>Határozat</th>
+      <th>Mandátum</th>
+      <th>Szavazati arány</th>
+      <th>Csatolmányok</th>
+      <th>Feltöltve</th>
+    </tr>
+    <ng-container *ngFor="let file of hatarozatokObject.slice().reverse()">
+      <tr class="filesData" *ngIf="filterData == undefined || filterData.id == file.committee">
+        <td class="centeredClass">{{file.number}}</td>
+        <td class="centeredClass">{{file.decisionDate}}</td>
+        <td class="breakableData">{{file.decision}}</td>
+        <td class="centeredClass">{{file.mandate}}</td>
+        <td class="centeredClass">{{file.vote}}</td>
+        <td class="breakableData centeredClass">
+          <a *ngFor="let append of file.appendix; let i = index"  href="{{append}}" download="asd">Csatolmány{{i+1}} </a>
+          <br>
+        </td>
+        <td class="centeredClass">{{file.uploadDate}}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-hatarozatok',
   templateUrl: './hatarozatok.component.html',
   styleUrls: ['./hatarozatok.component.css']
 })
-export class HatarozatokComponent implements OnInit {
+export class HatarozatokComponent{
 
-  constructor() { }
+  public filterEvent: any;
 
-  ngOnInit(): void {
+  onFilterClicked(event : Object) {
+    this.filterEvent = event;
   }
 
 }
