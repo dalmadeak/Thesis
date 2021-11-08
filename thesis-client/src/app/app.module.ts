@@ -10,6 +10,7 @@ import { OsztondijakModule } from './osztondijak/osztondijak.module';
 import { SzervezetModule } from './szervezet/szervezet.module';
 import { SzolgaltatasokModule } from './szolgaltatasok/szolgaltatasok.module';
 import { AtlathatosagModule } from './atlathatosag/atlathatosag.module';
+import { SidenavModule } from './sidenav/sidenav.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +44,14 @@ import { SzolgaltatasokBelepokartyaComponent } from './szolgaltatasok/szolgaltat
 import { SzolgaltatasokSorompoComponent } from './szolgaltatasok/szolgaltatasok-sorompo/szolgaltatasok-sorompo.component';
 import { SzolgaltatasokEtkezokComponent } from './szolgaltatasok/szolgaltatasok-etkezok/szolgaltatasok-etkezok.component';
 import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltatasok-nyitvatartas/szolgaltatasok-nyitvatartas.component';
+import { ProfilComponent } from './sidenav/profil/profil.component';
+import { UjBejegyzesComponent } from './sidenav/uj-bejegyzes/uj-bejegyzes.component';
+import { BeszamolokComponent } from './sidenav/beszamolok/beszamolok.component';
+import { HatarozatokComponent } from './sidenav/hatarozatok/hatarozatok.component';
+import { SorompoAdminComponent } from './sidenav/sorompo-admin/sorompo-admin.component';
+import { BelepokartyaAdminComponent } from './sidenav/belepokartya-admin/belepokartya-admin.component';
+import { ValasztasokComponent } from './sidenav/valasztasok/valasztasok.component';
+import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +85,15 @@ import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltat
     SzolgaltatasokBelepokartyaComponent,
     SzolgaltatasokSorompoComponent,
     SzolgaltatasokEtkezokComponent,
-    SzolgaltatasokNyitvatartasComponent
+    SzolgaltatasokNyitvatartasComponent,
+    ProfilComponent,
+    UjBejegyzesComponent,
+    BeszamolokComponent,
+    HatarozatokComponent,
+    SorompoAdminComponent,
+    BelepokartyaAdminComponent,
+    ValasztasokComponent,
+    BejelentkezesComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +104,8 @@ import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltat
     SzervezetModule,
     OsztondijakModule,
     SzolgaltatasokModule,
-    AtlathatosagModule
+    AtlathatosagModule,
+    SidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
