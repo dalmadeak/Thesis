@@ -22,7 +22,7 @@ export class SorompoAdminComponent{
     registerDate: '2021.11.04.',
     semester: '2021-2022-1',
     reason: 'pls',
-    isApprover: false
+    isApproved: true
   },
   {
     name: 'Nagy Péter',
@@ -35,7 +35,7 @@ export class SorompoAdminComponent{
     registerDate: '2021.11.04.',
     semester: '2021-2022-1',
     reason: 'pls',
-    isApprover: false
+    isApproved: true
   },
   {
     name: 'Nagy Péterxd',
@@ -48,7 +48,7 @@ export class SorompoAdminComponent{
     registerDate: '2021.11.04.',
     semester: '2021-2022-1',
     reason: 'plsplsplsplsplsplsplsplsplsplsplspls plsplsplsplsplsplsplsplsplsplsplspls plsplsplsplsplsplsplspl splsplspls',
-    isApprover: false
+    isApproved: true
   },
   {
     name: 'Nagy Péter',
@@ -61,7 +61,7 @@ export class SorompoAdminComponent{
     registerDate: '2021.11.04.',
     semester: '2021-2022-1',
     reason: 'pls',
-    isApprover: false
+    isApproved: true
   },
   {
     name: 'Nagy Péter',
@@ -74,7 +74,7 @@ export class SorompoAdminComponent{
     registerDate: '2021.11.04.',
     semester: '2021-2022-1',
     reason: 'pls',
-    isApprover: false
+    isApproved: true
   },
   {
     name: 'Abdulmuttalib Abdul Kherim',
@@ -87,7 +87,23 @@ export class SorompoAdminComponent{
     registerDate: '2021.11.04.',
     semester: '2021-2022-1',
     reason: 'pls',
-    isApprover: true
+    isApproved: true
   }];
+
+  ujKeresekObject = [
+    {
+      name: 'Approve me Péter',
+      neptun: 'ABC123',
+      plate: 'CBA321',
+      type: 'Renault Twingo',
+      card: '11111111',
+      mobile: '+36301234567',
+      email: 'peter@gmail.com',
+      registerDate: '2021.11.04.',
+      semester: '2021-2022-1',
+      reason: 'pls',
+      isApproved: false
+    }
+  ];
 
 }
