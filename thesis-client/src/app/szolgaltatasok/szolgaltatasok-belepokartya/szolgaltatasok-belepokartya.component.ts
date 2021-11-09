@@ -7,9 +7,6 @@ import { FormControl, NgForm } from '@angular/forms';
   styleUrls: ['./szolgaltatasok-belepokartya.component.css']
 })
 export class SzolgaltatasokBelepokartyaComponent {
-  nameControl = new FormControl('');
-  studentIdAnswer = '';
-
   onSubmit(form: NgForm) {
     console.log(form.value);
     alert('Sikeres jelentkezés!');

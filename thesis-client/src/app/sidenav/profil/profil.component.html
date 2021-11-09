@@ -1,1 +1,84 @@
-<p>profil works!</p>
+<div class="container">
+  <div class="header">
+    <h1>Profil</h1>
+  </div>
+  <header>Felhasználói adatok</header>
+  <div class="register">
+    <form (ngSubmit)="onSubmitProfile(profileForm)" #profileForm="ngForm">
+      <div ngModelGroup="profileGroup">
+      <label>Név: </label>
+      <input
+        type="text"
+        ngModel
+        name="name"
+        required>
+      <br>
+
+      <label>Neptun-kód: </label>
+      <input
+        type="text"
+        ngModel
+        name="neptun"
+        required
+        maxlength="6"
+        minlength="6">
+      <br>
+
+      <label>E-mail cím: </label>
+      <input
+        type="email"
+        ngModel
+        name="email"
+        required
+        email>
+      <br>
+
+      <label>Jogosultságok: </label>
+      <input
+        type="text"
+        ngModel
+        name="permission"
+        required>
+      <br>
+
+      <button
+        type="submit"
+        [disabled]="!profileForm.valid">Küldés</button>
+      </div>
+    </form>
+  </div>
+  <header class="second">Felhasználói adatok</header>
+  <div class="register">
+    <form (ngSubmit)="onSubmitPassword(passwordForm)" #passwordForm="ngForm">
+      <div ngModelGroup="passwordGroup">
+      <label>Jelenlegi jelszó: </label>
+      <input
+        type="password"
+        ngModel
+        name="oldPassword"
+        required>
+      <br>
+
+      <label>Új jelszó: </label>
+      <input
+        type="password"
+        ngModel
+        name="newPassword"
+        required>
+      <br>
+
+      <label>Új jelszó ismét: </label>
+      <input
+        type="password"
+        ngModel
+        name="newPasswordAgain"
+        required>
+      <br>
+
+      <button
+        type="submit"
+        [disabled]="!passwordForm.valid">Küldés</button>
+      </div>
+    </form>
+  </div>
+ </div>
