@@ -54,7 +54,3 @@ td, th{
 tr:hover {
   background-color: #F1F2F1;
 }
-
-.toggleChildView {
-  display: none;
-}

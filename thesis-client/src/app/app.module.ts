@@ -47,6 +47,7 @@ import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltat
 import { ProfilComponent } from './sidenav/profil/profil.component';
 import { UjBejegyzesComponent } from './sidenav/uj-bejegyzes/uj-bejegyzes.component';
 import { BeszamolokComponent } from './sidenav/beszamolok/beszamolok.component';
+import { BeszamolokOsszegzesComponent } from './sidenav/beszamolok/beszamolok-osszegzes/beszamolok-osszegzes.component';
 import { HatarozatokComponent } from './sidenav/hatarozatok/hatarozatok.component';
 import { HatarozatokFilesComponent } from './sidenav/hatarozatok/hatarozatok-files/hatarozatok-files.component';
 import { HatarozatokNavbarComponent } from './sidenav/hatarozatok/hatarozatok-navbar/hatarozatok-navbar.component';
@@ -91,6 +92,7 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
     ProfilComponent,
     UjBejegyzesComponent,
     BeszamolokComponent,
+    BeszamolokOsszegzesComponent,
     HatarozatokComponent,
     HatarozatokNavbarComponent,
     HatarozatokFilesComponent,
