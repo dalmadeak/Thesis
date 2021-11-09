@@ -1,1 +1,32 @@
-<p>sorompo-admin works!</p>
+<div class="mainClass">
+  <div class="header">
+    <h1>Sorompó adminisztráció</h1>
+  </div>
+  <div>
+
+  </div>
+  <table class="container">
+    <tr class="filesHeader">
+      <th>Név</th>
+      <th>Neptun-kód</th>
+      <th>Rendszám</th>
+      <th>Típus</th>
+      <th>Belépőkártya száma</th>
+      <th>Telefonszám</th>
+      <th>E-mail cím</th>
+      <th>Regisztrált</th>
+      <th>Szemeszter</th>
+    </tr>
+      <tr class="filesData" *ngFor="let data of sorompoObject.slice().reverse()">
+        <td class="centeredClass">{{data.name}}</td>
+        <td class="centeredClass">{{data.neptun}}</td>
+        <td class="centeredClass">{{data.plate}}</td>
+        <td class="centeredClass">{{data.type}}</td>
+        <td class="centeredClass">{{data.card}}</td>
+        <td class="centeredClass">{{data.mobile}}</td>
+        <td class="centeredClass">{{data.email}}</td>
+        <td class="centeredClass">{{data.registerDate}}</td>
+        <td class="centeredClass">{{data.semester}}</td>
+      </tr>
+  </table>
+</div>

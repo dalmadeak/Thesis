@@ -1,0 +1,54 @@
+fa-icon {
+  color: #13294B;
+}
+
+h1 {
+  color: #13294B;
+  margin: auto;
+}
+
+.header {
+  max-width: 65%;
+  margin: 50px auto;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.container {
+  width: 70%;
+  margin: 30px auto;
+  text-align: left;
+  border: 1px solid #F1F2F1;
+}
+
+table {
+  border-collapse: collapse;
+  page-break-inside:auto;
+}
+
+.filesHeader {
+  background-color: #F1F2F1;
+}
+
+.centeredClass{
+  text-align: center;
+}
+
+.breakableData {
+  word-break: break-word;
+}
+
+th {
+  text-align: center;
+}
+
+td, th{
+  padding: 10px;
+  max-width: 350px;
+}
+
+tr:hover {
+  background-color: #F1F2F1;
+}
