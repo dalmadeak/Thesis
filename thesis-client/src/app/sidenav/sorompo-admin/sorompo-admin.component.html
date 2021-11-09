@@ -1,1 +1,39 @@
-<p>sorompo-admin works!</p>
+<div class="mainClass">
+  <div class="header">
+    <h1>Sorompó adminisztráció</h1>
+  </div>
+  <div>
+
+  </div>
+  <table class="container">
+    <tr class="filesHeader">
+      <th>Név</th>
+      <th>Neptun-kód</th>
+      <th>Rendszám</th>
+      <th>Típus</th>
+      <th>Belépőkártya száma</th>
+      <th>Telefonszám</th>
+      <th>E-mail cím</th>
+      <th>Regisztrált</th>
+      <th>Szemeszter</th>
+      <th><fa-icon [icon]="faComment"></fa-icon></th>
+      <th><fa-icon [icon]="faCheck"></fa-icon></th>
+    </tr>
+      <tr class="filesData" *ngFor="let data of sorompoObject.slice().reverse()">
+        <td>{{data.name}}</td>
+        <td>{{data.neptun}}</td>
+        <td>{{data.plate}}</td>
+        <td>{{data.type}}</td>
+        <td>{{data.card}}</td>
+        <td>{{data.mobile}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.registerDate}}</td>
+        <td>{{data.semester}}</td>
+        <td>
+          <p class="tooltip"><b>[M]</b>
+          <span class="left">{{data.reason}}</span></p>
+        </td>
+        <td><input type="checkbox"></td>
+      </tr>
+  </table>
+</div>
