@@ -16,17 +16,24 @@
       <th>E-mail cím</th>
       <th>Regisztrált</th>
       <th>Szemeszter</th>
+      <th><fa-icon [icon]="faComment"></fa-icon></th>
+      <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
       <tr class="filesData" *ngFor="let data of sorompoObject.slice().reverse()">
-        <td class="centeredClass">{{data.name}}</td>
-        <td class="centeredClass">{{data.neptun}}</td>
-        <td class="centeredClass">{{data.plate}}</td>
-        <td class="centeredClass">{{data.type}}</td>
-        <td class="centeredClass">{{data.card}}</td>
-        <td class="centeredClass">{{data.mobile}}</td>
-        <td class="centeredClass">{{data.email}}</td>
-        <td class="centeredClass">{{data.registerDate}}</td>
-        <td class="centeredClass">{{data.semester}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.neptun}}</td>
+        <td>{{data.plate}}</td>
+        <td>{{data.type}}</td>
+        <td>{{data.card}}</td>
+        <td>{{data.mobile}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.registerDate}}</td>
+        <td>{{data.semester}}</td>
+        <td>
+          <p class="tooltip"><b>[M]</b>
+          <span class="left">{{data.reason}}</span></p>
+        </td>
+        <td><input type="checkbox"></td>
       </tr>
   </table>
 </div>
