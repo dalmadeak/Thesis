@@ -2,7 +2,7 @@ fa-icon {
   color: #13294B;
 }
 
-h1 {
+h1, h3 {
   color: #13294B;
   margin: auto;
 }
@@ -21,12 +21,19 @@ table {
   margin: 30px auto;
   text-align: left;
   border: 1px solid #F1F2F1;
+  margin-bottom: 50px;
 }
 
 table {
   border-collapse: collapse;
   page-break-inside:auto;
 }
+
+.mainHeader {
+  background-color: #13294B;
+  color: #FFFFFF;
+}
+
 
 .filesHeader {
   background-color: #F1F2F1;
