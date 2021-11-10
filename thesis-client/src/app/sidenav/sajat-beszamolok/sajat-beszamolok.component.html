@@ -1,0 +1,24 @@
+<div class="mainClass">
+  <div class="header">
+    <h1>Saját beszámolók</h1>
+  </div>
+
+  <table class="container">
+    <tr>
+      <th class="mainHeader" colspan="3">Saját beszámolók</th>
+    </tr>
+    <tr class="filesHeader">
+      <th>Év</th>
+      <th>Hónap</th>
+      <th>Műveletek</th>
+    </tr>
+      <tr class="filesData" *ngFor="let data of myReportsObject.slice().reverse()">
+        <td>{{data.year}}</td>
+        <td>{{data.month}}</td>
+        <td>
+          <fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon>
+          <fa-icon [icon]="faDelete" title="Törlés"></fa-icon>
+        </td>
+      </tr>
+  </table>
+</div>

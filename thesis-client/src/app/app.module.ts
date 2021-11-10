@@ -46,6 +46,7 @@ import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltat
 import { ProfilComponent } from './sidenav/profil/profil.component';
 import { UjBejegyzesComponent } from './sidenav/uj-bejegyzes/uj-bejegyzes.component';
 import { BeszamolokComponent } from './sidenav/beszamolok/beszamolok.component';
+import { BeszamolokOsszegzesComponent } from './sidenav/beszamolok/beszamolok-osszegzes/beszamolok-osszegzes.component';
 import { HatarozatokComponent } from './sidenav/hatarozatok/hatarozatok.component';
 import { HatarozatokFilesComponent } from './sidenav/hatarozatok/hatarozatok-files/hatarozatok-files.component';
 import { HatarozatokNavbarComponent } from './sidenav/hatarozatok/hatarozatok-navbar/hatarozatok-navbar.component';
@@ -53,6 +54,7 @@ import { SorompoAdminComponent } from './sidenav/sorompo-admin/sorompo-admin.com
 import { BelepokartyaAdminComponent } from './sidenav/belepokartya-admin/belepokartya-admin.component';
 import { ValasztasokComponent } from './sidenav/valasztasok/valasztasok.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
+import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-beszamolok.component';
 
 @NgModule({
   declarations: [
@@ -90,13 +92,15 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
     ProfilComponent,
     UjBejegyzesComponent,
     BeszamolokComponent,
+    BeszamolokOsszegzesComponent,
     HatarozatokComponent,
     HatarozatokNavbarComponent,
     HatarozatokFilesComponent,
     SorompoAdminComponent,
     BelepokartyaAdminComponent,
     ValasztasokComponent,
-    BejelentkezesComponent
+    BejelentkezesComponent,
+    SajatBeszamolokComponent
   ],
   imports: [
     BrowserModule,
