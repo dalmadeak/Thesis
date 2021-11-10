@@ -7,9 +7,7 @@ import { UjBejegyzesComponent } from './uj-bejegyzes/uj-bejegyzes.component';
 import { BeszamolokComponent } from './beszamolok/beszamolok.component';
 import { BelepokartyaAdminComponent } from './belepokartya-admin/belepokartya-admin.component';
 import { SorompoAdminComponent } from './sorompo-admin/sorompo-admin.component';
-import { ValasztasokComponent } from './valasztasok/valasztasok.component';
 import { HatarozatokComponent } from './hatarozatok/hatarozatok.component';
-import { BeszamolokOsszegzesComponent } from './beszamolok/beszamolok-osszegzes/beszamolok-osszegzes.component';
 import { SajatBeszamolokComponent } from './sajat-beszamolok/sajat-beszamolok.component';
 
 
@@ -47,11 +45,6 @@ const routes: Routes = [
   {
     path: 'sorompo-admin',
     component: SorompoAdminComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'valasztasok',
-    component: ValasztasokComponent,
     pathMatch: 'full'
   }
 ];

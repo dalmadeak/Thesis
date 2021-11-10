@@ -52,7 +52,6 @@ import { HatarozatokFilesComponent } from './sidenav/hatarozatok/hatarozatok-fil
 import { HatarozatokNavbarComponent } from './sidenav/hatarozatok/hatarozatok-navbar/hatarozatok-navbar.component';
 import { SorompoAdminComponent } from './sidenav/sorompo-admin/sorompo-admin.component';
 import { BelepokartyaAdminComponent } from './sidenav/belepokartya-admin/belepokartya-admin.component';
-import { ValasztasokComponent } from './sidenav/valasztasok/valasztasok.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
 import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-beszamolok.component';
 
@@ -98,7 +97,6 @@ import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-besza
     HatarozatokFilesComponent,
     SorompoAdminComponent,
     BelepokartyaAdminComponent,
-    ValasztasokComponent,
     BejelentkezesComponent,
     SajatBeszamolokComponent
   ],
