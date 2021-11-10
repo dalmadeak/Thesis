@@ -1,3 +1,4 @@
+import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
 import { Component, Input } from "@angular/core";
 
 
@@ -8,6 +9,7 @@ import { Component, Input } from "@angular/core";
 })
 export class UlesekElementComponent {
   @Input() filterData: any;
+  p: number = 1;
 
   // Ülések type object for content title
   committeeTypesObject = [
@@ -89,5 +91,14 @@ export class UlesekElementComponent {
     return(Object.values(obj).find((x) => {
       return x.name === property;
     })).title;
+  }
+
+  filterObject(data : Array<any>) {
+    let copyOfObject = data;
+    if (this.filterData !== undefined && this.filterData !== '') {
+      copyOfObject = copyOfObject.slice().reverse().filter(el => el.committee == this.filterData)
+    }
+    console.log(copyOfObject)
+    return copyOfObject;
   }
 }

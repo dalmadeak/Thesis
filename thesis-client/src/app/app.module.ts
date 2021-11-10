@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { FormsModule } from '@angular/forms';
-
 
 import { OsztondijakModule } from './osztondijak/osztondijak.module';
 import { SzervezetModule } from './szervezet/szervezet.module';
@@ -103,6 +102,7 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
     BrowserModule,
     AppRoutingModule,
     NgImageSliderModule,
+    NgxPaginationModule,
     FontAwesomeModule,
     FormsModule,
     SzervezetModule,

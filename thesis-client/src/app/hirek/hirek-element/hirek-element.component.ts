@@ -1,13 +1,15 @@
 import { Component } from "@angular/core";
 
-
 @Component({
   selector: 'app-hirek-element',
   templateUrl: './hirek-element.component.html',
   styleUrls: ['./hirek-element.component.css']
 })
 export class HirekElementComponent {
-  hirekObject = [{
+  p: number = 1;
+
+  hirekObject = [
+  {
     id: '0001',
     title: 'First post!',
     content: 'This is the first post\'s content! AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCcccccccccccccccccccccccccccccccccccccccccccccccAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCccccccccccccccccccccccccccccccccccccccccccccccccccCCCCCCCCCCCCCCCD',
@@ -27,5 +29,6 @@ export class HirekElementComponent {
     title: 'Fourth post!',
     content: 'This is the fourth post\'s content!',
     date: '2021.10.24. 18:45'
-  }];
+  }
+  ];
 }
