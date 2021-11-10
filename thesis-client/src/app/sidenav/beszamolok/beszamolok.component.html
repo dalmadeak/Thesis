@@ -1,27 +1,8 @@
 <div class="mainClass">
   <div class="header">
-    <h1>Beszámolók</h1>
+    <h1>Beszámolók összegzése</h1>
   </div>
-<!--
-  <table class="container">
-    <tr>
-      <th class="mainHeader" colspan="4">Saját beszámolók</th>
-    </tr>
-    <tr class="filesHeader">
-      <th>Év</th>
-      <th>Hónap</th>
-      <th>Műveletek</th>
-    </tr>
-      <tr class="filesData" *ngFor="let data of myReportsObject.slice().reverse()">
-        <td>{{data.year}}</td>
-        <td>{{data.month}}</td>
-        <td>
-          <fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon>
-          <fa-icon [icon]="faDelete" title="Törlés"></fa-icon>
-        </td>
-      </tr>
-  </table>
--->
+
   <table class="container">
     <tr>
       <th class="mainHeader" colspan="4">Beszámolók összegzése</th>
@@ -37,7 +18,7 @@
         <td>{{data.month}}</td>
         <td>{{data.reports.length}}</td>
         <td>
-          <fa-icon [icon]="faView" title="Megtekintés" (click)="onClickView(data.reports, target)"></fa-icon>
+          <fa-icon [icon]="faView" title="Megtekintés" (click)="onClickView(data.reports)"></fa-icon>
           <fa-icon [icon]="faSummarize" title="Összegzés"></fa-icon>
         </td>
       </tr>
@@ -45,8 +26,8 @@
 
   <app-beszamolok-osszegzes
     [summarizeObject]="monthlyReport || null"
-    [ngClass]="{'toggleChildView': monthlyReport.length <= 0}">
+    [ngClass]="{'allowChildView': monthlyReport.length <= 0}">
   </app-beszamolok-osszegzes>
-  <p #target></p>
+  <div #target class="target"></div>
 </div>
 
