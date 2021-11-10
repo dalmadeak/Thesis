@@ -94,11 +94,10 @@ export class UlesekElementComponent {
   }
 
   filterObject(data : Array<any>) {
-    let copyOfObject = data;
-    if (this.filterData !== undefined && this.filterData !== '') {
-      copyOfObject = copyOfObject.slice().reverse().filter(el => el.committee == this.filterData)
+    let copyOfObject = data.slice().reverse();
+    if (this.filterData !== null && this.filterData !== '') {
+      copyOfObject = copyOfObject.filter(el => el.committee == this.filterData.id)
     }
-    console.log(copyOfObject)
     return copyOfObject;
   }
 }

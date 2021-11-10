@@ -9,7 +9,7 @@
       <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
     </tr>
-    <tr class="filesData" *ngFor="let file of beszamolokObject">
+    <tr class="filesData" *ngFor="let file of beszamolokObject | paginate: { itemsPerPage: 24, currentPage: p }">
       <td *ngIf="getFileExtension(file.name) === '.pdf'; else elseBlock;" class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
       <ng-template #elseBlock><td class="centeredClass"><fa-icon [icon]="faFileZip"></fa-icon></td></ng-template>
       <td>{{file.name}}</td>
@@ -18,3 +18,8 @@
     </tr>
   </table>
 </div>
+<pagination-controls
+(pageChange)="p = $event"
+previousLabel="Előző"
+nextLabel="Következő"
+class="pagination"></pagination-controls>

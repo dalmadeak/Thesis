@@ -8,6 +8,7 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
 })
 export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   @Input() filterData: any;
+  p : number = 1;
 
   faFile = faFile;
   faDownload = faDownload;
@@ -70,5 +71,13 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
 
   getFileExtension(fileName : string) {
     return fileName.substr(fileName.indexOf('.'));
+  }
+
+  filterObject(data : Array<any>) {
+    let copyOfObject = data.slice().reverse();
+    if (this.filterData !== null && this.filterData !== '') {
+      copyOfObject = copyOfObject.filter(el => el.committee == this.filterData.id)
+    }
+    return copyOfObject;
   }
 }

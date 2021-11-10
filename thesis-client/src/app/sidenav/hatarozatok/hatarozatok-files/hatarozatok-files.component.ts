@@ -1,13 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-hatarozatok-files',
   templateUrl: './hatarozatok-files.component.html',
-  styleUrls: ['./hatarozatok-files.component.css']
+  styleUrls: ['./hatarozatok-files.component.css','../../sidenav.component.css']
 })
-export class HatarozatokFilesComponent implements OnInit {
+export class HatarozatokFilesComponent {
   @Input() filterData: any;
+  p : number = 1;
 
   faFile = faFile;
   faDownload = faDownload;
@@ -67,8 +68,12 @@ export class HatarozatokFilesComponent implements OnInit {
     appendix: []
   }];
 
-  constructor() {}
-
-  ngOnInit() {}
+  filterObject(data : Array<any>) {
+    let copyOfObject = data.slice().reverse();
+    if (this.filterData !== null && this.filterData !== '') {
+      copyOfObject = copyOfObject.filter(el => el.committee == this.filterData.id)
+    }
+    return copyOfObject;
+  }
 
 }

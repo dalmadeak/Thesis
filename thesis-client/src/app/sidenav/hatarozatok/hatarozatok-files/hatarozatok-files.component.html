@@ -12,7 +12,7 @@
       <th>Csatolmányok</th>
       <th>Feltöltve</th>
     </tr>
-    <ng-container *ngFor="let file of hatarozatokObject.slice().reverse()">
+    <ng-container *ngFor="let file of filterObject(hatarozatokObject) | paginate: { itemsPerPage: 24, currentPage: p }">
       <tr class="filesData" *ngIf="filterData == undefined || filterData.id == file.committee">
         <td class="centeredClass">{{file.number}}</td>
         <td class="centeredClass">{{file.decisionDate}}</td>
@@ -28,3 +28,8 @@
     </ng-container>
   </table>
 </div>
+<pagination-controls
+(pageChange)="p = $event"
+previousLabel="Előző"
+nextLabel="Következő"
+class="pagination"></pagination-controls>

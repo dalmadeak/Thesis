@@ -7,6 +7,8 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
   styleUrls: ['../../atlathatosag.component.css']
 })
 export class AtlathatosagPalyazatokFilesComponent {
+  p : number = 1;
+
   faFile = faFile;
   faDownload = faDownload;
   faFilePdf = faFilePdf;
@@ -51,4 +53,5 @@ export class AtlathatosagPalyazatokFilesComponent {
   getFileExtension(fileName : string) {
     return fileName.substr(fileName.indexOf('.'));
   }
+
 }

@@ -1,5 +1,5 @@
 <div class="postContainer">
-  <ng-container *ngFor="let ules of ulesekObject.slice().reverse() | paginate: { itemsPerPage: 1, currentPage: p }">
+  <ng-container *ngFor="let ules of filterObject(ulesekObject) | paginate: { itemsPerPage: 25, currentPage: p }">
     <div class="post" *ngIf="filterData == undefined || filterData.id == ules.committee">
         <p class="postHeader">
           ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülés - {{ ules.meetingDate }}
