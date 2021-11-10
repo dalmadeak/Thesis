@@ -14,6 +14,7 @@ h1, h3 {
 
 table {
   border-collapse: collapse;
+  page-break-inside:auto;
 }
 
 .container {
@@ -24,16 +25,10 @@ table {
   margin-bottom: 50px;
 }
 
-table {
-  border-collapse: collapse;
-  page-break-inside:auto;
-}
-
 .mainHeader {
   background-color: #13294B;
   color: #FFFFFF;
 }
-
 
 .filesHeader {
   background-color: #F1F2F1;

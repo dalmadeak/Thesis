@@ -1,46 +1,44 @@
 fa-icon {
   color: #13294B;
+  padding: 5px;
+  cursor: pointer;
 }
 
-h1 {
+h1, h3 {
   color: #13294B;
   margin: auto;
 }
 
 .header {
-  max-width: 55%;
+  max-width: 65%;
   margin: 50px auto;
 }
 
 table {
   border-collapse: collapse;
+  page-break-inside:auto;
 }
 
 .container {
   width: 70%;
-  margin: 30px auto 100px auto;
+  margin: 30px auto;
   text-align: left;
   border: 1px solid #F1F2F1;
+  margin-bottom: 50px;
 }
+
+.mainHeader {
+  background-color: #13294B;
+  color: #FFFFFF;
+}
+
 
 .filesHeader {
   background-color: #F1F2F1;
 }
 
-.centeredClass{
-  text-align: center;
-}
-
 .breakableData {
   word-break: break-word;
-}
-
-a {
-  padding-top: 5px;
-  display: block;
-  color: #13294B;
-  font-weight: bold;
-  text-decoration: none;
 }
 
 th {
@@ -50,14 +48,9 @@ th {
 td, th{
   padding: 10px;
   max-width: 350px;
+  text-align: center;
 }
 
 tr:hover {
   background-color: #F1F2F1;
-}
-
-button {
-  padding: 3px;
-  border: none;
-  cursor: pointer;
 }

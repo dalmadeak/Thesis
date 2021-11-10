@@ -1,0 +1,27 @@
+
+<div class="mainClass">
+  <table class="container">
+    <tr>
+      <th class="mainHeader" colspan="5">Beérkezett beszámolók</th>
+    </tr>
+    <tr class="filesHeader">
+      <th>Év</th>
+      <th>Hónap</th>
+      <th>Beküldő</th>
+      <th>Beküldés ideje</th>
+      <th>Műveletek</th>
+    </tr>
+    <ng-container *ngFor="let data of summarizeObject">
+      <tr class="filesData" *ngIf="summarizeObject.length">
+        <td>{{data.year}}</td>
+        <td>{{data.month}}</td>
+        <td>{{data.author}}</td>
+        <td>{{data.date}}</td>
+        <td>
+          <fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon>
+          <fa-icon [icon]="faDelete" title="Törlés"></fa-icon>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
