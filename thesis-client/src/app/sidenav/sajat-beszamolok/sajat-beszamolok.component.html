@@ -12,7 +12,7 @@
       <th>Hónap</th>
       <th>Műveletek</th>
     </tr>
-      <tr class="filesData" *ngFor="let data of myReportsObject.slice().reverse()">
+      <tr class="filesData" *ngFor="let data of myReportsObject.slice().reverse() | paginate: { itemsPerPage: 24, currentPage: p }">
         <td>{{data.year}}</td>
         <td>{{data.month}}</td>
         <td>
@@ -22,3 +22,8 @@
       </tr>
   </table>
 </div>
+<pagination-controls
+(pageChange)="p = $event"
+previousLabel="Előző"
+nextLabel="Következő"
+class="pagination"></pagination-controls>

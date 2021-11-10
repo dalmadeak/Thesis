@@ -1,7 +1,6 @@
 <div class="postContainer">
-  <ng-container *ngFor="let ules of ulesekObject.slice().reverse()">
+  <ng-container *ngFor="let ules of filterObject(ulesekObject) | paginate: { itemsPerPage: 25, currentPage: p }">
     <div class="post" *ngIf="filterData == undefined || filterData.id == ules.committee">
-      <!-- this is where one post goes -->
         <p class="postHeader">
           ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülés - {{ ules.meetingDate }}
         </p>
@@ -28,3 +27,8 @@
     </div>
   </ng-container>
 </div>
+<pagination-controls
+(pageChange)="p = $event"
+previousLabel="Előző"
+nextLabel="Következő"
+class="pagination"></pagination-controls>

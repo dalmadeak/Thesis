@@ -7,6 +7,8 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fo
   styleUrls: ['../../atlathatosag.component.css']
 })
 export class AtlathatosagBeszamolokFilesComponent {
+  p : number = 1;
+
   faFile = faFile;
   faDownload = faDownload;
   faFilePdf = faFilePdf;

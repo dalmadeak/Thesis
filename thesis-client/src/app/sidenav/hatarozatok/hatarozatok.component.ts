@@ -12,5 +12,4 @@ export class HatarozatokComponent{
   onFilterClicked(event : Object) {
     this.filterEvent = event;
   }
-
 }
