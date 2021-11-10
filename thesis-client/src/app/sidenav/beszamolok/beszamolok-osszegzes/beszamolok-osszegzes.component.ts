@@ -11,27 +11,4 @@ export class BeszamolokOsszegzesComponent{
 
   faEdit = faPencilAlt;
   faDelete = faTrash;
-
-  reportsObject = [
-    {
-      year: '2021',
-      month: 'szeptember',
-      author: 'Dalma',
-      date: '2021. november 4. 23:59',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-    {
-      year: '2021',
-      month: 'szeptember',
-      author: 'Ez is Dalma',
-      date: '2021. november 4. 23:59',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-    {
-      year: '2021',
-      month: 'szeptember',
-      author: 'Ez már nem',
-      date: '2021. november 4. 23:59',
-      content: 'Nagyon szeretem a kiskutyákat'
-    }];
 }

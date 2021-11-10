@@ -10,6 +10,7 @@ import { SorompoAdminComponent } from './sorompo-admin/sorompo-admin.component';
 import { ValasztasokComponent } from './valasztasok/valasztasok.component';
 import { HatarozatokComponent } from './hatarozatok/hatarozatok.component';
 import { BeszamolokOsszegzesComponent } from './beszamolok/beszamolok-osszegzes/beszamolok-osszegzes.component';
+import { SajatBeszamolokComponent } from './sajat-beszamolok/sajat-beszamolok.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'beszamolok/sajat',
-    component: BeszamolokOsszegzesComponent,
+    component: SajatBeszamolokComponent,
     pathMatch: 'full'
   },
   {

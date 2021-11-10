@@ -55,6 +55,11 @@ tr:hover {
   background-color: #F1F2F1;
 }
 
-.toggleChildView {
+.allowChildView{
   display: none;
 }
+
+.target {
+  margin-top: 300px;
+}
+

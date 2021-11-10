@@ -10,7 +10,7 @@ import { SidenavComponent } from "./sidenav.component";
     SidenavRoutingModule
   ],
   declarations: [
-    SidenavComponent
+    SidenavComponent,
   ],
   exports: [
     SidenavComponent

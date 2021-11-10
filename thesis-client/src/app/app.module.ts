@@ -55,6 +55,7 @@ import { SorompoAdminComponent } from './sidenav/sorompo-admin/sorompo-admin.com
 import { BelepokartyaAdminComponent } from './sidenav/belepokartya-admin/belepokartya-admin.component';
 import { ValasztasokComponent } from './sidenav/valasztasok/valasztasok.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
+import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-beszamolok.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
     SorompoAdminComponent,
     BelepokartyaAdminComponent,
     ValasztasokComponent,
-    BejelentkezesComponent
+    BejelentkezesComponent,
+    SajatBeszamolokComponent
   ],
   imports: [
     BrowserModule,

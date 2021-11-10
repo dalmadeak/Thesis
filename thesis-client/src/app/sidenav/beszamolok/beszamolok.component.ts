@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { faTrash, faPencilAlt, faFileImport, faList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,40 +7,13 @@ import { faTrash, faPencilAlt, faFileImport, faList } from '@fortawesome/free-so
   styleUrls: ['./beszamolok.component.css']
 })
 export class BeszamolokComponent{
+  @ViewChild('target') targetRef: ElementRef | undefined;
   monthlyReport : Array<Object> = [];
 
   faEdit = faPencilAlt;
   faDelete = faTrash;
   faView = faList;
   faSummarize = faFileImport;
-
-  myReportsObject = [
-    {
-      year: '2021',
-      month: 'május',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-    {
-      year: '2021',
-      month: 'augusztus',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-    {
-      year: '2021',
-      month: 'szeptember',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-    {
-      year: '2021',
-      month: 'október',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-    {
-      year: '2021',
-      month: 'november',
-      content: 'Nagyon szeretem a kiskutyákat'
-    },
-  ];
 
   reportsObject = [
     {
@@ -356,19 +328,19 @@ export class BeszamolokComponent{
           content: 'Nagyon szeretem a kiskutyákat'
         }]
     }
-];
+  ];
 
-  onClickView(data: Array<Object>, element: HTMLElement) {
-    this.addMonthToSummary(data);
-    this.scrollToChild(element);
+  async onClickView(data: Array<Object>) {
+    await this.addMonthToSummary(data);
+    this.scrollToChild();
   }
 
   addMonthToSummary(data: Array<Object>) {
     this.monthlyReport = data;
   }
 
-  scrollToChild(element: HTMLElement): void {
-    element.scrollIntoView({behavior: 'smooth'});
+  scrollToChild(): void {
+   this.targetRef?.nativeElement.scrollIntoView({behavior: 'smooth'});
   }
 
 }
