@@ -6,6 +6,17 @@ import { Component } from "@angular/core";
   styleUrls: ['./hirek.component.css']
 })
 export class HirekComponent {
+
+
+
+
+
+
+
+
+
+
+  /*
   allowNewServer = false;
   serverName = '';
   isServerCreated = false;
@@ -28,5 +39,5 @@ export class HirekComponent {
     console.log(event);
     this.serverName = (<HTMLInputElement>event.target).value;
     // this.serverName = event.target.value , ha az event : any típusú
-  }
+  }*/
 }

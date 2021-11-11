@@ -4,6 +4,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { OsztondijakModule } from './osztondijak/osztondijak.module';
 import { SzervezetModule } from './szervezet/szervezet.module';
@@ -107,6 +108,7 @@ import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-besza
     NgxPaginationModule,
     FontAwesomeModule,
     FormsModule,
+    HttpClientModule,
     SzervezetModule,
     OsztondijakModule,
     SzolgaltatasokModule,

@@ -1,10 +1,11 @@
 <div class="postContainer">
-    <div class="post" *ngFor="let hir of hirekObject.slice().reverse() | paginate: { itemsPerPage: 24, currentPage: p }">
+    <div class="post" *ngFor="let hir of getObject() | paginate: { itemsPerPage: 24, currentPage: p }">
         <p class="postHeader">{{ hir.title }}</p>
         <p class="postContent">{{ hir.content }}</p>
         <p class="postData">{{ hir.date }}</p>
     </div>
 </div>
+
 <pagination-controls
 (pageChange)="p = $event"
 previousLabel="Előző"
