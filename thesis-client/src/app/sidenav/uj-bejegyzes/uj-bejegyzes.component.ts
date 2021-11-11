@@ -7,9 +7,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./uj-bejegyzes.component.css']
 })
 export class UjBejegyzesComponent{
+  selectedOption : string = 'hir';
 
   onSubmit(form: NgForm) {
-
+    console.log(this.selectedOption);
+    console.log(form.value);
   }
-
 }

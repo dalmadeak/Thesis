@@ -9,10 +9,10 @@
           <div>
             <label>Bejegyzés típusa: </label>
             <select
-              ngModel
-              name="type"
+              [(ngModel)]="selectedOption"
+              name="postType"
               required>
-              <option value="hir">Hír</option>
+              <option value="hir" selected>Hír</option>
               <option value="ules">Bizottsági ülés</option>
               <option value="beszamolo">Átláthatóság - Beszámoló</option>
               <option value="jegyzokonyv">Átláthatóság - Jegyzőkönyv</option>
@@ -22,7 +22,7 @@
             </select>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'ules'">
             <label>Bizottság: </label>
             <select
               ngModel
@@ -41,7 +41,7 @@
             </select>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'ules'">
             <label>Ülés típusa: </label>
             <select
               ngModel
@@ -53,7 +53,7 @@
             </select>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption != 'b-beszamolo' && selectedOption != 'b-hatarozat'">
             <label>Cím: </label>
             <input
               type="text"
@@ -62,7 +62,7 @@
               required>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'b-hatarozat'">
             <label>Sorszám: </label>
             <input
               type="text"
@@ -71,7 +71,7 @@
               required>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'ules' || selectedOption == 'jegyzokonyv' || selectedOption == 'b-hatarozat'">
             <label>Esemény időpontja: </label>
             <input
               type="date"
@@ -79,7 +79,7 @@
               name="date"
               required>
           </div>
-          <div>
+          <div *ngIf="selectedOption == 'ules' || selectedOption == 'jegyzokonyv' || selectedOption == 'b-hatarozat'">
             <label></label>
             <input
               type="time"
@@ -88,7 +88,7 @@
               required>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'b-beszamolo'">
             <label>Év: </label>
             <input
               type="number"
@@ -97,7 +97,7 @@
               required>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'b-beszamolo'">
             <label>Hónap: </label>
             <select
               ngModel
@@ -118,7 +118,7 @@
             </select>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption != 'beszamolo' && selectedOption != 'jegyzokonyv' && selectedOption != 'palyazat'">
             <label>Tartalom: </label>
             <textarea
               ngModel
@@ -128,7 +128,7 @@
             </textarea>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'b-hatarozat'">
             <label>Mandátum: </label>
             <input
               type="number"
@@ -137,7 +137,7 @@
               required>
           </div>
 
-          <div>
+          <div *ngIf="selectedOption == 'b-hatarozat'">
             <label>Szavazati arány: </label>
             <input
               type="text"
@@ -182,3 +182,5 @@
       </form>
   </div>
 </div>
+
+<!--  -->
