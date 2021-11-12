@@ -22,16 +22,15 @@ export class UjBejegyzesComponent{
 
   addNewPost(form : NgForm) {
     const newPost : Hirek = {
-      id: 1000,
+      _id: null,
       title: form.value.newRegistryGroup.title,
       content: form.value.newRegistryGroup.content,
       date: form.value.newRegistryGroup.postDate
     }
 
-    this.http.post<{ message: string }>('http://localhost:3000/api/hirek', newPost).subscribe((responseData) => {
-      console.log(responseData.message);
+    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/hirek', newPost).subscribe((asd) => {
+      const id = asd.postId;
+      newPost._id = id;
     });
-
-    console.log(newPost);
   }
 }

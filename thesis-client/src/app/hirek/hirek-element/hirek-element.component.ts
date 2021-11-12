@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { Hirek } from '../hirek.model';
 import { map } from 'rxjs/operators'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-hirek-element',
@@ -9,8 +10,8 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./hirek-element.component.css']
 })
 export class HirekElementComponent implements OnInit{
-  months = ["január", "február", "március", "április", "május", "június",
-  "július", "augusztus", "szeptember", "október", "november", "december"];
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
 
   p: number = 1;
 
@@ -31,11 +32,9 @@ export class HirekElementComponent implements OnInit{
   getPosts() {
     this.http.get<{message: string, posts: any }>('http://localhost:3000/api/hirek')
       .pipe(map(postData => {
-        return postData.posts.map((post: { _id: any; title: string; content: string; date: Date; }) => {
-          console.log(post.date.getFullYear())
-         // let transformedDate = (post.date.getFullYear() + '. ' + this.months[post.date.getMonth()] + ' ' + post.date.getDay() );
-          return {
-            id: post._id,
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
             title: post.title,
             content: post.content,
             date: post.date
@@ -45,5 +44,13 @@ export class HirekElementComponent implements OnInit{
       .subscribe((finalPosts) => {
         this.hirekObject = finalPosts;
       });
+  }
+
+  onDeletePost(postId : string) {
+    this.http.delete('http://localhost:3000/api/hirek/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.hirekObject.filter(post => post._id !== postId);
+        this.hirekObject = updatedPost;
+      })
   }
 }

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const hirekSchema = mongoose.Schema({
-  id: { type: String, required: true},
   title: { type: String, required: true },
   content: { type: String, required: true},
   date: { type: Date, required: true },

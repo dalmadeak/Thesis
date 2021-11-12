@@ -1,5 +1,5 @@
 export interface Hirek {
-  id: any;
+  _id: any;
   title: string,
   content: string;
   date: Date;

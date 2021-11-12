@@ -44,6 +44,17 @@
   margin: auto;
 }
 
+.postIcons {
+  text-align: right;
+  float: right;
+}
+
+fa-icon {
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+}
+
 p {
   word-wrap: break-word;
 }
