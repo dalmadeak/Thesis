@@ -8,7 +8,7 @@ const debug = require('debug')('node-angular');
 
 const port = (process.env.PORT || '3000');
 
-server.listen(port); */
+server.listen(port);*/
 
 const normalizedPort = val => {
   let port = parseInt(val, 10);
@@ -54,3 +54,4 @@ const server = http.createServer(app);
 server.on('error', onError);
 server.on('listening', onListening);
 server.listen(port);
+console.log('yay!')
