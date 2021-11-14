@@ -9,7 +9,7 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAl
   templateUrl: './atlathatosag-palyazatok-files.component.html',
   styleUrls: ['../../atlathatosag.component.css']
 })
-export class AtlathatosagPalyazatokFilesComponent {
+export class AtlathatosagPalyazatokFilesComponent implements OnInit{
   p : number = 1;
 
   faFile = faFile;

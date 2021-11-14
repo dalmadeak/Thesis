@@ -209,7 +209,7 @@ app.post('/api/beszamolok', (req, res, next) => {
 
 //put - completely replace old resource with new one, patch - update resource
 app.put('/api/beszamolok/:id', (req,res,next) => {
-  const post = new DeciReportsion({
+  const post = new Report({
     _id: req.body._id,
     title: req.body.title,
     date: req.body.date,

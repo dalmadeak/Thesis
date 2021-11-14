@@ -26,6 +26,10 @@
         <app-uj-bejegyzes-hirek></app-uj-bejegyzes-hirek>
       </div>
 
+      <div *ngIf="selectedOption == 'beszamolo'">
+        <app-uj-bejegyzes-beszamolok></app-uj-bejegyzes-beszamolok>
+      </div>
+
       <div *ngIf="selectedOption == 'palyazat'">
         <app-uj-bejegyzes-palyazatok></app-uj-bejegyzes-palyazatok>
       </div>
@@ -37,6 +41,7 @@
       <div *ngIf="selectedOption == 'b-beszamolo'">
         <app-uj-bejegyzes-sajat-beszamolok></app-uj-bejegyzes-sajat-beszamolok>
       </div>
+
 
      <!-- <form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
         <div ngModelGroup="newRegistryGroup" class="group">
