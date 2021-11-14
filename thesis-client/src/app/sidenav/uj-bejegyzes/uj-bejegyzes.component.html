@@ -57,7 +57,7 @@
             <label>Cím: </label>
             <input
               type="text"
-              ngModel
+              [ngModel]="editablePost.title"
               name="title"
               required>
           </div>
@@ -121,7 +121,7 @@
           <div *ngIf="selectedOption != 'beszamolo' && selectedOption != 'jegyzokonyv' && selectedOption != 'palyazat'">
             <label>Tartalom: </label>
             <textarea
-              ngModel
+            [ngModel]="editablePost.content"
               name="content"
               rows="10"
               required>
@@ -150,7 +150,7 @@
             <label>Közzététel időpontja: </label>
             <input
               type="date"
-              ngModel
+              [ngModel]="editablePost.date.split(' ')[0]"
               name="postDate"
               required>
           </div>
@@ -158,7 +158,7 @@
             <label></label>
             <input
               type="time"
-              ngModel
+              [ngModel]="editablePost.date.split(' ')[1]"
               name="postTime"
               required>
           </div>
@@ -167,7 +167,7 @@
             <label>Csatolmányok: </label>
             <input
               type="file"
-              ngModel
+              [ngModel]="editablePost.files"
               name="file">
           </div>
 

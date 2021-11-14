@@ -5,8 +5,8 @@
         <div class="postData">
           {{ hir.date }}
           <div class="postIcons">
-            <fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon>
-            <fa-icon [icon]="faDelete" title="Törlés" (click)="onDeletePost(hir._id)"></fa-icon>
+            <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', hir._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(hir._id)"></fa-icon>
           </div>
         </div>
     </div>
