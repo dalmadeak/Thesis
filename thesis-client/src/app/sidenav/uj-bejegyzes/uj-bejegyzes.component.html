@@ -26,6 +26,10 @@
         <app-uj-bejegyzes-hirek></app-uj-bejegyzes-hirek>
       </div>
 
+      <div *ngIf="selectedOption == 'ules'">
+        <app-uj-bejegyzes-ulesek></app-uj-bejegyzes-ulesek>
+      </div>
+
       <div *ngIf="selectedOption == 'jegyzokonyv'">
         <app-uj-bejegyzes-jegyzokonyvek></app-uj-bejegyzes-jegyzokonyvek>
       </div>

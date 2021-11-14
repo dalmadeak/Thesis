@@ -1,5 +1,6 @@
-export interface Ules {
+export interface Ulesek {
   _id: any;
+  author: string;
   committee: string;
   type: string;
   decisionDate: string;

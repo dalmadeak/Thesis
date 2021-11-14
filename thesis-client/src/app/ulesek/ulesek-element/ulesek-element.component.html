@@ -1,7 +1,16 @@
 <div class="postContainer">
-  <ng-container *ngFor="let ules of filterObject(ulesekObject) | paginate: { itemsPerPage: 25, currentPage: p }">
+  <ng-container *ngFor="let ules of filterObject(getObject()) | paginate: { itemsPerPage: 25, currentPage: p }">
     <div class="post" *ngIf="filterData == undefined || filterData.id == ules.committee">
-        <p class="postHeader">
+      <p class="postHeader">
+        ELTE IK HÖK {{ ules.committee }} {{ ules.type }} ülés - {{ ules.decisionDate }}
+      </p>
+      <div class="postContent">
+          {{ules.content}}
+      </div>
+
+
+
+      <!-- <p class="postHeader">
           ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülés - {{ ules.meetingDate }}
         </p>
         <div class="postContent">
@@ -22,8 +31,14 @@
 
           <p>Tisztelettel,</p>
           <p>{{ ules.author }}</p>
+        </div> -->
+      <div class="postData">
+        {{ ules.date }}
+        <div class="postIcons">
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', ules._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(ules._id)"></fa-icon>
         </div>
-        <p class="postData">{{ ules.postDate }}</p>
+      </div>
     </div>
   </ng-container>
 </div>
