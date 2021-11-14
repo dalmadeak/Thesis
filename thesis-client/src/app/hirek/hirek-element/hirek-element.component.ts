@@ -46,7 +46,7 @@ export class HirekElementComponent implements OnInit{
       });
   }
 
-  onDeletePost(postId : string) {
+  deletePost(postId : string) {
     this.http.delete('http://localhost:3000/api/hirek/' + postId)
       .subscribe(() => {
         const updatedPost = this.hirekObject.filter(post => post._id !== postId);

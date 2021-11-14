@@ -23,6 +23,11 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'uj-bejegyzes/szerkesztes/:id',
+    component: UjBejegyzesComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'beszamolok',
     component: BeszamolokComponent,
     pathMatch: 'full'
