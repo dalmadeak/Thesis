@@ -70,7 +70,6 @@ input, textarea, select {
 
 textarea {
   vertical-align: top;
-  white-space: pre-wrap;
 }
 
 button {

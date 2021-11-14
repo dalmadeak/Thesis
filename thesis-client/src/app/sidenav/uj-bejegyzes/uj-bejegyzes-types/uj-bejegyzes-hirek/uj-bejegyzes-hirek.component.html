@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
   <div ngModelGroup="newRegistryGroup" class="group">
-    <div *ngIf="selectedOption != 'b-beszamolo' && selectedOption != 'b-hatarozat'">
+    <div>
       <label>Cím: </label>
       <input
         type="text"
@@ -9,7 +9,7 @@
         required>
     </div>
 
-    <div *ngIf="selectedOption != 'beszamolo' && selectedOption != 'jegyzokonyv' && selectedOption != 'palyazat'">
+    <div>
       <label>Tartalom: </label>
       <textarea
       [ngModel]="editablePost.content"

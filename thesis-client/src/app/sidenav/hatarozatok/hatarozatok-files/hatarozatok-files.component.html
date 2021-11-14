@@ -11,19 +11,24 @@
       <th>Szavazati arány</th>
       <th>Csatolmányok</th>
       <th>Feltöltve</th>
+      <th>Műveletek</th>
     </tr>
-    <ng-container *ngFor="let file of filterObject(hatarozatokObject) | paginate: { itemsPerPage: 24, currentPage: p }">
+    <ng-container *ngFor="let file of filterObject(getObject()) | paginate: { itemsPerPage: 24, currentPage: p }">
       <tr class="filesData" *ngIf="filterData == undefined || filterData.id == file.committee">
         <td class="centeredClass">{{file.number}}</td>
         <td class="centeredClass">{{file.decisionDate}}</td>
-        <td class="breakableData">{{file.decision}}</td>
+        <td class="breakableData">{{file.content}}</td>
         <td class="centeredClass">{{file.mandate}}</td>
         <td class="centeredClass">{{file.vote}}</td>
         <td class="breakableData centeredClass">
-          <a *ngFor="let append of file.appendix; let i = index"  href="{{append}}" download="asd">Csatolmány{{i+1}} </a>
+          <a *ngFor="let appendix of file.files; let i = index" href="{{appendix}}" download="file.files[i]">Csatolmány{{i+1}} </a>
           <br>
         </td>
-        <td class="centeredClass">{{file.uploadDate}}</td>
+        <td class="centeredClass">{{file.date}}</td>
+        <td>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', file._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(file._id)"></fa-icon>
+        </td>
       </tr>
     </ng-container>
   </table>
