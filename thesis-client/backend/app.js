@@ -207,14 +207,6 @@ app.post('/api/beszamolok', (req, res, next) => {
   });
 });
 
-/*
-author: req.body.author,
-    year: req.body.year,
-    month: req.body.month,
-    content: req.body.content,
-    date: req.body.date,
-*/
-
 //put - completely replace old resource with new one, patch - update resource
 app.put('/api/beszamolok/:id', (req,res,next) => {
   const post = new DeciReportsion({

@@ -8,13 +8,18 @@
       <th>Név <button (click)="onSortByName()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
+      <th class="centeredClass">Műveletek</th>
     </tr>
-    <tr class="filesData" *ngFor="let file of palyazatokObject | paginate: { itemsPerPage: 24, currentPage: p }">
-      <td *ngIf="getFileExtension(file.name) === '.pdf'; else elseBlock;" class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
+    <tr class="filesData" *ngFor="let file of getObject() | paginate: { itemsPerPage: 24, currentPage: p }">
+      <td *ngIf="getFileExtension(file.title) === '.pdf'; else elseBlock;" class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
       <ng-template #elseBlock><td class="centeredClass"><fa-icon [icon]="faFileZip"></fa-icon></td></ng-template>
-      <td>{{file.name}}</td>
-      <td>{{file.uploadDate}}</td>
-      <td class="centeredClass"><a href="{{file.path}}" download="{{file.name}}">Letöltés</a></td>
+      <td>{{file.title}}</td>
+      <td>{{file.date}}</td>
+      <td class="centeredClass"><a href="{{file.files}}" download="{{file.title}}">Letöltés</a></td>
+      <td class="centeredClass">
+        <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', file._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+        <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(file._id)"></fa-icon>
+      </td>
     </tr>
   </table>
 </div>
