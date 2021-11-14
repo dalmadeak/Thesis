@@ -77,7 +77,6 @@ app.put('/api/hirek/:id', (req,res,next) => {
     files: req.body.files
   })
   Post.updateOne({_id: req.params.id}, post).then(result => {
-    console.log(post);
     res.status(200).json({
       message: 'Post updated successfully'
     });

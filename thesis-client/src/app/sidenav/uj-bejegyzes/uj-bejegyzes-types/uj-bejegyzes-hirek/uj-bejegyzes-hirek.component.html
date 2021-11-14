@@ -1,0 +1,53 @@
+<form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
+  <div ngModelGroup="newRegistryGroup" class="group">
+    <div *ngIf="selectedOption != 'b-beszamolo' && selectedOption != 'b-hatarozat'">
+      <label>Cím: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.title"
+        name="title"
+        required>
+    </div>
+
+    <div *ngIf="selectedOption != 'beszamolo' && selectedOption != 'jegyzokonyv' && selectedOption != 'palyazat'">
+      <label>Tartalom: </label>
+      <textarea
+      [ngModel]="editablePost.content"
+        name="content"
+        rows="10"
+        required>
+      </textarea>
+    </div>
+
+    <div>
+      <label>Közzététel időpontja: </label>
+      <input
+        type="date"
+        [ngModel]="editablePost.date.split(' ')[0]"
+        name="postDate"
+        required>
+    </div>
+    <div>
+      <label></label>
+      <input
+        type="time"
+        [ngModel]="editablePost.date.split(' ')[1]"
+        name="postTime"
+        required>
+    </div>
+
+    <div>
+      <label>Csatolmányok: </label>
+      <input
+        type="file"
+        [ngModel]="editablePost.files"
+        name="file">
+    </div>
+
+    <div>
+    <button
+      type="submit"
+      [disabled]="!newRegistryForm.valid">Küldés</button>
+    </div>
+  </div>
+</form>
