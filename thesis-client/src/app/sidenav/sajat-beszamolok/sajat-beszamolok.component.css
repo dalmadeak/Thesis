@@ -41,10 +41,6 @@ table {
   word-break: break-word;
 }
 
-th {
-  text-align: center;
-}
-
 td, th{
   padding: 10px;
   max-width: 350px;

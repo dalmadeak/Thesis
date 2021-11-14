@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -11,6 +11,7 @@ import { Hirek } from '../../../../hirek/hirek.model';
   styleUrls: ['./uj-bejegyzes-hirek.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesHirekComponent implements OnInit {
+  @Output() selectedOptionEvent = new EventEmitter<string>();
   selectedOption : string = 'hir';
 
   private mode = 'createNewPost'
@@ -78,5 +79,10 @@ export class UjBejegyzesHirekComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       })
+  }
+
+  emitSelectedOption(value: string) {
+    this.selectedOptionEvent.emit(value);
+    console.log(value)
   }
 }

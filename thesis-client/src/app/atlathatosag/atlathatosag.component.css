@@ -1,5 +1,7 @@
 fa-icon {
   color: #13294B;
+  padding: 5px;
+  cursor: pointer;
 }
 
 h1 {

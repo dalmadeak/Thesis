@@ -1,12 +1,17 @@
-import { Component } from "@angular/core";
-import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from "@angular/core";
+import { Beszamolok } from '../beszamolok.model';
+import { map } from 'rxjs/operators'
+import { HttpClient } from "@angular/common/http";
+import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-atlathatosag-beszamolok-files',
   templateUrl: './atlathatosag-beszamolok-files.component.html',
   styleUrls: ['../../atlathatosag.component.css']
 })
-export class AtlathatosagBeszamolokFilesComponent {
+export class AtlathatosagBeszamolokFilesComponent implements OnInit{
+
   p : number = 1;
 
   faFile = faFile;
@@ -14,43 +19,58 @@ export class AtlathatosagBeszamolokFilesComponent {
   faFilePdf = faFilePdf;
   faChevronDown = faChevronDown;
   faFileZip = faFileArchive;
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
 
-  beszamolokObject = [
-  {
-    name: 'beszamolo2.pdf',
-    uploadDate: '2021. október 02.',
-    path: '../../../../assets/images/header-background.png'
-  },
-  {
-    name: 'beszamolo1.pdf',
-    uploadDate: '2021. október 15.',
-    path: '../../../../assets/images/header-background.png'
-  },
-  {
-    name: 'beszamolo3.pdf',
-    uploadDate: '2021. október 20.',
-    path: '../../../../assets/images/header-background.png'
-  },
-  {
-    name: 'beszamolo5.zip',
-    uploadDate: '2021. október 22.',
-    path: '../../../../assets/images/header-background.png'
-  },
-  {
-    name: 'beszamolo4.pdf',
-    uploadDate: '2021. október 27.',
-    path: '../../../../assets/images/header-background.png'
-  }];
+  private beszamolokObject : Beszamolok[] = [];
+
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.beszamolokObject].slice().reverse();
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/beszamolok')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            title: post.title,
+            content: post.content,
+            date: post.date
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.beszamolokObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.http.delete('http://localhost:3000/api/beszamolok/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.beszamolokObject.filter(post => post._id !== postId);
+        this.beszamolokObject = updatedPost;
+      })
+  }
 
   onSortByName(){
-    return this.beszamolokObject.sort((a,b) => (a.name > b.name) ? 1 : -1);
+    return this.beszamolokObject.sort((a,b) => (a.title > b.title) ? 1 : -1);
   }
 
   onSortByUploadDate(){
-    return this.beszamolokObject.sort((a,b) => (a.uploadDate > b.uploadDate) ? 1 : -1);
+    return this.beszamolokObject.sort((a,b) => (a.date > b.date) ? 1 : -1);
   }
 
   getFileExtension(fileName : string) {
     return fileName.substr(fileName.indexOf('.'));
   }
+
 }

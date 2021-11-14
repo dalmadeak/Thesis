@@ -1,1 +1,66 @@
-<p>uj-bejegyzes-sajat-beszamolok works!</p>
+<form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
+  <div ngModelGroup="newRegistryGroup" class="group">
+    <div>
+      <label>Év: </label>
+      <input
+        type="number"
+        [ngModel]="editablePost.year"
+        name="year"
+        required>
+    </div>
+
+    <div>
+      <label>Hónap: </label>
+      <select
+      [ngModel]="editablePost.month"
+        name="month"
+        required>
+        <option value="január">Január 5.</option>
+        <option value="február">Február 5.</option>
+        <option value="március">Március 5.</option>
+        <option value="április">Április 5.</option>
+        <option value="május">Május 5.</option>
+        <option value="június">Június 5.</option>
+        <option value="július">Július 5.</option>
+        <option value="augusztus">Augusztus 5.</option>
+        <option value="szeptember">Szeptember 5.</option>
+        <option value="október">Október 5.</option>
+        <option value="november">November 5.</option>
+        <option value="december">December 5.</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Tartalom: </label>
+      <textarea
+        [ngModel]="editablePost.content"
+        name="content"
+        rows="10"
+        required>
+      </textarea>
+    </div>
+
+    <div>
+      <label>Közzététel időpontja: </label>
+      <input
+        type="date"
+        [ngModel]="editablePost.date.split(' ')[0]"
+        name="postDate"
+        required>
+    </div>
+    <div>
+      <label></label>
+      <input
+        type="time"
+        [ngModel]="editablePost.date.split(' ')[1]"
+        name="postTime"
+        required>
+    </div>
+
+    <div>
+    <button
+      type="submit"
+      [disabled]="!newRegistryForm.valid">Küldés</button>
+    </div>
+  </div>
+</form>

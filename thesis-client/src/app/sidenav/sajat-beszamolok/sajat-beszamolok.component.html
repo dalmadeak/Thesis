@@ -12,12 +12,12 @@
       <th>Hónap</th>
       <th>Műveletek</th>
     </tr>
-      <tr class="filesData" *ngFor="let data of myReportsObject.slice().reverse() | paginate: { itemsPerPage: 24, currentPage: p }">
+      <tr class="filesData" *ngFor="let data of getObject() | paginate: { itemsPerPage: 24, currentPage: p }">
         <td>{{data.year}}</td>
         <td>{{data.month}}</td>
         <td>
-          <fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon>
-          <fa-icon [icon]="faDelete" title="Törlés"></fa-icon>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(data._id)"></fa-icon>
         </td>
       </tr>
   </table>

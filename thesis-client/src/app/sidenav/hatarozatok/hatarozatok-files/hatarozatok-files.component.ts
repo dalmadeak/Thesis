@@ -1,5 +1,8 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, Input } from "@angular/core";
-import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { map } from "rxjs/operators";
+import { Hatarozat } from "../hatarozatok.model";
 
 @Component({
   selector: 'app-hatarozatok-files',
@@ -10,63 +13,52 @@ export class HatarozatokFilesComponent {
   @Input() filterData: any;
   p : number = 1;
 
-  faFile = faFile;
-  faDownload = faDownload;
-  faFilePdf = faFilePdf;
-  faChevronDown = faChevronDown;
-  faFileZip = faFileArchive;
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
 
-  hatarozatokObject = [
-  {
-    number: '1/2021/Elnökség',
-    decisionDate: '2021. október 10.',
-    uploadDate: '2021. október 15.',
-    committee: 'elnokseg',
-    decision: 'Az ELTE IK HÖK Elnöksége úgy döntött, hogy feloszlatja magát yolo.',
-    mandate: '9',
-    vote: '9/0/0',
-    appendix: ['../../../../assets/images/header-background.png']
-  },
-  {
-    number: '2/2021/Elnökség',
-    decisionDate: '2021. október 10.',
-    uploadDate: '2021. október 15.',
-    committee: 'elnokseg',
-    decision: 'Az ELTE IK HÖK Elnöksége úgy döntött, hogy feloszlatja a Kabinetet is.',
-    mandate: '9',
-    vote: '8/0/0 - 1 online nem szavazott',
-    appendix: ['../../../../assets/images/header-background.png']
-  },
-  {
-    number: '1/2021/Kabinet',
-    decisionDate: '2021. október 12.',
-    uploadDate: '2021. október 18.',
-    committee: 'kabinet',
-    decision: 'Az ELTE IK HÖK Küldöttgyűlése felhatalmazza az ELTE IK HÖK Elnökét, hogy amennyiben nem tud a Kari Tanács tagok mindegyike valamely ülésen részt venni, akkor az ülés időtartamára a hiányzó tagok helyett a három választott póttag közül delegáljon sorrendben a Kari Tanácsba. A Küldöttgyűlés Miklósi László Dávidot választja harmadik póttagként.',
-    mandate: '6',
-    vote: '6/0/0',
-    appendix: ['../../../../assets/images/header-background.png']
-  },
-  {
-    number: '3/2021/Elnökség',
-    decisionDate: '2021. október 11.',
-    uploadDate: '2021. október 20.',
-    committee: 'elnokseg',
-    decision: 'Az ELTE IK HÖK Elnöksége az Informatikai Kar 2021-es gólyatáborának felsőbbéveseinek toborzása céljából a mellékletben található pályázatot írja ki 2021. július 4. 23:59-es határidővel.',
-    mandate: '40',
-    vote: '38/1/0 - 1 online nem szavazott',
-    appendix: ['../../../../assets/images/header-background.png','../../../../assets/images/header-background.png','../../../../assets/images/header-background.png','../../../../assets/images/header-background.png','../../../../assets/images/header-background.png','../../../../assets/images/header-background.png','../../../../assets/images/header-background.png','../../../../assets/images/header-background.png']
-  },
-  {
-    number: '1/2021/Hallgatói Jóléti Bizottság',
-    decisionDate: '2021. október 17.',
-    uploadDate: '2021. október 17.',
-    committee: 'hjb',
-    decision: 'Mittomén.',
-    mandate: '6',
-    vote: '4/2/0',
-    appendix: []
-  }];
+  private hatarozatokObject : Hatarozat[] = [];
+
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.hatarozatokObject].slice().reverse();
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/hatarozatok')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            committee: post.committee,
+            number: post.number,
+            decisionDate: post.decisionDate,
+            content: post.content,
+            mandate: post.mandate,
+            vote: post.vote,
+            date: post.date,
+            files: post.files,
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.hatarozatokObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.http.delete('http://localhost:3000/api/hatarozatok/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.hatarozatokObject.filter(post => post._id !== postId);
+        this.hatarozatokObject = updatedPost;
+      })
+  }
 
   filterObject(data : Array<any>) {
     let copyOfObject = data.slice().reverse();

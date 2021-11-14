@@ -1,91 +1,65 @@
-import { elementEventFullName } from "@angular/compiler/src/view_compiler/view_compiler";
-import { Component, Input } from "@angular/core";
-
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, Input } from "@angular/core";
+import { Ulesek } from '../ulesek.model';
+import { map } from 'rxjs/operators'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-ulesek-element',
   templateUrl: './ulesek-element.component.html',
   styleUrls: ['./ulesek-element.component.css']
 })
-export class UlesekElementComponent {
+export class UlesekElementComponent implements OnInit{
   @Input() filterData: any;
+
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
+
   p: number = 1;
 
-  // Ülések type object for content title
-  committeeTypesObject = [
-  {
-    name: 'kgy',
-    title: 'Küldöttgyűlés'
-  },
-  {
-    name: 'elnokseg',
-    title: 'Elnökség'
-  },
-  {
-    name: 'kabinet',
-    title: 'Kabinet'
-  },
-  {
-    name: 'hjb',
-    title: 'Hallgatói Jóléti Bizottság'
-  },
-  {
-    name: 'kombiz',
-    title: 'Kommunikációs Bizottság'
-  },
-  {
-    name: 'kb',
-    title: 'Külügyi Bizottság'
-  },
-  {
-    name: 'szb',
-    title: 'Szervező Bizottság'
-  },
-  {
-    name: 'tb',
-    title: 'Tanulmányi Bizottság'
-  },
-  {
-    name: 'eb',
-    title: 'Ellenőrző Bizottság'
-  },
-  {
-    name: 'vb',
-    title: 'Választási Bizottság'
-  }];
+  private ulesekObject : Ulesek[] = [];
 
-  ulesTypesArray = ['rendes', 'rendkívüli', 'azonnali'];
+  constructor(private http: HttpClient) {
+  }
 
-  ulesekObject = [
-  {
-    id: '0001',
-    committee: 'kgy',
-    type:  this.ulesTypesArray[0],
-    meetingDate: '2021. október 25. 18:00',
-    postDate: '2021. október 23. 16:00',
-    author: 'elnok@ikhok.elte.hu'
-  }, {
-    id: '0002',
-    committee: 'elnokseg',
-    type:  this.ulesTypesArray[2],
-    meetingDate: '2021. október 26. 18:00',
-    postDate: '2021. október 22. 16:00',
-    author: 'elnok@ikhok.elte.hu'
-  }, {
-    id: '0003',
-    committee: 'hjb',
-    type:  this.ulesTypesArray[0],
-    meetingDate: '2021. október 27. 18:00',
-    postDate: '2021. október 23. 16:00',
-    author: 'osztondij@ikhok.elte.hu'
-  }, {
-    id: '0004',
-    committee: 'elnokseg',
-    type:  this.ulesTypesArray[1],
-    meetingDate: '2021. október 28. 18:00',
-    postDate: '2021. október 26. 16:00',
-    author: 'kulugy@ikhok.elte.hu'
-  }];
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.ulesekObject].slice().reverse();
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/ulesek')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            author: post.author,
+            committee: post.committee,
+            type: post.type,
+            title: post.title,
+            content: post.content,
+            decisionDate: post.decisionDate,
+            date: post.date,
+            files: post.files
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.ulesekObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.http.delete('http://localhost:3000/api/ulesek/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.ulesekObject.filter(post => post._id !== postId);
+        this.ulesekObject = updatedPost;
+      })
+  }
 
   getProperty(obj : Object, property : string){
     return(Object.values(obj).find((x) => {
