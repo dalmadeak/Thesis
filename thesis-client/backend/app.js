@@ -5,6 +5,11 @@ const mongoose = require('mongoose');
 const app = express();
 const Post = require('./models/hirek');
 const Decision = require('./models/hatarozatok');
+const Application = require('./models/palyazatok');
+const Report = require('./models/beszamolok');
+const MonthlyReport = require('./models/havi-beszamolok');
+const Record = require('./models/jegyzokonyvek');
+const Meeting = require('./models/ulesek');
 
 // xtiV4hKL05OqaLbM
 mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
