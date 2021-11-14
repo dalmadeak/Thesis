@@ -44,17 +44,7 @@ import { SzolgaltatasokBelepokartyaComponent } from './szolgaltatasok/szolgaltat
 import { SzolgaltatasokSorompoComponent } from './szolgaltatasok/szolgaltatasok-sorompo/szolgaltatasok-sorompo.component';
 import { SzolgaltatasokEtkezokComponent } from './szolgaltatasok/szolgaltatasok-etkezok/szolgaltatasok-etkezok.component';
 import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltatasok-nyitvatartas/szolgaltatasok-nyitvatartas.component';
-import { ProfilComponent } from './sidenav/profil/profil.component';
-import { UjBejegyzesComponent } from './sidenav/uj-bejegyzes/uj-bejegyzes.component';
-import { BeszamolokComponent } from './sidenav/beszamolok/beszamolok.component';
-import { BeszamolokOsszegzesComponent } from './sidenav/beszamolok/beszamolok-osszegzes/beszamolok-osszegzes.component';
-import { HatarozatokComponent } from './sidenav/hatarozatok/hatarozatok.component';
-import { HatarozatokFilesComponent } from './sidenav/hatarozatok/hatarozatok-files/hatarozatok-files.component';
-import { HatarozatokNavbarComponent } from './sidenav/hatarozatok/hatarozatok-navbar/hatarozatok-navbar.component';
-import { SorompoAdminComponent } from './sidenav/sorompo-admin/sorompo-admin.component';
-import { BelepokartyaAdminComponent } from './sidenav/belepokartya-admin/belepokartya-admin.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
-import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-beszamolok.component';
 
 @NgModule({
   declarations: [
@@ -89,17 +79,7 @@ import { SajatBeszamolokComponent } from './sidenav/sajat-beszamolok/sajat-besza
     SzolgaltatasokSorompoComponent,
     SzolgaltatasokEtkezokComponent,
     SzolgaltatasokNyitvatartasComponent,
-    ProfilComponent,
-    UjBejegyzesComponent,
-    BeszamolokComponent,
-    BeszamolokOsszegzesComponent,
-    HatarozatokComponent,
-    HatarozatokNavbarComponent,
-    HatarozatokFilesComponent,
-    SorompoAdminComponent,
-    BelepokartyaAdminComponent,
     BejelentkezesComponent,
-    SajatBeszamolokComponent
   ],
   imports: [
     BrowserModule,
