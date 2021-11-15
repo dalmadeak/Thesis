@@ -7,7 +7,7 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./uj-bejegyzes.component.css']
 })
 export class UjBejegyzesComponent implements OnInit{
-  selectedOption : string = 'b-hatarozat';
+  selectedOption : string = 'hir';
 
   constructor(private cd : ChangeDetectorRef){}
 
