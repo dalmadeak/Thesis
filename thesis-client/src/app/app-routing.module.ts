@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HirekComponent } from './hirek/hirek.component';
-import { PageNotFoundComponent } from './pagenotfound/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UlesekComponent } from './ulesek/ulesek.component';
 
 const routes: Routes = [
