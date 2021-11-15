@@ -9,7 +9,7 @@
       <th>Ülés dátuma <button (click)="onSortByMeetingDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
-      <th>Műveletek</th>
+      <th class="centeredClass">Műveletek</th>
     </tr>
     <ng-container *ngFor="let file of filterObject(getObject()) | paginate: { itemsPerPage: 24, currentPage: p }">
       <tr class="filesData" *ngIf="filterData == undefined || filterData.id == file.committee">
@@ -21,7 +21,14 @@
         <td class="centeredClass"><a href="{{file.files}}" download="{{file.title}}">Letöltés</a></td>
         <td class="centeredClass">
           <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', file._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
-          <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(file._id)"></fa-icon>
+          <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan törlöd a bejegyzést?</p>
+            <button type="button" class="btn button-sub" (click)="deletePost(file._id)">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
         </td>
       </tr>
     </ng-container>

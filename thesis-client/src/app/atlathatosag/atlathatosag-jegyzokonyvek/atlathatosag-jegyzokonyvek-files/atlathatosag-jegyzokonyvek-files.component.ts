@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Jegyzokonyvek } from '../jegyzokonyvek.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -21,9 +22,12 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   faEdit = faPencilAlt;
   faDelete = faTrash;
 
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
   private jegyzokonyvekObject : Jegyzokonyvek[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -55,6 +59,8 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   }
 
   deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/jegyzokonyvek/' + postId)
       .subscribe(() => {
         const updatedPost = this.jegyzokonyvekObject.filter(post => post._id !== postId);
@@ -84,5 +90,14 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
       copyOfObject = copyOfObject.filter(el => el.committee == this.filterData.id)
     }
     return copyOfObject;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
   }
 }
