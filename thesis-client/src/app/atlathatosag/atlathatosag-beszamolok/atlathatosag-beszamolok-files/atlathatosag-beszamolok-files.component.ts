@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Beszamolok } from '../beszamolok.model';
 import { map } from 'rxjs/operators'
 import { HttpClient } from "@angular/common/http";
@@ -22,9 +23,12 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
   faEdit = faPencilAlt;
   faDelete = faTrash;
 
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
   private beszamolokObject : Beszamolok[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -54,6 +58,8 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
   }
 
   deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/beszamolok/' + postId)
       .subscribe(() => {
         const updatedPost = this.beszamolokObject.filter(post => post._id !== postId);
@@ -71,6 +77,15 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
 
   getFileExtension(fileName : string) {
     return fileName.substr(fileName.indexOf('.'));
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
   }
 
 }

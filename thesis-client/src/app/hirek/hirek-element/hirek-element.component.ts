@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Hirek } from '../hirek.model';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -15,9 +16,12 @@ export class HirekElementComponent implements OnInit{
 
   p: number = 1;
 
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
   private hirekObject : Hirek[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -47,10 +51,21 @@ export class HirekElementComponent implements OnInit{
   }
 
   deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/hirek/' + postId)
       .subscribe(() => {
         const updatedPost = this.hirekObject.filter(post => post._id !== postId);
         this.hirekObject = updatedPost;
       })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
   }
 }

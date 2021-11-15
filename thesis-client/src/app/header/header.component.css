@@ -22,10 +22,9 @@
   padding: 25px;
 }
 
-#headerImage, #logoImage {
+#logoImage {
   float: left;
-  width: 125px;
-  height: 60px;
-  padding: 15px;
-  margin-right: 15px;
+  width: 135px;
+  height: 65px;
+  margin: 30px 15px 10px 15px;
 }

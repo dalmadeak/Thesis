@@ -6,7 +6,14 @@
           {{ hir.date }}
           <div class="postIcons">
             <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', hir._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
-            <fa-icon [icon]="faDelete" title="Törlés" (click)="deletePost(hir._id)"></fa-icon>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a bejegyzést?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(hir._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
           </div>
         </div>
     </div>

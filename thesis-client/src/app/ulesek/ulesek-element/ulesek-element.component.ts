@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Ulesek } from '../ulesek.model';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -15,11 +16,15 @@ export class UlesekElementComponent implements OnInit{
   faEdit = faPencilAlt;
   faDelete = faTrash;
 
+  selectedOption : string = 'ules';
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
   p: number = 1;
 
   private ulesekObject : Ulesek[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -54,6 +59,8 @@ export class UlesekElementComponent implements OnInit{
   }
 
   deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/ulesek/' + postId)
       .subscribe(() => {
         const updatedPost = this.ulesekObject.filter(post => post._id !== postId);
@@ -73,5 +80,14 @@ export class UlesekElementComponent implements OnInit{
       copyOfObject = copyOfObject.filter(el => el.committee == this.filterData.id)
     }
     return copyOfObject;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
   }
 }

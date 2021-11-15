@@ -1,7 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Hatarozat } from 'src/app/sidenav/hatarozatok/hatarozatok.model';
 import { EventEmitter } from '@angular/core';
 
@@ -17,6 +18,9 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
 
   private mode = 'createNewPost'
   private postId : any;
+
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
   editablePost : Hatarozat = {
     _id: '',
     committee: '',
@@ -29,7 +33,11 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     files: []
   };
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private modalService: BsModalService,
+    private router: Router) {
   }
 
  ngOnInit() {
@@ -50,13 +58,15 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form);
     } else if (this.mode === 'editPost') {
       this.updatePost(this.postId, form);
     }
+    this.modalRef.hide();
+    this.router.navigate(['/sidenav/hatarozatok']);
   }
-
   addNewPost(form : NgForm) {
     const newPost : Hatarozat = {
       _id: null,
@@ -93,6 +103,15 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
   }
 
   emitSelectedOption(value: string) {

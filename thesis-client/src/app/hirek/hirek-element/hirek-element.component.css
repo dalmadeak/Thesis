@@ -56,6 +56,21 @@ fa-icon {
   padding: 5px;
 }
 
+button {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 30px auto 0px auto;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.button-sub {
+  padding: 10px 20px;
+  margin: 0 10px;
+}
+
 p {
   word-wrap: break-word;
 }

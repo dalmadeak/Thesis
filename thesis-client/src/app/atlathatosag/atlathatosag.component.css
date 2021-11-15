@@ -57,6 +57,16 @@ button {
   cursor: pointer;
 }
 
+.button-sub {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
 .pagination /deep/ .ngx-pagination .current {
   background: #13294B;
   color: white;

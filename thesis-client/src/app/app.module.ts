@@ -5,6 +5,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { OsztondijakModule } from './osztondijak/osztondijak.module';
 import { SzervezetModule } from './szervezet/szervezet.module';
@@ -95,7 +96,8 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
     OsztondijakModule,
     SzolgaltatasokModule,
     AtlathatosagModule,
-    SidenavModule
+    SidenavModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
