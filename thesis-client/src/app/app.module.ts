@@ -14,6 +14,7 @@ import { SidenavModule } from './sidenav/sidenav.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HirekComponent } from './hirek/hirek.component';
@@ -49,6 +50,7 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
     HeaderComponent,
     NavbarComponent,
     HirekComponent,
