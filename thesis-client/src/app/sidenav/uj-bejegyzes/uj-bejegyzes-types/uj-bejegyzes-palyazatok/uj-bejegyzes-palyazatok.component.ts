@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/c
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Palyazatok } from '../../../../atlathatosag/atlathatosag-palyazatok/palyazatok.model';
 
@@ -27,7 +27,11 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
     files: []
   };
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private modalService: BsModalService) {
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private modalService: BsModalService,
+    private router: Router) {
   }
 
  ngOnInit() {
@@ -48,13 +52,13 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.message = 'Elfogadva';
-
     if(this.mode === 'createNewPost') {
       this.addNewPost(form);
     } else if (this.mode === 'editPost') {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
+    this.router.navigate(['/atlathatosag/palyazatok']);
   }
 
   addNewPost(form : NgForm) {

@@ -47,7 +47,6 @@ import { SzolgaltatasokSorompoComponent } from './szolgaltatasok/szolgaltatasok-
 import { SzolgaltatasokEtkezokComponent } from './szolgaltatasok/szolgaltatasok-etkezok/szolgaltatasok-etkezok.component';
 import { SzolgaltatasokNyitvatartasComponent } from './szolgaltatasok/szolgaltatasok-nyitvatartas/szolgaltatasok-nyitvatartas.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
-import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +83,6 @@ import { ModalComponent } from './modal/modal.component';
     SzolgaltatasokEtkezokComponent,
     SzolgaltatasokNyitvatartasComponent,
     BejelentkezesComponent,
-    ModalComponent,
   ],
   imports: [
     BrowserModule,
