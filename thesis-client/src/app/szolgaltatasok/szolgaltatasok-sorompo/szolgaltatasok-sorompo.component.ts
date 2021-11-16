@@ -66,6 +66,7 @@ export class SzolgaltatasokSorompoComponent {
 
   addNewPost(form : NgForm) {
     let today = new Date();
+    let cardNumber = (form.value.barrierRegistryGroup.card == '') ? '-' : form.value.barrierRegistryGroup.card;
     const newPost : Sorompo = {
       _id: null,
       fullName: form.value.barrierRegistryGroup.fullName,
@@ -74,7 +75,7 @@ export class SzolgaltatasokSorompoComponent {
       type: form.value.barrierRegistryGroup.type,
       email: form.value.barrierRegistryGroup.email,
       phone: form.value.barrierRegistryGroup.phone,
-      card: form.value.barrierRegistryGroup.card,
+      card: cardNumber,
       date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(),
       semester: '-',
       reason: form.value.barrierRegistryGroup.reason,

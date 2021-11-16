@@ -19,7 +19,7 @@ table {
 }
 
 .container {
-  width: 70%;
+  width: 80%;
   margin: 30px auto;
   text-align: left;
   border: 1px solid #F1F2F1;
@@ -28,7 +28,7 @@ table {
 
 table {
   border-collapse: collapse;
-  page-break-inside:auto;
+  page-break-inside: auto;
 }
 
 .mainHeader {
