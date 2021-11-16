@@ -58,7 +58,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/atlathatosag/beszamolok']);
+    setTimeout(() => {this.router.navigate(['/atlathatosag/beszamolok']);},0);
   }
 
   addNewPost(form : NgForm) {

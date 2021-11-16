@@ -12,8 +12,6 @@ import { Ulesek } from '../../../../ulesek/ulesek.model';
   styleUrls: ['./uj-bejegyzes-ulesek.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesUlesekComponent implements OnInit {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-
   private mode = 'createNewPost'
   private postId : any;
 
@@ -63,7 +61,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/ulesek']);
+    setTimeout(() => {this.router.navigate(['/ulesek']);},0);
   }
 
   addNewPost(form : NgForm) {
@@ -112,12 +110,4 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
-  }
-
-
-
 }

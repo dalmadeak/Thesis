@@ -65,7 +65,7 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/sidenav/hatarozatok']);
+    setTimeout(() => {this.router.navigate(['/atlathatosag/hatarozatok']);},0);
   }
   addNewPost(form : NgForm) {
     const newPost : Hatarozat = {

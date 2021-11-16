@@ -59,7 +59,7 @@ export class UjBejegyzesHirekComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/hirek']);
+    setTimeout(() => {this.router.navigate(['/hirek']);},0);
   }
 
   addNewPost(form : NgForm) {

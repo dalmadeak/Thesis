@@ -60,7 +60,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/sidenav/sajat-beszamolok']);
+    setTimeout(() => {this.router.navigate(['/sidenav/beszamolok/sajat']);},0);
   }
 
   addNewPost(form : NgForm) {

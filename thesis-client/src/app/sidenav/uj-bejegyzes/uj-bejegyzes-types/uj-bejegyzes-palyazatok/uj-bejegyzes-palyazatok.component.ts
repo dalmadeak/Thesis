@@ -58,7 +58,7 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/atlathatosag/palyazatok']);
+    setTimeout(() => {this.router.navigate(['/atlathatosag/palyazatok']);},0);
   }
 
   addNewPost(form : NgForm) {

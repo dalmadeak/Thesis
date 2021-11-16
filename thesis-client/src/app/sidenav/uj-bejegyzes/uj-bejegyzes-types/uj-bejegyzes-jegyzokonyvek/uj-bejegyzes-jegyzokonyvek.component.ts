@@ -60,7 +60,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/atlathatosag/jegyzokonyvek']);
+    setTimeout(() => {this.router.navigate(['/atlathatosag/jegyzokonyvek']);},0);
   }
 
   addNewPost(form : NgForm) {
