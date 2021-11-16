@@ -84,6 +84,8 @@ export class SzolgaltatasokBelepokartyaComponent {
       const id = data.postId;
       newPost._id = id;
     });
+
+    form.reset();
   }
 
   openModal(template: TemplateRef<any>) {
