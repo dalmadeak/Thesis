@@ -36,6 +36,7 @@ router.post('', (req, res, next) => {
     date: req.body.date,
     returnDate: req.body.returnDate,
     reason: req.body.reason,
+    isApproved: req.body.isApproved
   });
   // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
@@ -59,6 +60,7 @@ router.put('/:id', (req,res,next) => {
     date: req.body.date,
     returnDate: req.body.returnDate,
     reason: req.body.reason,
+    isApproved: req.body.isApproved
   })
   EntranceCard.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({

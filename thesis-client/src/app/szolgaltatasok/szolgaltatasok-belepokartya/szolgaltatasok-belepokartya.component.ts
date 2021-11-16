@@ -27,12 +27,12 @@ export class SzolgaltatasokBelepokartyaComponent {
     permissions: '',
     date: '',
     returnDate: '',
-    reason: ''
+    reason: '',
+    isApproved: false
   };
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute,
     private modalService: BsModalService) {
   }
 
@@ -75,7 +75,8 @@ export class SzolgaltatasokBelepokartyaComponent {
       permissions: '-',
       date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(),
       returnDate: '-',
-      reason: form.value.cardRegistryGroup.reason
+      reason: form.value.cardRegistryGroup.reason,
+      isApproved: false
     }
 
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/belepokartya', newPost)

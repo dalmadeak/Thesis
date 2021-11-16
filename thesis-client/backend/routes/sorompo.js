@@ -27,7 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new Barrier({
-    name: req.body.name,
+    fullName: req.body.fullName,
     neptun: req.body.neptun,
     plate: req.body.plate,
     type: req.body.type,
@@ -35,7 +35,9 @@ router.post('', (req, res, next) => {
     phone: req.body.phone,
     email: req.body.email,
     date: req.body.date,
-    comment: req.body.comment,
+    semester: req.body.semester,
+    reason: req.body.reason,
+    isApproved: req.body.isApproved
   });
   // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
@@ -50,7 +52,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new Barrier({
     _id: req.body._id,
-    name: req.body.name,
+    fullName: req.body.fullName,
     neptun: req.body.neptun,
     plate: req.body.plate,
     type: req.body.type,
@@ -58,7 +60,9 @@ router.put('/:id', (req,res,next) => {
     phone: req.body.phone,
     email: req.body.email,
     date: req.body.date,
-    comment: req.body.comment,
+    semester: req.body.semester,
+    reason: req.body.reason,
+    isApproved: req.body.isApproved
   })
   Barrier.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({

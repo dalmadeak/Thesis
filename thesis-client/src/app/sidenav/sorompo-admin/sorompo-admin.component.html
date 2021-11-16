@@ -4,7 +4,7 @@
   </div>
   <table class="container">
     <tr>
-      <th class="mainHeader" colspan="11">Sorompó jogosultság kérések</th>
+      <th class="mainHeader" colspan="12">Sorompó jogosultság kérések</th>
     </tr>
     <tr class="filesHeader">
       <th>Név</th>
@@ -17,29 +17,45 @@
       <th>Regisztrált</th>
       <th>Szemeszter</th>
       <th><fa-icon [icon]="faComment"></fa-icon></th>
+      <th>Műveletek</th>
       <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
-      <tr class="filesData" *ngFor="let data of ujKeresekObject.slice().reverse()">
-        <td>{{data.name}}</td>
+    <ng-container *ngFor="let data of getObject()">
+      <tr class="filesData" *ngIf="!data.isApproved" >
+        <td>{{data.fullName}}</td>
         <td>{{data.neptun}}</td>
         <td>{{data.plate}}</td>
         <td>{{data.type}}</td>
         <td>{{data.card}}</td>
-        <td>{{data.mobile}}</td>
+        <td>{{data.phone}}</td>
         <td>{{data.email}}</td>
-        <td>{{data.registerDate}}</td>
+        <td>{{data.date}}</td>
         <td>{{data.semester}}</td>
         <td>
-          <p class="tooltip"><b>[M]</b>
-          <span class="left">{{data.reason}}</span></p>
+          <ng-template #tooltiptemplate>
+            <p>{{data.reason}}</p>
+          </ng-template>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
         </td>
-        <td><input type="checkbox"></td>
+        <td>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a regisztrációt?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(data._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
+        </td>
+        <td><input type="checkbox" [checked]="data.isApproved"></td>
       </tr>
+    </ng-container>
   </table>
 
   <table class="container">
     <tr>
-      <th class="mainHeader" colspan="11">Sorompó jogosultságok listája</th>
+      <th class="mainHeader" colspan="12">Sorompó jogosultságok listája</th>
     </tr>
     <tr class="filesHeader">
       <th>Név</th>
@@ -52,23 +68,39 @@
       <th>Regisztrált</th>
       <th>Szemeszter</th>
       <th><fa-icon [icon]="faComment"></fa-icon></th>
+      <th>Műveletek</th>
       <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
-      <tr class="filesData" *ngFor="let data of sorompoObject.slice().reverse()">
-        <td>{{data.name}}</td>
+    <ng-container *ngFor="let data of getObject()">
+      <tr class="filesData" *ngIf="data.isApproved" >
+        <td>{{data.fullName}}</td>
         <td>{{data.neptun}}</td>
         <td>{{data.plate}}</td>
         <td>{{data.type}}</td>
         <td>{{data.card}}</td>
-        <td>{{data.mobile}}</td>
+        <td>{{data.phone}}</td>
         <td>{{data.email}}</td>
-        <td>{{data.registerDate}}</td>
+        <td>{{data.date}}</td>
         <td>{{data.semester}}</td>
         <td>
-          <p class="tooltip"><b>[M]</b>
-          <span class="left">{{data.reason}}</span></p>
+          <ng-template #tooltiptemplate>
+            <p>{{data.reason}}</p>
+          </ng-template>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
         </td>
-        <td><input type="checkbox"></td>
+        <td>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a regisztrációt?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(data._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
+        </td>
+        <td><input type="checkbox" [checked]="data.isApproved"></td>
       </tr>
+    </ng-container>
   </table>
 </div>

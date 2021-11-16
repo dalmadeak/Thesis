@@ -48,6 +48,7 @@ export class BelepokartyaAdminComponent implements OnInit{
             date: post.date,
             returnDate: post.returnDate,
             reason: post.reason,
+            isApproved: post.isApproved
           }
         });
       }))

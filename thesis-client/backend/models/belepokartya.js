@@ -9,7 +9,8 @@ const belepokartyaSchema = mongoose.Schema({
   permissions: { type: String },
   date: { type: String },
   returnDate: { type: String },
-  reason: { type: String },
+  reason: { type: String, required: true },
+  isApproved: { type: Boolean }
 });
 
 //this schema needs a model (a definition)

@@ -1,13 +1,14 @@
-export interface Belepokartya {
+export interface Sorompo {
   _id: any;
   fullName: string;
   neptun: string;
+  plate: string;
+  type: string;
   email: string;
-  studentId: string;
+  phone: string;
   card: string;
-  permissions: string;
   date: string;
-  returnDate: string;
+  semester: string;
   reason: string;
   isApproved: boolean;
 }

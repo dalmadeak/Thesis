@@ -19,7 +19,8 @@
       <th>Műveletek</th>
       <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
-      <tr class="filesData" *ngFor="let data of getObject()">
+    <ng-container *ngFor="let data of getObject()">
+      <tr class="filesData" *ngIf="!data.isApproved" >
         <td>{{data.fullName}}</td>
         <td>{{data.neptun}}</td>
         <td>{{data.email}}</td>
@@ -45,8 +46,9 @@
               </div>
             </ng-template>
         </td>
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" [checked]="data.isApproved"></td>
       </tr>
+    </ng-container>
   </table>
 
   <table class="container" id="cardList">
@@ -66,7 +68,8 @@
       <th>Műveletek</th>
       <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
-      <tr class="filesData" *ngFor="let data of getObject()">
+    <ng-container *ngFor="let data of getObject()">
+      <tr class="filesData" *ngIf="data.isApproved" >
         <td>{{data.fullName}}</td>
         <td>{{data.neptun}}</td>
         <td>{{data.email}}</td>
@@ -92,7 +95,8 @@
               </div>
             </ng-template>
         </td>
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" [checked]="data.isApproved"></td>
       </tr>
+    </ng-container>
   </table>
 </div>
