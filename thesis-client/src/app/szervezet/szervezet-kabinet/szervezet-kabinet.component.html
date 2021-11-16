@@ -3,21 +3,44 @@
     <h1>Kabinet</h1>
   </div>
   <table class="container">
-    <div *ngFor="let tag of kabinetObject; let odd=odd;" class="elementContainer">
+    <div *ngFor="let member of getObject(); let odd=odd;" class="elementContainer">
       <tr *ngIf="odd; else elseBlock">
         <td><div class="contactInfo contactLeft">
-          <p class="name"><b>{{ tag.name }}</b></p><br>
-          <p class="info">{{ tag.position }}</p>
-          <p class="info">{{ tag.contact }}</p>
+          <p class="name"><b>{{ member.name }}</b></p><br>
+          <p class="info">{{ member.position }}</p>
+          <p class="info">{{ member.email }}</p>
+          <div class="iconClass">
+            <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a bejegyzést?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(member._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
+          </div>
         </div></td>
-        <td><img class="profilePicture" src="{{tag.image}}"></td>
+        <td><img class="profilePicture" src="{{member.image}}"></td>
       </tr>
+
       <ng-template #elseBlock>
-        <td><img class="profilePicture" src="{{tag.image}}"></td>
+        <td><img class="profilePicture" src="{{member.image}}"></td>
         <td><div class="contactInfo contactRight">
-          <p class="name"><b>{{ tag.name }}</b></p><br>
-          <p class="info">{{ tag.position }}</p>
-          <p class="info">{{ tag.contact }}</p>
+          <p class="name"><b>{{ member.name }}</b></p><br>
+          <p class="info">{{ member.position }}</p>
+          <p class="info">{{ member.email }}</p>
+          <div class="iconClass">
+            <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a bejegyzést?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(member._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
+          </div>
         </div></td>
       </ng-template>
     </div>

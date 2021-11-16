@@ -17,6 +17,9 @@ const belepokartyaRoutes = require('./routes/belepokartya')
 
 const irodaRoutes = require('./routes/iroda')
 const bufekRoutes = require('./routes/bufek')
+const kozeletikRoutes = require('./routes/kozeletik')
+const elnoksegRoutes = require('./routes/elnokseg')
+const kabinetRoutes = require('./routes/kabinet')
 
 
 // xtiV4hKL05OqaLbM
@@ -76,5 +79,14 @@ app.use('/api/iroda', irodaRoutes);
 
 /* BÜFÉK, ÉTKEZŐK */
 app.use('/api/bufek', bufekRoutes);
+
+/* KÖZÉLETI ÖSZTÖNDÍJAK */
+app.use('/api/kozeletik', kozeletikRoutes);
+
+/* ELNÖKSÉG */
+app.use('/api/elnokseg', elnoksegRoutes);
+
+/* KABINET */
+app.use('/api/kabinet', kabinetRoutes);
 
 module.exports = app;

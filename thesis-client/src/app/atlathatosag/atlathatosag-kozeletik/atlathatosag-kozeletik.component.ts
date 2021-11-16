@@ -1,121 +1,70 @@
-import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit,TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { map } from 'rxjs/operators'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
+import { Kozeletik } from "./kozeletik.model";
 
 @Component({
   selector: 'app-atlathatosag-kozeletik',
   templateUrl: './atlathatosag-kozeletik.component.html',
   styleUrls: ['./atlathatosag-kozeletik.component.css']
 })
-export class AtlathatosagKozeletikComponent {
-  kozeletikObject = [
-    {
-      id: 'elnok',
-      name: "Elnök",
-      amount: '10.000 Ft'
-    },
-    {
-      id: 'gazd',
-      name: "Gazdasági és Pályázati ügyekért felelős alelnök",
-      amount: '10.000 Ft'
-    },
-    {
-      id: 'strat',
-      name: "Stratégiai és Innovációs alelnök",
-      amount: '10.000 Ft'
-    },
-    {
-      id: 'szombathely',
-      name: "Szombathelyi ügyekért felelős alelnök",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Hallgatói Jóléti Bizottság elnöke',
-      id: "hjb",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Kommunikációs Bizottság elnöke',
-      id: "kombiz",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Külügyi Bizottság elnöke',
-      id: "kulugy",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Szervező Bizottság elnöke',
-      id: "szb",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Tanulmányi Bizottság elnöke',
-      id: "tb",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Ellenőrző Bizottság elnöke',
-      id: "eb",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Ellenőrző Bizottság tagja(i)',
-      id: "ebt",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Animátorkoordinátor',
-      id: "animator",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Informatikai referens',
-      id: "inforef",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Külügyi főmentor',
-      id: "kbfomentor",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Médiareferens',
-      id: "media",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Mentorkoordinátor',
-      id: "mentor",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Sportreferens',
-      id: "sport",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Szakterületi rendezvénykoordinátor',
-      id: "szakrendezveny",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Szombathelyi referens',
-      id: "sektanulmany",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Tanárképzési referens',
-      id: "tanarkepzes",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Titkár',
-      id: "titkar",
-      amount: '10.000 Ft'
-    },
-    {
-      name: 'Tudományos referens',
-      id: "tudref",
-      amount: '10.000 Ft'
-    }
-  ];
+export class AtlathatosagKozeletikComponent implements OnInit{
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
+
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
+  private kozeletikObject : Kozeletik[] = [];
+
+  constructor(private http: HttpClient, private modalService: BsModalService) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.kozeletikObject];
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kozeletik')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            postType: post.postType,
+            name: post.name,
+            amount: post.amount
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.kozeletikObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
+    this.http.delete('http://localhost:3000/api/kozeletik/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.kozeletikObject.filter(post => post._id !== postId);
+        this.kozeletikObject = updatedPost;
+      })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
+  }
 }

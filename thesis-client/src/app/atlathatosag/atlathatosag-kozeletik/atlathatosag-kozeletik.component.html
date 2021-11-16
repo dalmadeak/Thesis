@@ -4,11 +4,22 @@
   </div>
   <table>
     <tr>
-      <th colspan="2">Közéleti ösztöndíjak</th>
+      <th colspan="3">Közéleti ösztöndíjak</th>
     </tr>
-    <tr *ngFor="let member of kozeletikObject" class="membersInfo">
-      <td>{{member.name}}</td>
-      <td>{{member.amount}}</td>
+    <tr *ngFor="let member of getObject()" class="membersInfo">
+      <td class="nameClass">{{member.name}}</td>
+      <td class="amountClass">{{member.amount}}</td>
+      <td class="iconClass">
+        <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+        <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan törlöd a bejegyzést?</p>
+            <button type="button" class="btn button-sub" (click)="deletePost(member._id)">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </td>
     </tr>
   </table>
 </div>

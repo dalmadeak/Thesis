@@ -1,4 +1,10 @@
-import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { map } from 'rxjs/operators'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
+import { Elnokseg } from "./elnokseg.model";
 
 @Component({
   selector: 'app-szervezet-elnokseg',
@@ -6,59 +12,61 @@ import { Component } from "@angular/core";
   styleUrls: ['./szervezet-elnokseg.component.css']
 })
 export class SzervezetElnoksegComponent {
-  elnoksegObject = [
-  {
-    name: 'Deák Dalma',
-    position: 'Elnök',
-    contact: 'elnok@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Borics László Péter',
-    position: 'Gazdasági és pályázati ügyekért felelős alelnök',
-    contact: 'gazdasag@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Gerely Viktor András',
-    position: 'Stratégiai és Innovációs alelnök',
-    contact: 'strategia@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Agg Martin',
-    position: 'Szombathelyi ügyekért felelős alelnök',
-    contact: 'szombathely@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Bognár Viktória',
-    position: 'Hallgatói Jóléti Bizottság elnöke',
-    contact: 'osztondij@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Kassai Gréta',
-    position: 'Kommunikációs Bizottság elnöke',
-    contact: 'kommunikacio@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Mészáros Gábor',
-    position: 'Külügyi bizottság elnöke',
-    contact: 'kulugy@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Fodor Zoltán',
-    position: 'Szervező Bizottság elnöke',
-    contact: 'rendezveny@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  },
-  {
-    name: 'Lajkó Míra',
-    position: 'Tanulmányi Bizottság elnöke',
-    contact: 'tanulmany@ikhok.elte.hu',
-    image: '../../../assets/images/profile-picture.png'
-  }]
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
+
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
+  private elnoksegObject : Elnokseg[] = [];
+
+  constructor(private http: HttpClient, private modalService: BsModalService) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.elnoksegObject];
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/elnokseg')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            postType: post.postType,
+            name: post.name,
+            position: post.position,
+            email: post.email,
+            image: post.image
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.elnoksegObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
+    this.http.delete('http://localhost:3000/api/elnokseg/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.elnoksegObject.filter(post => post._id !== postId);
+        this.elnoksegObject = updatedPost;
+      })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
+  }
 }

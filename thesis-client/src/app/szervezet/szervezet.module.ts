@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SzervezetRoutingModule } from "./szervezet-routing.module";
 
 import { SzervezetComponent } from "./szervezet.component";
@@ -12,6 +13,7 @@ import { SzervezetKuldottgyulesComponent } from "./szervezet-kgy/szervezet-kgy.c
 @NgModule({
   imports: [
     CommonModule,
+    FontAwesomeModule,
     SzervezetRoutingModule
   ],
   declarations: [

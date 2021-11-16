@@ -48,3 +48,31 @@ h1 {
 .info {
   font-size: 14px;
 }
+
+.iconClass {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+fa-icon {
+  color: #13294B;
+  padding: 5px;
+  cursor: pointer;
+}
+
+button {
+  padding: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-sub {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
