@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Ulesek } from '../ulesek.model';
 import { map } from 'rxjs/operators'
@@ -42,6 +42,7 @@ export class UlesekElementComponent implements OnInit{
         return postData.posts.map((post: any) => {
          return {
             _id: post._id,
+            postType: post.postType,
             author: post.author,
             committee: post.committee,
             type: post.type,

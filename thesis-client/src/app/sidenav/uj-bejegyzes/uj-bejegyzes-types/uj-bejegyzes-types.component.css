@@ -70,6 +70,7 @@ input, textarea, select {
 
 textarea {
   vertical-align: top;
+  font-family: Montserrat, sans-serif;
 }
 
 button {

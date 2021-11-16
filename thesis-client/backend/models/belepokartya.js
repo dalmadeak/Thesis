@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const belepokartyaSchema = mongoose.Schema({
+  postType: { type: String },
   fullName: { type: String, required: true },
   neptun: { type: String, required: true },
   email: { type: String, required: true },

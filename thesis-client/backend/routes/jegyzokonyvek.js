@@ -27,6 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new Record({
+    postType: req.body.postType,
     committee: req.body.committee,
     title: req.body.title,
     decisionDate: req.body.decisionDate,
@@ -46,6 +47,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new Record({
     _id: req.body._id,
+    postType: req.body.postType,
     committee: req.body.committee,
     title: req.body.title,
     decisionDate: req.body.decisionDate,

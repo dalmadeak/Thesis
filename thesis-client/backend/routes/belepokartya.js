@@ -27,6 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new EntranceCard({
+    postType: req.body.postType,
     fullName: req.body.fullName,
     neptun: req.body.neptun,
     email: req.body.email,
@@ -51,6 +52,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new EntranceCard({
     _id: req.body._id,
+    postType: req.body.postType,
     fullName: req.body.fullName,
     neptun: req.body.neptun,
     email: req.body.email,

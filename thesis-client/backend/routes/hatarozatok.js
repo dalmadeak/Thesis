@@ -27,6 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new Decision({
+    postType: req.body.postType,
     committee: req.body.committee,
     number: req.body.number,
     decisionDate: req.body.decisionDate,
@@ -49,6 +50,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new Decision({
     _id: req.body._id,
+    postType: req.body.postType,
     committee: req.body.committee,
     number: req.body.number,
     decisionDate: req.body.decisionDate,

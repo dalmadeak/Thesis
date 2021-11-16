@@ -27,6 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new Meeting({
+    postType: req.body.postType,
     committee: req.body.committee,
     type: req.body.type,
     title: req.body.title,
@@ -48,6 +49,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new Meeting({
     _id: req.body._id,
+    postType: req.body.postType,
     committee: req.body.committee,
     type: req.body.type,
     title: req.body.title,

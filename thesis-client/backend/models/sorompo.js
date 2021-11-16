@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const sorompoSchema = mongoose.Schema({
+  postType: { type: String },
   fullName: { type: String, required: true },
   neptun: { type: String, required: true },
   plate: { type: String, required: true },

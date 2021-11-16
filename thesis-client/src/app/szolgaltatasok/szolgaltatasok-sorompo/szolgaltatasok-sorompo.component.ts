@@ -19,6 +19,7 @@ export class SzolgaltatasokSorompoComponent {
   message: string = '';
   editablePost : Sorompo = {
     _id : '',
+    postType: '',
     fullName: '',
     neptun: '',
     plate: '',
@@ -69,6 +70,7 @@ export class SzolgaltatasokSorompoComponent {
     let cardNumber = (form.value.barrierRegistryGroup.card == '') ? '-' : form.value.barrierRegistryGroup.card;
     const newPost : Sorompo = {
       _id: null,
+      postType: 'sorompo',
       fullName: form.value.barrierRegistryGroup.fullName,
       neptun: form.value.barrierRegistryGroup.neptun,
       plate: form.value.barrierRegistryGroup.plate,

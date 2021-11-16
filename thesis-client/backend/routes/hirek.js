@@ -27,6 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new Post({
+    postType: req.body.postType,
     title: req.body.title,
     content: req.body.content,
     date: req.body.date,
@@ -45,6 +46,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new Post({
     _id: req.body._id,
+    postType: req.body.postType,
     title: req.body.title,
     content: req.body.content,
     date: req.body.date,
