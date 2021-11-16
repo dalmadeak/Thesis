@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const ulesekSchema = mongoose.Schema({
   author: { type: String },
+  postType: { type: String },
   committee: { type: String, required: true },
   type: { type: String, required: true },
   title: { type: String, required: true },

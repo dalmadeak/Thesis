@@ -8,15 +8,17 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./uj-bejegyzes.component.css']
 })
 export class UjBejegyzesComponent implements OnInit{
-  selectedOption : string | undefined = '';
-  previousUrl: string | undefined = '';
-  currentUrl: string | undefined = '';
+  selectedOption : string | undefined = 'hirek';
 
   constructor(private cd : ChangeDetectorRef, private router: Router){
   }
 
   ngOnInit(){
-
+    if ((this.router.url).includes('szerkesztes')) {
+      let arrayOfUrl = (this.router.url).split('/');
+      let option = (arrayOfUrl[(arrayOfUrl.length - 2)]);
+      this.selectedOption = option;
+    }
   }
 
 

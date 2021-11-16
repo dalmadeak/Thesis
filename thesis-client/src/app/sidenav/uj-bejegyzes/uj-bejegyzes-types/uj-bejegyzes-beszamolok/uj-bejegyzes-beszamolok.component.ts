@@ -22,6 +22,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
   message: string = '';
   editablePost : Beszamolok = {
     _id : '',
+    postType: '',
     title: '',
     date: '',
     files: []
@@ -64,6 +65,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
   addNewPost(form : NgForm) {
     const newPost : Beszamolok = {
       _id: null,
+      postType: 'beszamolok',
       title: form.value.newRegistryGroup.title,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
       files: form.value.newRegistryGroup.files,
@@ -79,6 +81,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Beszamolok = {
       _id: id,
+      postType: 'beszamolok',
       title: form.value.newRegistryGroup.title,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
       files: form.value.newRegistryGroup.files,

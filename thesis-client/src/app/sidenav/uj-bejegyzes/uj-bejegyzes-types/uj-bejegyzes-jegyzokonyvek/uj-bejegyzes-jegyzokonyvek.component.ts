@@ -22,6 +22,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   message: string = '';
   editablePost : Jegyzokonyvek = {
     _id : '',
+    postType: '',
     committee: '',
     title: '',
     decisionDate: '',
@@ -66,6 +67,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   addNewPost(form : NgForm) {
     const newPost : Jegyzokonyvek = {
       _id: null,
+      postType: 'jegyzokonyvek',
       committee: form.value.newRegistryGroup.committee,
       title: form.value.newRegistryGroup.title,
       decisionDate: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
@@ -83,6 +85,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Jegyzokonyvek = {
       _id: id,
+      postType: 'jegyzokonyvek',
       committee: form.value.newRegistryGroup.committee,
       title: form.value.newRegistryGroup.title,
       decisionDate: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,

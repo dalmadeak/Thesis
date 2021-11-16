@@ -11,7 +11,6 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./ulesek-element.component.css']
 })
 export class UlesekElementComponent implements OnInit{
-  @Output() selectedOptionEvent = new EventEmitter<string>();
   @Input() filterData: any;
 
   faEdit = faPencilAlt;
@@ -43,6 +42,7 @@ export class UlesekElementComponent implements OnInit{
         return postData.posts.map((post: any) => {
          return {
             _id: post._id,
+            postType: post.postType,
             author: post.author,
             committee: post.committee,
             type: post.type,
@@ -90,10 +90,5 @@ export class UlesekElementComponent implements OnInit{
   decline(): void {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
-  }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
   }
 }

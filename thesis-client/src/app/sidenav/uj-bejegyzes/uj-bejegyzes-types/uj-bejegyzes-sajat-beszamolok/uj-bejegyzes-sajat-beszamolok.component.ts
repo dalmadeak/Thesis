@@ -22,6 +22,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   private postId : any;
   editablePost : SajatBeszamolok = {
     _id : '',
+    postType: '',
     author: '',
     year: 0,
     month: '',
@@ -67,6 +68,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     const newPost : SajatBeszamolok = {
       _id: null,
       author: 'Test',
+      postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,
@@ -84,6 +86,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     const post : SajatBeszamolok = {
       _id: id,
       author: 'Test',
+      postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,

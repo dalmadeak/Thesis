@@ -1,5 +1,6 @@
 export interface Ulesek {
   _id: any;
+  postType: string;
   author: string;
   committee: string;
   type: string;

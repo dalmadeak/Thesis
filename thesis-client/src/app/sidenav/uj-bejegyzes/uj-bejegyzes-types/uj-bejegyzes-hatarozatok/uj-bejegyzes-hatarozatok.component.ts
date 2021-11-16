@@ -12,8 +12,6 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./uj-bejegyzes-hatarozatok.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesHatarozatokComponent implements OnInit {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-
   selectedOption : string = 'b-hatarozat';
 
   private mode = 'createNewPost'
@@ -23,6 +21,7 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
   message: string = '';
   editablePost : Hatarozat = {
     _id: '',
+    postType: '',
     committee: '',
     number: '',
     decisionDate: '',
@@ -41,7 +40,6 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
   }
 
  ngOnInit() {
-  this.emitSelectedOption(this.selectedOption);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -65,11 +63,12 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/atlathatosag/hatarozatok']);},0);
+    setTimeout(() => {this.router.navigate(['/sidenav/hatarozatok']);},0);
   }
   addNewPost(form : NgForm) {
     const newPost : Hatarozat = {
       _id: null,
+      postType: 'hatarozatok',
       committee: form.value.newRegistryGroup.committee,
       number: form.value.newRegistryGroup.number,
       decisionDate: form.value.newRegistryGroup.decisionDate + ' ' + form.value.newRegistryGroup.decisionTime,
@@ -90,9 +89,10 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Hatarozat = {
       _id: id,
+      postType: 'hatarozatok',
       committee: form.value.newRegistryGroup.committee,
       number: form.value.newRegistryGroup.number,
-      decisionDate: form.value.newRegistryGroup.decisionDate,
+      decisionDate: form.value.newRegistryGroup.decisionDate + ' ' + form.value.newRegistryGroup.decisionTime,
       content: form.value.newRegistryGroup.content,
       mandate: form.value.newRegistryGroup.mandate,
       vote: form.value.newRegistryGroup.vote,
@@ -113,10 +113,4 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
-  }
-
 }

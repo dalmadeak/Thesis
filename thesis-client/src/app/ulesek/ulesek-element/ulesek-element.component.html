@@ -35,7 +35,7 @@
       <div class="postData">
         {{ ules.date }}
         <div class="postIcons">
-          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', ules._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', ules.postType, ules._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
           <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
           <ng-template #template>
             <div class="modal-body text-center">

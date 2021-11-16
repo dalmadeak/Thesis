@@ -20,6 +20,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   message: string = '';
   editablePost : Ulesek = {
     _id : '',
+    postType: '',
     author: '',
     committee: '',
     type: '',
@@ -67,6 +68,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   addNewPost(form : NgForm) {
     const newPost : Ulesek = {
       _id: null,
+      postType: 'ulesek',
       author: 'Test',
       committee: form.value.newRegistryGroup.committee,
       type: form.value.newRegistryGroup.type,
@@ -87,6 +89,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Ulesek = {
       _id: id,
+      postType: 'ulesek',
       author: 'Test',
       committee: form.value.newRegistryGroup.committee,
       type: form.value.newRegistryGroup.type,

@@ -45,6 +45,7 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
         return postData.posts.map((post: any) => {
          return {
             _id: post._id,
+            postType: post.postType,
             committee: post.committee,
             title: post.title,
             decisionDate: post.decisionDate,

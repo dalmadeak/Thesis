@@ -1,6 +1,7 @@
 export interface Hirek {
   _id: any;
-  title: string,
+  postType: string;
+  title: string;
   content: string;
   date: string;
   files: Array<File>;

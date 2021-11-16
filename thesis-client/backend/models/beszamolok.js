@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const beszamolokSchema = mongoose.Schema({
+  postType: { type: String },
   title: { type: String, required: true },
   date: { type: String, required: true },
   files: { type: Array }

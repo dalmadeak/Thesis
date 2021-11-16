@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const hatarozatokSchema = mongoose.Schema({
+  postType: { type: String },
   committee: { type: String, required: true },
   number: { type: String, required: true },
   decisionDate: { type: String, required: true },

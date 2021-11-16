@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const havibeszamolokSchema = mongoose.Schema({
+  postType: { type: String },
   author: { type: String },
   year: { type: String, required: true },
   month: { type: String, required: true },
