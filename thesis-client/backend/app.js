@@ -15,6 +15,9 @@ const jegyzokonyvekRoutes = require('./routes/jegyzokonyvek')
 const sorompoRoutes = require('./routes/sorompo')
 const belepokartyaRoutes = require('./routes/belepokartya')
 
+const irodaRoutes = require('./routes/iroda')
+const bufekRoutes = require('./routes/bufek')
+
 
 // xtiV4hKL05OqaLbM
 mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
@@ -66,5 +69,12 @@ app.use('/api/sorompo', sorompoRoutes);
 
 /* BELÉPŐKÁRTYA REGISZTRÁCIÓK */
 app.use('/api/belepokartya', belepokartyaRoutes);
+
+
+/* IRODA NYITVATARTÁSOK */
+app.use('/api/iroda', irodaRoutes);
+
+/* BÜFÉK, ÉTKEZŐK */
+app.use('/api/bufek', bufekRoutes);
 
 module.exports = app;

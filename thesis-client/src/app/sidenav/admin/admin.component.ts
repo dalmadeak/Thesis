@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +7,17 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  selectedOption : string = 'elnokseg';
+  selectedOption : string | undefined = 'elnokseg';
 
-  constructor(private cd : ChangeDetectorRef){}
+  constructor(private cd : ChangeDetectorRef, private router: Router){
+  }
 
-  ngOnInit(){}
+  ngOnInit(){
+    if ((this.router.url).includes('szerkesztes')) {
+      let arrayOfUrl = (this.router.url).split('/');
+      let option = (arrayOfUrl[(arrayOfUrl.length - 2)]);
+      this.selectedOption = option;
+    }
+  }
 
 }

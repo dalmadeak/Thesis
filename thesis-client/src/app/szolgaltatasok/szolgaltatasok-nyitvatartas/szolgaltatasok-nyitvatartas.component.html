@@ -2,16 +2,20 @@
   <div class="header">
     <h1>Iroda nyitvatartás</h1>
   </div>
-  <div class="container" *ngFor="let office of officeObject">
+  <div class="dataContainer" *ngFor="let office of getObject()">
+    <div class="postIcons">
+      <a [routerLink]="['/sidenav/admin/szerkesztes', office.postType, office._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+      <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+      <ng-template #template>
+        <div class="modal-body text-center">
+          <p>Biztosan törlöd a bejegyzést?</p>
+          <button type="button" class="btn button-sub" (click)="deletePost(office._id)">Igen</button>
+          <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+        </div>
+      </ng-template>
+    </div>
     <h3>{{office.name}}</h3>
     <p>{{office.brief}}</p>
     <p>Nyitvatartás:</p>
-    <ul>
-      <li>Hétfő: {{office.openHours[0]}}</li>
-      <li>Kedd: {{office.openHours[1]}}</li>
-      <li>Szerda: {{office.openHours[2]}}</li>
-      <li>Csütörtök: {{office.openHours[3]}}</li>
-      <li>Péntek: {{office.openHours[4]}}</li>
-    </ul>
-  </div>
+    <p>{{office.openHours}}</p>
 </div>

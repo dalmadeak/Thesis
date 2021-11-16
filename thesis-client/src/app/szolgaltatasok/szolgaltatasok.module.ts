@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SzolgaltatasokRoutingModule } from "./szolgaltatasok-routing.module";
 
 import { SzolgaltatasokComponent } from "./szolgaltatasok.component";
@@ -14,7 +15,8 @@ import { SzolgaltatasokNyitvatartasComponent } from "./szolgaltatasok-nyitvatart
   imports: [
     CommonModule,
     SzolgaltatasokRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   declarations: [
     SzolgaltatasokComponent,

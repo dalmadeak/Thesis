@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -12,9 +12,6 @@ import { Belepokartya } from './belepokartya.model';
   styleUrls: ['./szolgaltatasok-belepokartya.component.css']
 })
 export class SzolgaltatasokBelepokartyaComponent {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-  selectedOption : string = 'belepokartya';
-
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   editablePost : Belepokartya = {
@@ -97,10 +94,5 @@ export class SzolgaltatasokBelepokartyaComponent {
   decline(): void {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
-  }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
   }
 }
