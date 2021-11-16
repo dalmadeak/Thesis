@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Ulesek } from '../ulesek.model';
 import { map } from 'rxjs/operators'
@@ -11,6 +11,7 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./ulesek-element.component.css']
 })
 export class UlesekElementComponent implements OnInit{
+  @Output() selectedOptionEvent = new EventEmitter<string>();
   @Input() filterData: any;
 
   faEdit = faPencilAlt;
@@ -89,5 +90,10 @@ export class UlesekElementComponent implements OnInit{
   decline(): void {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
+  }
+
+  emitSelectedOption(value: string) {
+    this.selectedOptionEvent.emit(value);
+    console.log(value)
   }
 }
