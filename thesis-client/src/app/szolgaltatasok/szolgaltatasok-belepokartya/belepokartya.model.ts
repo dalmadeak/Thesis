@@ -1,5 +1,6 @@
 export interface Belepokartya {
   _id: any;
+  postType: string;
   fullName: string;
   neptun: string;
   email: string;

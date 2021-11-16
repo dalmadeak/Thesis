@@ -22,6 +22,7 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
   message: string = '';
   editablePost : Palyazatok = {
     _id : '',
+    postType: '',
     title: '',
     date: '',
     files: []
@@ -58,12 +59,13 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/atlathatosag/palyazatok']);
+    setTimeout(() => {this.router.navigate(['/atlathatosag/palyazatok']);},0);
   }
 
   addNewPost(form : NgForm) {
     const newPost : Palyazatok = {
       _id: null,
+      postType: 'palyazatok',
       title: form.value.newRegistryGroup.title,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
       files: form.value.newRegistryGroup.files,
@@ -79,6 +81,7 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Palyazatok = {
       _id: id,
+      postType: 'palyazatok',
       title: form.value.newRegistryGroup.title,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
       files: form.value.newRegistryGroup.files,

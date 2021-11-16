@@ -19,6 +19,7 @@ export class SzolgaltatasokBelepokartyaComponent {
   message: string = '';
   editablePost : Belepokartya = {
     _id : '',
+    postType: '',
     fullName: '',
     neptun: '',
     email: '',
@@ -67,6 +68,7 @@ export class SzolgaltatasokBelepokartyaComponent {
     let today = new Date();
     const newPost : Belepokartya = {
       _id: null,
+      postType: 'belepokartya',
       fullName: form.value.cardRegistryGroup.fullName,
       neptun: form.value.cardRegistryGroup.neptun,
       email: form.value.cardRegistryGroup.email,

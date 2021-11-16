@@ -1,5 +1,6 @@
 export interface Hatarozat {
   _id: any;
+  postType: string;
   committee: string;
   number: string;
   decisionDate: string;

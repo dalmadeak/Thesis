@@ -22,6 +22,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   private postId : any;
   editablePost : SajatBeszamolok = {
     _id : '',
+    postType: '',
     author: '',
     year: 0,
     month: '',
@@ -60,13 +61,14 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/sidenav/sajat-beszamolok']);
+    setTimeout(() => {this.router.navigate(['/sidenav/beszamolok/sajat']);},0);
   }
 
   addNewPost(form : NgForm) {
     const newPost : SajatBeszamolok = {
       _id: null,
       author: 'Test',
+      postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,
@@ -84,6 +86,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     const post : SajatBeszamolok = {
       _id: id,
       author: 'Test',
+      postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,

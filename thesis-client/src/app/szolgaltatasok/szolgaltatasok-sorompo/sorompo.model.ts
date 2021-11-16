@@ -1,5 +1,6 @@
 export interface Sorompo {
   _id: any;
+  postType: string;
   fullName: string;
   neptun: string;
   plate: string;

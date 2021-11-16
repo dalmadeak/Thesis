@@ -12,8 +12,6 @@ import { Ulesek } from '../../../../ulesek/ulesek.model';
   styleUrls: ['./uj-bejegyzes-ulesek.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesUlesekComponent implements OnInit {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-
   private mode = 'createNewPost'
   private postId : any;
 
@@ -22,6 +20,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   message: string = '';
   editablePost : Ulesek = {
     _id : '',
+    postType: '',
     author: '',
     committee: '',
     type: '',
@@ -63,12 +62,13 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    this.router.navigate(['/ulesek']);
+    setTimeout(() => {this.router.navigate(['/ulesek']);},0);
   }
 
   addNewPost(form : NgForm) {
     const newPost : Ulesek = {
       _id: null,
+      postType: 'ulesek',
       author: 'Test',
       committee: form.value.newRegistryGroup.committee,
       type: form.value.newRegistryGroup.type,
@@ -89,6 +89,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Ulesek = {
       _id: id,
+      postType: 'ulesek',
       author: 'Test',
       committee: form.value.newRegistryGroup.committee,
       type: form.value.newRegistryGroup.type,
@@ -112,12 +113,4 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
-  }
-
-
-
 }

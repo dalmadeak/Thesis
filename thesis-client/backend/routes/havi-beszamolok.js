@@ -27,6 +27,7 @@ router.get('/:id', (req,res,next) => {
 
 router.post('', (req, res, next) => {
   const post = new MonthlyReport({
+    postType: req.body.postType,
     author: req.body.author,
     year: req.body.year,
     month: req.body.month,
@@ -46,6 +47,7 @@ router.post('', (req, res, next) => {
 router.put('/:id', (req,res,next) => {
   const post = new MonthlyReport({
     _id: req.body._id,
+    postType: req.body.postType,
     author: req.body.author,
     year: req.body.year,
     month: req.body.month,

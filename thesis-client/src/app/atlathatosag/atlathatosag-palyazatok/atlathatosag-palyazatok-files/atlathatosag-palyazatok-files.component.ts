@@ -44,6 +44,7 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
         return postData.posts.map((post: any) => {
          return {
             _id: post._id,
+            postType: post.postType,
             title: post.title,
             content: post.content,
             date: post.date

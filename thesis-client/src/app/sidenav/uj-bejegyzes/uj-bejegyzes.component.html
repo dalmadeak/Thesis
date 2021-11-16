@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header">
-    <h1>Új bejegyzés</h1>
+    <h1>Bejegyzés létrehozása, szerkesztése</h1>
   </div>
   <header>Új bejegyzés létrehozása</header>
   <div class="createContent">
@@ -11,42 +11,42 @@
           [(ngModel)]="selectedOption"
           name="postType"
           required>
-          <option value="hir">Hír</option>
-          <option value="ules">Bizottsági ülés</option>
-          <option value="beszamolo">Átláthatóság - Beszámoló</option>
-          <option value="jegyzokonyv">Átláthatóság - Jegyzőkönyv</option>
-          <option value="palyazat">Átláthatóság - Pályázat</option>
-          <option value="b-hatarozat">Belső - Határozat</option>
-          <option value="b-beszamolo">Belső - Havi beszámoló</option>
+          <option value="hirek">Hír</option>
+          <option value="ulesek">Bizottsági ülés</option>
+          <option value="beszamolok">Átláthatóság - Beszámoló</option>
+          <option value="jegyzokonyvek">Átláthatóság - Jegyzőkönyv</option>
+          <option value="palyazatok">Átláthatóság - Pályázat</option>
+          <option value="hatarozatok">Belső - Határozat</option>
+          <option value="sajat">Belső - Havi beszámoló</option>
         </select>
       </div>
-      </div>
+    </div>
 
-      <div *ngIf="selectedOption == 'hir'">
+      <div *ngIf="selectedOption == 'hirek'">
         <app-uj-bejegyzes-hirek></app-uj-bejegyzes-hirek>
       </div>
 
-      <div *ngIf="selectedOption == 'ules'">
+      <div *ngIf="selectedOption == 'ulesek'">
         <app-uj-bejegyzes-ulesek></app-uj-bejegyzes-ulesek>
       </div>
 
-      <div *ngIf="selectedOption == 'jegyzokonyv'">
+      <div *ngIf="selectedOption == 'jegyzokonyvek'">
         <app-uj-bejegyzes-jegyzokonyvek></app-uj-bejegyzes-jegyzokonyvek>
       </div>
 
-      <div *ngIf="selectedOption == 'beszamolo'">
+      <div *ngIf="selectedOption == 'beszamolok'">
         <app-uj-bejegyzes-beszamolok></app-uj-bejegyzes-beszamolok>
       </div>
 
-      <div *ngIf="selectedOption == 'palyazat'">
+      <div *ngIf="selectedOption == 'palyazatok'">
         <app-uj-bejegyzes-palyazatok></app-uj-bejegyzes-palyazatok>
       </div>
 
-      <div *ngIf="selectedOption == 'b-hatarozat'">
+      <div *ngIf="selectedOption == 'hatarozatok'">
         <app-uj-bejegyzes-hatarozatok></app-uj-bejegyzes-hatarozatok>
       </div>
 
-      <div *ngIf="selectedOption == 'b-beszamolo'">
+      <div *ngIf="selectedOption == 'sajat'">
         <app-uj-bejegyzes-sajat-beszamolok></app-uj-bejegyzes-sajat-beszamolok>
       </div>
 

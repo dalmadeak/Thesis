@@ -39,6 +39,7 @@ export class BelepokartyaAdminComponent implements OnInit{
         return postData.posts.map((post: any) => {
          return {
             _id: post._id,
+            postType: post.postType,
             fullName: post.fullName,
             neptun: post.neptun,
             email: post.email,
