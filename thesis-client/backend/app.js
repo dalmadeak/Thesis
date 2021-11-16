@@ -12,12 +12,9 @@ const hatarozatokRoutes = require('./routes/hatarozatok')
 const haviBeszamolokRoutes = require('./routes/havi-beszamolok')
 const jegyzokonyvekRoutes = require('./routes/jegyzokonyvek')
 
-const Decision = require('./models/hatarozatok');
-const Application = require('./models/palyazatok');
-const Report = require('./models/beszamolok');
-const MonthlyReport = require('./models/havi-beszamolok');
-const Record = require('./models/jegyzokonyvek');
-const Meeting = require('./models/ulesek');
+const sorompoRoutes = require('./routes/sorompo')
+const belepokartyaRoutes = require('./routes/belepokartya')
+
 
 // xtiV4hKL05OqaLbM
 mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
@@ -63,5 +60,11 @@ app.use('/api/havi-beszamolok', haviBeszamolokRoutes);
 /* HATÁROZATOK */
 app.use('/api/hatarozatok', hatarozatokRoutes);
 
+
+/* SOROMPÓ REGISZTRÁCIÓK */
+app.use('/api/sorompo', sorompoRoutes);
+
+/* BELÉPŐKÁRTYA REGISZTRÁCIÓK */
+app.use('/api/belepokartya', belepokartyaRoutes);
 
 module.exports = app;

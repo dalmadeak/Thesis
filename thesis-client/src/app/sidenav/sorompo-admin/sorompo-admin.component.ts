@@ -1,109 +1,79 @@
-import { Component } from "@angular/core";
-import { faCheck, faComment } from '@fortawesome/free-solid-svg-icons';
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Sorompo } from '../../szolgaltatasok/szolgaltatasok-sorompo/sorompo.model';
+import { map } from 'rxjs/operators'
+import { faTrash, faPencilAlt, faCheck, faComment } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sorompo-admin',
   templateUrl: './sorompo-admin.component.html',
   styleUrls: ['./sorompo-admin.component.css']
 })
-export class SorompoAdminComponent{
+export class SorompoAdminComponent implements OnInit{
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
   faComment = faComment;
   faCheck = faCheck;
 
-  sorompoObject = [
-  {
-    name: 'Nagy Péter',
-    neptun: 'ABC123',
-    plate: 'CBA321',
-    type: 'Renault Twingo',
-    card: '11111111',
-    mobile: '+36301234567',
-    email: 'peter@gmail.com',
-    registerDate: '2021.11.04.',
-    semester: '2021-2022-1',
-    reason: 'pls',
-    isApproved: true
-  },
-  {
-    name: 'Nagy Péter',
-    neptun: 'ABC123',
-    plate: 'CBA321',
-    type: 'Renault Twingo',
-    card: '11111111',
-    mobile: '+36301234567',
-    email: 'peter@gmail.com',
-    registerDate: '2021.11.04.',
-    semester: '2021-2022-1',
-    reason: 'pls',
-    isApproved: true
-  },
-  {
-    name: 'Nagy Péterxd',
-    neptun: 'ABC123',
-    plate: 'CBA321',
-    type: 'Renault Twingo',
-    card: '11111111',
-    mobile: '+36301234567',
-    email: 'peter@gmail.com',
-    registerDate: '2021.11.04.',
-    semester: '2021-2022-1',
-    reason: 'plsplsplsplsplsplsplsplsplsplsplspls plsplsplsplsplsplsplsplsplsplsplspls plsplsplsplsplsplsplspl splsplspls',
-    isApproved: true
-  },
-  {
-    name: 'Nagy Péter',
-    neptun: 'ABC123',
-    plate: 'CBA321',
-    type: 'Renault Twingo',
-    card: '11111111',
-    mobile: '+36301234567',
-    email: 'peter@gmail.com',
-    registerDate: '2021.11.04.',
-    semester: '2021-2022-1',
-    reason: 'pls',
-    isApproved: true
-  },
-  {
-    name: 'Nagy Péter',
-    neptun: 'ABC123',
-    plate: 'CBA321',
-    type: 'Renault Twingo',
-    card: '11111111',
-    mobile: '+36301234567',
-    email: 'peter@gmail.com',
-    registerDate: '2021.11.04.',
-    semester: '2021-2022-1',
-    reason: 'pls',
-    isApproved: true
-  },
-  {
-    name: 'Abdulmuttalib Abdul Kherim',
-    neptun: 'ABC123',
-    plate: 'CBA321',
-    type: 'Renault Twingo',
-    card: '11111111',
-    mobile: '+36301234567',
-    email: 'abdulkherim1998@gmail.com',
-    registerDate: '2021.11.04.',
-    semester: '2021-2022-1',
-    reason: 'pls',
-    isApproved: true
-  }];
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
 
-  ujKeresekObject = [
-    {
-      name: 'Approve me Péter',
-      neptun: 'ABC123',
-      plate: 'CBA321',
-      type: 'Renault Twingo',
-      card: '11111111',
-      mobile: '+36301234567',
-      email: 'peter@gmail.com',
-      registerDate: '2021.11.04.',
-      semester: '2021-2022-1',
-      reason: 'pls',
-      isApproved: false
-    }
-  ];
+  private sorompoObject : Sorompo[] = [];
 
+  constructor(private http: HttpClient, private modalService: BsModalService) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.sorompoObject].slice().reverse();
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/sorompo')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            fullName: post.fullName,
+            neptun: post.neptun,
+            plate: post.plate,
+            type: post.type,
+            email: post.email,
+            phone: post.phone,
+            card: post.card,
+            date: post.date,
+            semester: post.semester,
+            reason: post.reason,
+            isApproved: post.isApproved
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.sorompoObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
+    this.http.delete('http://localhost:3000/api/sorompo/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.sorompoObject.filter(post => post._id !== postId);
+        this.sorompoObject = updatedPost;
+      })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
+  }
 }
