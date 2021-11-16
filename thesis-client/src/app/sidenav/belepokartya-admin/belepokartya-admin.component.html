@@ -4,7 +4,7 @@
   </div>
   <table class="container" id="changesList">
     <tr>
-      <th class="mainHeader" colspan="10">Belépőkártya kérések</th>
+      <th class="mainHeader" colspan="12">Belépőkártya kérések</th>
     </tr>
     <tr class="filesHeader">
       <th>Név</th>
@@ -16,20 +16,34 @@
       <th>Regisztráció időpontja</th>
       <th>Leadás időpontja</th>
       <th><fa-icon [icon]="faComment"></fa-icon></th>
+      <th>Műveletek</th>
       <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
-      <tr class="filesData" *ngFor="let data of ujKeresekObject.slice().reverse()">
-        <td>{{data.name}}</td>
+      <tr class="filesData" *ngFor="let data of getObject()">
+        <td>{{data.fullName}}</td>
         <td>{{data.neptun}}</td>
         <td>{{data.email}}</td>
         <td>{{data.studentId}}</td>
         <td>{{data.card}}</td>
-        <td>{{data.permission}}</td>
-        <td>{{data.registerDate}}</td>
+        <td>{{data.permissions}}</td>
+        <td>{{data.date}}</td>
         <td>{{data.returnDate}}</td>
         <td>
-          <p class="tooltip"><b>[M]</b>
-          <span class="left">{{data.reason}}</span></p>
+          <ng-template #tooltiptemplate>
+            <p>{{data.reason}}</p>
+          </ng-template>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
+        </td>
+        <td>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a regisztrációt?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(data._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
         </td>
         <td><input type="checkbox"></td>
       </tr>
@@ -37,7 +51,7 @@
 
   <table class="container" id="cardList">
     <tr>
-      <th class="mainHeader" colspan="10">Belépőkártyák listája</th>
+      <th class="mainHeader" colspan="12">Belépőkártyák listája</th>
     </tr>
     <tr class="filesHeader">
       <th>Név</th>
@@ -49,20 +63,34 @@
       <th>Regisztráció időpontja</th>
       <th>Leadás időpontja</th>
       <th><fa-icon [icon]="faComment"></fa-icon></th>
+      <th>Műveletek</th>
       <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
-      <tr class="filesData" *ngFor="let data of belepokartyaObject.slice().reverse()">
-        <td>{{data.name}}</td>
+      <tr class="filesData" *ngFor="let data of getObject()">
+        <td>{{data.fullName}}</td>
         <td>{{data.neptun}}</td>
         <td>{{data.email}}</td>
         <td>{{data.studentId}}</td>
         <td>{{data.card}}</td>
-        <td>{{data.permission}}</td>
-        <td>{{data.registerDate}}</td>
+        <td>{{data.permissions}}</td>
+        <td>{{data.date}}</td>
         <td>{{data.returnDate}}</td>
         <td>
-          <p class="tooltip"><b>[M]</b>
-          <span class="left">{{data.reason}}</span></p>
+          <ng-template #tooltiptemplate>
+            <p>{{data.reason}}</p>
+          </ng-template>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
+        </td>
+        <td>
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan törlöd a regisztrációt?</p>
+                <button type="button" class="btn button-sub" (click)="deletePost(data._id)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
         </td>
         <td><input type="checkbox"></td>
       </tr>

@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { OsztondijakModule } from './osztondijak/osztondijak.module';
 import { SzervezetModule } from './szervezet/szervezet.module';
@@ -97,7 +98,8 @@ import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component'
     SzolgaltatasokModule,
     AtlathatosagModule,
     SidenavModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

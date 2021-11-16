@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 import { SidenavRoutingModule } from "./sidenav-routing.module";
 import { SidenavComponent } from "./sidenav.component";
@@ -31,7 +32,8 @@ import { UjBejegyzesSajatBeszamolokComponent } from './uj-bejegyzes/uj-bejegyzes
     SidenavRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TooltipModule
   ],
   declarations: [
     SidenavComponent,

@@ -10,59 +10,82 @@
   </div>
   <header>Belépőkártya Regisztráció</header>
   <div class="register">
-      <form (ngSubmit)="onSubmit(cardRegisterForm)" #cardRegisterForm="ngForm">
-        <div ngModelGroup="cardRegisterGroup">
+    <form (ngSubmit)="onSubmit(cardRegisterForm)" #cardRegisterForm="ngForm">
+      <div ngModelGroup="cardRegistryGroup" class="group">
+
+      <div>
         <label>Név: </label>
         <input
           type="text"
-          ngModel
-          name="name"
+          [ngModel]="editablePost.fullName"
+          name="fullName"
           required>
         <br>
+      </div>
 
+      <div>
         <label>Neptun-kód: </label>
         <input
           type="text"
-          ngModel
+          [ngModel]="editablePost.neptun"
           name="neptun"
           required
           maxlength="6"
           minlength="6">
         <br>
+      </div>
 
+      <div>
         <label>E-mail cím: </label>
         <input
           type="email"
-          ngModel
+          [ngModel]="editablePost.email"
           name="email"
           required
           email>
         <br>
+      </div>
 
+      <div>
         <label>Diákigazolvány szám: </label>
         <input
           type="text"
-          ngModel
+          [ngModel]="editablePost.studentId"
           name="studentId"
           required
           maxlength="11"
           minlength="11"
           pattern="[0-9]+">
         <br>
+      </div>
 
+      <div>
         <label>Igénylés indoka: </label>
         <textarea
-          ngModel
+          [ngModel]="editablePost.reason"
           name="reason"
           rows="3"
           required>
         </textarea>
         <br><br>
+      </div>
 
+      <div>
         <button
-          type="submit"
+          type="button"
+          class="btn button-main"
+          (click)="openModal(template)"
           [disabled]="!cardRegisterForm.valid">Küldés</button>
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Biztosan el szeretnéd menteni a regisztrációdat?</p>
+              <button type="submit" class="btn button-sub" (click)="onSubmit(cardRegisterForm)">Igen</button>
+              <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+            </div>
+          </ng-template>
         </div>
-      </form>
+
+      </div>
+    </form>
   </div>
 </div>
