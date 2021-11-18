@@ -55,6 +55,10 @@ h1 {
   display: inline-block;
 }
 
+img {
+  object-fit: cover;
+}
+
 fa-icon {
   color: #13294B;
   padding: 5px;

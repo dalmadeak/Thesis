@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -41,9 +42,16 @@ app.use((req,res,next) => {
 
 //Body Parser
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit: '50mb',
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+
+//give access to de images folder
+app.use('/images', express.static(path.join('backend/images')));
+
+
+
 
 /* HÍREK MIDDLEWARES */
 app.use('/api/hirek', hirekRoutes);

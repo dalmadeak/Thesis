@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -39,6 +40,7 @@ import { AdminPanelBufekComponent } from './admin/admin-panel-types/admin-panel-
     CommonModule,
     SidenavRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     NgxPaginationModule,
     TooltipModule
