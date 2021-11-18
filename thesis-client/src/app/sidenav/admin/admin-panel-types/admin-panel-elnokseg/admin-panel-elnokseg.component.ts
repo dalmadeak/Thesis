@@ -5,7 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Elnokseg } from 'src/app/szervezet/szervezet-elnokseg/elnokseg.model';
-import { mimeType } from './mime-type.validator';
+import { mimeType } from '../mime-type.validator';
 
 
 @Component({

@@ -21,11 +21,11 @@
             </ng-template>
           </div>
         </div></td>
-        <td><img class="profilePicture" src="{{member.image}}"></td>
+        <td><img class="profilePicture" [src]="member.file" [alt]="member.name"></td>
       </tr>
 
       <ng-template #elseBlock>
-        <td><img class="profilePicture" src="{{member.image}}"></td>
+        <td><img class="profilePicture" [src]="member.file" [alt]="member.name"></td>
         <td><div class="contactInfo contactRight">
           <p class="name"><b>{{ member.name }}</b></p><br>
           <p class="info">{{ member.position }}</p>

@@ -42,7 +42,7 @@ export class SzervezetKabinetComponent {
             name: post.name,
             position: post.position,
             email: post.email,
-            image: post.image
+            file: post.file
           }
         });
       }))

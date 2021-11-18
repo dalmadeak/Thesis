@@ -4,5 +4,5 @@ export interface Kabinet {
   name: string;
   position: string;
   email: string;
-  image: string;
+  file: string;
 }
