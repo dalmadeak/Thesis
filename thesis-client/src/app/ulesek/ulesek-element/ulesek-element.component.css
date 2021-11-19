@@ -82,3 +82,9 @@ p {
   margin: 50px auto;
   font-family: Montserrat, sans-serif;
 }
+
+.paginationClass {
+  width: 25%;
+  text-align: center;
+  margin: auto;
+}
