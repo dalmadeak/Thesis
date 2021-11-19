@@ -55,6 +55,7 @@ export class BelepokartyaAdminComponent implements OnInit{
       }))
       .subscribe((finalPosts) => {
         this.belepokartyaObject = finalPosts;
+        console.log(this.belepokartyaObject)
       });
   }
 

@@ -62,7 +62,7 @@ export class AdminPanelBufekComponent implements OnInit {
   addNewPost(form : NgForm) {
     const newPost : Bufek = {
       _id: null,
-      postType: 'iroda',
+      postType: 'bufek',
       name: form.value.adminGroup.name,
       brief: form.value.adminGroup.brief,
       openHours: form.value.adminGroup.openHours,
@@ -78,7 +78,7 @@ export class AdminPanelBufekComponent implements OnInit {
   updatePost(id: string, form: NgForm) {
     const post : Bufek = {
       _id: id,
-      postType: 'iroda',
+      postType: 'bufek',
       name: form.value.adminGroup.name,
       brief: form.value.adminGroup.brief,
       openHours: form.value.adminGroup.openHours,

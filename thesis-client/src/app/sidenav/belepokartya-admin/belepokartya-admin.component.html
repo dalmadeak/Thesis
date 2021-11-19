@@ -17,7 +17,6 @@
       <th>Leadás időpontja</th>
       <th><fa-icon [icon]="faComment"></fa-icon></th>
       <th>Műveletek</th>
-      <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
     <ng-container *ngFor="let data of getObject()">
       <tr class="filesData" *ngIf="!data.isApproved" >
@@ -28,7 +27,8 @@
         <td>{{data.card}}</td>
         <td>{{data.permissions}}</td>
         <td>{{data.date}}</td>
-        <td>{{data.returnDate}}</td>
+        <td *ngIf="data.returnDate != ' ' ">{{data.returnDate}}</td>
+        <td *ngIf="data.returnDate == ' '">-</td>
         <td>
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
@@ -36,7 +36,7 @@
           <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
         </td>
         <td>
-          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <a [routerLink]="['/sidenav/admin/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
             <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
             <ng-template #template>
               <div class="modal-body text-center">
@@ -46,14 +46,13 @@
               </div>
             </ng-template>
         </td>
-        <td><input type="checkbox" [checked]="data.isApproved"></td>
       </tr>
     </ng-container>
   </table>
 
   <table class="container" id="cardList">
     <tr>
-      <th class="mainHeader" colspan="12">Belépőkártyák listája</th>
+      <th class="mainHeader" colspan="12">Aktív belépőkártyák listája</th>
     </tr>
     <tr class="filesHeader">
       <th>Név</th>
@@ -66,7 +65,6 @@
       <th>Leadás időpontja</th>
       <th><fa-icon [icon]="faComment"></fa-icon></th>
       <th>Műveletek</th>
-      <th><fa-icon [icon]="faCheck"></fa-icon></th>
     </tr>
     <ng-container *ngFor="let data of getObject()">
       <tr class="filesData" *ngIf="data.isApproved" >
@@ -77,7 +75,8 @@
         <td>{{data.card}}</td>
         <td>{{data.permissions}}</td>
         <td>{{data.date}}</td>
-        <td>{{data.returnDate}}</td>
+        <td *ngIf="data.returnDate != ' ' ">{{data.returnDate}}</td>
+        <td *ngIf="data.returnDate == ' '">-</td>
         <td>
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
@@ -85,7 +84,7 @@
           <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
         </td>
         <td>
-          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <a [routerLink]="['/sidenav/admin/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
             <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
             <ng-template #template>
               <div class="modal-body text-center">
@@ -95,7 +94,6 @@
               </div>
             </ng-template>
         </td>
-        <td><input type="checkbox" [checked]="data.isApproved"></td>
       </tr>
     </ng-container>
   </table>

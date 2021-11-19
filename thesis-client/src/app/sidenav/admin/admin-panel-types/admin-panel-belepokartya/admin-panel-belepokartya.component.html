@@ -1,0 +1,139 @@
+<form (ngSubmit)="onSubmit(adminForm)" #adminForm="ngForm">
+  <div ngModelGroup="adminGroup" class="group">
+
+    <div>
+      <label>Név: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.fullName"
+        name="fullName"
+        required>
+      <br>
+    </div>
+
+    <div>
+      <label>Neptun-kód: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.neptun"
+        name="neptun"
+        required
+        maxlength="6"
+        minlength="6">
+      <br>
+    </div>
+
+    <div>
+      <label>E-mail cím: </label>
+      <input
+        type="email"
+        [ngModel]="editablePost.email"
+        name="email"
+        required
+        email>
+      <br>
+    </div>
+
+    <div>
+      <label>Diákigazolvány szám: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.studentId"
+        name="studentId"
+        required
+        maxlength="11"
+        minlength="11"
+        pattern="[0-9]+">
+      <br>
+    </div>
+
+    <div>
+      <label>Belépőkártya száma: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.card"
+        name="card"
+        maxlength="11"
+        minlength="11"
+        pattern="[0-9]+">
+      <br>
+    </div>
+
+    <div>
+      <label>Jogosultság: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.permissions"
+        name="permissions"
+        required>
+      <br>
+    </div>
+
+    <div>
+      <label>Regisztráció időpontja: </label>
+      <input
+        type="date"
+        [ngModel]="editablePost.date.split(' ')[0]"
+        name="date"
+        required>
+    </div>
+    <div>
+      <label></label>
+      <input
+        type="time"
+        [ngModel]="editablePost.date.split(' ')[1]"
+        name="time"
+        required>
+    </div>
+
+    <div>
+      <label>Leadás időpontja: </label>
+      <input
+        type="date"
+        [ngModel]="editablePost.returnDate.split(' ')[0]"
+        name="returnDate">
+    </div>
+    <div>
+      <label></label>
+      <input
+        type="time"
+        [ngModel]="editablePost.returnDate.split(' ')[1]"
+        name="returnTime">
+    </div>
+
+    <div>
+      <label>Igénylés indoka: </label>
+      <textarea
+        [ngModel]="editablePost.reason"
+        name="reason"
+        rows="3"
+        required>
+      </textarea>
+    </div>
+
+    <div>
+      <label>Aktív: </label>
+      <input
+        type="checkbox"
+        [ngModel]="editablePost.isApproved"
+        name="isApproved">
+      <br><br>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        class="btn button-main"
+        (click)="openModal(template)"
+        [disabled]="!adminForm.valid">Küldés</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
+            <button type="submit" class="btn button-sub" (click)="onSubmit(adminForm)">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </div>
+  </div>
+
+</form>

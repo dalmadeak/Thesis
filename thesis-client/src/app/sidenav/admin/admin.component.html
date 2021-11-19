@@ -18,6 +18,8 @@
           <option value="kozeletik">Közéleti ösztöndíjak</option>
           <option value="bufek">Büfék, étkezők</option>
           <option value="iroda">Iroda nyitvatartás</option>
+          <option value="belepokartya">Belépőkártya regisztráció</option>
+          <option value="sorompo">Sorompó regisztráció</option>
         </select>
       </div>
       </div>
@@ -48,6 +50,14 @@
 
       <div *ngIf="selectedOption == 'iroda'">
         <app-admin-panel-iroda></app-admin-panel-iroda>
+      </div>
+
+      <div *ngIf="selectedOption == 'belepokartya'">
+        <app-admin-panel-belepokartya></app-admin-panel-belepokartya>
+      </div>
+
+      <div *ngIf="selectedOption == 'sorompo'">
+        <app-admin-panel-sorompo></app-admin-panel-sorompo>
       </div>
 
 
