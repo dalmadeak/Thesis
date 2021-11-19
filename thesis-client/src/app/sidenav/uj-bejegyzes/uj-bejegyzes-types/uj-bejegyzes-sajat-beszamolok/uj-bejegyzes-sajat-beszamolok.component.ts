@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -12,22 +12,24 @@ import { SajatBeszamolok } from '../../../sajat-beszamolok/sajat-beszamolok.mode
   styleUrls: ['./uj-bejegyzes-sajat-beszamolok.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-
-  selectedOption : string = 'b-beszamolo';
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isDisabled: boolean = false;
+
+  today = new Date();
+  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
 
   private mode = 'createNewPost'
   private postId : any;
+
   editablePost : SajatBeszamolok = {
     _id : '',
     postType: '',
     author: '',
-    year: 0,
+    year: this.today.getFullYear(),
     month: '',
     content: '',
-    date: '',
+    date: this.now,
   };
 
   constructor(
@@ -106,10 +108,4 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
-  }
-
 }

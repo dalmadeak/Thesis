@@ -18,6 +18,10 @@ export class AdminPanelSorompoComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+
+  today = new Date();
+  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+
   editablePost : Sorompo = {
     _id: '',
     postType: '',
@@ -28,7 +32,7 @@ export class AdminPanelSorompoComponent implements OnInit {
     card: '',
     plate: '',
     type: '',
-    date: '',
+    date: this.now,
     semester: '',
     reason: '',
     isApproved: false

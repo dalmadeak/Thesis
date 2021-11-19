@@ -46,7 +46,8 @@
         type="date"
         [ngModel]="editablePost.date.split(' ')[0]"
         name="postDate"
-        required>
+        required
+        disabled>
     </div>
     <div>
       <label></label>
@@ -54,7 +55,8 @@
         type="time"
         [ngModel]="editablePost.date.split(' ')[1]"
         name="postTime"
-        required>
+        required
+        disabled>
     </div>
 
     <div>

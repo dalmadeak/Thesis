@@ -21,6 +21,11 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+
+  today = new Date();
+  dateNow = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate();
+  timeNow = this.today.getHours() + ':' + this.today.getMinutes();
+
   editablePost : Palyazatok = {
     _id : '',
     postType: '',
@@ -39,8 +44,8 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
  ngOnInit() {
   this.form = new FormGroup({
     'title': new FormControl(null, {validators: [Validators.required]}),
-    'date': new FormControl(null, {validators: [Validators.required]}),
-    'time': new FormControl(null, {validators: [Validators.required]}),
+    'date': new FormControl(this.dateNow, {validators: [Validators.required]}),
+    'time': new FormControl(this.timeNow, {validators: [Validators.required]}),
     'file': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
   });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

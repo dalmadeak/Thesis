@@ -18,6 +18,10 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+
+  today = new Date();
+  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+
   editablePost : Belepokartya = {
     _id: '',
     postType: '',
@@ -27,7 +31,7 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
     studentId: '',
     card: '',
     permissions: '',
-    date: '',
+    date: this.now,
     returnDate: '',
     reason: '',
     isApproved: false
@@ -41,7 +45,7 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
   }
 
  ngOnInit() {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+  this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
