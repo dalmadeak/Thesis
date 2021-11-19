@@ -58,6 +58,7 @@ export class SzolgaltatasokBelepokartyaComponent {
     } else if (this.mode === 'editPost') {
       this.updatePost(this.postId, form);
     }*/
+    form.reset();
     this.modalRef.hide();
   }
 
@@ -83,8 +84,6 @@ export class SzolgaltatasokBelepokartyaComponent {
       const id = data.postId;
       newPost._id = id;
     });
-
-    form.reset();
   }
 
   openModal(template: TemplateRef<any>) {
