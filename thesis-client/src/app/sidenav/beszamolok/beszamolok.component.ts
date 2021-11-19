@@ -330,8 +330,8 @@ export class BeszamolokComponent{
     }
   ];
 
-  async onClickView(data: Array<Object>) {
-    await this.addMonthToSummary(data);
+  onClickView(data: Array<Object>) {
+    this.addMonthToSummary(data);
     this.scrollToChild();
   }
 

@@ -62,6 +62,7 @@ export class SzolgaltatasokSorompoComponent {
     } else if (this.mode === 'editPost') {
       this.updatePost(this.postId, form);
     }*/
+    form.reset();
     this.modalRef.hide();
   }
 
