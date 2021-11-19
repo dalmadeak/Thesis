@@ -1,109 +1,73 @@
-import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Component, NgModule, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { map } from 'rxjs/operators'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
+import { Kuldottgyules } from "./kuldottgyules.model";
 
 @Component ({
   selector: 'app-szervezet-kgy',
   templateUrl: './szervezet-kgy.component.html',
   styleUrls: ['./szervezet-kgy.component.css']
 })
-export class SzervezetKuldottgyulesComponent {
-  kgyObject = [
-  {
-    year: '2019',
-    brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque urna lectus, molestie ac tortor nec, mollis egestas magna. Donec gravida, urna et viverra fermentum, urna justo elementum tortor, nec pharetra justo turpis vel est. Praesent in ex varius, dignissim diam ac, placerat sapien. Maecenas facilisis tristique finibus. Donec non luctus nisi, id vehicula tellus. Morbi ullamcorper semper porta. Ut id velit dui. Sed a arcu tincidunt, auctor nulla id, commodo quam.',
-    members: [
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd1','asd2']
-    },
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd1','asd2']
-    },
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd1',]
-    },
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd1','asd2']
-    },
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd2']
-    },
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd1','asd2']
-    },
-    {
-      name: 'Lorem ipsum',
-      committees: ['asd2']
-    }]
-  },
-  {
-    year: '2020',
-    brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque urna lectus, molestie ac tortor nec, mollis egestas magna. Donec gravida, urna et viverra fermentum, urna justo elementum tortor, nec pharetra justo turpis vel est. Praesent in ex varius, dignissim diam ac, placerat sapien. Maecenas facilisis tristique finibus. Donec non luctus nisi, id vehicula tellus. Morbi ullamcorper semper porta. Ut id velit dui. Sed a arcu tincidunt, auctor nulla id, commodo quam.',
-    members: [
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1',]
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd2']
-      }]
-  },
-  {
-    year: '2021',
-    brief: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque urna lectus, molestie ac tortor nec, mollis egestas magna. Donec gravida, urna et viverra fermentum, urna justo elementum tortor, nec pharetra justo turpis vel est. Praesent in ex varius, dignissim diam ac, placerat sapien. Maecenas facilisis tristique finibus. Donec non luctus nisi, id vehicula tellus. Morbi ullamcorper semper porta. Ut id velit dui. Sed a arcu tincidunt, auctor nulla id, commodo quam.',
-    members: [
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1',]
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd1','asd2']
-      },
-      {
-        name: 'Lorem ipsum',
-        committees: ['asd2']
-      }]
-  }]
+export class SzervezetKuldottgyulesComponent implements OnInit {
+  brief: string = 'Az Önkormányzat legfőbb döntéshozó és ellenőrző szerve a Küldöttgyűlés, amely dönthet minden olyan ügyben, amit az Alapszabály, jogszabály, egyetemi, kari vagy egyéb szabályzat, egyedi aktus a hatáskörébe utal. A Küldöttgyűlés ezen túlmenően az Alapszabályban meghatározott kivételektől eltekintve bármely más szervének, testületének vagy tisztségviselőjének már meghozott döntéseit másodfokon eljárva felülbírálhatja. Ilyen kivételnek minősül, amikor az Alapszabály a döntést az Önkormányzat más szervének, testületének vagy tisztségviselőjének kizárólagos hatáskörébe utalja';
+
+  faEdit = faPencilAlt;
+  faDelete = faTrash;
+
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
+  private kuldottgyulesObject : Kuldottgyules[] = [];
+
+  constructor(private http: HttpClient, private modalService: BsModalService) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.kuldottgyulesObject];
+  }
+
+  getPosts() {
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kuldottgyules')
+      .pipe(map(postData => {
+        return postData.posts.map((post: any) => {
+         return {
+            _id: post._id,
+            postType: post.postType,
+            fullName: post.fullName,
+            firstCommittee: post.firstCommittee,
+            secondCommittee: post.secondCommittee,
+          }
+        });
+      }))
+      .subscribe((finalPosts) => {
+        this.kuldottgyulesObject = finalPosts;
+      });
+  }
+
+  deletePost(postId : string) {
+    this.message = 'Elfogadva!';
+    this.modalRef.hide();
+    this.http.delete('http://localhost:3000/api/kuldottgyules/' + postId)
+      .subscribe(() => {
+        const updatedPost = this.kuldottgyulesObject.filter(post => post._id !== postId);
+        this.kuldottgyulesObject = updatedPost;
+      })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  decline(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
+  }
 }
