@@ -20,10 +20,7 @@
         <td class="breakableData">{{file.content}}</td>
         <td class="centeredClass">{{file.mandate}}</td>
         <td class="centeredClass">{{file.vote}}</td>
-        <td class="breakableData centeredClass">
-          <a *ngFor="let appendix of file.files; let i = index" href="{{appendix}}" download="file.files[i]">Csatolmány{{i+1}} </a>
-          <br>
-        </td>
+        <td class="centeredClass"><a [href]="file.file" [download]="file.title" download target="_blank">Letöltés</a></td>
         <td class="centeredClass">{{file.date}}</td>
         <td class="centeredClass">
           <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', file.postType, file._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>

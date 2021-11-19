@@ -83,7 +83,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
     postData.append('postType', 'beszamolok');
     postData.append('title', this.form.value.title);
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
-    postData.append('file', this.form.value.file, this.form.value.name);
+    postData.append('file', this.form.value.file, this.form.value.title);
 
     this.http.post<{ message: string, post: Beszamolok }>('http://localhost:3000/api/beszamolok', postData)
       .subscribe((data) => {
@@ -105,7 +105,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
       postData.append('postType', 'beszamolok');
       postData.append('title', this.form.value.title);
       postData.append('date', this.form.value.date + ' ' + this.form.value.time);
-      postData.append('file', file, this.form.value.name);
+      postData.append('file', file,this.form.value.title);
     } else {
       postData = {
         _id: id,
@@ -121,7 +121,7 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
           _id: id,
           postType: 'beszamolok',
           title: this.form.value.title,
-          date: this.form.value.ate + ' ' + this.form.value.time,
+          date: this.form.value.date + ' ' + this.form.value.time,
           file: ''
         }
       })

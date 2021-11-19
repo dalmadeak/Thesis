@@ -1,8 +1,32 @@
 const express = require('express');
+const multer = require("multer");
 
 const Decision = require('../models/hatarozatok');
 
 const router = express.Router();
+
+const MIME_TYPE_MAP = {
+  'application/pdf': 'pdf',
+  'application/zip': 'zip',
+  'application/x-zip-compressed': 'zip',
+}
+
+const storage = multer.diskStorage({
+  destination: (req,file,cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    console.log(file.mimetype)
+    let error = new Error('Invalid type');
+    if (isValid){
+      error = null
+    }
+    cb(error, "backend/files/hatarozatok");
+  },
+  filename: (req,file,cb) => {
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+    const extention = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + '-' + Date.now() + '.' + extention);
+  }
+});
 
 router.get('', (req,res,next) => {
   Decision.find() //returns all entries
@@ -25,40 +49,60 @@ router.get('/:id', (req,res,next) => {
     });
 });
 
-router.post('', (req, res, next) => {
+router.post('', multer({storage: storage}).single('file'), (req, res, next) => {
+  const url = req.protocol + '://' + req.get('host');
   const post = new Decision({
     postType: req.body.postType,
     committee: req.body.committee,
+    title: req.body.title,
     number: req.body.number,
     decisionDate: req.body.decisionDate,
     content: req.body.content,
     mandate: req.body.mandate,
     vote: req.body.vote,
     date: req.body.date,
-    files: req.body.files,
+    file: url + '/files/hatarozatok/' + req.file.filename,
   });
   // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Decision added successfully',
-      postId: result._id
+      post: {
+        _id: result._id,
+        postType: result.postType,
+        committee: result.committee,
+        title: result.title,
+        number: result.number,
+        decisionDate: result.decisionDate,
+        content: result.content,
+        mandate: result.mandate,
+        vote: result.vote,
+        date: result.date,
+        file: result.file
+      }
     });
   });
 });
 
 //put - completely replace old resource with new one, patch - update resource
-router.put('/:id', (req,res,next) => {
+router.put('/:id', multer({storage: storage}).single('file'), (req,res,next) => {
+  let filePath = req.body.file;
+  if(req.file) {
+    const url = req.protocol + '://' + req.get('host');
+    filePath = url + '/files/hatarozatok/' + req.file.filename;
+  }
   const post = new Decision({
     _id: req.body._id,
     postType: req.body.postType,
     committee: req.body.committee,
+    title: req.body.title,
     number: req.body.number,
     decisionDate: req.body.decisionDate,
     content: req.body.content,
     mandate: req.body.mandate,
     vote: req.body.vote,
     date: req.body.date,
-    files: req.body.files,
+    file: filePath
   })
   Decision.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({

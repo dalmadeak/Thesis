@@ -48,10 +48,8 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
             postType: post.postType,
             committee: post.committee,
             title: post.title,
-            decisionDate: post.decisionDate.split(' ')[0],
-            decisionTime: post.decisionDate.split(' ')[1],
-            date: post.date.split(' ')[0],
-            time: post.date.split(' ')[1],
+            decisionDate: post.decisionDate,
+            date: post.date,
             file: post.file
           }
         });

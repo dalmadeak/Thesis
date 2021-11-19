@@ -55,6 +55,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
         this.http.get<{message: string, post: any }>('http://localhost:3000/api/jegyzokonyvek/' + this.postId)
         .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
+          console.log(fetchedData.post[0]);
           this.form.setValue(
             {
               'committee': this.editablePost.committee,
@@ -93,7 +94,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
     postData.append('title', this.form.value.title);
     postData.append('decisionDate', this.form.value.decisionDate + ' ' + this.form.value.decisionTime);
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
-    postData.append('file', this.form.value.file, this.form.value.name);
+    postData.append('file', this.form.value.file, this.form.value.title);
 
     this.http.post<{ message: string, post: Jegyzokonyvek }>('http://localhost:3000/api/jegyzokonyvek', postData)
       .subscribe((data) => {
@@ -119,7 +120,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
       postData.append('title', this.form.value.title);
       postData.append('decisionDate', this.form.value.decisionDate + ' ' + this.form.value.decisionTime);
       postData.append('date', this.form.value.date + ' ' + this.form.value.time);
-      postData.append('file', file, this.form.value.name);
+      postData.append('file', file, this.form.value.title);
     } else {
       postData = {
         _id: id,
@@ -139,7 +140,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
           committee: this.form.value.committee,
           title: this.form.value.title,
           decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
-          date: this.form.value.ate + ' ' + this.form.value.time,
+          date: this.form.value.date + ' ' + this.form.value.time,
           file: ''
         }
       })

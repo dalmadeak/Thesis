@@ -1,10 +1,11 @@
 import { Component, OnInit, Output, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Hatarozat } from 'src/app/sidenav/hatarozatok/hatarozatok.model';
-import { EventEmitter } from '@angular/core';
+
+import { Hatarozatok } from 'src/app/sidenav/hatarozatok/hatarozatok.model';
+import { mimeType } from '../mime-type.validator';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-uj-bejegyzes-hatarozatok',
@@ -12,24 +13,26 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./uj-bejegyzes-hatarozatok.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesHatarozatokComponent implements OnInit {
-  selectedOption : string = 'b-hatarozat';
+  form: any;
+  imagePreview: string = '';
 
   private mode = 'createNewPost'
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
-  editablePost : Hatarozat = {
+  editablePost : Hatarozatok = {
     _id: '',
     postType: '',
     committee: '',
+    title: '',
     number: '',
     decisionDate: '',
     content: '',
     mandate: 0,
     vote: '',
     date: '',
-    files: []
+    file: ''
   };
 
   constructor(
@@ -40,6 +43,19 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
   }
 
  ngOnInit() {
+  this.form = new FormGroup({
+    'committee': new FormControl(null, {validators: [Validators.required]}),
+    'title': new FormControl(null, {validators: [Validators.required]}),
+    'number': new FormControl(null, {validators: [Validators.required]}),
+    'decisionDate': new FormControl(null, {validators: [Validators.required]}),
+    'decisionTime': new FormControl(null, {validators: [Validators.required]}),
+    'content': new FormControl(null, {validators: [Validators.required]}),
+    'mandate': new FormControl(null, {validators: [Validators.required]}),
+    'vote': new FormControl(null, {validators: [Validators.required]}),
+    'date': new FormControl(null, {validators: [Validators.required]}),
+    'time': new FormControl(null, {validators: [Validators.required]}),
+    'file': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
+  });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -47,6 +63,20 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
         this.http.get<{message: string, post: any }>('http://localhost:3000/api/hatarozatok/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
+          this.form.setValue(
+            {
+              'committee': this.editablePost.committee,
+              'title': this.editablePost.title,
+              'number': this.editablePost.number,
+              'decisionDate': this.editablePost.decisionDate.split(' ')[0],
+              'decisionTime': this.editablePost.decisionDate.split(' ')[1],
+              'content': this.editablePost.content,
+              'mandate': this.editablePost.mandate,
+              'vote': this.editablePost.vote,
+              'date': this.editablePost.date.split(' ')[0],
+              'time': this.editablePost.date.split(' ')[1],
+              'file': this.editablePost.file,
+            });
         });
       } else {
         this.mode = 'createNewPost';
@@ -55,54 +85,109 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit() {
     this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      this.updatePost(this.postId, this.form.value.file);
     }
+    this.form.reset();
     this.modalRef.hide();
     setTimeout(() => {this.router.navigate(['/sidenav/hatarozatok']);},0);
   }
-  addNewPost(form : NgForm) {
-    const newPost : Hatarozat = {
-      _id: null,
-      postType: 'hatarozatok',
-      committee: form.value.newRegistryGroup.committee,
-      number: form.value.newRegistryGroup.number,
-      decisionDate: form.value.newRegistryGroup.decisionDate + ' ' + form.value.newRegistryGroup.decisionTime,
-      content: form.value.newRegistryGroup.content,
-      mandate: form.value.newRegistryGroup.mandate,
-      vote: form.value.newRegistryGroup.vote,
-      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
-      files: form.value.newRegistryGroup.files
-    }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/hatarozatok', newPost)
+  addNewPost() {
+    const postData = new FormData();
+    postData.append('_id', '');
+    postData.append('postType', 'hatarozatok');
+    postData.append('committee', this.form.value.committee);
+    postData.append('title', this.form.value.title);
+    postData.append('number', this.form.value.number);
+    postData.append('decisionDate', this.form.value.decisionDate + ' ' + this.form.value.decisionTime);
+    postData.append('content', this.form.value.content);
+    postData.append('mandate', this.form.value.mandate);
+    postData.append('vote', this.form.value.vote);
+    postData.append('date', this.form.value.date + ' ' + this.form.value.time);
+    postData.append('file', this.form.value.file, this.form.value.title);
+
+    this.http.post<{ message: string, post: Hatarozatok }>('http://localhost:3000/api/hatarozatok', postData)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const newPost: Hatarozatok = {
+          _id: data.post._id,
+          postType: 'hatarozatok',
+          committee: this.form.value.committee,
+          title: this.form.value.title,
+          number: this.form.value.number,
+          decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
+          content: this.form.value.content,
+          mandate: this.form.value.mandate,
+          vote: this.form.value.vote,
+          date: this.form.value.date + ' ' + this.form.value.time,
+          file: data.post.file,
+        }
     });
   }
 
-  updatePost(id: string, form: NgForm) {
-    const post : Hatarozat = {
-      _id: id,
-      postType: 'hatarozatok',
-      committee: form.value.newRegistryGroup.committee,
-      number: form.value.newRegistryGroup.number,
-      decisionDate: form.value.newRegistryGroup.decisionDate + ' ' + form.value.newRegistryGroup.decisionTime,
-      content: form.value.newRegistryGroup.content,
-      mandate: form.value.newRegistryGroup.mandate,
-      vote: form.value.newRegistryGroup.vote,
-      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
-      files: form.value.newRegistryGroup.files
+  updatePost(id: string, file: File | string) {
+    let postData : Hatarozatok | FormData;
+    if(typeof(file) === "object") {
+      postData = new FormData();
+      postData.append('_id', id);
+      postData.append('postType', 'hatarozatok');
+      postData.append('committee', this.form.value.committee);
+      postData.append('title', this.form.value.title);
+      postData.append('number', this.form.value.number);
+      postData.append('decisionDate', this.form.value.decisionDate + ' ' + this.form.value.decisionTime);
+      postData.append('content', this.form.value.content);
+      postData.append('mandate', this.form.value.mandate);
+      postData.append('vote', this.form.value.vote);
+      postData.append('date', this.form.value.date + ' ' + this.form.value.time);
+      postData.append('file', file, this.form.value.title);
+    } else {
+      postData = {
+        _id: id,
+        postType: 'hatarozatok',
+        committee: this.form.value.committee,
+        title: this.form.value.title,
+        number: this.form.value.number,
+        decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
+        content: this.form.value.content,
+        mandate: this.form.value.mandate,
+        vote: this.form.value.vote,
+        date: this.form.value.date + ' ' + this.form.value.time,
+        file: this.form.value.file,
+      }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/hatarozatok/' + id, post)
+    this.http.put<{ message: string }>('http://localhost:3000/api/hatarozatok/' + id, postData)
       .subscribe((data) => {
-        console.log(data);
+        const newPost = {
+          _id: id,
+          postType: 'hatarozatok',
+          committee: this.form.value.committee,
+          title: this.form.value.title,
+          number: this.form.value.number,
+          decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
+          content: this.form.value.content,
+          mandate: this.form.value.mandate,
+          vote: this.form.value.vote,
+          date: this.form.value.date + ' ' + this.form.value.time,
+          file: ''
+        }
       })
+  }
+
+  onFilePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    this.form.patchValue({file: file});
+    this.form.get('file').updateValueAndValidity();
+
+    //convert do data url
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = (reader.result as string);
+    };
+    reader.readAsDataURL(file);
   }
 
   openModal(template: TemplateRef<any>) {

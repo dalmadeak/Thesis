@@ -3,7 +3,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { faPencilAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { map } from "rxjs/operators";
-import { Hatarozat } from "../hatarozatok.model";
+import { Hatarozatok } from "../hatarozatok.model";
 
 @Component({
   selector: 'app-hatarozatok-files',
@@ -20,7 +20,7 @@ export class HatarozatokFilesComponent {
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
 
-  private hatarozatokObject : Hatarozat[] = [];
+  private hatarozatokObject : Hatarozatok[] = [];
 
   constructor(private http: HttpClient, private modalService: BsModalService) {
   }
@@ -42,13 +42,14 @@ export class HatarozatokFilesComponent {
             _id: post._id,
             postType: post.postType,
             committee: post.committee,
+            title: post.title,
             number: post.number,
             decisionDate: post.decisionDate,
             content: post.content,
             mandate: post.mandate,
             vote: post.vote,
             date: post.date,
-            files: post.files,
+            file: post.file,
           }
         });
       }))
