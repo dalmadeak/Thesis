@@ -78,7 +78,7 @@ export class SzolgaltatasokSorompoComponent {
       email: form.value.barrierRegistryGroup.email,
       phone: form.value.barrierRegistryGroup.phone,
       card: cardNumber,
-      date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(),
+      date: today.getFullYear() + '-' + (today.getMonth()+1) + '-'+ today.getDate() + ' ' + today.getHours() + ':' + (today.getMinutes()<10?'0':'') + today.getMinutes(),
       semester: '-',
       reason: form.value.barrierRegistryGroup.reason,
       isApproved: false

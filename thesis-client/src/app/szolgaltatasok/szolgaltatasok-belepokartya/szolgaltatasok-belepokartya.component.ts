@@ -72,7 +72,7 @@ export class SzolgaltatasokBelepokartyaComponent {
       studentId: form.value.cardRegistryGroup.studentId,
       card: '-',
       permissions: '-',
-      date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate(),
+      date: today.getFullYear() + '-' + (today.getMonth()+1) + '-'+ today.getDate() + ' ' + today.getHours() + ':' + (today.getMinutes()<10?'0':'') + today.getMinutes(),
       returnDate: '-',
       reason: form.value.cardRegistryGroup.reason,
       isApproved: false

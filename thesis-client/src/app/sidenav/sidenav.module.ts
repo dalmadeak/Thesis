@@ -34,6 +34,8 @@ import { AdminPanelKuldottgyulesComponent } from './admin/admin-panel-types/admi
 import { AdminPanelKozeletikComponent } from './admin/admin-panel-types/admin-panel-kozeletik/admin-panel-kozeletik.component';
 import { AdminPanelIrodaComponent } from './admin/admin-panel-types/admin-panel-iroda/admin-panel-iroda.component';
 import { AdminPanelBufekComponent } from './admin/admin-panel-types/admin-panel-bufek/admin-panel-bufek.component';
+import { AdminPanelBelepokartyaComponent } from './admin/admin-panel-types/admin-panel-belepokartya/admin-panel-belepokartya.component';
+import { AdminPanelSorompoComponent } from './admin/admin-panel-types/admin-panel-sorompo/admin-panel-sorompo.component';
 
 @NgModule({
   imports: [
@@ -71,7 +73,9 @@ import { AdminPanelBufekComponent } from './admin/admin-panel-types/admin-panel-
     AdminPanelKuldottgyulesComponent,
     AdminPanelKozeletikComponent,
     AdminPanelIrodaComponent,
-    AdminPanelBufekComponent
+    AdminPanelBufekComponent,
+    AdminPanelBelepokartyaComponent,
+    AdminPanelSorompoComponent
   ],
   exports: [
     SidenavComponent
