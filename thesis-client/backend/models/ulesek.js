@@ -8,8 +8,7 @@ const ulesekSchema = mongoose.Schema({
   title: { type: String, required: true },
   decisionDate: { type: String, required: true },
   content: { type: String, required: true },
-  date: { type: String, required: true },
-  files: { type: Array }
+  date: { type: String, required: true }
 });
 
 //this schema needs a model (a definition)

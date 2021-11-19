@@ -9,14 +9,19 @@ export class HirekSliderComponent {
   imageObject: Array<object> = [{
       image: '../../../assets/images/header-background.png',
       thumbImage: '../../assets/images/header-background.png',
-      title: 'Jelentkezz te is a 2021-es IK GT szervezői közé!'
+      title: 'Ismerd meg szervezetünket a Szervezet menüpont alatt!'
   }, {
       image: '../../../assets/images/header-background.png',
       thumbImage: '../../assets/images/header-background.png',
-      title: 'Csúnyák a HÖK-ösök!'
+      title: 'Érdekel tevékenységünk? Nézd át az Átláthatóság menüpontunkat!'
   }, {
       image: '../../../assets/images/header-background.png',
       thumbImage: '../../assets/images/header-background.png',
-      title: 'Gyere ELTE is!'
-  }];
+      title: 'Elérhető szolgáltatási lehetőségeinket a Szolgáltatások menüpont alatt megtalálod!'
+  },
+  {
+    image: '../../../assets/images/header-background.png',
+    thumbImage: '../../assets/images/header-background.png',
+    title: 'Kari és egyetemi ösztöndíjainkról minden tudnivalót megtalálsz az Ösztöndíjak oldalon!'
+}];
 }

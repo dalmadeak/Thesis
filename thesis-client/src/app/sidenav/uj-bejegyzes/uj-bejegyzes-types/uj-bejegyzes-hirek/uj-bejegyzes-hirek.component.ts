@@ -12,9 +12,6 @@ import { Hirek } from '../../../../hirek/hirek.model';
   styleUrls: ['./uj-bejegyzes-hirek.component.css','../uj-bejegyzes-types.component.css']
 })
 export class UjBejegyzesHirekComponent implements OnInit {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-  selectedOption : string = 'hir';
-
   private mode = 'createNewPost'
   private postId : any;
 
@@ -25,8 +22,7 @@ export class UjBejegyzesHirekComponent implements OnInit {
     postType: '',
     title: '',
     content: '',
-    date: '',
-    files: []
+    date: ''
   };
 
   constructor(
@@ -69,8 +65,7 @@ export class UjBejegyzesHirekComponent implements OnInit {
       postType: 'hirek',
       title: form.value.newRegistryGroup.title,
       content: form.value.newRegistryGroup.content,
-      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
-      files: form.value.newRegistryGroup.files
+      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime
     }
 
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/hirek', newPost)
@@ -86,8 +81,7 @@ export class UjBejegyzesHirekComponent implements OnInit {
       postType: 'hirek',
       title: form.value.newRegistryGroup.title,
       content: form.value.newRegistryGroup.content,
-      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
-      files: form.value.newRegistryGroup.files
+      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/hirek/' + id, post)
       .subscribe((data) => {
@@ -102,10 +96,5 @@ export class UjBejegyzesHirekComponent implements OnInit {
   decline(): void {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
-  }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
   }
 }

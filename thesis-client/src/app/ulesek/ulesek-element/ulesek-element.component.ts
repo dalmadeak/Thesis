@@ -49,8 +49,7 @@ export class UlesekElementComponent implements OnInit{
             title: post.title,
             content: post.content,
             decisionDate: post.decisionDate,
-            date: post.date,
-            files: post.files
+            date: post.date
           }
         });
       }))

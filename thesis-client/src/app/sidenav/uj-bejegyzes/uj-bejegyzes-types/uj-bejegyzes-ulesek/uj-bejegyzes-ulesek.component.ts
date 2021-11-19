@@ -27,8 +27,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     title: '',
     content: '',
     decisionDate: '',
-    date: '',
-    files: []
+    date: ''
   };
 
   constructor(
@@ -76,7 +75,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       content: form.value.newRegistryGroup.content,
       decisionDate: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
-      files: form.value.newRegistryGroup.files,
     }
 
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/ulesek', newPost)
@@ -97,7 +95,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       content: form.value.newRegistryGroup.content,
       decisionDate: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime,
-      files: form.value.newRegistryGroup.files,
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/ulesek/' + id, post)
       .subscribe((data) => {
