@@ -33,8 +33,10 @@
     </ng-container>
   </table>
 </div>
-<pagination-controls
-(pageChange)="p = $event"
-previousLabel="Előző"
-nextLabel="Következő"
-class="pagination"></pagination-controls>
+<div class="paginationClass">
+  <pagination-controls
+    (pageChange)="p = $event"
+    previousLabel="Előző"
+    nextLabel="Következő"
+    class="pagination"></pagination-controls>
+</div>
