@@ -1,37 +1,34 @@
-<form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
-  <div ngModelGroup="newRegistryGroup" class="group">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="group">
 
     <div>
       <label>Cím: </label>
       <input
         type="text"
-        [ngModel]="editablePost.title"
-        name="title"
-        required>
+        formControlName="title"
+        name="title">
     </div>
 
     <div>
       <label>Közzététel időpontja: </label>
       <input
         type="date"
-        [ngModel]="editablePost.date.split(' ')[0]"
-        name="postDate"
-        required>
+        formControlName="date"
+        name="postDate">
     </div>
     <div>
       <label></label>
       <input
         type="time"
-        [ngModel]="editablePost.date.split(' ')[1]"
-        name="postTime"
-        required>
+        formControlName="time"
+        name="postTime">
     </div>
 
     <div>
-      <label>Csatolmányok: </label>
+      <label>Csatolmány: </label>
       <input
         type="file"
-        [ngModel]="editablePost.files"
+        (change)="onFilePicked($event)"
         name="file">
     </div>
 
@@ -40,11 +37,11 @@
         type="button"
         class="btn button-main"
         (click)="openModal(template)"
-        [disabled]="!newRegistryForm.valid">Küldés</button>
+        [disabled]="!this.form.valid">Küldés</button>
         <ng-template #template>
           <div class="modal-body text-center">
             <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
-            <button type="submit" class="btn button-sub" (click)="onSubmit(newRegistryForm)">Igen</button>
+            <button type="submit" class="btn button-sub" (click)="onSubmit()">Igen</button>
             <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
           </div>
         </ng-template>

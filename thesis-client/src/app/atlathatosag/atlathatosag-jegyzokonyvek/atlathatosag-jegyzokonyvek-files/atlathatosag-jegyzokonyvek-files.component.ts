@@ -48,9 +48,11 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
             postType: post.postType,
             committee: post.committee,
             title: post.title,
-            decisionDate: post.decisionDate,
-            date: post.date,
-            files: post.files
+            decisionDate: post.decisionDate.split(' ')[0],
+            decisionTime: post.decisionDate.split(' ')[1],
+            date: post.date.split(' ')[0],
+            time: post.date.split(' ')[1],
+            file: post.file
           }
         });
       }))
@@ -79,10 +81,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
 
   onSortByUploadDate(){
     return this.jegyzokonyvekObject.sort((a,b) => (a.date > b.date) ? 1 : -1);
-  }
-
-  getFileExtension(fileName : string) {
-    return fileName.substr(fileName.indexOf('.'));
   }
 
   filterObject(data : Array<any>) {

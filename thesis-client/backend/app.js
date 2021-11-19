@@ -47,8 +47,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json({limit: '50mb'}));
 
-//give access to de images folder
+//give access to the images folder
 app.use('/images', express.static(path.join('backend/images')));
+
+//give access to the files folder
+app.use('/files', express.static(path.join('backend/files')));
 
 
 

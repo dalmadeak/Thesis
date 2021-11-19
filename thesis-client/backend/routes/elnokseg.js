@@ -89,7 +89,6 @@ router.put('/:id', multer({storage: storage}).single('file'), (req,res,next) => 
     email: req.body.email,
     file: filePath,
   })
-  console.log(post)
   Presidium.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({
       message: 'Presidium updated successfully'

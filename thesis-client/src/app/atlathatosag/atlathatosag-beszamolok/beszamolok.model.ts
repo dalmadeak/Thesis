@@ -3,5 +3,5 @@ export interface Beszamolok {
   postType: string;
   title: string,
   date: string;
-  files: Array<File>;
+  file: string;
 }

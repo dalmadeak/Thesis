@@ -108,7 +108,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
         email: this.form.value.email,
         file: data.post.file,
       }
-      console.log(newPost);
     });
   }
 
