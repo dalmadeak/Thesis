@@ -15,9 +15,12 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   private mode = 'createNewPost'
   private postId : any;
 
-  selectedOption : string = 'ules';
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+
+  today = new Date();
+  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+
   editablePost : Ulesek = {
     _id : '',
     postType: '',
@@ -27,7 +30,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     title: '',
     content: '',
     decisionDate: '',
-    date: ''
+    date: this.now
   };
 
   constructor(

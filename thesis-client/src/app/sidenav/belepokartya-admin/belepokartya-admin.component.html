@@ -27,8 +27,8 @@
         <td>{{data.card}}</td>
         <td>{{data.permissions}}</td>
         <td>{{data.date}}</td>
-        <td *ngIf="data.returnDate != ' ' ">{{data.returnDate}}</td>
-        <td *ngIf="data.returnDate == ' '">-</td>
+        <td *ngIf="data.returnDate != ' ' && !data.returnDate.includes('undefined') ">{{data.returnDate}}</td>
+        <td *ngIf="data.returnDate == ' ' || data.returnDate.includes('undefined') ">-</td>
         <td>
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
