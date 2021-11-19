@@ -21,6 +21,7 @@ const bufekRoutes = require('./routes/bufek')
 const kozeletikRoutes = require('./routes/kozeletik')
 const elnoksegRoutes = require('./routes/elnokseg')
 const kabinetRoutes = require('./routes/kabinet')
+const kuldottgyulesSchema = require('./routes/kuldottgyules')
 
 
 // xtiV4hKL05OqaLbM
@@ -99,5 +100,8 @@ app.use('/api/elnokseg', elnoksegRoutes);
 
 /* KABINET */
 app.use('/api/kabinet', kabinetRoutes);
+
+/* KABINET */
+app.use('/api/kuldottgyules', kuldottgyulesSchema);
 
 module.exports = app;

@@ -1,1 +1,48 @@
-<p>admin-panel-kuldottgyules works!</p>
+<form (ngSubmit)="onSubmit(adminForm)" #adminForm="ngForm">
+  <div ngModelGroup="adminGroup" class="group">
+
+    <div>
+      <label>Név: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.fullName"
+        name="fullName"
+        required>
+    </div>
+
+    <div>
+      <label>Első bizottság: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.firstCommittee"
+        name="firstCommittee"
+        required>
+    </div>
+
+    <div>
+      <label>Második bizottság: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.secondCommittee"
+        name="secondCommittee"
+        placeholder="Ha van"
+        required>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        class="btn button-main"
+        (click)="openModal(template)"
+        [disabled]="!adminForm.valid">Küldés</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
+            <button type="submit" class="btn button-sub" (click)="onSubmit(adminForm)">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </div>
+  </div>
+
+</form>

@@ -2,20 +2,28 @@
   <div class="header">
     <h1>Küldöttgyűlés</h1>
   </div>
-  <table *ngFor="let kgy of kgyObject.slice().reverse()">
+  <table>
       <tr>
-        <th colspan="3">Küldöttgyűlés {{kgy.year}}</th>
+        <th colspan="4">Küldöttgyűlés</th>
       </tr>
       <tr>
-        <td class="committeeBrief" colspan="3">{{ kgy.brief }}</td>
+        <td class="committeeBrief" colspan="4">{{ brief }}</td>
       </tr>
-      <tr *ngFor="let member of kgy.members" class="membersInfo">
-        <td>{{ member.name }}</td>
-        <td *ngIf="member.committees.length == 1; else elseBlock" class="singleMember">{{ member.committees }}</td>
-        <ng-template #elseBlock>
-          <td>{{ member.committees[0] }}</td>
-          <td>{{ member.committees[1] }}</td>
-        </ng-template>
+      <tr *ngFor="let member of getObject()" class="membersInfo">
+        <td>{{ member.fullName }}</td>
+        <td>{{ member.firstCommittee }}</td>
+        <td *ngIf="member.secondCommittee">{{ member.secondCommittee }}</td>
+        <td><div class="iconClass">
+          <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Biztosan törlöd a bejegyzést?</p>
+              <button type="button" class="btn button-sub" (click)="deletePost(member._id)">Igen</button>
+              <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+            </div>
+          </ng-template>
+        </div></td>
       </tr>
   </table>
   </div>
