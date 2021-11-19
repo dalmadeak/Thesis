@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -25,12 +26,21 @@ import { UjBejegyzesJegyzokonyvekComponent } from './uj-bejegyzes/uj-bejegyzes-t
 import { UjBejegyzesHatarozatokComponent } from './uj-bejegyzes/uj-bejegyzes-types/uj-bejegyzes-hatarozatok/uj-bejegyzes-hatarozatok.component';
 import { UjBejegyzesPalyazatokComponent } from './uj-bejegyzes/uj-bejegyzes-types/uj-bejegyzes-palyazatok/uj-bejegyzes-palyazatok.component';
 import { UjBejegyzesSajatBeszamolokComponent } from './uj-bejegyzes/uj-bejegyzes-types/uj-bejegyzes-sajat-beszamolok/uj-bejegyzes-sajat-beszamolok.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminPanelElnoksegComponent } from './admin/admin-panel-types/admin-panel-elnokseg/admin-panel-elnokseg.component';
+import { AdminPanelKabinetComponent } from './admin/admin-panel-types/admin-panel-kabinet/admin-panel-kabinet.component';
+import { AdminPanelBizottsagokComponent } from './admin/admin-panel-types/admin-panel-bizottsagok/admin-panel-bizottsagok.component';
+import { AdminPanelKuldottgyulesComponent } from './admin/admin-panel-types/admin-panel-kuldottgyules/admin-panel-kuldottgyules.component';
+import { AdminPanelKozeletikComponent } from './admin/admin-panel-types/admin-panel-kozeletik/admin-panel-kozeletik.component';
+import { AdminPanelIrodaComponent } from './admin/admin-panel-types/admin-panel-iroda/admin-panel-iroda.component';
+import { AdminPanelBufekComponent } from './admin/admin-panel-types/admin-panel-bufek/admin-panel-bufek.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SidenavRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     NgxPaginationModule,
     TooltipModule
@@ -53,7 +63,15 @@ import { UjBejegyzesSajatBeszamolokComponent } from './uj-bejegyzes/uj-bejegyzes
     UjBejegyzesJegyzokonyvekComponent,
     UjBejegyzesHatarozatokComponent,
     UjBejegyzesPalyazatokComponent,
-    UjBejegyzesSajatBeszamolokComponent
+    UjBejegyzesSajatBeszamolokComponent,
+    AdminComponent,
+    AdminPanelElnoksegComponent,
+    AdminPanelKabinetComponent,
+    AdminPanelBizottsagokComponent,
+    AdminPanelKuldottgyulesComponent,
+    AdminPanelKozeletikComponent,
+    AdminPanelIrodaComponent,
+    AdminPanelBufekComponent
   ],
   exports: [
     SidenavComponent

@@ -50,7 +50,7 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
             title: post.title,
             decisionDate: post.decisionDate,
             date: post.date,
-            files: post.files
+            file: post.file
           }
         });
       }))
@@ -79,10 +79,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
 
   onSortByUploadDate(){
     return this.jegyzokonyvekObject.sort((a,b) => (a.date > b.date) ? 1 : -1);
-  }
-
-  getFileExtension(fileName : string) {
-    return fileName.substr(fileName.indexOf('.'));
   }
 
   filterObject(data : Array<any>) {

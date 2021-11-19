@@ -9,12 +9,23 @@ import { BelepokartyaAdminComponent } from './belepokartya-admin/belepokartya-ad
 import { SorompoAdminComponent } from './sorompo-admin/sorompo-admin.component';
 import { HatarozatokComponent } from './hatarozatok/hatarozatok.component';
 import { SajatBeszamolokComponent } from './sajat-beszamolok/sajat-beszamolok.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin/szerkesztes/:postType/:id',
+    component: AdminComponent,
     pathMatch: 'full'
   },
   {

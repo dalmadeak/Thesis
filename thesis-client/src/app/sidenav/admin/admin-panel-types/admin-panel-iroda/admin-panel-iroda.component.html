@@ -1,0 +1,49 @@
+<form (ngSubmit)="onSubmit(adminForm)" #adminForm="ngForm">
+  <div ngModelGroup="adminGroup" class="group">
+
+    <div>
+      <label>Név: </label>
+      <input
+        type="text"
+        [ngModel]="editablePost.name"
+        name="name"
+        required>
+    </div>
+
+    <div>
+      <label>Leírás: </label>
+      <textarea
+        [ngModel]="editablePost.brief"
+        name="brief"
+        rows="10"
+        required>
+      </textarea>
+    </div>
+
+    <div>
+      <label>Nyitvatartás: </label>
+      <textarea
+        [ngModel]="editablePost.openHours"
+        name="openHours"
+        rows="10"
+        required>
+      </textarea>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        class="btn button-main"
+        (click)="openModal(template)"
+        [disabled]="!adminForm.valid">Küldés</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
+            <button type="submit" class="btn button-sub" (click)="onSubmit(adminForm)">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </div>
+  </div>
+
+</form>

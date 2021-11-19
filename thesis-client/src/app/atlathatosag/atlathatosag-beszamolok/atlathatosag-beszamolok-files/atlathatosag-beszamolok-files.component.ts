@@ -1,10 +1,9 @@
+import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Beszamolok } from '../beszamolok.model';
 import { map } from 'rxjs/operators'
-import { HttpClient } from "@angular/common/http";
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
-
 
 @Component({
   selector: 'app-atlathatosag-beszamolok-files',
@@ -12,7 +11,6 @@ import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAl
   styleUrls: ['../../atlathatosag.component.css']
 })
 export class AtlathatosagBeszamolokFilesComponent implements OnInit{
-
   p : number = 1;
 
   faFile = faFile;
@@ -49,7 +47,8 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
             postType: post.postType,
             title: post.title,
             content: post.content,
-            date: post.date
+            date: post.date,
+            file: post.file
           }
         });
       }))

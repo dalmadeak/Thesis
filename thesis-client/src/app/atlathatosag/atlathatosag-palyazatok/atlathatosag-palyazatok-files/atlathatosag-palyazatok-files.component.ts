@@ -47,7 +47,8 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
             postType: post.postType,
             title: post.title,
             content: post.content,
-            date: post.date
+            date: post.date,
+            file: post.file
           }
         });
       }))

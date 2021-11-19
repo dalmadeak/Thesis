@@ -5,6 +5,7 @@ h1, h3 {
 
 h3 {
   margin-top: 30px;
+  vertical-align: middle;
 }
 
 .header {
@@ -12,9 +13,39 @@ h3 {
   margin: 50px auto;
 }
 
-.container {
+.container, .dataContainer {
   width: 80%;
   margin: auto;
   text-align: justify;
   margin-bottom: 50px;
+  white-space: pre-wrap;
+}
+
+
+fa-icon {
+  color: #13294B;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.postIcons {
+  display: block;
+  text-align: right;
+  float: right;
+  margin-top: 5px;
+}
+
+button {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 30px auto 0px auto;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.button-sub {
+  padding: 10px 20px;
+  margin: 0 10px;
 }

@@ -1,0 +1,218 @@
+<div class="container">
+  <div class="header">
+    <h1>Admin panel</h1>
+  </div>
+  <header>Oldal adatok szerkesztése</header>
+  <div class="createContent">
+    <div class="group">
+      <div>
+        <label>Bejegyzés típusa: </label>
+        <select
+          [(ngModel)]="selectedOption"
+          name="postType"
+          required>
+          <option value="elnokseg">Elnökség</option>
+          <option value="kabinet">Kabinet</option>
+          <option value="bizottsagok">Bizottságok</option>
+          <option value="kuldottgyules">Küldöttgyűlés</option>
+          <option value="kozeletik">Közéleti ösztöndíjak</option>
+          <option value="bufek">Büfék, étkezők</option>
+          <option value="iroda">Iroda nyitvatartás</option>
+        </select>
+      </div>
+      </div>
+
+      <div *ngIf="selectedOption == 'elnokseg'">
+        <app-admin-panel-elnokseg></app-admin-panel-elnokseg>
+      </div>
+
+      <div *ngIf="selectedOption == 'kabinet'">
+        <app-admin-panel-kabinet></app-admin-panel-kabinet>
+      </div>
+
+      <div *ngIf="selectedOption == 'bizottsagok'">
+        <app-admin-panel-bizottsagok></app-admin-panel-bizottsagok>
+      </div>
+
+      <div *ngIf="selectedOption == 'kuldottgyules'">
+        <app-admin-panel-kuldottgyules></app-admin-panel-kuldottgyules>
+      </div>
+
+      <div *ngIf="selectedOption == 'kozeletik'">
+        <app-admin-panel-kozeletik></app-admin-panel-kozeletik>
+      </div>
+
+      <div *ngIf="selectedOption == 'bufek'">
+        <app-admin-panel-bufek></app-admin-panel-bufek>
+      </div>
+
+      <div *ngIf="selectedOption == 'iroda'">
+        <app-admin-panel-iroda></app-admin-panel-iroda>
+      </div>
+
+
+     <!-- <form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
+        <div ngModelGroup="newRegistryGroup" class="group">
+
+
+          <div *ngIf="selectedOption == 'ules'">
+            <label>Bizottság: </label>
+            <select
+              ngModel
+              name="ulesCommittee"
+              required>
+              <option value="kgy">Küldöttgyűlés</option>
+              <option value="elnokseg">Elnökség</option>
+              <option value="kabinet">Kabinet</option>
+              <option value="hjb">Hallgatói Jóléti Bizottság</option>
+              <option value="kombiz">Kommunikációs Bizottság</option>
+              <option value="kb">Külügyi Bizottság</option>
+              <option value="szb">Szervező Bizottság</option>
+              <option value="tb">Tanulmányi Bizottság</option>
+              <option value="eb">Ellenőrző Bizottság</option>
+              <option value="vb">Választási Bizottság</option>
+            </select>
+          </div>
+
+          <div *ngIf="selectedOption == 'ules'">
+            <label>Ülés típusa: </label>
+            <select
+              ngModel
+              name="ulesType"
+              required>
+              <option value="rendes">Rendes</option>
+              <option value="rendkivuli">Rendkívüli</option>
+              <option value="azonnali">Azonnali</option>
+            </select>
+          </div>
+
+          <div *ngIf="selectedOption != 'b-beszamolo' && selectedOption != 'b-hatarozat'">
+            <label>Cím: </label>
+            <input
+              type="text"
+              [ngModel]="editablePost.title"
+              name="title"
+              required>
+          </div>
+
+          <div *ngIf="selectedOption == 'b-hatarozat'">
+            <label>Sorszám: </label>
+            <input
+              type="text"
+              ngModel
+              name="serialNumber"
+              required>
+          </div>
+
+          <div *ngIf="selectedOption == 'ules' || selectedOption == 'jegyzokonyv' || selectedOption == 'b-hatarozat'">
+            <label>Esemény időpontja: </label>
+            <input
+              type="date"
+              ngModel
+              name="date"
+              required>
+          </div>
+          <div *ngIf="selectedOption == 'ules' || selectedOption == 'jegyzokonyv' || selectedOption == 'b-hatarozat'">
+            <label></label>
+            <input
+              type="time"
+              ngModel
+              name="time"
+              required>
+          </div>
+
+          <div *ngIf="selectedOption == 'b-beszamolo'">
+            <label>Év: </label>
+            <input
+              type="number"
+              ngModel
+              name="year"
+              required>
+          </div>
+
+          <div *ngIf="selectedOption == 'b-beszamolo'">
+            <label>Hónap: </label>
+            <select
+              ngModel
+              name="month"
+              required>
+              <option value="jan">Január 5.</option>
+              <option value="feb">Február 5.</option>
+              <option value="mar">Március 5.</option>
+              <option value="apr">Április 5.</option>
+              <option value="may">Május 5.</option>
+              <option value="jun">Június 5.</option>
+              <option value="jul">Július 5.</option>
+              <option value="aug">Augusztus 5.</option>
+              <option value="sep">Szeptember 5.</option>
+              <option value="oct">Október 5.</option>
+              <option value="nov">November 5.</option>
+              <option value="dec">December 5.</option>
+            </select>
+          </div>
+
+          <div *ngIf="selectedOption != 'beszamolo' && selectedOption != 'jegyzokonyv' && selectedOption != 'palyazat'">
+            <label>Tartalom: </label>
+            <textarea
+            [ngModel]="editablePost.content"
+              name="content"
+              rows="10"
+              required>
+            </textarea>
+          </div>
+
+          <div *ngIf="selectedOption == 'b-hatarozat'">
+            <label>Mandátum: </label>
+            <input
+              type="number"
+              ngModel
+              name="mandate"
+              required>
+          </div>
+
+          <div *ngIf="selectedOption == 'b-hatarozat'">
+            <label>Szavazati arány: </label>
+            <input
+              type="text"
+              ngModel
+              name="vote"
+              required>
+          </div>
+
+          <div>
+            <label>Közzététel időpontja: </label>
+            <input
+              type="date"
+              [ngModel]="editablePost.date.split(' ')[0]"
+              name="postDate"
+              required>
+          </div>
+          <div>
+            <label></label>
+            <input
+              type="time"
+              [ngModel]="editablePost.date.split(' ')[1]"
+              name="postTime"
+              required>
+          </div>
+
+          <div>
+            <label>Csatolmányok: </label>
+            <input
+              type="file"
+              [ngModel]="editablePost.files"
+              name="file">
+          </div>
+
+          <div>
+          <button
+            type="submit"
+            [disabled]="!newRegistryForm.valid">Küldés</button>
+          </div>
+        </div>
+
+      </form> -->
+  </div>
+</div>
+
+<!--  -->

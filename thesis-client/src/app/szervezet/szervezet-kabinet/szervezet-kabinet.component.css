@@ -9,11 +9,10 @@ h1 {
 }
 
 .container {
-  margin: 30px auto;
   max-width: 55%;
+  margin: 30px auto;
   border-collapse: separate;
   border-spacing: 100px 20px;
-  overflow: hidden;
 }
 
 .profilePicture {
@@ -48,4 +47,36 @@ h1 {
 
 .info {
   font-size: 14px;
+}
+
+.iconClass {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+img {
+  object-fit: cover;
+}
+
+fa-icon {
+  color: #13294B;
+  padding: 5px;
+  cursor: pointer;
+}
+
+button {
+  padding: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-sub {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }

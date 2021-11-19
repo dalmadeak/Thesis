@@ -1,0 +1,56 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="group">
+
+    <div>
+      <label>Név: </label>
+      <input
+        type="text"
+        name="name"
+        formControlName="name"
+        required>
+    </div>
+
+    <div>
+      <label>Pozíció: </label>
+      <input
+        type="text"
+        name="position"
+        formControlName="position">
+    </div>
+
+    <div>
+      <label>E-mail cím: </label>
+      <input
+        type="text"
+        name="email"
+        formControlName="email">
+    </div>
+
+    <div>
+      <label>Kép: </label>
+      <input
+        type="file"
+        name="file"
+        (change)="onImagePicked($event)">
+        <p *ngIf="imagePreview !== '' && !form.get('file').valid">Csak png, jpeg vagy jpg formátumú fájlt tölthetsz fel!</p>
+    </div>
+    <div class="imagePreview">
+      <img [src]="imagePreview" [alt]="this.form.value.name" *ngIf="imagePreview && imagePreview !== '' && form.get('file').valid">
+    </div>
+    <div>
+      <button
+        type="button"
+        class="btn button-main"
+        (click)="openModal(template)"
+        [disabled]="this.form.invalid">Küldés</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
+            <button type="submit" class="btn button-sub" (click)="onSubmit()">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </div>
+  </div>
+
+</form>

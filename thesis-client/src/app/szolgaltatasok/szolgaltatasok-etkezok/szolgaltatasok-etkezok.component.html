@@ -2,16 +2,21 @@
   <div class="header">
     <h1>Büfék, étkezők</h1>
   </div>
-  <div class="container" *ngFor="let diner of dinerObject">
-    <h3>{{diner.name}}</h3>
-    <p>{{diner.brief}}</p>
+  <div class="dataContainer" *ngFor="let canteen of getObject()">
+    <div class="postIcons">
+      <a [routerLink]="['/sidenav/admin/szerkesztes', canteen.postType, canteen._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+      <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+      <ng-template #template>
+        <div class="modal-body text-center">
+          <p>Biztosan törlöd a bejegyzést?</p>
+          <button type="button" class="btn button-sub" (click)="deletePost(canteen._id)">Igen</button>
+          <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+        </div>
+      </ng-template>
+    </div>
+    <h3>{{canteen.name}}</h3>
+    <p>{{canteen.brief}}</p>
     <p>Nyitvatartás:</p>
-    <ul>
-      <li>Hétfő: {{diner.openHours[0]}}</li>
-      <li>Kedd: {{diner.openHours[1]}}</li>
-      <li>Szerda: {{diner.openHours[2]}}</li>
-      <li>Csütörtök: {{diner.openHours[3]}}</li>
-      <li>Péntek: {{diner.openHours[4]}}</li>
-    </ul>
+    <p>{{canteen.openHours}}</p>
   </div>
 </div>

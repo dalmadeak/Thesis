@@ -3,5 +3,5 @@ export interface Palyazatok {
   postType: string;
   title: string,
   date: string;
-  files: Array<File>;
+  file: string;
 }

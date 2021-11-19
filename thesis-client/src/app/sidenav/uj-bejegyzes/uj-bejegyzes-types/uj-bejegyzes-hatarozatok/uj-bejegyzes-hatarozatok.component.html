@@ -1,11 +1,10 @@
-<form (ngSubmit)="onSubmit(newRegistryForm)" #newRegistryForm="ngForm">
-  <div ngModelGroup="newRegistryGroup" class="group">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="group">
     <div>
       <label>Bizottság: </label>
       <select
-      [ngModel]="editablePost.committee"
-        name="committee"
-        required>
+        formControlName="committee"
+        name="committee">
         <option value="kgy">Küldöttgyűlés</option>
         <option value="elnokseg">Elnökség</option>
         <option value="kabinet">Kabinet</option>
@@ -20,38 +19,42 @@
     </div>
 
     <div>
+      <label>Cím: </label>
+      <input
+        type="text"
+        formControlName="title"
+        name="title">
+    </div>
+
+    <div>
       <label>Sorszám: </label>
       <input
         type="text"
-        [ngModel]="editablePost.number"
-        name="number"
-        required>
+        formControlName="number"
+        name="number">
     </div>
 
     <div>
       <label>Esemény időpontja: </label>
       <input
         type="date"
-        [ngModel]="editablePost.decisionDate.split(' ')[0]"
-        name="decisionDate"
-        required>
+        formControlName="decisionDate"
+        name="decisionDate">
     </div>
     <div>
       <label></label>
       <input
         type="time"
-        [ngModel]="editablePost.decisionDate.split(' ')[1]"
-        name="decisionTime"
-        required>
+        formControlName="decisionTime"
+        name="decisionTime">
     </div>
 
     <div>
       <label>Tartalom: </label>
       <textarea
-      [ngModel]="editablePost.content"
+        formControlName="content"
         name="content"
-        rows="10"
-        required>
+        rows="10">
       </textarea>
     </div>
 
@@ -59,42 +62,38 @@
       <label>Mandátum: </label>
       <input
         type="number"
-        [ngModel]="editablePost.mandate"
-        name="mandate"
-        required>
+        formControlName="mandate"
+        name="mandate">
     </div>
 
     <div>
       <label>Szavazati arány: </label>
       <input
         type="text"
-        [ngModel]="editablePost.vote"
-        name="vote"
-        required>
+        formControlName="vote"
+        name="vote">
     </div>
 
     <div>
       <label>Közzététel időpontja: </label>
       <input
         type="date"
-        [ngModel]="editablePost.date.split(' ')[0]"
-        name="postDate"
-        required>
+        formControlName="date"
+        name="postDate">
     </div>
     <div>
       <label></label>
       <input
         type="time"
-        [ngModel]="editablePost.date.split(' ')[1]"
-        name="postTime"
-        required>
+        formControlName="time"
+        name="postTime">
     </div>
 
     <div>
-      <label>Csatolmányok: </label>
+      <label>Csatolmány: </label>
       <input
         type="file"
-        [ngModel]="editablePost.files"
+        (change)="onFilePicked($event)"
         name="files">
     </div>
 
@@ -103,11 +102,11 @@
         type="button"
         class="btn button-main"
         (click)="openModal(template)"
-        [disabled]="!newRegistryForm.valid">Küldés</button>
+        [disabled]="!this.form.valid">Küldés</button>
         <ng-template #template>
           <div class="modal-body text-center">
             <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
-            <button type="submit" class="btn button-sub" (click)="onSubmit(newRegistryForm)">Igen</button>
+            <button type="submit" class="btn button-sub" (click)="onSubmit()">Igen</button>
             <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
           </div>
         </ng-template>

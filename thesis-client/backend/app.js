@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -14,6 +15,12 @@ const jegyzokonyvekRoutes = require('./routes/jegyzokonyvek')
 
 const sorompoRoutes = require('./routes/sorompo')
 const belepokartyaRoutes = require('./routes/belepokartya')
+
+const irodaRoutes = require('./routes/iroda')
+const bufekRoutes = require('./routes/bufek')
+const kozeletikRoutes = require('./routes/kozeletik')
+const elnoksegRoutes = require('./routes/elnokseg')
+const kabinetRoutes = require('./routes/kabinet')
 
 
 // xtiV4hKL05OqaLbM
@@ -35,9 +42,19 @@ app.use((req,res,next) => {
 
 //Body Parser
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit: '50mb',
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+
+//give access to the images folder
+app.use('/images', express.static(path.join('backend/images')));
+
+//give access to the files folder
+app.use('/files', express.static(path.join('backend/files')));
+
+
+
 
 /* HÍREK MIDDLEWARES */
 app.use('/api/hirek', hirekRoutes);
@@ -66,5 +83,21 @@ app.use('/api/sorompo', sorompoRoutes);
 
 /* BELÉPŐKÁRTYA REGISZTRÁCIÓK */
 app.use('/api/belepokartya', belepokartyaRoutes);
+
+
+/* IRODA NYITVATARTÁSOK */
+app.use('/api/iroda', irodaRoutes);
+
+/* BÜFÉK, ÉTKEZŐK */
+app.use('/api/bufek', bufekRoutes);
+
+/* KÖZÉLETI ÖSZTÖNDÍJAK */
+app.use('/api/kozeletik', kozeletikRoutes);
+
+/* ELNÖKSÉG */
+app.use('/api/elnokseg', elnoksegRoutes);
+
+/* KABINET */
+app.use('/api/kabinet', kabinetRoutes);
 
 module.exports = app;
