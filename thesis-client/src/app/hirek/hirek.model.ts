@@ -4,5 +4,4 @@ export interface Hirek {
   title: string;
   content: string;
   date: string;
-  files: Array<File>;
 }

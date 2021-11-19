@@ -8,5 +8,4 @@ export interface Ulesek {
   title: string;
   content: string;
   date: string;
-  files: Array<File>;
 }

@@ -33,8 +33,7 @@ router.post('', (req, res, next) => {
     title: req.body.title,
     decisionDate: req.body.decisionDate,
     content: req.body.content,
-    date: req.body.date,
-    files: req.body.files,
+    date: req.body.date
   });
   // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
@@ -55,8 +54,7 @@ router.put('/:id', (req,res,next) => {
     title: req.body.title,
     decisionDate: req.body.decisionDate,
     content: req.body.content,
-    date: req.body.date,
-    files: req.body.files,
+    date: req.body.date
   })
   Meeting.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({

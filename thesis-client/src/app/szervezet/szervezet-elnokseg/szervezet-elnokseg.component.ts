@@ -11,7 +11,7 @@ import { Elnokseg } from "./elnokseg.model";
   templateUrl: './szervezet-elnokseg.component.html',
   styleUrls: ['./szervezet-elnokseg.component.css']
 })
-export class SzervezetElnoksegComponent {
+export class SzervezetElnoksegComponent implements OnInit {
   faEdit = faPencilAlt;
   faDelete = faTrash;
 
