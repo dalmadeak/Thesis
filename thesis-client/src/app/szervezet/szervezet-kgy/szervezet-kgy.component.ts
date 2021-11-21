@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, NgModule, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +31,7 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
-    return [...this.kuldottgyulesObject];
+    return [...this.kuldottgyulesObject].sort((a,b) => (a.fullName > b.fullName) ? 1 : ((b.fullName > a.fullName) ? -1 : 0));
   }
 
   getPosts() {
@@ -43,12 +43,16 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
             postType: post.postType,
             fullName: post.fullName,
             firstCommittee: post.firstCommittee,
+            firstPosition: post.firstPosition,
             secondCommittee: post.secondCommittee,
+            secondPosition: post.secondPosition,
+            email: post.email
           }
         });
       }))
       .subscribe((finalPosts) => {
         this.kuldottgyulesObject = finalPosts;
+        console.log(this.kuldottgyulesObject)
       });
   }
 
