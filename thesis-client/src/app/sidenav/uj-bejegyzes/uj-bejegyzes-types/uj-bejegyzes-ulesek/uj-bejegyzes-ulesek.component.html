@@ -37,7 +37,7 @@
       <input
         type="date"
         [ngModel]="editablePost.decisionDate.split(' ')[0]"
-        name="date"
+        name="decisionDate"
         required>
     </div>
     <div>
@@ -45,7 +45,7 @@
       <input
         type="time"
         [ngModel]="editablePost.decisionDate.split(' ')[1]"
-        name="time"
+        name="decisionTime"
         required>
     </div>
 
@@ -55,16 +55,18 @@
         type="text"
         [ngModel]="editablePost.title"
         name="title"
-        required>
+        required
+        (click)="generateMeetingTitle(newRegistryForm)">
     </div>
 
     <div>
       <label>Tartalom: </label>
       <textarea
-        [ngModel]="editablePost.content"
+        [(ngModel)]="editablePost.content"
         name="content"
         rows="10"
-        required>
+        required
+        (click)="generateMeetingContent(newRegistryForm)">
       </textarea>
     </div>
 
@@ -73,7 +75,7 @@
       <input
         type="date"
         [ngModel]="editablePost.date.split(' ')[0]"
-        name="postDate"
+        name="date"
         required>
     </div>
     <div>
@@ -81,7 +83,7 @@
       <input
         type="time"
         [ngModel]="editablePost.date.split(' ')[1]"
-        name="postTime"
+        name="time"
         required>
     </div>
 
