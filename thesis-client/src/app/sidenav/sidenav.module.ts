@@ -29,7 +29,6 @@ import { UjBejegyzesSajatBeszamolokComponent } from './uj-bejegyzes/uj-bejegyzes
 import { AdminComponent } from './admin/admin.component';
 import { AdminPanelElnoksegComponent } from './admin/admin-panel-types/admin-panel-elnokseg/admin-panel-elnokseg.component';
 import { AdminPanelKabinetComponent } from './admin/admin-panel-types/admin-panel-kabinet/admin-panel-kabinet.component';
-import { AdminPanelBizottsagokComponent } from './admin/admin-panel-types/admin-panel-bizottsagok/admin-panel-bizottsagok.component';
 import { AdminPanelKuldottgyulesComponent } from './admin/admin-panel-types/admin-panel-kuldottgyules/admin-panel-kuldottgyules.component';
 import { AdminPanelKozeletikComponent } from './admin/admin-panel-types/admin-panel-kozeletik/admin-panel-kozeletik.component';
 import { AdminPanelIrodaComponent } from './admin/admin-panel-types/admin-panel-iroda/admin-panel-iroda.component';
@@ -69,7 +68,6 @@ import { AdminPanelSorompoComponent } from './admin/admin-panel-types/admin-pane
     AdminComponent,
     AdminPanelElnoksegComponent,
     AdminPanelKabinetComponent,
-    AdminPanelBizottsagokComponent,
     AdminPanelKuldottgyulesComponent,
     AdminPanelKozeletikComponent,
     AdminPanelIrodaComponent,

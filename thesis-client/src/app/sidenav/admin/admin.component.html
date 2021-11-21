@@ -13,7 +13,6 @@
           required>
           <option value="elnokseg">Elnökség</option>
           <option value="kabinet">Kabinet</option>
-          <option value="bizottsagok">Bizottságok</option>
           <option value="kuldottgyules">Küldöttgyűlés</option>
           <option value="kozeletik">Közéleti ösztöndíjak</option>
           <option value="bufek">Büfék, étkezők</option>
@@ -30,10 +29,6 @@
 
       <div *ngIf="selectedOption == 'kabinet'">
         <app-admin-panel-kabinet></app-admin-panel-kabinet>
-      </div>
-
-      <div *ngIf="selectedOption == 'bizottsagok'">
-        <app-admin-panel-bizottsagok></app-admin-panel-bizottsagok>
       </div>
 
       <div *ngIf="selectedOption == 'kuldottgyules'">
