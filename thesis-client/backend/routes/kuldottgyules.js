@@ -29,8 +29,11 @@ router.post('', (req, res, next) => {
   const post = new Delegate({
     postType: req.body.postType,
     fullName: req.body.fullName,
+    firstPosition: req.body.firstPosition,
     firstCommittee: req.body.firstCommittee,
+    secondPosition: req.body.secondPosition,
     secondCommittee: req.body.secondCommittee,
+    email: req.body.email
   });
   // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
@@ -47,8 +50,12 @@ router.put('/:id', (req,res,next) => {
     _id: req.body._id,
     postType: req.body.postType,
     fullName: req.body.fullName,
+    firstPosition: req.body.firstPosition,
     firstCommittee: req.body.firstCommittee,
+    secondPosition: req.body.secondPosition,
     secondCommittee: req.body.secondCommittee,
+    email: req.body.email
+
   })
   Delegate.updateOne({_id: req.params.id}, post).then(result => {
     res.status(200).json({

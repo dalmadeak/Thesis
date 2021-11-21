@@ -3,5 +3,8 @@ export interface Kuldottgyules {
   postType: string;
   fullName: string;
   firstCommittee: string;
+  firstPosition: string;
   secondCommittee: string;
+  secondPosition: string;
+  email: string;
 }

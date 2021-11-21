@@ -12,21 +12,63 @@
 
     <div>
       <label>Első bizottság: </label>
-      <input
-        type="text"
+      <select
         [ngModel]="editablePost.firstCommittee"
         name="firstCommittee"
         required>
+        <option value="hjb">Hallgatói Jóléti Bizottság</option>
+        <option value="kombiz">Kommunikációs Bizottság</option>
+        <option value="kb">Külügyi Bizottság</option>
+        <option value="szb">Szervező Bizottság</option>
+        <option value="tb">Tanulmányi Bizottság</option>
+        <option value="eb">Ellenőrző Bizottság</option>
+        <option value="vb">Választási Bizottság</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Első bizottsági pozíció: </label>
+      <select
+        [ngModel]="editablePost.firstPosition"
+        name="firstPosition"
+        required>
+        <option value="elnok">Bizottsági Elnök</option>
+        <option value="tag">Tag</option>
+      </select>
     </div>
 
     <div>
       <label>Második bizottság: </label>
+      <select
+        [ngModel]="editablePost.secondCommittee"
+        name="secondCommittee">
+        <option value="hjb">Hallgatói Jóléti Bizottság</option>
+        <option value="kombiz">Kommunikációs Bizottság</option>
+        <option value="kb">Külügyi Bizottság</option>
+        <option value="szb">Szervező Bizottság</option>
+        <option value="tb">Tanulmányi Bizottság</option>
+        <option value="eb">Ellenőrző Bizottság</option>
+        <option value="vb">Választási Bizottság</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Második bizottsági pozíció: </label>
+      <select
+        [ngModel]="editablePost.secondPosition"
+        name="secondPosition">
+        <option value="elnok">Bizottsági Elnök</option>
+        <option value="tag">Tag</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Email: </label>
       <input
         type="text"
-        [ngModel]="editablePost.secondCommittee"
-        name="secondCommittee"
-        placeholder="Ha van"
-        required>
+        [ngModel]="editablePost.email"
+        name="email"
+        email>
     </div>
 
     <div>

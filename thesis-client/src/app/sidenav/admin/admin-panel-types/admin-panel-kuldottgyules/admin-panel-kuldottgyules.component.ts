@@ -22,7 +22,10 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
     postType: '',
     fullName: '',
     firstCommittee: '',
-    secondCommittee: ''
+    firstPosition: '',
+    secondCommittee: '',
+    secondPosition: '',
+    email: ''
   };
 
   constructor(
@@ -65,7 +68,10 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       postType: 'kuldottgyules',
       fullName: form.value.adminGroup.fullName,
       firstCommittee: form.value.adminGroup.firstCommittee,
+      firstPosition: form.value.adminGroup.firstPosition,
       secondCommittee: form.value.adminGroup.secondCommittee,
+      secondPosition: form.value.adminGroup.secondPosition,
+      email: form.value.adminGroup.email
     }
 
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/kuldottgyules', newPost)
@@ -81,7 +87,10 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       postType: 'kuldottgyules',
       fullName: form.value.adminGroup.fullName,
       firstCommittee: form.value.adminGroup.firstCommittee,
+      firstPosition: form.value.adminGroup.firstPosition,
       secondCommittee: form.value.adminGroup.secondCommittee,
+      secondPosition: form.value.adminGroup.secondPosition,
+      email: form.value.adminGroup.email
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/kuldottgyules/' + id, post)
       .subscribe((data) => {
