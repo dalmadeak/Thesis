@@ -11,15 +11,22 @@
       <th>Beküldés ideje</th>
       <th>Műveletek</th>
     </tr>
-    <ng-container *ngFor="let data of summarizeObject">
+    <ng-container *ngFor="let data of getObject()">
       <tr class="filesData" *ngIf="summarizeObject.length">
         <td>{{data.year}}</td>
         <td>{{data.month}}</td>
         <td>{{data.author}}</td>
         <td>{{data.date}}</td>
-        <td>
-          <fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon>
-          <fa-icon [icon]="faDelete" title="Törlés"></fa-icon>
+        <td class="centeredClass">
+          <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+          <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Biztosan törlöd a bejegyzést?</p>
+              <button type="button" class="btn button-sub" (click)="deletePost(data._id)">Igen</button>
+              <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+            </div>
+          </ng-template>
         </td>
       </tr>
     </ng-container>

@@ -25,6 +25,27 @@ router.get('/:id', (req,res,next) => {
     });
 });
 
+//Get post by author
+router.get('/:author', (req,res,next) => {
+  MonthlyReport.find({author: req.params.author})
+    .then(documents => {
+      res.status(202).json({
+        posts: documents
+      });
+    });
+});
+
+//Get post by date
+router.get('/:year/:month', (req,res,next) => {
+  MonthlyReport.find({year: req.params.year, month: req.params.month})
+    .then(fetchedPost => {
+      res.status(201).json({
+        message: 'Monthly Report fetched successfully',
+        post: fetchedPost
+      });
+    });
+});
+
 router.post('', (req, res, next) => {
   const post = new MonthlyReport({
     postType: req.body.postType,
