@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+const authRoutes = require('./routes/auth')
 const hirekRoutes = require('./routes/hirek')
 const ulesekRoutes = require('./routes/ulesek')
 const palyazatokRoutes = require('./routes/palyazatok')
@@ -21,8 +22,7 @@ const bufekRoutes = require('./routes/bufek')
 const kozeletikRoutes = require('./routes/kozeletik')
 const elnoksegRoutes = require('./routes/elnokseg')
 const kabinetRoutes = require('./routes/kabinet')
-const kuldottgyulesSchema = require('./routes/kuldottgyules')
-
+const kuldottgyulesRoutes = require('./routes/kuldottgyules')
 
 // xtiV4hKL05OqaLbM
 mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
@@ -55,7 +55,8 @@ app.use('/images', express.static(path.join('backend/images')));
 app.use('/files', express.static(path.join('backend/files')));
 
 
-
+/* AUTENTIKÁCIÓ */
+app.use('/api/auth', authRoutes);
 
 /* HÍREK MIDDLEWARES */
 app.use('/api/hirek', hirekRoutes);
@@ -101,7 +102,7 @@ app.use('/api/elnokseg', elnoksegRoutes);
 /* KABINET */
 app.use('/api/kabinet', kabinetRoutes);
 
-/* KABINET */
-app.use('/api/kuldottgyules', kuldottgyulesSchema);
+/* KÜLDÖTTGYŰLÉS */
+app.use('/api/kuldottgyules', kuldottgyulesRoutes);
 
 module.exports = app;
