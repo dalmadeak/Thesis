@@ -5,6 +5,9 @@ import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { Kuldottgyules } from "./kuldottgyules.model";
+import { Subscription } from "rxjs";
+import { UserService } from "src/app/bejelentkezes/user.service";
+import { ThrowStmt } from "@angular/compiler";
 
 @Component ({
   selector: 'app-szervezet-kgy',
@@ -19,14 +22,30 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  colspan: number = 3;
 
   private kuldottgyulesObject : Kuldottgyules[] = [];
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
-  }
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
+
+  isAuthenticated = false;
+  private userAuthSubs : Subscription | undefined;
 
   ngOnInit() {
     this.getPosts();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    if (this.isAuthenticated) {
+      this.colspan = 4;
+    } else {
+      this.colspan = 3;
+    }
+    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
+  }
+
+  ngOnDestroy() {
+    this.userAuthSubs?.unsubscribe();
   }
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni

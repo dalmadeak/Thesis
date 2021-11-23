@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
+import { UserGuard } from './bejelentkezes/user.guard';
 import { HirekComponent } from './hirek/hirek.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UlesekComponent } from './ulesek/ulesek.component';
@@ -44,7 +45,8 @@ const routes: Routes = [
   },
   {
     path: 'sidenav',
-    loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavModule)
+    loadChildren: () => import('./sidenav/sidenav.module').then(m => m.SidenavModule),
+    canActivate: [UserGuard]
   },
   {
     path: '**',
@@ -54,6 +56,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [UserGuard]
 })
 export class AppRoutingModule { }

@@ -79,6 +79,16 @@ ul li ul li {
   width: 100%;
 }
 
+.logButton {
+  padding: 15px;
+  border:none;
+  background: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
 .nav-item {
   font-size: 18px;
   font-weight: bold;
@@ -98,4 +108,16 @@ ul li ul li {
   margin-bottom: 2px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.button-sub {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 30px auto 0px auto;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  padding: 10px 20px;
+  margin: 0 10px;
 }

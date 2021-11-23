@@ -4,7 +4,7 @@
         <p class="postContent">{{ hir.content }}</p>
         <div class="postData">
           {{ hir.date }}
-          <div class="postIcons">
+          <div class="postIcons" *ngIf="isAuthenticated">
             <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', hir.postType, hir._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
             <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
             <ng-template #template>

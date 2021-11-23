@@ -7,34 +7,9 @@
       <div class="postContent">
           {{ules.content}}
       </div>
-
-
-
-      <!-- <p class="postHeader">
-          ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülés - {{ ules.meetingDate }}
-        </p>
-        <div class="postContent">
-            <p>Tisztelt Küldöttek, Tisztségviselők! Kedves Hallgatók!</p>
-
-            <p>Összehívom az ELTE IK HÖK {{ getProperty(committeeTypesObject, ules.committee) }} {{ ules.type }} ülését.<br>
-            <b>Időpont:</b> {{ ules.meetingDate }}<br>
-            <b>Helyszín:</b> IK HÖK iroda (1117 Budapest, Pázmány Péter sétány 1/a, -1.66/B).<br></p>
-
-            <p>Az előzetes napirendi pontok a következők:</p>
-            <ol>
-              <li>Tájékoztató</li>
-              <li>Feladatok</li>
-              <li>Egyebek</li>
-            </ol>
-          <p *ngIf="['a','e','i','o','u'].includes(ules.author.charAt(0)); else elseBlock">Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat az {{ ules.author }} e-mail címre várom.<br></p>
-          <ng-template #elseBlock>Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat a {{ ules.author }} e-mail címre várom.<br></ng-template>
-
-          <p>Tisztelettel,</p>
-          <p>{{ ules.author }}</p>
-        </div> -->
       <div class="postData">
         {{ ules.date }}
-        <div class="postIcons">
+        <div class="postIcons" *ngIf="isAuthenticated">
           <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', ules.postType, ules._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
           <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
           <ng-template #template>
