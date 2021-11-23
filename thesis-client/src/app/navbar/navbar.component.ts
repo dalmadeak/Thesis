@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { faBars, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faEllipsisH, faUser} from "@fortawesome/free-solid-svg-icons";
 
 
 @Component ({
@@ -10,4 +10,5 @@ import { faBars, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 export class NavbarComponent {
   faBars = faBars;
   faDots = faEllipsisH;
+  faUser = faUser;
 }

@@ -19,6 +19,7 @@
           <option value="iroda">Iroda nyitvatartás</option>
           <option value="belepokartya">Belépőkártya regisztráció</option>
           <option value="sorompo">Sorompó regisztráció</option>
+          <option value="regisztracio">Regisztráció</option>
         </select>
       </div>
       </div>
@@ -53,6 +54,10 @@
 
       <div *ngIf="selectedOption == 'sorompo'">
         <app-admin-panel-sorompo></app-admin-panel-sorompo>
+      </div>
+
+      <div *ngIf="selectedOption == 'regisztracio'">
+        <app-admin-panel-regisztracio></app-admin-panel-regisztracio>
       </div>
 
 
