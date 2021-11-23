@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require("multer");
+const checkAuth = require('../middleware/auth');
 
 const Application = require('../models/palyazatok');
 
@@ -49,7 +50,7 @@ router.get('/:id', (req,res,next) => {
     });
 });
 
-router.post('', multer({storage: storage}).single('file'), (req, res, next) => {
+router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, next) => {
   const url = req.protocol + '://' + req.get('host');
   const post = new Application({
     postType: req.body.postType,
@@ -73,7 +74,7 @@ router.post('', multer({storage: storage}).single('file'), (req, res, next) => {
 });
 
 //put - completely replace old resource with new one, patch - update resource
-router.put('/:id', multer({storage: storage}).single('file'), (req,res,next) => {
+router.put('/:id',checkAuth, multer({storage: storage}).single('file'), (req,res,next) => {
   let filePath = req.body.file;
   if(req.file) {
     const url = req.protocol + '://' + req.get('host');
@@ -93,7 +94,7 @@ router.put('/:id', multer({storage: storage}).single('file'), (req,res,next) => 
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id',checkAuth, (req, res, next) => {
   Application.deleteOne({_id: req.params.id}).then(result => {
     res.status(201).json({
       message: 'Application deleted successfully'

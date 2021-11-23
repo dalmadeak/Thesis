@@ -1,16 +1,18 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Hirek } from '../hirek.model';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from "src/app/bejelentkezes/user.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-hirek-element',
   templateUrl: './hirek-element.component.html',
   styleUrls: ['./hirek-element.component.css']
 })
-export class HirekElementComponent implements OnInit{
+export class HirekElementComponent implements OnInit, OnDestroy{
   faEdit = faPencilAlt;
   faDelete = faTrash;
 
@@ -18,14 +20,24 @@ export class HirekElementComponent implements OnInit{
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isAuthenticated = false;
 
+  private userAuthSubs : Subscription | undefined;
   private hirekObject : Hirek[] = [];
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
     this.getPosts();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
+  }
+
+  ngOnDestroy() {
+     this.userAuthSubs?.unsubscribe();
   }
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni

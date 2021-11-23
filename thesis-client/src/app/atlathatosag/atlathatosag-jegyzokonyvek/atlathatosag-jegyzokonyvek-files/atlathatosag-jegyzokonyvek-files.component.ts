@@ -4,6 +4,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Jegyzokonyvek } from '../jegyzokonyvek.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from "rxjs";
+import { UserService } from "src/app/bejelentkezes/user.service";
 
 @Component({
   selector: 'app-atlathatosag-jegyzokonyvek-files',
@@ -27,11 +29,20 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
 
   private jegyzokonyvekObject : Jegyzokonyvek[] = [];
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
-  }
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
 
+  isAuthenticated = false;
+  private userAuthSubs : Subscription | undefined;
   ngOnInit() {
     this.getPosts();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
+  }
+
+  ngOnDestroy() {
+    this.userAuthSubs?.unsubscribe();
   }
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni

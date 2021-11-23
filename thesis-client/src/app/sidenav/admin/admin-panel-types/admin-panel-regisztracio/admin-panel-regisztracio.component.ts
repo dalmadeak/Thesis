@@ -11,9 +11,6 @@ import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
   styleUrls: ['./admin-panel-regisztracio.component.css', '../admin-panel-types.component.css']
 })
 export class AdminPanelRegisztracioComponent implements OnInit {
-  private mode = 'createNewPost'
-  private postId : any;
-
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   editablePost : Felhasznalo = {
@@ -32,28 +29,10 @@ export class AdminPanelRegisztracioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      if (paramMap.has('id')) {
-        this.mode = 'editPost';
-        this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/auth/' + this.postId)
-          .subscribe((fetchedData) => {
-          this.editablePost = fetchedData.post[0];
-        });
-      } else {
-        this.mode = 'createNewPost';
-        this.postId = '';
-      }
-    });
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
-    if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
-    } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
-    }
+    this.addNewPost(form);
     form.reset();
     this.modalRef.hide();
   }
@@ -68,14 +47,14 @@ export class AdminPanelRegisztracioComponent implements OnInit {
       email: form.value.adminGroup.email,
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/auth', newPost)
+    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/auth/register', newPost)
       .subscribe((data) => {
       const id = data.postId;
       newPost._id = id;
     });
   }
 
-  updatePost(id: string, form: NgForm) {
+ /* updatePost(id: string, form: NgForm) {
     const post : Felhasznalo = {
       _id: id,
       postType: 'auth',
@@ -84,9 +63,9 @@ export class AdminPanelRegisztracioComponent implements OnInit {
       position: form.value.adminGroup.position,
       email: form.value.adminGroup.email,
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/auth/' + id, post)
+    this.http.put<{ message: string }>('http://localhost:3000/api/auth/register/' + id, post)
       .subscribe()
-  }
+  }*/
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});

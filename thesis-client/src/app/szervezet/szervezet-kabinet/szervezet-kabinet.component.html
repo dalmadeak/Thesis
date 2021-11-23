@@ -9,7 +9,7 @@
           <p class="name"><b>{{ member.name }}</b></p><br>
           <p class="info">{{ member.position }}</p>
           <p class="info">{{ member.email }}</p>
-          <div class="iconClass">
+          <div class="iconClass" *ngIf="isAuthenticated">
             <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
             <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
             <ng-template #template>
@@ -30,7 +30,7 @@
           <p class="name"><b>{{ member.name }}</b></p><br>
           <p class="info">{{ member.position }}</p>
           <p class="info">{{ member.email }}</p>
-          <div class="iconClass">
+          <div class="iconClass" *ngIf="isAuthenticated">
             <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
             <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
             <ng-template #template>
