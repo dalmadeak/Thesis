@@ -89,6 +89,31 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
       })
   }
 
+  getCommitteeName(committee: string) {
+    switch(committee) {
+      case 'kgy':
+        return 'Küldöttgyűlés';
+      case 'elnokseg':
+        return 'Elnökség';
+      case 'kabinet':
+        return 'Kabinet';
+      case 'hjb':
+        return 'Hallgatói Jóléti Bizottság';
+      case 'kombiz':
+        return 'Kommunikációs Bizottság';
+      case 'kb':
+        return 'Külügyi Bizottság';
+      case 'szb':
+        return 'Szervező Bizottság';
+      case 'tb':
+        return 'Tanulmányi Bizottság';
+      case 'eb':
+        return 'Ellenőrző Bizottság';
+      default:
+        return 'Választási Bizottság';
+    }
+  }
+
   getAuthLevel() {
     return this.authLevel;
   }

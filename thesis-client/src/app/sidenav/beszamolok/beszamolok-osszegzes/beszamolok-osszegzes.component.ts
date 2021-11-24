@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SajatBeszamolok } from '../../sajat-beszamolok/sajat-beszamolok.model';
@@ -11,6 +11,7 @@ import { SajatBeszamolok } from '../../sajat-beszamolok/sajat-beszamolok.model';
 })
 export class BeszamolokOsszegzesComponent implements OnInit{
   @Input() summarizeObject : any = [];
+  @Output() refreshObjectEvent = new EventEmitter<Array<Object> >();
 
   faEdit = faPencilAlt;
   faDelete = faTrash;
@@ -36,7 +37,12 @@ export class BeszamolokOsszegzesComponent implements OnInit{
       .subscribe(() => {
         const updatedPost = this.summarizeObject.filter((post : any) => post._id !== postId);
         this.summarizeObject = updatedPost;
+        this.updateSummarizeObject(this.summarizeObject);
       })
+  }
+
+  updateSummarizeObject(value : any) {
+    this.refreshObjectEvent.emit(value);
   }
 
   openModal(template: TemplateRef<any>) {

@@ -12,8 +12,8 @@
       </tr>
       <tr *ngFor="let member of getObject()" class="membersInfo">
         <td>{{ member.fullName }}</td>
-        <td>{{ member.firstCommittee }}</td>
-        <td *ngIf="member.secondCommittee">{{ member.secondCommittee }}</td>
+        <td>{{ getCommitteeName(member.firstCommittee) }}</td>
+        <td *ngIf="member.secondCommittee">{{ getCommitteeName(member.secondCommittee) }}</td>
         <td *ngIf="isAuthenticated && getAuthLevel() == 1">
           <div class="iconClass">
             <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>

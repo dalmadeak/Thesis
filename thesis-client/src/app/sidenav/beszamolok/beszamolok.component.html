@@ -12,7 +12,7 @@
       <th>Hónap</th>
       <th>Műveletek</th>
     </tr>
-    <ng-container *ngFor="let data of asd()">
+    <ng-container *ngFor="let data of filterReports()">
       <tr class="filesData" >
         <td>{{data.year}}</td>
         <td>{{data.month}}</td>
@@ -25,6 +25,7 @@
   </table>
 
   <app-beszamolok-osszegzes
+    (refreshObjectEvent)="addMonthToSummary($event)"
     [summarizeObject]="monthlyReport || null"
     [ngClass]="{'allowChildView': monthlyReport.length <= 0}">
   </app-beszamolok-osszegzes>
