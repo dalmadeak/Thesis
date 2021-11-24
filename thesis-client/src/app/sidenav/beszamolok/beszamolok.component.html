@@ -10,18 +10,18 @@
     <tr class="filesHeader">
       <th>Év</th>
       <th>Hónap</th>
-      <th>Beérkezett</th>
       <th>Műveletek</th>
     </tr>
-      <tr class="filesData" *ngFor="let data of reportsObject.slice().reverse()">
+    <ng-container *ngFor="let data of asd()">
+      <tr class="filesData" >
         <td>{{data.year}}</td>
         <td>{{data.month}}</td>
-        <td>{{data.reports.length}}</td>
         <td>
-          <fa-icon [icon]="faView" title="Megtekintés" (click)="onClickView(data.reports)"></fa-icon>
+          <fa-icon [icon]="faView" title="Megtekintés" (click)="onClickView(data.year, data.month)"></fa-icon>
           <fa-icon [icon]="faSummarize" title="Összegzés"></fa-icon>
         </td>
       </tr>
+    </ng-container>
   </table>
 
   <app-beszamolok-osszegzes

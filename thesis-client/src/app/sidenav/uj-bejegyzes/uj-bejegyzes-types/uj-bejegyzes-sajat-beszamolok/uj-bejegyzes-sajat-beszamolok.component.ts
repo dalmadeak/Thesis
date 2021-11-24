@@ -32,7 +32,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     year: this.today.getFullYear(),
     month: '',
     content: '',
-    date: this.now,
+    date: this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
   };
 
   constructor(
@@ -79,7 +79,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,
-      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime
+      date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
 
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/havi-beszamolok', newPost)
@@ -98,7 +98,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,
-      date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime
+      date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
       .subscribe((data) => {

@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SajatBeszamolok } from './sajat-beszamolok.model';
-import { map } from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/bejelentkezes/user.service";
@@ -21,6 +21,7 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   isAuthenticated = false;
+
 
   private myReportsObject : SajatBeszamolok[] = [];
   private userAuthSubs : Subscription | undefined;
@@ -48,19 +49,20 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   }
 
   getPosts() {
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/havi-beszamolok')
-      .pipe(map(postData => {
+    this.http.get<{posts: any }>('http://localhost:3000/api/havi-beszamolok')
+      .pipe(
+        map(postData => {
         return postData.posts.map((post: any) => {
-         return {
-            _id: post._id,
-            postType: post.postType,
-            author: post.author,
-            year: post.year,
-            month: post.month,
-            content: post.content,
-            date: post.date
-          }
-        });
+          return {
+              _id: post._id,
+              postType: post.postType,
+              author: post.author,
+              year: post.year,
+              month: post.month,
+              content: post.content,
+              date: post.date
+            }
+          })
       }))
       .subscribe((finalPosts) => {
         this.myReportsObject = finalPosts.filter((data:any) => data.author.userId == this.user.userId);
