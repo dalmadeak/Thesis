@@ -7,6 +7,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Ulesek } from '../../../../ulesek/ulesek.model';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 import { UserService } from 'src/app/bejelentkezes/user.service';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-uj-bejegyzes-ulesek',
@@ -23,8 +24,8 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   isContentClicked = false;
   isTitleClicked = false;
 
-  today = new Date();
-  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+  dateNow: string = '';
+  timeNow: string = '';
 
   editablePost : Ulesek = {
     _id : '',
@@ -35,7 +36,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     title: '',
     content: '',
     decisionDate: '',
-    date: this.now
+    date: ''
   };
 
   constructor(
@@ -47,6 +48,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   }
 
  ngOnInit() {
+  this.editablePost.date = this.getDate();
    this.author = this.userService.getUserInformation();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
@@ -206,6 +208,19 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       default:
         return 'Választási Bizottság';
     }
+  }
+
+  getDate(){
+    let today = new Date();
+    this.dateNow =
+      today.getFullYear() + '-' +
+      (((today.getMonth()+1) < 10) ? ('0' + (today.getMonth()+1)) : (today.getMonth()+1)) + '-' +
+      ((today.getDate()< 10) ? ('0' + today.getDate()) : (today.getDate()));
+    this.timeNow =
+      ((today.getHours() < 10) ? ('0' + today.getHours() + ':') : (today.getHours()  + ':')) +
+      ((today.getMinutes() < 10) ? ('0' + today.getMinutes()) : (today.getMinutes()))
+
+    return this.dateNow + ' ' + this.timeNow;
   }
 
   openModal(template: TemplateRef<any>) {

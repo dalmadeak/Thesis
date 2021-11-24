@@ -19,7 +19,9 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   isDisabled: boolean = false;
 
   today = new Date();
-  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+  dateNow: string = '';
+  timeNow: string = '';
+
 
   private mode = 'createNewPost'
   private postId : any;
@@ -32,7 +34,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     year: this.today.getFullYear(),
     month: '',
     content: '',
-    date: this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+    date: ''
   };
 
   constructor(
@@ -44,6 +46,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   }
 
  ngOnInit() {
+    this.editablePost.date = this.getDate();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -104,6 +107,19 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       .subscribe((data) => {
         console.log(post);
       })
+  }
+
+  getDate(){
+    let today = new Date();
+    this.dateNow =
+      today.getFullYear() + '-' +
+      (((today.getMonth()+1) < 10) ? ('0' + (today.getMonth()+1)) : (today.getMonth()+1)) + '-' +
+      ((today.getDate()< 10) ? ('0' + today.getDate()) : (today.getDate()));
+    this.timeNow =
+      ((today.getHours() < 10) ? ('0' + today.getHours() + ':') : (today.getHours()  + ':')) +
+      ((today.getMinutes() < 10) ? ('0' + today.getMinutes()) : (today.getMinutes()))
+
+    return this.dateNow + ' ' + this.timeNow;
   }
 
   openModal(template: TemplateRef<any>) {
