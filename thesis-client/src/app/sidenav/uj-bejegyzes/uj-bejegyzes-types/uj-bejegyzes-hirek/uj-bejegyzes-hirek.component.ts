@@ -19,14 +19,15 @@ export class UjBejegyzesHirekComponent implements OnInit {
   message: string = '';
 
   today = new Date();
-  now = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate() + ' ' + this.today.getHours() + ':' + this.today.getMinutes()
+  dateNow: string = ''
+  timeNow: string = ''
 
   editablePost : Hirek = {
     _id : '',
     postType: '',
     title: '',
     content: '',
-    date: this.now
+    date: ''
   };
 
   constructor(
@@ -37,6 +38,7 @@ export class UjBejegyzesHirekComponent implements OnInit {
   }
 
  ngOnInit() {
+  this.editablePost.date = this.getDate();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -91,6 +93,19 @@ export class UjBejegyzesHirekComponent implements OnInit {
       .subscribe((data) => {
         console.log(data);
       })
+  }
+
+  getDate(){
+    let today = new Date();
+    this.dateNow =
+      today.getFullYear() + '-' +
+      (((today.getMonth()+1) < 10) ? ('0' + (today.getMonth()+1)) : (today.getMonth()+1)) + '-' +
+      ((today.getDate()< 10) ? ('0' + today.getDate()) : (today.getDate()));
+    this.timeNow =
+      ((today.getHours() < 10) ? ('0' + today.getHours() + ':') : (today.getHours()  + ':')) +
+      ((today.getMinutes() < 10) ? ('0' + today.getMinutes()) : (today.getMinutes()))
+
+    return this.dateNow + ' ' + this.timeNow;
   }
 
   openModal(template: TemplateRef<any>) {

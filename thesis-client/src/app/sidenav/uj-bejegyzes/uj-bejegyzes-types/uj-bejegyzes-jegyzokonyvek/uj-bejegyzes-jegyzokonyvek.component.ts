@@ -23,8 +23,8 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   message: string = '';
 
   today = new Date();
-  dateNow = this.today.getFullYear() + '-' + (this.today.getMonth()+1) + '-' + this.today.getDate();
-  timeNow = this.today.getHours() + ':' + this.today.getMinutes();
+  dateNow: string = ''
+  timeNow: string = ''
 
   editablePost : Jegyzokonyvek = {
     _id : '',
@@ -44,6 +44,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   }
 
  ngOnInit() {
+   this.getDate();
   this.form = new FormGroup({
     'committee': new FormControl(null, {validators: [Validators.required]}),
     'title': new FormControl(null, {validators: [Validators.required]}),
@@ -162,6 +163,17 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
       this.imagePreview = (reader.result as string);
     };
     reader.readAsDataURL(file);
+  }
+
+  getDate(){
+    let today = new Date();
+    this.dateNow =
+      today.getFullYear() + '-' +
+      (((today.getMonth()+1) < 10) ? ('0' + (today.getMonth()+1)) : (today.getMonth()+1)) + '-' +
+      ((today.getDate()< 10) ? ('0' + today.getDate()) : (today.getDate()));
+    this.timeNow =
+      ((today.getHours() < 10) ? ('0' + today.getHours() + ':') : (today.getHours()  + ':')) +
+      ((today.getMinutes() < 10) ? ('0' + today.getMinutes()) : (today.getMinutes()))
   }
 
   openModal(template: TemplateRef<any>) {
