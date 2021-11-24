@@ -20,17 +20,22 @@ export class AtlathatosagKozeletikComponent implements OnInit{
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   colspan = 3;
-
-  private kozeletikObject : Kozeletik[] = [];
-
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
-
   isAuthenticated = false;
+
   private userAuthSubs : Subscription | undefined;
+  private kozeletikObject : Kozeletik[] = [];
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  }
+
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
-    if(this.isAuthenticated) {
+    if(this.isAuthenticated && this.getAuthLevel() <= 2) {
       this.colspan = 4;
     } else {
       this.colspan = 3;
@@ -74,6 +79,10 @@ export class AtlathatosagKozeletikComponent implements OnInit{
         const updatedPost = this.kozeletikObject.filter(post => post._id !== postId);
         this.kozeletikObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   openModal(template: TemplateRef<any>) {

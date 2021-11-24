@@ -29,6 +29,7 @@ router.get('/:id', (req,res,next) => {
 router.post('',checkAuth, (req, res, next) => {
   const post = new Meeting({
     postType: req.body.postType,
+    author: req.authData,
     committee: req.body.committee,
     type: req.body.type,
     title: req.body.title,
@@ -50,6 +51,7 @@ router.put('/:id',checkAuth, (req,res,next) => {
   const post = new Meeting({
     _id: req.body._id,
     postType: req.body.postType,
+    author: req.authData,
     committee: req.body.committee,
     type: req.body.type,
     title: req.body.title,

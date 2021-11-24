@@ -25,14 +25,19 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
-
-  private beszamolokObject : Beszamolok[] = [];
-
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
-
   isAuthenticated = false;
+
   private userAuthSubs : Subscription | undefined;
+  private beszamolokObject : Beszamolok[] = [];
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  }
+
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
@@ -76,6 +81,10 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
         const updatedPost = this.beszamolokObject.filter(post => post._id !== postId);
         this.beszamolokObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   onSortByName(){

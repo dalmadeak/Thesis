@@ -11,7 +11,7 @@
       <th>Szavazati arány</th>
       <th>Csatolmányok</th>
       <th>Feltöltve</th>
-      <th>Műveletek</th>
+      <th *ngIf="isAuthenticated && getAuthLevel() <= 2">Műveletek</th>
     </tr>
     <ng-container *ngFor="let file of filterObject(getObject()) | paginate: { itemsPerPage: 24, currentPage: p }">
       <tr class="filesData" *ngIf="filterData == undefined || filterData.id == file.committee">
@@ -22,7 +22,7 @@
         <td class="centeredClass">{{file.vote}}</td>
         <td class="centeredClass"><a [href]="file.file" [download]="file.title" download target="_blank">Letöltés</a></td>
         <td class="centeredClass">{{file.date}}</td>
-        <td class="centeredClass">
+        <td class="centeredClass" *ngIf="isAuthenticated && getAuthLevel() <= 2">
           <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', file.postType, file._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
           <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
           <ng-template #template>

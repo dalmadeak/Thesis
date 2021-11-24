@@ -1,7 +1,7 @@
 export interface SajatBeszamolok {
   _id: any;
   postType: string;
-  author: string;
+  author: Object;
   year: number;
   month: string;
   content: string;

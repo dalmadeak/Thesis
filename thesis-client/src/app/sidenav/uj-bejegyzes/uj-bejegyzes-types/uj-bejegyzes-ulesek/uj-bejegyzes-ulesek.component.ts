@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Ulesek } from '../../../../ulesek/ulesek.model';
+import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
+import { UserService } from 'src/app/bejelentkezes/user.service';
 
 @Component({
   selector: 'app-uj-bejegyzes-ulesek',
@@ -14,6 +16,7 @@ import { Ulesek } from '../../../../ulesek/ulesek.model';
 export class UjBejegyzesUlesekComponent implements OnInit {
   private mode = 'createNewPost'
   private postId : any;
+  private author: any;
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
@@ -39,10 +42,12 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private modalService: BsModalService,
-    private router: Router) {
+    private router: Router,
+    private userService: UserService) {
   }
 
  ngOnInit() {
+   this.author = this.userService.getUserInformation();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -61,20 +66,19 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      this.addNewPost(form, this.author);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      this.updatePost(this.postId, form, this.author);
     }
     this.modalRef.hide();
     setTimeout(() => {this.router.navigate(['/ulesek']);},0);
   }
 
-  addNewPost(form : NgForm) {
-    console.log(form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time)
+  addNewPost(form : NgForm, author: Felhasznalo) {
     const newPost : Ulesek = {
       _id: null,
       postType: 'ulesek',
-      author: 'Test',
+      author: author,
       committee: form.value.newRegistryGroup.committee,
       type: form.value.newRegistryGroup.type,
       title: form.value.newRegistryGroup.title,
@@ -90,11 +94,12 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     });
   }
 
-  updatePost(id: string, form: NgForm) {
+  updatePost(id: string, form: NgForm, author: Felhasznalo) {
+    console.log(author)
     const post : Ulesek = {
       _id: id,
       postType: 'ulesek',
-      author: 'Test',
+      author: author,
       committee: form.value.newRegistryGroup.committee,
       type: form.value.newRegistryGroup.type,
       title: form.value.newRegistryGroup.title,
@@ -104,11 +109,18 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/ulesek/' + id, post)
       .subscribe((data) => {
-        console.log(data);
       })
   }
 
-  generateMeetingTitle(form: NgForm) {
+  onTitleClicked(form: NgForm) {
+    this.generateMeetingTitle(form, this.author);
+  }
+
+  onContentClicked(form: NgForm) {
+    this.generateMeetingContent(form, this.author);
+  }
+
+  generateMeetingTitle(form: NgForm, author: Felhasznalo) {
     if(this.isTitleClicked || this.mode == 'editPost' || !this.checkInputValidity(form)) return;
     this.isTitleClicked = true;
 
@@ -126,11 +138,11 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     this.editablePost.title = title;
   }
 
-  generateMeetingContent(form: NgForm){
+  generateMeetingContent(form: NgForm, author: Felhasznalo){
     if(this.isContentClicked || this.mode == 'editPost' || !this.checkInputValidity(form)) return;
     this.isContentClicked = true;
-    let author="elnok@ikhok.elte.hu";
-    let appendix = ['a','e','i','o','u'].includes(author.charAt(0)) ? 'az' : 'a'
+    console.log(author);
+    let appendix = ['a','e','i','o','u'].includes(author.email.charAt(0)) ? 'az' : 'a'
 
     let content =
     ("Tisztelt Küldöttek, Tisztségviselők! Kedves Hallgatók!\n\nÖsszehívom az ELTE IK HÖK "
@@ -148,10 +160,16 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     + "Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat "
     + appendix
     + " "
-    + author
+    + author.email
     + " e-mail címre várom.\n\n"
     + "Tisztelettel,\n"
-    + author);
+    + author.fullName + "\n"
+    + author.position + "\n"
+    + "ELTE IK HÖK\n"
+    + "1117 Budapest, Pázmány Péter sétány 1/A -1.66B\n"
+    + "tel: +36 1 372 25 20\n"
+    + "e-mail: " + author.email
+    + "\nweb: http://ikhok.elte.hu\n");
 
     this.editablePost.content = content;
   }

@@ -29,7 +29,7 @@ router.get('/:id', (req,res,next) => {
 router.post('',checkAuth, (req, res, next) => {
   const post = new MonthlyReport({
     postType: req.body.postType,
-    author: req.body.author,
+    author: req.authData,
     year: req.body.year,
     month: req.body.month,
     content: req.body.content,
@@ -49,7 +49,7 @@ router.put('/:id',checkAuth, (req,res,next) => {
   const post = new MonthlyReport({
     _id: req.body._id,
     postType: req.body.postType,
-    author: req.body.author,
+    author: req.authData,
     year: req.body.year,
     month: req.body.month,
     content: req.body.content,

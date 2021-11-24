@@ -5,8 +5,6 @@ const jsonwt = require('jsonwebtoken');
 const router = express.Router();
 
 const User = require('../models/auth');
-const { runInNewContext } = require('vm');
-const { isError } = require('util');
 
 router.get('', (req,res,next) => {
   User.find() //returns all entries
@@ -34,10 +32,12 @@ router.post('/register', (req, res, next) => {
     .then(hash => {
       const post = new User({
         postType: req.body.postType,
+        fullName: req.body.fullName,
         identifier: req.body.identifier,
         password: hash,
         position: req.body.position,
-        email: req.body.email
+        email: req.body.email,
+        permissions: req.body.permissions
       });
       post.save().then( result => {
         res.status(201).json({
@@ -67,14 +67,21 @@ router.post('/login', (req, res, next) => {
         });
       }
       const token = jsonwt.sign({
+        userId: fetchedUser._id,
         identifier: fetchedUser.identifier,
+        fullName: fetchedUser.fullName,
         position: fetchedUser.position,
         email: fetchedUser.email,
-        userId: fetchedUser._id
+        permissions: fetchedUser.permissions,
       }, 'ikhokSecretPass_forTokenIdentification', { expiresIn: '1h'});
       res.status(200).json({
         token: token,
-        expiresIn: '60'
+        expiresIn: '60',
+        userId: fetchedUser._id,
+        fullName: fetchedUser.fullName,
+        position: fetchedUser.position,
+        email: fetchedUser.email,
+        permissions: fetchedUser.permissions,
       });
       console.log(token)
     })
@@ -91,6 +98,7 @@ router.put('/:id', (req,res,next) => {
     .then(hash => {
       const post = new User({
         postType: req.body.postType,
+        fullName: fetchedUser.fullName,
         identifier: req.body.identifier,
         password: hash,
         position: req.body.position,

@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { SajatBeszamolok } from '../../../sajat-beszamolok/sajat-beszamolok.model';
+import { UserService } from 'src/app/bejelentkezes/user.service';
+import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 
 @Component({
   selector: 'app-uj-bejegyzes-sajat-beszamolok',
@@ -21,6 +23,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
 
   private mode = 'createNewPost'
   private postId : any;
+  private author: any;
 
   editablePost : SajatBeszamolok = {
     _id : '',
@@ -36,10 +39,12 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private modalService: BsModalService,
-    private router: Router) {
+    private router: Router,
+    private userService: UserService) {
   }
 
  ngOnInit() {
+  this.author = this.userService.getUserInformation();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -58,18 +63,18 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      this.addNewPost(form, this.author);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      this.updatePost(this.postId, form, this.author);
     }
     this.modalRef.hide();
     setTimeout(() => {this.router.navigate(['/sidenav/beszamolok/sajat']);},0);
   }
 
-  addNewPost(form : NgForm) {
+  addNewPost(form : NgForm, author: Felhasznalo) {
     const newPost : SajatBeszamolok = {
       _id: null,
-      author: 'Test',
+      author: author,
       postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
@@ -81,13 +86,14 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       .subscribe((data) => {
       const id = data.postId;
       newPost._id = id;
+      console.log(newPost)
     });
   }
 
-  updatePost(id: string, form: NgForm) {
+  updatePost(id: string, form: NgForm, author: Felhasznalo) {
     const post : SajatBeszamolok = {
       _id: id,
-      author: 'Test',
+      author: author,
       postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
@@ -96,7 +102,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
       .subscribe((data) => {
-        console.log(data);
+        console.log(post);
       })
   }
 
