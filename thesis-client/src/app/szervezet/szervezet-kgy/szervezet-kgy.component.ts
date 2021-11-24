@@ -23,18 +23,22 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   colspan: number = 3;
-
-  private kuldottgyulesObject : Kuldottgyules[] = [];
-
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
-
   isAuthenticated = false;
+
   private userAuthSubs : Subscription | undefined;
+  private kuldottgyulesObject : Kuldottgyules[] = [];
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  }
 
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
-    if (this.isAuthenticated) {
+    if (this.isAuthenticated && this.getAuthLevel() == 1) {
       this.colspan = 4;
     } else {
       this.colspan = 3;
@@ -83,6 +87,10 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
         const updatedPost = this.kuldottgyulesObject.filter(post => post._id !== postId);
         this.kuldottgyulesObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   openModal(template: TemplateRef<any>) {

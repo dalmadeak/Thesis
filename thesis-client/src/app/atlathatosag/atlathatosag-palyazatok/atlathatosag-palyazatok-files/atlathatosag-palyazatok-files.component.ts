@@ -25,14 +25,19 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
-
-  private palyazatokObject : Palyazatok[] = [];
-
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
-
   isAuthenticated = false;
+
   private userAuthSubs : Subscription | undefined;
+  private palyazatokObject : Palyazatok[] = [];
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  }
+
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
@@ -76,6 +81,10 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
         const updatedPost = this.palyazatokObject.filter(post => post._id !== postId);
         this.palyazatokObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   onSortByName(){

@@ -20,14 +20,19 @@ export class SzolgaltatasokEtkezokComponent {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
-
-  private irodaObject : Bufek[] = [];
-
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
-
   isAuthenticated = false;
+
   private userAuthSubs : Subscription | undefined;
+  private irodaObject : Bufek[] = [];
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  }
+
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
@@ -60,6 +65,10 @@ export class SzolgaltatasokEtkezokComponent {
       .subscribe((finalPosts) => {
         this.irodaObject = finalPosts;
       });
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   deletePost(postId : string) {

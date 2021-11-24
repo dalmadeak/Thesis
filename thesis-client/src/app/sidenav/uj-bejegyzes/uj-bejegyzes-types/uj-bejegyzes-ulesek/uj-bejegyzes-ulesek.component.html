@@ -56,7 +56,7 @@
         [ngModel]="editablePost.title"
         name="title"
         required
-        (click)="generateMeetingTitle(newRegistryForm)">
+        (click)="onTitleClicked(newRegistryForm)">
     </div>
 
     <div>
@@ -66,7 +66,7 @@
         name="content"
         rows="10"
         required
-        (click)="generateMeetingContent(newRegistryForm)">
+        (click)="onContentClicked(newRegistryForm)">
       </textarea>
     </div>
 

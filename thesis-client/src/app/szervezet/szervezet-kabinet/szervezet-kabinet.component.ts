@@ -19,14 +19,19 @@ export class SzervezetKabinetComponent {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
-
-  private kabinetObject : Kabinet[] = [];
-
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
-
   isAuthenticated = false;
+
   private userAuthSubs : Subscription | undefined;
+  private kabinetObject : Kabinet[] = [];
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  }
+
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
@@ -70,6 +75,10 @@ export class SzervezetKabinetComponent {
         const updatedPost = this.kabinetObject.filter(post => post._id !== postId);
         this.kabinetObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   openModal(template: TemplateRef<any>) {

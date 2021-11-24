@@ -8,14 +8,14 @@
       <th>Név <button (click)="onSortByName()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th>Feltöltés dátuma <button (click)="onSortByUploadDate()"><fa-icon [icon]="faChevronDown"></fa-icon></button></th>
       <th class="centeredClass"><fa-icon [icon]="faDownload"></fa-icon></th>
-      <th class="centeredClass" *ngIf="isAuthenticated">Műveletek </th>
+      <th class="centeredClass" *ngIf="isAuthenticated && getAuthLevel() <= 2">Műveletek </th>
     </tr>
     <tr class="filesData" *ngFor="let file of getObject() | paginate: { itemsPerPage: 24, currentPage: p }">
       <td class="centeredClass"><fa-icon [icon]="faFilePdf"></fa-icon></td>
       <td>{{file.title}}</td>
       <td>{{file.date}}</td>
       <td class="centeredClass"><a [href]="file.file" [download]="file.title" download target="_blank">Letöltés</a></td>
-      <td class="centeredClass" *ngIf="isAuthenticated">
+      <td class="centeredClass" *ngIf="isAuthenticated && getAuthLevel() <= 2">
         <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', file.postType, file._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
         <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
         <ng-template #template>

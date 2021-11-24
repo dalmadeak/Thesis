@@ -17,9 +17,11 @@ export class AdminPanelRegisztracioComponent implements OnInit {
     _id : '',
     postType: '',
     identifier: '',
+    fullName: '',
     password: '',
     position: '',
     email: '',
+    permissions: '',
   };
 
   constructor(
@@ -42,9 +44,11 @@ export class AdminPanelRegisztracioComponent implements OnInit {
       _id: null,
       postType: 'auth',
       identifier: form.value.adminGroup.identifier,
+      fullName: form.value.adminGroup.fullName,
       password: form.value.adminGroup.password,
       position: form.value.adminGroup.position,
       email: form.value.adminGroup.email,
+      permissions: form.value.adminGroup.permissions,
     }
 
     this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/auth/register', newPost)
@@ -59,9 +63,11 @@ export class AdminPanelRegisztracioComponent implements OnInit {
       _id: id,
       postType: 'auth',
       identifier: form.value.adminGroup.identifier,
+      fullName: form.value.adminGroup.fullName,
       password: form.value.adminGroup.password,
       position: form.value.adminGroup.position,
       email: form.value.adminGroup.email,
+      permissions: form.value.adminGroup.permissions,
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/auth/register/' + id, post)
       .subscribe()

@@ -1,7 +1,7 @@
 export interface Ulesek {
   _id: any;
   postType: string;
-  author: string;
+  author: Object;
   committee: string;
   type: string;
   decisionDate: string;

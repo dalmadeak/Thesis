@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/bejelentkezes/user.service';
 
 @Component({
   selector: 'app-uj-bejegyzes',
@@ -9,11 +9,15 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class UjBejegyzesComponent implements OnInit{
   selectedOption : string | undefined = 'hirek';
+  private userData: any;
+  private authLevel: number = 5;
 
-  constructor(private cd : ChangeDetectorRef, private router: Router){
+  constructor( private router: Router, private userService : UserService){
   }
 
   ngOnInit(){
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     if ((this.router.url).includes('szerkesztes')) {
       let arrayOfUrl = (this.router.url).split('/');
       let option = (arrayOfUrl[(arrayOfUrl.length - 2)]);
@@ -21,10 +25,7 @@ export class UjBejegyzesComponent implements OnInit{
     }
   }
 
-
-  //A change detection az Expression has changed after it was checked error miatt van https://angular.io/errors/NG0100
-  refreshSelectedOption(option : any){
-    this.selectedOption = option;
-    //this.cd.detectChanges();
+  getAuthLevel() {
+    return this.authLevel;
   }
 }

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
 
@@ -11,13 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./bejelentkezes.component.css']
 })
 export class BejelentkezesComponent implements OnInit {
-  constructor(private http: HttpClient, private userService : UserService, private router: Router) { }
+  constructor(private userService : UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onLogin(form: NgForm) {
-    this.userService.login(form);
-    this.router.navigate(['/'])
+  async onLogin(form: NgForm) {
+    await this.userService.login(form);
+    setTimeout(() => {this.router.navigate(['/'])}, 1000);
   }
 }

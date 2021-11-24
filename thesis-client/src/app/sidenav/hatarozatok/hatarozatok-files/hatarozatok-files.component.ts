@@ -1,16 +1,18 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { faPencilAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { map } from "rxjs/operators";
 import { Hatarozatok } from "../hatarozatok.model";
+import { UserService } from "src/app/bejelentkezes/user.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-hatarozatok-files',
   templateUrl: './hatarozatok-files.component.html',
   styleUrls: ['./hatarozatok-files.component.css','../../sidenav.component.css']
 })
-export class HatarozatokFilesComponent {
+export class HatarozatokFilesComponent implements OnInit, OnDestroy{
   @Input() filterData: any;
   p : number = 1;
 
@@ -19,15 +21,29 @@ export class HatarozatokFilesComponent {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isAuthenticated = false;
 
   private hatarozatokObject : Hatarozatok[] = [];
+  private userAuthSubs : Subscription | undefined;
+  private userData: any;
+  private authLevel: number = 5;
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
   }
+
+  ngOnDestroy() {
+    this.userAuthSubs?.unsubscribe();
+ }
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
@@ -66,6 +82,10 @@ export class HatarozatokFilesComponent {
         const updatedPost = this.hatarozatokObject.filter(post => post._id !== postId);
         this.hatarozatokObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   filterObject(data : Array<any>) {

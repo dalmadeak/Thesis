@@ -18,7 +18,6 @@ export class UlesekElementComponent implements OnInit{
   faEdit = faPencilAlt;
   faDelete = faTrash;
 
-  selectedOption : string = 'ules';
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   isAuthenticated = false;
@@ -27,11 +26,15 @@ export class UlesekElementComponent implements OnInit{
 
   private ulesekObject : Ulesek[] = [];
   private userAuthSubs : Subscription | undefined;
+  private userData: any;
+  private authLevel: number = 5;
 
   constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
@@ -43,10 +46,9 @@ export class UlesekElementComponent implements OnInit{
      this.userAuthSubs?.unsubscribe();
   }
 
-
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
-    return [...this.ulesekObject].slice().reverse();
+    return [...this.ulesekObject];
   }
 
   getPosts() {
@@ -79,6 +81,10 @@ export class UlesekElementComponent implements OnInit{
         const updatedPost = this.ulesekObject.filter(post => post._id !== postId);
         this.ulesekObject = updatedPost;
       })
+  }
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   getProperty(obj : Object, property : string){

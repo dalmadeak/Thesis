@@ -3,7 +3,7 @@
     <h1>Büfék, étkezők</h1>
   </div>
   <div class="dataContainer" *ngFor="let canteen of getObject()">
-    <div class="postIcons" *ngIf="isAuthenticated">
+    <div class="postIcons" *ngIf="isAuthenticated && getAuthLevel() == 1">
       <a [routerLink]="['/sidenav/admin/szerkesztes', canteen.postType, canteen._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
       <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
       <ng-template #template>

@@ -4,80 +4,94 @@
   </div>
   <header>Felhasználói adatok</header>
   <div class="register">
-    <form (ngSubmit)="onSubmitProfile(profileForm)" #profileForm="ngForm">
-      <div ngModelGroup="profileGroup">
-      <label>Név: </label>
-      <input
-        type="text"
-        ngModel
-        name="name"
-        required>
-      <br>
+    <form (ngSubmit)="onSubmitProfile(adminForm)" #adminForm="ngForm">
+      <div ngModelGroup="adminGroup" class="group">
 
-      <label>Neptun-kód: </label>
-      <input
-        type="text"
-        ngModel
-        name="neptun"
-        required
-        maxlength="6"
-        minlength="6">
-      <br>
+        <div>
+          <label>Név: </label>
+          <input
+            type="text"
+            [ngModel]="editablePost.fullName"
+            name="fullName"
+            required>
+        </div>
 
-      <label>E-mail cím: </label>
-      <input
-        type="email"
-        ngModel
-        name="email"
-        required
-        email>
-      <br>
+        <div>
+          <label>E-mail cím: </label>
+          <input
+            [ngModel]="editablePost.email"
+            name="email"
+            required>
+        </div>
 
-      <label>Jogosultságok: </label>
-      <input
-        type="text"
-        ngModel
-        name="permission"
-        required>
-      <br>
-
-      <button
-        type="submit"
-        [disabled]="!profileForm.valid">Küldés</button>
+        <div>
+          <button
+            type="button"
+            class="btn button-main"
+            (click)="openModal(template)"
+            [disabled]="!adminForm.valid">Mentés</button>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Biztosan el szeretnéd menteni a profilodat?</p>
+                <button type="submit" class="btn button-sub" (click)="onSubmitProfile(adminForm)">Igen</button>
+                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
+          </div>
       </div>
+
     </form>
   </div>
   <header class="second">Felhasználói adatok</header>
   <div class="register">
     <form (ngSubmit)="onSubmitPassword(passwordForm)" #passwordForm="ngForm">
-      <div ngModelGroup="passwordGroup">
-      <label>Jelenlegi jelszó: </label>
-      <input
-        type="password"
-        ngModel
-        name="oldPassword"
-        required>
-      <br>
+      <div ngModelGroup="passwordGroup" class="group">
 
-      <label>Új jelszó: </label>
-      <input
-        type="password"
-        ngModel
-        name="newPassword"
-        required>
-      <br>
+      <div>
+        <label>Jelenlegi jelszó: </label>
+        <input
+          type="password"
+          ngModel
+          name="oldPassword"
+          required>
+        <br>
+      </div>
 
-      <label>Új jelszó ismét: </label>
-      <input
-        type="password"
-        ngModel
-        name="newPasswordAgain"
-        required>
-      <br>
 
-      <button
-        type="submit"
-        [disabled]="!passwordForm.valid">Küldés</button>
+      <div>
+        <label>Új jelszó: </label>
+        <input
+          type="password"
+          ngModel
+          name="newPassword"
+          required>
+        <br>
+      </div>
+
+      <div>
+        <label>Új jelszó ismét: </label>
+        <input
+          type="password"
+          ngModel
+          name="newPasswordAgain"
+          required>
+        <br>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          class="btn button-main"
+          (click)="openModal(template)"
+          [disabled]="!passwordForm.valid">Mentés</button>
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Biztosan el szeretnéd menteni a jelszómódosítást?</p>
+              <button type="submit" class="btn button-sub" (click)="onSubmitPassword(adminForm)">Igen</button>
+              <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+            </div>
+          </ng-template>
+        </div>
       </div>
     </form>
   </div>

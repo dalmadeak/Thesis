@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
-import { UserGuard } from './bejelentkezes/user.guard';
+import { UserGuard } from './guards/user.guard';
 import { HirekComponent } from './hirek/hirek.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UlesekComponent } from './ulesek/ulesek.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'bejelentkezes',
     component: BejelentkezesComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'hirek',
