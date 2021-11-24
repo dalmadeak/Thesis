@@ -1,1 +1,37 @@
-<p>bejelentkezes works!</p>
+<div class="container">
+  <header>Bejelentkezés</header>
+  <div class="register">
+    <div class="header">
+      <p>Kérlek, jelentkezz be HÖK azonosítóddal!</p>
+    </div>
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+      <div ngModelGroup="profileGroup" class="group">
+
+      <div>
+        <label>Azonosító: </label>
+        <input
+          type="text"
+          ngModel
+          name="identifier"
+          required>
+        <br>
+      </div>
+
+      <div>
+        <label>Jelszó: </label>
+        <input
+          type="password"
+          ngModel
+          name="password"
+          required>
+        <br>
+      </div>
+
+      <button
+        class="button-main"
+        type="submit"
+        [disabled]="">Bejelentkezés</button>
+      </div>
+    </form>
+  </div>
+ </div>

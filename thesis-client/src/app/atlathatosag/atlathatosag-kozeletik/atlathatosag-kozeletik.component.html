@@ -4,12 +4,12 @@
   </div>
   <table>
     <tr>
-      <th colspan="3">Közéleti ösztöndíjak</th>
+      <th [attr.colspan]="colspan">Közéleti ösztöndíjak</th>
     </tr>
     <tr *ngFor="let member of getObject()" class="membersInfo">
       <td class="nameClass">{{member.name}}</td>
       <td class="amountClass">{{member.amount}}</td>
-      <td class="iconClass">
+      <td class="iconClass" *ngIf="isAuthenticated">
         <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
         <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
         <ng-template #template>

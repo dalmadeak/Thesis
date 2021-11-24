@@ -1,4 +1,5 @@
 const express = require('express');
+const checkAuth = require('../middleware/auth');
 
 const MonthlyReport = require('../models/havi-beszamolok');
 
@@ -46,7 +47,8 @@ router.get('/:year/:month', (req,res,next) => {
     });
 });
 
-router.post('', (req, res, next) => {
+router.post('',checkAuth, (req, res, next) => {
+
   const post = new MonthlyReport({
     postType: req.body.postType,
     author: req.body.author,
@@ -65,7 +67,7 @@ router.post('', (req, res, next) => {
 });
 
 //put - completely replace old resource with new one, patch - update resource
-router.put('/:id', (req,res,next) => {
+router.put('/:id',checkAuth, (req,res,next) => {
   const post = new MonthlyReport({
     _id: req.body._id,
     postType: req.body.postType,
@@ -82,7 +84,7 @@ router.put('/:id', (req,res,next) => {
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id',checkAuth, (req, res, next) => {
   MonthlyReport.deleteOne({_id: req.params.id}).then(result => {
     res.status(201).json({
       message: 'MonthlyReport deleted successfully'

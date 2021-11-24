@@ -44,7 +44,18 @@
   </div>
   <div class="nav-right">
     <ul>
-      <li class="nav-item"><a class="nav-link"><fa-icon [icon]="faBars" class="bars"></fa-icon></a>
+      <li *ngIf="!isAuthenticated" class="nav-item" title="Bejelentkezés"><a class="nav-link" routerLink="bejelentkezes"><fa-icon [icon]="faLogin"></fa-icon></a>
+      </li>
+      <li *ngIf="isAuthenticated" class="nav-item" title="Kijelentkezés"><button class="logButton" (click)="openModal(template)"><fa-icon [icon]="faLogout"></fa-icon></button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan ki szeretnél jelentkezni?</p>
+            <button type="button" class="btn button-sub" (click)="onLogout()">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </li>
+      <li *ngIf="isAuthenticated" class="nav-item"><a class="nav-link"><fa-icon [icon]="faBars"></fa-icon></a>
         <ul>
           <li class="subnav-item"><a class="nav-link" routerLink="sidenav/profil">Profil</a></li>
           <li class="subnav-item"><a class="nav-link" routerLink="sidenav/uj-bejegyzes">Új bejegyzés</a></li>
@@ -54,7 +65,6 @@
           <li class="subnav-item"><a class="nav-link" routerLink="sidenav/sorompo-admin">Sorompó adminisztráció</a></li>
           <li class="subnav-item"><a class="nav-link" routerLink="sidenav/belepokartya-admin">Belépőkártya adminisztráció</a></li>
           <li class="subnav-item"><a class="nav-link" routerLink="sidenav/admin">Admin panel</a></li>
-          <li class="subnav-item"><a class="nav-link" routerLink="sidenav/kijelentkezes">Kijelentkezés</a></li>
         </ul>
       </li>
     </ul>

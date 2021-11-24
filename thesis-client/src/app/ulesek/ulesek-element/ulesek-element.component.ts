@@ -4,6 +4,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Ulesek } from '../ulesek.model';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { Subscription } from "rxjs";
+import { UserService } from "src/app/bejelentkezes/user.service";
 
 @Component({
   selector: 'app-ulesek-element',
@@ -19,17 +21,28 @@ export class UlesekElementComponent implements OnInit{
   selectedOption : string = 'ules';
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isAuthenticated = false;
 
   p: number = 1;
 
   private ulesekObject : Ulesek[] = [];
+  private userAuthSubs : Subscription | undefined;
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
     this.getPosts();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
   }
+
+  ngOnDestroy() {
+     this.userAuthSubs?.unsubscribe();
+  }
+
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {

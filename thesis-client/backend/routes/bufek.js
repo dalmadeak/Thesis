@@ -1,4 +1,5 @@
 const express = require('express');
+const checkAuth = require('../middleware/auth');
 
 const Canteen = require('../models/bufek');
 
@@ -25,7 +26,7 @@ router.get('/:id', (req,res,next) => {
     });
 });
 
-router.post('', (req, res, next) => {
+router.post('',checkAuth, (req, res, next) => {
   const post = new Canteen({
     postType: req.body.postType,
     name: req.body.name,
@@ -42,7 +43,7 @@ router.post('', (req, res, next) => {
 });
 
 //put - completely replace old resource with new one, patch - update resource
-router.put('/:id', (req,res,next) => {
+router.put('/:id',checkAuth, (req,res,next) => {
   const post = new Canteen({
     _id: req.body._id,
     postType: req.body.postType,
@@ -57,7 +58,7 @@ router.put('/:id', (req,res,next) => {
   });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id',checkAuth, (req, res, next) => {
   Canteen.deleteOne({_id: req.params.id}).then(result => {
     res.status(201).json({
       message: 'Canteen deleted successfully'

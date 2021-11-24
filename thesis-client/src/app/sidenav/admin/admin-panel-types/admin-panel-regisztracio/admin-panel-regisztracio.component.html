@@ -1,0 +1,84 @@
+ <form (ngSubmit)="onSubmit(adminForm)" #adminForm="ngForm">
+  <div ngModelGroup="adminGroup" class="group">
+
+    <div>
+      <label>Azonosító: </label>
+      <input
+        type="text"
+        [ngModel]=""
+        name="identifier"
+        required>
+      <br>
+    </div>
+
+    <div>
+      <label>Jelszó: </label>
+      <input
+        type="password"
+        [ngModel]=""
+        name="password"
+        required
+        placeholder="A felhasználó módosítsa első belépéskor!">
+      <br>
+    </div>
+
+    <div>
+      <label>Pozíció: </label>
+      <select
+        ngModel
+        name="position"
+        required>
+        <option value="elnok">Elnök</option>
+        <option value="gazdasag">Gazdasági és pályázati ügyekért felelős alelnök</option>
+        <option value="strategia">Stratlgiai és innovációs alelnök</option>
+        <option value="szombathely">Szombathelyi ügyekért felelős alelnök</option>
+        <option value="hjb">HJB elnök</option>
+        <option value="kombiz">KomBiz elnök</option>
+        <option value="kb">KB elnök</option>
+        <option value="szb">SzB elnök</option>
+        <option value="tb">TB elnök</option>
+        <option value="eb">EB elnök</option>
+        <option value="vb">VB elnök</option>
+        <option value="ebtag">EB tag</option>
+        <option value="animator">Animátorkoordinátor</option>
+        <option value="admin">Informatikai referens</option>
+        <option value="kulugyifomentor">Külügyi főmentor</option>
+        <option value="media">Médiareferens</option>
+        <option value="mentor">Mentorkoordinátor</option>
+        <option value="sport">Sportreferens</option>
+        <option value="szakrendezveny">Szakterületi rendezvénykoordinátor</option>
+        <option value="sektanulmany">Szombathelyi referens</option>
+        <option value="tanarkepzes">Tanárképzési referens</option>
+        <option value="titkar">Titkár</option>
+        <option value="tudref">Tudományos referens</option>
+      </select>
+    </div>
+
+    <div>
+      <label>E-mail cím: </label>
+      <input
+        type="email"
+        [ngModel]=""
+        name="email"
+        required
+        placeholder="A HÖK levelezésének címe">
+      <br>
+    </div>
+
+    <div>
+      <button
+        type="button"
+        class="btn button-main"
+        (click)="openModal(template)"
+        [disabled]="!adminForm.valid">Küldés</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Biztosan el szeretnéd menteni a bejegyzést?</p>
+            <button type="submit" class="btn button-sub" (click)="onSubmit(adminForm)">Igen</button>
+            <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+          </div>
+        </ng-template>
+      </div>
+  </div>
+
+</form>

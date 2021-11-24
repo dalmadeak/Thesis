@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { Iroda } from "./iroda.model";
+import { UserService } from "src/app/bejelentkezes/user.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-szolgaltatasok-nyitvatartas',
@@ -21,13 +23,21 @@ export class SzolgaltatasokNyitvatartasComponent implements OnInit{
 
   private irodaObject : Iroda[] = [];
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
-  }
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {}
 
+  isAuthenticated = false;
+  private userAuthSubs : Subscription | undefined;
   ngOnInit() {
     this.getPosts();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
   }
 
+  ngOnDestroy() {
+    this.userAuthSubs?.unsubscribe();
+  }
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.irodaObject].slice().reverse();
