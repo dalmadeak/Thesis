@@ -59,6 +59,7 @@ import { UjBejegyzesSajatBeszamolokComponent } from './uj-bejegyzes/uj-bejegyzes
     UjBejegyzesHatarozatokComponent,
     UjBejegyzesPalyazatokComponent,
     UjBejegyzesSajatBeszamolokComponent,
+
   ],
   exports: [
     SidenavComponent

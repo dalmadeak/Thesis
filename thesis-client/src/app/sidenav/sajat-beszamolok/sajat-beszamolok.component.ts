@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SajatBeszamolok } from './sajat-beszamolok.model';
-import { map } from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,6 +18,7 @@ export class SajatBeszamolokComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  author: string = 'Test'
 
   private myReportsObject : SajatBeszamolok[] = [];
 
@@ -34,19 +35,20 @@ export class SajatBeszamolokComponent implements OnInit {
   }
 
   getPosts() {
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/havi-beszamolok')
-      .pipe(map(postData => {
+    this.http.get<{posts: any }>('http://localhost:3000/api/havi-beszamolok')
+      .pipe(
+        map(postData => {
         return postData.posts.map((post: any) => {
-         return {
-            _id: post._id,
-            postType: post.postType,
-            author: post.author,
-            year: post.year,
-            month: post.month,
-            content: post.content,
-            date: post.date
-          }
-        });
+          return {
+              _id: post._id,
+              postType: post.postType,
+              author: post.author,
+              year: post.year,
+              month: post.month,
+              content: post.content,
+              date: post.date
+            }
+          })
       }))
       .subscribe((finalPosts) => {
         this.myReportsObject = finalPosts;

@@ -1,4 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, DoCheck } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+
+import { SajatBeszamolok } from '../sajat-beszamolok/sajat-beszamolok.model';
+
+import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt, faFileImport, faList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,332 +11,78 @@ import { faTrash, faPencilAlt, faFileImport, faList } from '@fortawesome/free-so
   templateUrl: './beszamolok.component.html',
   styleUrls: ['./beszamolok.component.css']
 })
-export class BeszamolokComponent{
+export class BeszamolokComponent implements OnInit{
   @ViewChild('target') targetRef: ElementRef | undefined;
   monthlyReport : Array<Object> = [];
+  reportDates: any[] = []
 
   faEdit = faPencilAlt;
   faDelete = faTrash;
   faView = faList;
   faSummarize = faFileImport;
 
-  reportsObject = [
-    {
-      year: '2021',
-      month: 'szeptember',
-      reports: [
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'október',
-      reports: [
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'november',
-      reports: [
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'szeptember',
-      reports: [
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'október',
-      reports: [
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'november',
-      reports: [
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'szeptember',
-      reports: [
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'október',
-      reports: [
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'november',
-      reports: [
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'szeptember',
-      reports: [
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'szeptember',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'október',
-      reports: [
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'október',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    },
-    {
-      year: '2021',
-      month: 'november',
-      reports: [
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez is Dalma',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        },
-        {
-          year: '2021',
-          month: 'november',
-          author: 'Ez már nem',
-          date: '2021. november 4. 23:59',
-          content: 'Nagyon szeretem a kiskutyákat'
-        }]
-    }
-  ];
+  author: string = 'Test'
 
-  onClickView(data: Array<Object>) {
-    this.addMonthToSummary(data);
+  private myReportsObject : SajatBeszamolok[] = [];
+
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.getPosts();
+  }
+
+  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+  getObject() {
+    return [...this.myReportsObject].slice().reverse();
+  }
+
+  ngDoCheck() {
+    this.asd();
+  }
+
+  getPosts() {
+    this.http.get<{posts: any}>('http://localhost:3000/api/havi-beszamolok')
+      .pipe(
+        map(postData => {
+        return postData.posts.map((post: any) => {
+          return {
+              _id: post._id,
+              postType: post.postType,
+              author: post.author,
+              year: post.year,
+              month: post.month,
+              content: post.content,
+              date: post.date
+            }
+          })
+      }))
+      .subscribe((finalPosts) => {
+        this.myReportsObject = finalPosts;
+      });
+  }
+
+  asd() {
+    let isNew = true;
+
+    for(let element of this.getObject()) {
+      isNew = true;
+      for(let newDate of this.reportDates) {
+        if (newDate.year == element.year && newDate.month == element.month) {
+          isNew = false;
+        }
+      }
+      if (isNew) {
+        this.reportDates.push(element);
+      }
+    }
+    return this.reportDates;
+  }
+
+  onClickView(year: number, month: string) {
+    this.monthlyReport = this.getObject().filter( (data: any) => {
+      return data.year == year && data.month == month
+    })
     this.scrollToChild();
   }
 
