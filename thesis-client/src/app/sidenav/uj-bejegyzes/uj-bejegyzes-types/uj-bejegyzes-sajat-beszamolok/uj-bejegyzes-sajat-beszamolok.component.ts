@@ -44,7 +44,6 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   }
 
  ngOnInit() {
-  this.author = this.userService.getUserInformation();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -56,6 +55,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       } else {
         this.mode = 'createNewPost';
         this.postId = '';
+        this.author = this.userService.getUserInformation();
       }
     });
   }

@@ -126,7 +126,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
 
     let title =
     ("ELTE IK HÖK "
-    + (form.value.newRegistryGroup.committee || '[BIZOTTSÁG]')
+    + (this.getCommitteeName(form.value.newRegistryGroup.committee) || '[BIZOTTSÁG]')
     + ' '
     + (form.value.newRegistryGroup.type || '[TÍPUS]')
     + ' ülése - '
@@ -146,7 +146,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
 
     let content =
     ("Tisztelt Küldöttek, Tisztségviselők! Kedves Hallgatók!\n\nÖsszehívom az ELTE IK HÖK "
-    + (form.value.newRegistryGroup.committee || '[BIZOTTSÁG]')
+    + (this.getCommitteeName(form.value.newRegistryGroup.committee) || '[BIZOTTSÁG]')
     + " "
     + (form.value.newRegistryGroup.type || '[TÍPUS]')
     + " ülését.\n"
@@ -154,7 +154,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     + (form.value.newRegistryGroup.decisionDate.split('-').join('. ') || '[DÁTUM]')
     + ". "
     + (form.value.newRegistryGroup.decisionTime || '[IDŐPONT]')
-    + "\nHelyszín: IK HÖK iroda (1117 Budapest, Pázmány Péter sétány 1/a, -1.66/B).\n\n"
+    + "\nHelyszín: ELTE IK HÖK iroda (1117 Budapest, Pázmány Péter sétány 1/A, -1.66/B).\n\n"
     + "Az előzetes napirendi pontok a következők: \n"
     + " 1. Tájékoztató\n 2. Feladatok\n 3. Egyebek\n\n"
     + "Az esetleges kimentéseket, illetve napirendipont-módosító javaslatokat "
@@ -181,6 +181,31 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       form.value.newRegistryGroup.decisionDate &&
       form.value.newRegistryGroup.decisionTime
     );
+  }
+
+  getCommitteeName(committee: string) {
+    switch(committee) {
+      case 'kgy':
+        return 'Küldöttgyűlés';
+      case 'elnokseg':
+        return 'Elnökség';
+      case 'kabinet':
+        return 'Kabinet';
+      case 'hjb':
+        return 'Hallgatói Jóléti Bizottság';
+      case 'kombiz':
+        return 'Kommunikációs Bizottság';
+      case 'kb':
+        return 'Külügyi Bizottság';
+      case 'szb':
+        return 'Szervező Bizottság';
+      case 'tb':
+        return 'Tanulmányi Bizottság';
+      case 'eb':
+        return 'Ellenőrző Bizottság';
+      default:
+        return 'Választási Bizottság';
+    }
   }
 
   openModal(template: TemplateRef<any>) {

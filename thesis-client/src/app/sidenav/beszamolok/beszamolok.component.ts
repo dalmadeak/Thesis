@@ -38,7 +38,7 @@ export class BeszamolokComponent implements OnInit{
   }
 
   ngDoCheck() {
-    this.asd();
+    this.filterReports();
   }
 
   getPosts() {
@@ -62,7 +62,7 @@ export class BeszamolokComponent implements OnInit{
       });
   }
 
-  asd() {
+  filterReports() {
     let isNew = true;
 
     for(let element of this.getObject()) {

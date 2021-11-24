@@ -15,7 +15,7 @@
       <tr class="filesData" *ngIf="summarizeObject.length">
         <td>{{data.year}}</td>
         <td>{{data.month}}</td>
-        <td>{{data.author}}</td>
+        <td>{{data.author.position}}</td>
         <td>{{data.date}}</td>
         <td class="centeredClass">
           <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
