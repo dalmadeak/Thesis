@@ -33,7 +33,7 @@
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
           </ng-template>
-          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top" class="ttipclass"><b>[M]</b></p>
         </td>
         <td>
           <a [routerLink]="['/sidenav/admin/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
@@ -81,7 +81,7 @@
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
           </ng-template>
-          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top"><b>[M]</b></p>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top" class="ttipclass"><b>[M]</b></p>
         </td>
         <td>
           <a [routerLink]="['/sidenav/admin/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>

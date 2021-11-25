@@ -10,9 +10,6 @@ import { Sorompo } from './sorompo.model';
   styleUrls: ['./szolgaltatasok-sorompo.component.css', '../szolgaltatasok.component.css']
 })
 export class SzolgaltatasokSorompoComponent {
-  @Output() selectedOptionEvent = new EventEmitter<string>();
-  selectedOption : string = 'sorompo';
-
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   editablePost : Sorompo = {
@@ -30,6 +27,10 @@ export class SzolgaltatasokSorompoComponent {
     reason: '',
     isApproved: false
   };
+
+  today = new Date();
+  dateNow: string = ''
+  timeNow: string = ''
 
   constructor(
     private http: HttpClient,
@@ -59,7 +60,7 @@ export class SzolgaltatasokSorompoComponent {
       email: form.value.barrierRegistryGroup.email,
       phone: form.value.barrierRegistryGroup.phone,
       card: cardNumber,
-      date: today.getFullYear() + '-' + (today.getMonth()+1) + '-'+ today.getDate() + ' ' + today.getHours() + ':' + (today.getMinutes()<10?'0':'') + today.getMinutes(),
+      date: this.getDate(),
       semester: '-',
       reason: form.value.barrierRegistryGroup.reason,
       isApproved: false
@@ -73,6 +74,19 @@ export class SzolgaltatasokSorompoComponent {
     });
   }
 
+  getDate(){
+    let today = new Date();
+    this.dateNow =
+      today.getFullYear() + '-' +
+      (((today.getMonth()+1) < 10) ? ('0' + (today.getMonth()+1)) : (today.getMonth()+1)) + '-' +
+      ((today.getDate()< 10) ? ('0' + today.getDate()) : (today.getDate()));
+    this.timeNow =
+      ((today.getHours() < 10) ? ('0' + today.getHours() + ':') : (today.getHours()  + ':')) +
+      ((today.getMinutes() < 10) ? ('0' + today.getMinutes()) : (today.getMinutes()))
+
+    return this.dateNow + ' ' + this.timeNow;
+  }
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
@@ -80,10 +94,5 @@ export class SzolgaltatasokSorompoComponent {
   decline(): void {
     this.message = 'Elutasítva!';
     this.modalRef.hide();
-  }
-
-  emitSelectedOption(value: string) {
-    this.selectedOptionEvent.emit(value);
-    console.log(value)
   }
 }

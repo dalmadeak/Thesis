@@ -20,6 +20,7 @@ th {
   background-color: #13294B;
   color: white;
   padding: 10px 0px;
+  text-align: center;
 }
 
 tr {
@@ -66,4 +67,11 @@ button {
   margin: 0 10px;
   cursor: pointer;
   transition-duration: 0.2s;
+}
+
+
+@media (max-width: 900px) {
+  table{
+    width: 80%;
+  }
 }

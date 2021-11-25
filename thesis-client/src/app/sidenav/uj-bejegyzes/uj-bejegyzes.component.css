@@ -1,3 +1,7 @@
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
 h1, h3 {
   color: #13294B;
   margin: auto;
@@ -11,11 +15,12 @@ h1, h3 {
 .container {
   width: 80%;
   margin: auto;
+  text-align: justify;
   margin-bottom: 50px;
 }
 
-.createContent {
-  width: 60%;
+.register {
+  width: 80%;
   margin: auto;
   padding: 20px 40px;
   border: 1px solid #DDDDDD;
@@ -28,7 +33,7 @@ header {
   text-align: center;
   margin: auto;
   padding: 5px 40px;
-  width: 60%;
+  width: 80%;
   border: 1px solid #13294B;
 }
 
@@ -40,22 +45,64 @@ header {
 }
 
 .group > div > label {
-  flex: 1 0 350px;
+  flex: 2 1 350px;
   max-width: 250px;
 }
 
 .group > div > label + * {
-  flex: 1 0 350px;
+  flex: 2 1 350px;
 }
 
-select {
-  background-color: #F1F2F1;
+input, select{
   height: 25px;
+}
+
+input, textarea, select {
+  background-color: #F1F2F1;
   width: 60%;
   min-width: 300px;
   font-size: 16px;
   border: none;
+}
 
+textarea {
+  vertical-align: top;
+}
+
+button {
+  background-color: #13294B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 30px auto 0px auto;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+.button-main {
+  display:block;
+}
+
+.button-sub {
+  padding: 10px 20px;
+  margin: 0 10px;
+}
+
+.button-main {
+  display:block;
+}
+
+.button-sub {
+  padding: 10px 20px;
+  margin: 0 10px;
+}
+
+button:hover {
+  background-color: #236192;
+}
+
+button:disabled {
+  background-color: #A7BAD8;
 }
 
 @media (max-width: 1300px) {
@@ -63,12 +110,27 @@ select {
     width: 90%;
   }
 
-  .createContent, header {
-    width: 75%;
+  .register, header {
+    width: 85%;
   }
-   select {
+
+  input, textarea, select{
     width: 100%;
     min-width: 0;
   }
 
+  textarea {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 750px) {
+  .register, header {
+    width: 95%;
+    padding: 20px;
+  }
+
+  input, textarea, select{
+    margin-bottom: -15px;
+  }
 }

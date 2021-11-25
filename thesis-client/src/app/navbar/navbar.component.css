@@ -89,7 +89,7 @@ ul li ul li {
 	outline: inherit;
 }
 
-.nav-item {
+.nav-item, .menu {
   font-size: 18px;
   font-weight: bold;
 }
@@ -120,4 +120,43 @@ ul li ul li {
   transition-duration: 0.2s;
   padding: 10px 20px;
   margin: 0 10px;
+}
+
+@media (max-width: 500px) {
+  nav {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .nav-left, .nav-right {
+    width: 100%;
+  }
+
+  ul, li {
+    flex-flow: column wrap;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #2B2C33;
+  }
+
+  ul li ul li {
+    display: block;
+  }
+
+  ul, li {
+    flex-flow: column wrap;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #2B2C33;
+  }
+
+  a, .logButton {
+    margin: auto;
+    width: 100%;
+    padding: 5px;
+  }
 }

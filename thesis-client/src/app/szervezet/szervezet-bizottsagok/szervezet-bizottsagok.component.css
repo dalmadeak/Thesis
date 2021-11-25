@@ -9,6 +9,7 @@ th {
   background-color: #13294B;
   color: white;
   padding: 10px 0px;
+  text-align: center;
 }
 
 .committeeBrief {
@@ -30,4 +31,16 @@ h1 {
 .header {
   max-width: 55%;
   margin: 30px auto;
+}
+
+@media (max-width: 1200px) {
+  table {
+    width: 80%;
+  }
+}
+
+@media (max-width: 770px) {
+  table {
+    width: 90%;
+  }
 }
