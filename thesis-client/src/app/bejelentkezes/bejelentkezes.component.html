@@ -4,7 +4,7 @@
     <div class="header">
       <p>Kérlek, jelentkezz be HÖK azonosítóddal!</p>
     </div>
-    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+    <form (submit)="onLogin(loginForm, template)" #loginForm="ngForm">
       <div ngModelGroup="profileGroup" class="group">
 
       <div>
@@ -29,8 +29,13 @@
 
       <button
         class="button-main"
-        type="submit"
-        [disabled]="">Bejelentkezés</button>
+        type="submit">Bejelentkezés</button>
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Hibás felhasználónév, vagy jelszó!</p>
+            <button class="btn button-sub" (click)="getUserService().back()">Vissza</button>
+          </div>
+        </ng-template>
       </div>
     </form>
   </div>

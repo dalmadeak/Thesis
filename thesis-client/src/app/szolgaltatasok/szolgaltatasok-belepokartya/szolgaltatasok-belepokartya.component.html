@@ -10,7 +10,7 @@
   </div>
   <header>Belépőkártya Regisztráció</header>
   <div class="register">
-    <form (ngSubmit)="onSubmit(cardRegisterForm)" #cardRegisterForm="ngForm">
+    <form (ngSubmit)="onSubmit(cardRegisterForm, template2)" #cardRegisterForm="ngForm">
       <div ngModelGroup="cardRegistryGroup" class="group">
 
       <div>
@@ -79,8 +79,14 @@
           <ng-template #template>
             <div class="modal-body text-center">
               <p>Biztosan el szeretnéd menteni a regisztrációdat?</p>
-              <button type="submit" class="btn button-sub" (click)="onSubmit(cardRegisterForm)">Igen</button>
+              <button type="submit" class="btn button-sub" (click)="onSubmit(cardRegisterForm, template2)">Igen</button>
               <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+            </div>
+          </ng-template>
+          <ng-template #template2>
+            <div class="modal-body text-center">
+              <p>Sikeres jelentkezés! Hamarosan megkeresünk e-mailben!</p>
+              <button type="button" class="btn button-sub" (click)="decline()" >Vissza</button>
             </div>
           </ng-template>
         </div>

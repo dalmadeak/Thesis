@@ -17,6 +17,7 @@ import { UserService } from 'src/app/bejelentkezes/user.service';
 export class ProfilComponent implements OnInit{
   private postId : any;
   private userData: any;
+  private authLevel: number = 5;
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
@@ -39,6 +40,7 @@ export class ProfilComponent implements OnInit{
 
   ngOnInit() {
     this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.postId = this.userData.userId;
     this.http.get<{message: string, post: any }>('http://localhost:3000/api/auth/' + this.postId)
     .subscribe((fetchedData) => {
@@ -63,26 +65,11 @@ export class ProfilComponent implements OnInit{
 
   }
 
-  /*addNewPost(form : NgForm) {
-    const newPost : Felhasznalo = {
-      _id: null,
-      postType: 'auth',
-      identifier: form.value.adminGroup.identifier,
-      fullName: form.value.adminGroup.fullName,
-      password: form.value.adminGroup.password,
-      position: form.value.adminGroup.position,
-      email: form.value.adminGroup.email,
-      permissions: form.value.adminGroup.permissions,
-    }
+  getAuthLevel() {
+    return this.authLevel;
+  }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/auth/register', newPost)
-      .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
-    });
-  }*/
-
- updateProfile(id: string, form: NgForm) {
+  updateProfile(id: string, form: NgForm) {
     const post = {
       fullName: form.value.adminGroup.fullName,
       email: form.value.adminGroup.email,

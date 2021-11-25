@@ -35,34 +35,17 @@ export class SzolgaltatasokBelepokartyaComponent {
   }
 
  ngOnInit() {
-    /*this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      if (paramMap.has('id')) {
-        this.mode = 'editPost';
-        this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/belepokartya/' + this.postId)
-          .subscribe((fetchedData) => {
-          this.editablePost = fetchedData.post[0];
-        });
-      } else {
-        this.mode = 'createNewPost';
-        this.postId = '';
-      }
-    });*/
+
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm, template: TemplateRef<any>) {
     this.message = 'Elfogadva';
-    this.addNewPost(form);
-    /*if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
-    } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
-    }*/
+    this.addNewPost(form, template);
     form.reset();
     this.modalRef.hide();
   }
 
-  addNewPost(form : NgForm) {
+  addNewPost(form : NgForm, template: TemplateRef<any>) {
     let today = new Date();
     const newPost : Belepokartya = {
       _id: null,
@@ -83,6 +66,7 @@ export class SzolgaltatasokBelepokartyaComponent {
       .subscribe((data) => {
       const id = data.postId;
       newPost._id = id;
+      this.openModal(template);
     });
   }
 

@@ -10,7 +10,7 @@
   </div>
   <header>Sorompó Regisztráció</header>
   <div class="register">
-      <form (ngSubmit)="onSubmit(barRegisterForm)" #barRegisterForm="ngForm">
+      <form (ngSubmit)="onSubmit(barRegisterForm, template2)" #barRegisterForm="ngForm">
         <div ngModelGroup="barrierRegistryGroup" class="group">
         <div>
           <label>Név: </label>
@@ -113,8 +113,14 @@
             <ng-template #template>
               <div class="modal-body text-center">
                 <p>Biztosan el szeretnéd menteni a regisztrációdat?</p>
-                <button type="submit" class="btn button-sub" (click)="onSubmit(barRegisterForm)">Igen</button>
+                <button type="submit" class="btn button-sub" (click)="onSubmit(barRegisterForm, template2)">Igen</button>
                 <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+              </div>
+            </ng-template>
+            <ng-template #template2>
+              <div class="modal-body text-center">
+                <p>Sikeres jelentkezés! Hamarosan megkeresünk e-mailben!</p>
+                <button type="button" class="btn button-sub" (click)="decline()" >Vissza</button>
               </div>
             </ng-template>
           </div>
