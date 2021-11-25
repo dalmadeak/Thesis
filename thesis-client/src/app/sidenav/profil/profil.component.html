@@ -4,7 +4,7 @@
   </div>
   <header>Felhasználói adatok</header>
   <div class="register">
-    <form (ngSubmit)="onSubmitProfile(adminForm)" #adminForm="ngForm">
+    <form #adminForm="ngForm">
       <div ngModelGroup="adminGroup" class="group">
 
         <div>
@@ -28,9 +28,9 @@
           <button
             type="button"
             class="btn button-main"
-            (click)="openModal(template)"
+            (click)="openModal(template1)"
             [disabled]="!adminForm.valid">Mentés</button>
-            <ng-template #template>
+            <ng-template #template1>
               <div class="modal-body text-center">
                 <p>Biztosan el szeretnéd menteni a profilodat?</p>
                 <button type="submit" class="btn button-sub" (click)="onSubmitProfile(adminForm)">Igen</button>
@@ -44,7 +44,7 @@
   </div>
   <header class="second">Felhasználói adatok</header>
   <div class="register">
-    <form (ngSubmit)="onSubmitPassword(passwordForm)" #passwordForm="ngForm">
+    <form #passwordForm="ngForm">
       <div ngModelGroup="passwordGroup" class="group">
 
       <div>
@@ -82,12 +82,12 @@
         <button
           type="button"
           class="btn button-main"
-          (click)="openModal(template)"
+          (click)="openModal(template2)"
           [disabled]="!passwordForm.valid">Mentés</button>
-          <ng-template #template>
+          <ng-template #template2>
             <div class="modal-body text-center">
               <p>Biztosan el szeretnéd menteni a jelszómódosítást?</p>
-              <button type="submit" class="btn button-sub" (click)="onSubmitPassword(adminForm)">Igen</button>
+              <button type="submit" class="btn button-sub" (click)="onSubmitPassword(passwordForm)">Igen</button>
               <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
             </div>
           </ng-template>

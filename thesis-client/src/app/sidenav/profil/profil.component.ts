@@ -2,9 +2,12 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/bejelentkezes/user.service';
+
 
 @Component({
   selector: 'app-profil',
@@ -13,6 +16,7 @@ import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 })
 export class ProfilComponent implements OnInit{
   private postId : any;
+  private userData: any;
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
@@ -29,41 +33,33 @@ export class ProfilComponent implements OnInit{
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute,
-    private modalService: BsModalService) {
+    private modalService: BsModalService,
+    private userService : UserService) {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      if (paramMap.has('id')) {
-        this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/auth/' + this.postId)
-          .subscribe((fetchedData) => {
-          this.editablePost = fetchedData.post[0];
-          console.log(this.editablePost)
-        });
-      } else {
-        this.postId = '';
-      }
+    this.userData = this.userService.getUserInformation();
+    this.postId = this.userData.userId;
+    this.http.get<{message: string, post: any }>('http://localhost:3000/api/auth/' + this.postId)
+    .subscribe((fetchedData) => {
+      this.editablePost = fetchedData.post[0];
     });
   }
 
   onSubmitProfile(form: NgForm) {
     this.updateProfile(this.postId, form);
-    form.reset();
     this.modalRef.hide();
   }
 
   onSubmitPassword(form: NgForm) {
-    if (form.value.passwordGroup.newPassword == form.value.passwordGroup.newPasswordAgain
-      && form.value.passwordGroup.newPassword !== form.value.passwordGroup.oldPassword
-      ) {
-        this.updatePassword(this.postId, form);
-        form.reset();
-        this.modalRef.hide();
+    if (form.value.passwordGroup.newPassword == form.value.passwordGroup.newPasswordAgain &&
+    form.value.passwordGroup.newPassword != form.value.passwordGroup.oldPassword) {
+      this.updatePassword(this.postId, form);
     } else {
-      console.log('xd fail');
+      console.log('failxd')
     }
+    form.reset();
+    this.modalRef.hide();
 
   }
 
@@ -87,33 +83,22 @@ export class ProfilComponent implements OnInit{
   }*/
 
  updateProfile(id: string, form: NgForm) {
-    const post : Felhasznalo = {
-      _id: id,
-      postType: 'auth',
-      identifier: form.value.adminGroup.identifier,
+    const post = {
       fullName: form.value.adminGroup.fullName,
-      password: form.value.adminGroup.password,
-      position: form.value.adminGroup.position,
       email: form.value.adminGroup.email,
-      permissions: form.value.adminGroup.permissions,
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/auth/register/' + id, post)
+    this.http.patch<{ message: string }>('http://localhost:3000/api/auth/register/user/' + id, post)
       .subscribe()
   }
 
   updatePassword(id: string, form: NgForm) {
-    const post : Felhasznalo = {
-      _id: id,
-      postType: 'auth',
-      identifier: form.value.adminGroup.identifier,
-      fullName: form.value.adminGroup.fullName,
-      password: form.value.adminGroup.password,
-      position: form.value.adminGroup.position,
-      email: form.value.adminGroup.email,
-      permissions: form.value.adminGroup.permissions,
-    }
-    this.http.put<{ message: string }>('http://localhost:3000/api/auth/register/' + id, post)
-      .subscribe()
+      const post = {
+        userId: this.userData.userId,
+        password: form.value.passwordGroup.newPassword,
+      }
+      console.log(this.userData.userId)
+      this.http.patch<{ message: string }>('http://localhost:3000/api/auth/register/password/' + id, post)
+        .subscribe()
   }
 
   openModal(template: TemplateRef<any>) {

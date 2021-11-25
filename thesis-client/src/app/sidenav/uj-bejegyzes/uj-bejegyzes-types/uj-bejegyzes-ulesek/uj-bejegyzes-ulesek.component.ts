@@ -7,7 +7,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Ulesek } from '../../../../ulesek/ulesek.model';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 import { UserService } from 'src/app/bejelentkezes/user.service';
-import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-uj-bejegyzes-ulesek',
