@@ -29,7 +29,7 @@
             type="button"
             class="btn button-main"
             (click)="openModal(template1)"
-            [disabled]="!adminForm.valid">Mentés</button>
+            [disabled]="!adminForm.valid || getAuthLevel() > 3">Mentés</button>
             <ng-template #template1>
               <div class="modal-body text-center">
                 <p>Biztosan el szeretnéd menteni a profilodat?</p>

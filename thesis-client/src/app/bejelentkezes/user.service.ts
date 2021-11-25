@@ -1,12 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, TemplateRef } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Felhasznalo } from "./user.model";
 import { NgForm } from "@angular/forms";
 import { Subject } from "rxjs";
 import { Router } from "@angular/router";
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
   private token : string | null = '';
   private userAuthStatus = new Subject<boolean>();
   private isAuthenticated = false;
@@ -14,9 +18,9 @@ export class UserService {
 
   private userInfo: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private modalService: BsModalService) {}
 
-  login(form: NgForm) {
+  login(form: NgForm, template: TemplateRef<any>) {
     const userData: Felhasznalo = {
       _id: null,
       postType: 'auth',
@@ -45,7 +49,11 @@ export class UserService {
           this.userAuthStatus.next(true);
           let expiration = this.getInTime(expiresIn)
           this.saveUserData(this.token, expiration, this.userInfo)
+          setTimeout(() => {this.router.navigate(['/'])}, 1000);
         }
+      }, error => {
+        this.userAuthStatus.next(false);
+        this.openModal(template);
       })
   }
 
@@ -163,6 +171,15 @@ export class UserService {
 
   getUserStatusListener() {
     return this.userAuthStatus.asObservable();
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  back(): void {
+    this.message = 'Elutasítva!';
+    this.modalRef.hide();
   }
 
 }
