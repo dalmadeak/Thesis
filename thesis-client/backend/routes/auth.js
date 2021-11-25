@@ -83,7 +83,6 @@ router.post('/login', (req, res, next) => {
         email: fetchedUser.email,
         permissions: fetchedUser.permissions,
       });
-      console.log(token)
     })
     .catch(error => {
       return res.status(401).json({
@@ -92,32 +91,45 @@ router.post('/login', (req, res, next) => {
     })
 });
 
-/*//put - completely replace old resource with new one, patch - update resource
-router.put('/:id', (req,res,next) => {
+//put - completely replace old resource with new one, patch - update resource
+router.patch('/register/user/:id', (req,res,next) => {
+  const post = {
+    fullName: req.body.fullName,
+    email: req.body.email
+  };
+  User.updateOne({_id: req.params.id}, post).then(result => {
+    res.status(200).json({
+      message: 'User updated successfully'
+    });
+  })
+})
+
+router.patch('/register/password/:id', (req,res,next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
-      const post = new User({
-        postType: req.body.postType,
-        fullName: fetchedUser.fullName,
-        identifier: req.body.identifier,
-        password: hash,
-        position: req.body.position,
-        email: req.body.email
-      });
-      User.updateOne({_id: req.params.id}, post).then(result => {
-        res.status(200).json({
-          message: 'User updated successfully'
-        });
-      })
-    })
-});*/
-
-router.delete('/:id', (req, res, next) => {
-  User.deleteOne({_id: req.params.id}).then(result => {
-    res.status(201).json({
-      message: 'User deleted successfully'
+      const post = {
+        password: hash
+      };
+      User.findOne({_id: req.body.userId})
+      .then(user => {
+        return bcrypt.compare(hash, user.password)
+          .then(result => {
+            if(!result) {
+              return res.status(401).json({
+                message: 'Authentication failed!'
+              });
+            } else {
+              User.updateOne({_id: req.params.id}, post).then(result => {
+                res.status(200).json({
+                  message: 'User updated successfully'
+                });
+              })
+              console.log('hash ' + hash);
+              console.log('user.pass ' + user.password)
+            }
+          });
     });
   });
-});
+})
 
 module.exports = router;

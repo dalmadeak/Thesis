@@ -14,8 +14,8 @@ export class BejelentkezesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async onLogin(form: NgForm) {
-    await this.userService.login(form);
+  onLogin(form: NgForm) {
+    this.userService.login(form);
     setTimeout(() => {this.router.navigate(['/'])}, 1000);
   }
 }

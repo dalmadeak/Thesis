@@ -65,10 +65,18 @@ button {
   color: white;
   border: none;
   padding: 10px 20px;
-  margin: 10px auto 0px auto;
-  display:block;
+  margin: 30px auto 0px auto;
   cursor: pointer;
   transition-duration: 0.2s;
+}
+
+.button-main {
+  display:block;
+}
+
+.button-sub {
+  padding: 10px 20px;
+  margin: 0 10px;
 }
 
 button:hover {
