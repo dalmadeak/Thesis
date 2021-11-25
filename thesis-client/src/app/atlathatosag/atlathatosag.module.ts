@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { AtlathatosagRoutingModule } from "./atlathatosag-rounting.module";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AtlathatosagComponent } from "./atlathatosag.component";
 import { AtlathatosagNavbarComponent } from "./atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek-navbar/atlathatosag-navbar.component";
@@ -19,7 +20,8 @@ import { AtlathatosagPalyazatokFilesComponent } from "./atlathatosag-palyazatok/
     CommonModule,
     AtlathatosagRoutingModule,
     FontAwesomeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxSpinnerModule
   ],
   declarations: [
     AtlathatosagComponent,

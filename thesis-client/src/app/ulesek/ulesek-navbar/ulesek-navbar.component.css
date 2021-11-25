@@ -37,3 +37,28 @@ li:focus-within a {
   font-size: 14px;
   font-weight: bold;
 }
+
+@media (max-width: 500px) {
+  nav {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  ul, li {
+    flex-flow: column wrap;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #2B2C33;
+  }
+
+  li {
+    padding: 5px;
+  }
+}

@@ -80,3 +80,39 @@ button {
   cursor: pointer;
   transition-duration: 0.2s;
 }
+
+@media (max-width: 1200px) {
+  .container {
+    margin: 30px auto;
+    padding: 0;
+    border-spacing: 30px 10px;
+  }
+
+  .profilePicture {
+    width: 200px;
+    height: 280px;
+  }
+  .contactInfo {
+    width: 300px;
+    padding: 20px 5px;
+  }
+}
+
+@media (max-width: 690px) {
+  tr {
+    display: block;
+  }
+
+  .profilePicture {
+    width: 300px;
+    height: 380px;
+    margin: 15px;
+  }
+  .contactInfo {
+    margin: 15px;
+  }
+
+  td {
+    float: left;
+  }
+}

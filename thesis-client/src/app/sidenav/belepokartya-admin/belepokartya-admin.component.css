@@ -14,12 +14,8 @@ h1 {
   margin: 50px auto;
 }
 
-table {
-  border-collapse: collapse;
-}
-
 .container {
-  width: 70%;
+  width: 80%;
   margin: 30px auto;
   text-align: left;
   border: 1px solid #F1F2F1;
@@ -28,7 +24,12 @@ table {
 
 table {
   border-collapse: collapse;
-  page-break-inside:auto;
+  page-break-inside: auto;
+  overflow-x:auto;
+  width: 70%;
+  margin: 30px auto;
+  text-align: left;
+  border: 1px solid #F1F2F1;
 }
 
 .mainHeader {
@@ -44,22 +45,21 @@ table {
   word-break: break-word;
 }
 
-th {
-  text-align: center;
-}
-
-p {
-  margin-bottom: 0;
-}
-
 td, th{
-  padding: 10px;
+  padding: 5px;
   max-width: 350px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   text-align: center;
 }
 
 tr:hover {
   background-color: #F1F2F1;
+}
+
+.ttipclass {
+  margin-bottom: -3px;
 }
 
 button {
@@ -79,4 +79,12 @@ button {
 .button-sub {
   padding: 10px 20px;
   margin: 30px 10px 0px 10px;
+}
+
+.mainClass {
+  overflow-x:auto;
+}
+
+.filesHeader {
+  background-color: #F1F2F1;
 }

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from "src/app/bejelentkezes/user.service";
 import { Subscription } from "rxjs";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-atlathatosag-palyazatok-files',
@@ -32,7 +33,7 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
   private userData: any;
   private authLevel: number = 5;
 
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -55,6 +56,7 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
   }
 
   getPosts() {
+    this.spinner.show();
     this.http.get<{message: string, posts: any }>('http://localhost:3000/api/palyazatok')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
@@ -70,6 +72,7 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
       }))
       .subscribe((finalPosts) => {
         this.palyazatokObject = finalPosts;
+        this.spinner.hide();
       });
   }
 

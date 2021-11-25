@@ -28,6 +28,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this.userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
@@ -43,6 +45,8 @@ export class NavbarComponent implements OnInit, OnDestroy{
   onLogout() {
     this.message = 'Elfogadva!';
     this.modalRef.hide();
+    this.userData = null;
+    this.authLevel = 5;
     this.userService.logout();
   }
 

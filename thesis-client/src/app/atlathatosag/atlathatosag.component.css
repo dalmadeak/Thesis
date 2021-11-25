@@ -4,6 +4,10 @@ fa-icon {
   cursor: pointer;
 }
 
+.mainClass {
+  overflow-x:auto;
+}
+
 h1 {
   color: #13294B;
   margin: auto;
@@ -16,9 +20,7 @@ h1 {
 
 table {
   border-collapse: collapse;
-}
-
-.container {
+  overflow-x:auto;
   width: 70%;
   margin: 30px auto;
   text-align: left;

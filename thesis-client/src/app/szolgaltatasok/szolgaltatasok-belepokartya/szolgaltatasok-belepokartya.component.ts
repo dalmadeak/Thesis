@@ -28,6 +28,10 @@ export class SzolgaltatasokBelepokartyaComponent {
     isApproved: false
   };
 
+  today = new Date();
+  dateNow: string = ''
+  timeNow: string = ''
+
   constructor(
     private http: HttpClient,
     private modalService: BsModalService) {
@@ -55,7 +59,7 @@ export class SzolgaltatasokBelepokartyaComponent {
       studentId: form.value.cardRegistryGroup.studentId,
       card: '-',
       permissions: '-',
-      date: today.getFullYear() + '-' + (today.getMonth()+1) + '-'+ today.getDate() + ' ' + today.getHours() + ':' + (today.getMinutes()<10?'0':'') + today.getMinutes(),
+      date: this.getDate(),
       returnDate: '-',
       reason: form.value.cardRegistryGroup.reason,
       isApproved: false
@@ -67,6 +71,19 @@ export class SzolgaltatasokBelepokartyaComponent {
       newPost._id = id;
       this.openModal(template);
     });
+  }
+
+  getDate(){
+    let today = new Date();
+    this.dateNow =
+      today.getFullYear() + '-' +
+      (((today.getMonth()+1) < 10) ? ('0' + (today.getMonth()+1)) : (today.getMonth()+1)) + '-' +
+      ((today.getDate()< 10) ? ('0' + today.getDate()) : (today.getDate()));
+    this.timeNow =
+      ((today.getHours() < 10) ? ('0' + today.getHours() + ':') : (today.getHours()  + ':')) +
+      ((today.getMinutes() < 10) ? ('0' + today.getMinutes()) : (today.getMinutes()))
+
+    return this.dateNow + ' ' + this.timeNow;
   }
 
   openModal(template: TemplateRef<any>) {

@@ -1,3 +1,7 @@
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
 h1, h3 {
   color: #13294B;
   margin: auto;
@@ -10,24 +14,15 @@ h1, h3 {
 
 .container {
   width: 80%;
-  margin: auto;
-  margin-bottom: 50px;
+  margin: 50px auto;
+  text-align: justify;
 }
 
 .register {
-  width: 50%;
+  width: 80%;
   margin: auto;
   padding: 20px 40px;
   border: 1px solid #DDDDDD;
-}
-
-.second {
-  margin-top: 50px;
-}
-
-label {
-  margin: 10px 0;
-  display:inline-block;
 }
 
 header {
@@ -35,29 +30,36 @@ header {
   background-color: #13294B;
   font-weight: bold;
   text-align: center;
-  margin: auto;
+  margin: 50px auto 0 auto;
   padding: 5px 40px;
-  width: 50%;
+  width: 80%;
   border: 1px solid #13294B;
+}
+
+.group div{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.group > div > label {
+  flex: 2 1 350px;
+  max-width: 250px;
+}
+
+.group > div > label + * {
+  flex: 2 1 350px;
 }
 
 input {
   height: 25px;
-  float: right;
-  clear: both;
-  border: none;
   background-color: #F1F2F1;
   width: 60%;
   min-width: 300px;
   font-size: 16px;
-}
+  border: none;
 
-input.ng-touched.ng-invalid{
-  border: 1px solid red;
-}
-
-input:focus{
-  outline: green;
 }
 
 button {
@@ -87,22 +89,25 @@ button:disabled {
   background-color: #A7BAD8;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1300px) {
   .container {
     width: 90%;
   }
 
   .register, header {
-    width: 75%;
+    width: 85%;
   }
 
-  input {
-    display: block;
+  input{
     width: 100%;
     min-width: 0;
   }
 
-  button{
-    margin-top: 40px;
+}
+
+@media (max-width: 750px) {
+  .register, header {
+    width: 95%;
+    padding: 20px;
   }
 }

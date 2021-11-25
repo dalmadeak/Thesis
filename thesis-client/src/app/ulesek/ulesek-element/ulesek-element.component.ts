@@ -54,7 +54,7 @@ export class UlesekElementComponent implements OnInit{
 
   getPosts() {
     this.spinner.show();
-    setTimeout( () => {this.http.get<{message: string, posts: any }>('http://localhost:3000/api/ulesek')
+    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/ulesek')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -73,7 +73,7 @@ export class UlesekElementComponent implements OnInit{
       .subscribe((finalPosts) => {
         this.ulesekObject = finalPosts;
         this.spinner.hide();
-      });},5000);
+      });
   }
 
   deletePost(postId : string) {
