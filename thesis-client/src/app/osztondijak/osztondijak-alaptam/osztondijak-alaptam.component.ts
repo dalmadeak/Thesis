@@ -6,10 +6,4 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../osztondijak.component.css']
 })
 export class OsztondijakAlaptamComponent{
-
-  file = {
-    name: 'Alaptámogatás_21_22.png',
-    path: '../../../assets/images/header-background.png'
-  }
-
 }

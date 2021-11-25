@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/bejelentkezes/user.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-ulesek-element',
@@ -29,7 +30,7 @@ export class UlesekElementComponent implements OnInit{
   private userData: any;
   private authLevel: number = 5;
 
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -52,7 +53,8 @@ export class UlesekElementComponent implements OnInit{
   }
 
   getPosts() {
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/ulesek')
+    this.spinner.show();
+    setTimeout( () => {this.http.get<{message: string, posts: any }>('http://localhost:3000/api/ulesek')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -70,7 +72,8 @@ export class UlesekElementComponent implements OnInit{
       }))
       .subscribe((finalPosts) => {
         this.ulesekObject = finalPosts;
-      });
+        this.spinner.hide();
+      });},5000);
   }
 
   deletePost(postId : string) {

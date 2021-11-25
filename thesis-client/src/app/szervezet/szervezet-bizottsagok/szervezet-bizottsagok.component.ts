@@ -3,6 +3,7 @@ import { Component, NgModule, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { Kuldottgyules } from "../szervezet-kgy/kuldottgyules.model";
 
@@ -53,7 +54,7 @@ export class SzervezetBizottsagokComponent implements OnInit {
     }
   ]
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -66,6 +67,7 @@ export class SzervezetBizottsagokComponent implements OnInit {
   }
 
   getPosts() {
+    this.spinner.show();
     this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kuldottgyules')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
@@ -83,7 +85,7 @@ export class SzervezetBizottsagokComponent implements OnInit {
       }))
       .subscribe((finalPosts) => {
         this.kuldottgyulesObject = finalPosts;
-        console.log(this.kuldottgyulesObject)
+        this.spinner.hide();
       });
   }
 

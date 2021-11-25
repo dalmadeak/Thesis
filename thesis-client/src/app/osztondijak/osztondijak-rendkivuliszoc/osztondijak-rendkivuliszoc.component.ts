@@ -7,15 +7,4 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OsztondijakRendkivuliszocComponent {
 
-  filesObject = [
-    {
-      name: 'Rendkivuli_szoctam_21_22.png',
-      path: '../../../assets/images/header-background.png'
-    },
-    {
-      name: 'BNO_kodok.png',
-      path: '../../../assets/images/header-background.png'
-    }
-  ];
-
 }

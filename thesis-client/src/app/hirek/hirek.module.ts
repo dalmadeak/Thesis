@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { HirekComponent } from "./hirek.component";
 import { HirekElementComponent } from "./hirek-element/hirek-element.component";
@@ -17,7 +18,8 @@ import { HirekSliderComponent } from "./hirek-slider/hirek-slider.component";
     FontAwesomeModule,
     NgImageSliderModule,
     NgxPaginationModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule
   ],
   declarations: [
     HirekComponent,

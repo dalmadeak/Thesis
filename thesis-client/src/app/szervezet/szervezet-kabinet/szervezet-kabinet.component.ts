@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { Kabinet } from "./kabinet.model";
 import { UserService } from "src/app/bejelentkezes/user.service";
@@ -26,7 +27,7 @@ export class SzervezetKabinetComponent {
   private userData: any;
   private authLevel: number = 5;
 
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -49,6 +50,7 @@ export class SzervezetKabinetComponent {
   }
 
   getPosts() {
+    this.spinner.show();
     this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kabinet')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
@@ -64,6 +66,7 @@ export class SzervezetKabinetComponent {
       }))
       .subscribe((finalPosts) => {
         this.kabinetObject = finalPosts;
+        this.spinner.hide();
       });
   }
 

@@ -2,6 +2,7 @@
   <div class="header">
     <h1>Iroda nyitvatartás</h1>
   </div>
+  <ngx-spinner bdColor = "rgba(0,0,0,0.1)" size = "medium" color = "#13294b" type = "ball-beat" [fullScreen] = "false"></ngx-spinner>
   <div class="dataContainer" *ngFor="let office of getObject()">
     <div class="postIcons" *ngIf="isAuthenticated && getAuthLevel() == 1">
       <a [routerLink]="['/sidenav/admin/szerkesztes', office.postType, office._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>

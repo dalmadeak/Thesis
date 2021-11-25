@@ -3,6 +3,7 @@ import { Component, OnInit,TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { Bufek } from "./bufek.model";
 import { UserService } from "src/app/bejelentkezes/user.service";
@@ -27,7 +28,7 @@ export class SzolgaltatasokEtkezokComponent {
   private userData: any;
   private authLevel: number = 5;
 
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -50,6 +51,7 @@ export class SzolgaltatasokEtkezokComponent {
   }
 
   getPosts() {
+    this.spinner.show();
     this.http.get<{message: string, posts: any }>('http://localhost:3000/api/bufek')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
@@ -64,6 +66,7 @@ export class SzolgaltatasokEtkezokComponent {
       }))
       .subscribe((finalPosts) => {
         this.irodaObject = finalPosts;
+        this.spinner.hide();
       });
   }
 

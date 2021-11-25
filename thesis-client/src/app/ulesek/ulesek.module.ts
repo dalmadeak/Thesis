@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { UlesekComponent } from "./ulesek.component";
 import { UlesekElementComponent } from "./ulesek-element/ulesek-element.component";
@@ -17,7 +18,8 @@ import { UlesekNavbarComponent } from "./ulesek-navbar/ulesek-navbar.component";
     FontAwesomeModule,
     NgImageSliderModule,
     NgxPaginationModule,
-    RouterModule
+    RouterModule,
+    NgxSpinnerModule
   ],
   declarations: [
     UlesekComponent,

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from './user.service';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-bejelentkezes',
@@ -16,10 +16,12 @@ export class BejelentkezesComponent implements OnInit, OnDestroy {
 
   private userAuthSubs : Subscription | undefined;
 
-  constructor(private userService : UserService, private router: Router, private modalService: BsModalService) { }
+  constructor(private userService : UserService) { }
 
   ngOnInit(){
+    //spinnerhez kell browser animations module is az app-ba
     this.userAuthSubs = this.userService.getUserStatusListener().subscribe( status => {
+      console.log(status)
     })
   }
 

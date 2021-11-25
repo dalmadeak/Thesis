@@ -2,8 +2,6 @@ import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/c
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-
 import { Sorompo } from './sorompo.model';
 
 @Component({

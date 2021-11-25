@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { SzervezetRoutingModule } from "./szervezet-routing.module";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { SzervezetComponent } from "./szervezet.component";
 import { SzervezetElnoksegComponent } from "./szervezet-elnokseg/szervezet-elnokseg.component";
@@ -14,7 +15,8 @@ import { SzervezetKuldottgyulesComponent } from "./szervezet-kgy/szervezet-kgy.c
   imports: [
     CommonModule,
     FontAwesomeModule,
-    SzervezetRoutingModule
+    SzervezetRoutingModule,
+    NgxSpinnerModule
   ],
   declarations: [
     SzervezetComponent,
