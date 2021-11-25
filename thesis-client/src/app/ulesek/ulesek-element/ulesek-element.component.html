@@ -3,7 +3,7 @@
   <ng-container *ngFor="let ules of filterObject(getObject()) | paginate: { itemsPerPage: 25, currentPage: p }">
     <div class="post" *ngIf="filterData == undefined || filterData.id == ules.committee">
       <p class="postHeader">
-        ELTE IK HÖK {{ ules.committee }} {{ ules.type }} ülés - {{ ules.decisionDate }}
+        {{ules.title}}
       </p>
       <div class="postContent">
           {{ules.content}}
