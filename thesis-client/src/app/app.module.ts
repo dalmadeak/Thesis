@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -7,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { HirekModule } from './hirek/hirek.module';
 import { UlesekModule } from './ulesek/ulesek.module';
@@ -35,9 +37,11 @@ import { AuthInterceptor } from './sidenav/admin/admin-panel-types/admin-panel-r
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgImageSliderModule,
     NgxPaginationModule,
+    NgxSpinnerModule,
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
@@ -49,11 +53,12 @@ import { AuthInterceptor } from './sidenav/admin/admin-panel-types/admin-panel-r
     AtlathatosagModule,
     SidenavModule,
     ModalModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

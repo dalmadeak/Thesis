@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SzolgaltatasokRoutingModule } from "./szolgaltatasok-routing.module";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { SzolgaltatasokComponent } from "./szolgaltatasok.component";
 import { SzolgaltatasokBelepokartyaComponent } from "./szolgaltatasok-belepokartya/szolgaltatasok-belepokartya.component";
@@ -16,7 +17,8 @@ import { SzolgaltatasokNyitvatartasComponent } from "./szolgaltatasok-nyitvatart
     CommonModule,
     SzolgaltatasokRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxSpinnerModule
   ],
   declarations: [
     SzolgaltatasokComponent,

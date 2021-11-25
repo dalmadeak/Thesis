@@ -2,6 +2,7 @@
   <div class="header">
     <h1>Bizottságok</h1>
   </div>
+  <ngx-spinner bdColor = "rgba(0,0,0,0.1)" size = "medium" color = "#13294b" type = "ball-beat" [fullScreen] = "false"></ngx-spinner>
   <table *ngFor="let committee of committeesObject">
       <tr>
         <th colspan="3">{{ committee.name }}</th>

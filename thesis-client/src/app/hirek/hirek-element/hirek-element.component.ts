@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from "src/app/bejelentkezes/user.service";
 import { Subscription } from "rxjs";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-hirek-element',
@@ -27,7 +28,7 @@ export class HirekElementComponent implements OnInit, OnDestroy{
   private userData: any;
   private authLevel: number = 5;
 
-  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit() {
@@ -50,6 +51,7 @@ export class HirekElementComponent implements OnInit, OnDestroy{
   }
 
   getPosts() {
+    this.spinner.show();
     this.http.get<{message: string, posts: any }>('http://localhost:3000/api/hirek')
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
@@ -64,16 +66,19 @@ export class HirekElementComponent implements OnInit, OnDestroy{
       }))
       .subscribe((finalPosts) => {
         this.hirekObject = finalPosts;
+        this.spinner.hide();
       });
   }
 
   deletePost(postId : string) {
     this.message = 'Elfogadva!';
     this.modalRef.hide();
+    this.spinner.show();
     this.http.delete('http://localhost:3000/api/hirek/' + postId)
       .subscribe(() => {
         const updatedPost = this.hirekObject.filter(post => post._id !== postId);
         this.hirekObject = updatedPost;
+        this.spinner.hide();
       })
   }
 

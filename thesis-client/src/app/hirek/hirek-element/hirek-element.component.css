@@ -91,3 +91,8 @@ p {
   text-align: center;
   margin: auto;
 }
+
+.spinnerClass .spinner{
+  margin-top: 1000px !important;
+  margin: auto;
+}

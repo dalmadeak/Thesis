@@ -6,16 +6,4 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../osztondijak.component.css']
 })
 export class OsztondijakRendszocComponent{
-
-  filesObject = [
-    {
-      name: 'Rendszeres_szoctam_21_22.png',
-      path: '../../../assets/images/header-background.png'
-    },
-    {
-      name: 'BNO_kodok.png',
-      path: '../../../assets/images/header-background.png'
-    }
-  ];
-
 }

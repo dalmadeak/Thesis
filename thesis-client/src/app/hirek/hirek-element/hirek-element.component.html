@@ -1,4 +1,5 @@
 <div class="postContainer">
+    <ngx-spinner bdColor = "rgba(0,0,0,0)" size = "medium" color = "#FFFFFF" type = "ball-beat" [fullScreen] = "false"></ngx-spinner>
     <div class="post" *ngFor="let hir of getObject() | paginate: { itemsPerPage: 24, currentPage: p }">
         <p class="postHeader">{{ hir.title }}</p>
         <p class="postContent">{{ hir.content }}</p>
