@@ -16,7 +16,6 @@ export class UjBejegyzesHirekComponent implements OnInit {
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   today = new Date();
   dateNow: string = ''
@@ -55,7 +54,6 @@ export class UjBejegyzesHirekComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form);
     } else if (this.mode === 'editPost') {
@@ -91,7 +89,6 @@ export class UjBejegyzesHirekComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/hirek/' + id, post)
       .subscribe((data) => {
-        console.log(data);
       })
   }
 
@@ -113,7 +110,6 @@ export class UjBejegyzesHirekComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

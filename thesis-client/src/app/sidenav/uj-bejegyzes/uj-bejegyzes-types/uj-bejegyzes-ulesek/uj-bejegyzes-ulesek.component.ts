@@ -19,7 +19,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   private author: any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isContentClicked = false;
   isTitleClicked = false;
 
@@ -65,7 +64,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form, this.author);
     } else if (this.mode === 'editPost') {
@@ -96,7 +94,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   }
 
   updatePost(id: string, form: NgForm, author: Felhasznalo) {
-    console.log(author)
     const post : Ulesek = {
       _id: id,
       postType: 'ulesek',
@@ -142,7 +139,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   generateMeetingContent(form: NgForm, author: Felhasznalo){
     if(this.isContentClicked || this.mode == 'editPost' || !this.checkInputValidity(form)) return;
     this.isContentClicked = true;
-    console.log(author);
     let appendix = ['a','e','i','o','u'].includes(author.email.charAt(0)) ? 'az' : 'a'
 
     let content =
@@ -227,7 +223,6 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

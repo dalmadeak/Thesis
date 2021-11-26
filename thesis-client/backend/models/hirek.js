@@ -7,8 +7,4 @@ const hirekSchema = mongoose.Schema({
   date: { type: String, required: true }
 });
 
-//this schema needs a model (a definition)
 module.exports = mongoose.model('Post', hirekSchema);
-
-//Amikor elmentünk egy új hírt, akkor adatbázisban kerül elmentésre - az adatbázisban egy olyan kollekciót fog ennek létrehozni
-//automatikusan, ami a séma nevének a többes száma, kisbetűvel (pl.: Post -> posts)

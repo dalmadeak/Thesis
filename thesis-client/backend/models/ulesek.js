@@ -11,6 +11,5 @@ const ulesekSchema = mongoose.Schema({
   date: { type: String, required: true }
 });
 
-//this schema needs a model (a definition)
 module.exports = mongoose.model('Meeting', ulesekSchema);
 

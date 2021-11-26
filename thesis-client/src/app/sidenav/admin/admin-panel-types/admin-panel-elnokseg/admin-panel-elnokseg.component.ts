@@ -21,7 +21,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
   imagePreview: string = '';
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Elnokseg = {
     _id : '',
     postType: '',
@@ -52,7 +51,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
         this.http.get<{message: string, post: any }>('http://localhost:3000/api/elnokseg/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
-          console.log(this.editablePost)
           this.form.setValue(
             {
               'name': this.editablePost.name,
@@ -69,7 +67,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
   }
 
   onSubmit() {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost();
     } else if (this.mode === 'editPost') {
@@ -82,14 +79,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
   }
 
   addNewPost() {
-    /*const newPost : Elnokseg = {
-      _id: null,
-      postType: 'elnokseg',
-      name: this.form.value.name,
-      position: this.form.value.position,
-      email: this.form.value.email,
-      file: this.form.value.file,
-    }*/
     const postData = new FormData();
     postData.append('_id', '');
     postData.append('postType', 'elnokseg');
@@ -100,26 +89,10 @@ export class AdminPanelElnoksegComponent implements OnInit {
 
     this.http.post<{ message: string, post: Elnokseg }>('http://localhost:3000/api/elnokseg', postData)
       .subscribe((data) => {
-      const newPost: Elnokseg = {
-        _id: data.post._id,
-        postType: 'elnokseg',
-        name: this.form.value.name,
-        position: this.form.value.position,
-        email: this.form.value.email,
-        file: data.post.file,
-      }
     });
   }
 
   updatePost(id: string, file: File | string) {
-    /*const post : Elnokseg = {
-      _id: id,
-      postType: 'elnokseg',
-      name: this.form.value.name,
-      position: this.form.value.position,
-      email:  this.form.value.email,
-      file: this.form.value.file,
-    }*/
     let postData : Elnokseg | FormData;
     if(typeof(file) === "object") {
       postData = new FormData();
@@ -142,14 +115,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/elnokseg/' + id, postData)
       .subscribe((data) => {
-        const newPost: Elnokseg = {
-          _id: id,
-          postType: 'elnokseg',
-          name: this.form.value.name,
-          position: this.form.value.position,
-          email: this.form.value.email,
-          file: ''
-        }
       })
   }
 
@@ -158,7 +123,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
-    //convert do data url
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = (reader.result as string);
@@ -172,7 +136,6 @@ export class AdminPanelElnoksegComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

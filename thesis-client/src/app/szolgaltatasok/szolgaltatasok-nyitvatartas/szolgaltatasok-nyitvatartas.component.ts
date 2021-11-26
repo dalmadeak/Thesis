@@ -20,7 +20,6 @@ export class SzolgaltatasokNyitvatartasComponent implements OnInit{
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private irodaObject : Iroda[] = [];
@@ -44,7 +43,7 @@ export class SzolgaltatasokNyitvatartasComponent implements OnInit{
   ngOnDestroy() {
     this.userAuthSubs?.unsubscribe();
   }
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
+
   getObject() {
     return [...this.irodaObject].slice().reverse();
   }
@@ -70,7 +69,6 @@ export class SzolgaltatasokNyitvatartasComponent implements OnInit{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/iroda/' + postId)
       .subscribe(() => {
@@ -88,7 +86,6 @@ export class SzolgaltatasokNyitvatartasComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

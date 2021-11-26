@@ -8,7 +8,6 @@
         <th [attr.colspan]="colspan">Küldöttgyűlés</th>
       </tr>
       <tr>
-        <!-- dinamikus colspan attribútom változtatás (one way data binding)-->
         <td class="committeeBrief" [attr.colspan]="colspan">{{ brief }}</td>
       </tr>
       <ng-container *ngFor="let member of getObject()" >

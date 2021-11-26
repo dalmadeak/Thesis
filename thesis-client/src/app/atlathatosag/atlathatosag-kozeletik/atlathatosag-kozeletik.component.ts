@@ -1,13 +1,14 @@
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Component, OnInit,TemplateRef } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { map } from 'rxjs/operators'
-import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { NgxSpinnerService } from "ngx-spinner";
-
-import { Kozeletik } from "./kozeletik.model";
-import { UserService } from "src/app/bejelentkezes/user.service";
 import { Subscription } from "rxjs";
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from "ngx-spinner";
+import { UserService } from "src/app/bejelentkezes/user.service";
+import { Kozeletik } from "./kozeletik.model";
+import { map } from 'rxjs/operators'
+import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-atlathatosag-kozeletik',
@@ -19,7 +20,6 @@ export class AtlathatosagKozeletikComponent implements OnInit{
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   colspan = 3;
   isAuthenticated = false;
 
@@ -50,7 +50,6 @@ export class AtlathatosagKozeletikComponent implements OnInit{
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.kozeletikObject];
   }
@@ -75,7 +74,6 @@ export class AtlathatosagKozeletikComponent implements OnInit{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/kozeletik/' + postId)
       .subscribe(() => {
@@ -93,7 +91,6 @@ export class AtlathatosagKozeletikComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

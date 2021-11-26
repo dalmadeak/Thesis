@@ -20,7 +20,6 @@ export class HirekElementComponent implements OnInit, OnDestroy{
   p: number = 1;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -45,7 +44,6 @@ export class HirekElementComponent implements OnInit, OnDestroy{
      this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.hirekObject].slice().reverse();
   }
@@ -71,7 +69,6 @@ export class HirekElementComponent implements OnInit, OnDestroy{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.spinner.show();
     this.http.delete('http://localhost:3000/api/hirek/' + postId)
@@ -91,7 +88,6 @@ export class HirekElementComponent implements OnInit, OnDestroy{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

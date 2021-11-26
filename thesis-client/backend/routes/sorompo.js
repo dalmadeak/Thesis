@@ -6,7 +6,7 @@ const Barrier = require('../models/sorompo');
 const router = express.Router();
 
 router.get('', (req,res,next) => {
-  Barrier.find() //returns all entries
+  Barrier.find()
     .then(documents => {
       res.status(200).json({
         message: 'Barriers fetched successfully',
@@ -15,7 +15,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   Barrier.find({_id: req.params.id})
     .then(fetchedPost => {
@@ -41,7 +40,6 @@ router.post('',checkAuth, (req, res, next) => {
     reason: req.body.reason,
     isApproved: req.body.isApproved
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Barrier added successfully',
@@ -50,7 +48,6 @@ router.post('',checkAuth, (req, res, next) => {
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, (req,res,next) => {
   const post = new Barrier({
     _id: req.body._id,

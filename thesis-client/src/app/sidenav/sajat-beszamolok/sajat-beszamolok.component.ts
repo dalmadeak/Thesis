@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SajatBeszamolok } from './sajat-beszamolok.model';
-import { filter, map } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/bejelentkezes/user.service";
@@ -19,21 +19,18 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
 
   private myReportsObject : SajatBeszamolok[] = [];
   private userAuthSubs : Subscription | undefined;
   private user: any;
-  private authLevel: number = 5;
 
   constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
     this.user = this.userService.getUserInformation();
-    this.authLevel = this.userService.getUserAuthorizationLevel(this.user);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
     this.userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
@@ -72,7 +69,6 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/havi-beszamolok/' + postId)
       .subscribe(() => {
@@ -86,7 +82,6 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

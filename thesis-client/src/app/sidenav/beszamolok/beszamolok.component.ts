@@ -20,8 +20,6 @@ export class BeszamolokComponent implements OnInit{
   faDelete = faTrash;
   faView = faList;
 
-  author: string = 'Test'
-
   private myReportsObject : SajatBeszamolok[] = [];
 
   constructor(private http: HttpClient) {
@@ -63,7 +61,6 @@ export class BeszamolokComponent implements OnInit{
 
   filterReports() {
     let isNew = true;
-
     for(let element of this.getObject()) {
       isNew = true;
       for(let newDate of this.reportDates) {

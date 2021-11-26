@@ -15,7 +15,6 @@ import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 })
 export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isDisabled: boolean = false;
 
   today = new Date();
@@ -64,7 +63,6 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form, this.author);
     } else if (this.mode === 'editPost') {
@@ -89,7 +87,6 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       .subscribe((data) => {
       const id = data.postId;
       newPost._id = id;
-      console.log(newPost)
     });
   }
 
@@ -103,7 +100,6 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     }
     this.http.patch<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
       .subscribe((data) => {
-        console.log(post);
       })
   }
 
@@ -125,7 +121,6 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

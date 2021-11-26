@@ -6,7 +6,7 @@ const MonthlyReport = require('../models/havi-beszamolok');
 const router = express.Router();
 
 router.get('', (req,res,next) => {
-  MonthlyReport.find() //returns all entries
+  MonthlyReport.find()
     .then(documents => {
       res.status(200).json({
         message: 'Monthly Reports fetched successfully',
@@ -15,7 +15,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   MonthlyReport.find({_id: req.params.id})
     .then(fetchedPost => {
@@ -26,7 +25,6 @@ router.get('/:id', (req,res,next) => {
     });
 });
 
-//Get post by author
 router.get('/:author', (req,res,next) => {
   MonthlyReport.find({author: req.params.author})
     .then(documents => {
@@ -36,7 +34,6 @@ router.get('/:author', (req,res,next) => {
     });
 });
 
-//Get post by date
 router.get('/:year/:month', (req,res,next) => {
   MonthlyReport.find({year: req.params.year, month: req.params.month})
     .then(fetchedPost => {
@@ -57,7 +54,6 @@ router.post('',checkAuth, (req, res, next) => {
     content: req.body.content,
     date: req.body.date,
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Monthly Report added successfully',
@@ -66,7 +62,6 @@ router.post('',checkAuth, (req, res, next) => {
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.patch('/:id',checkAuth, (req,res,next) => {
   const post = new MonthlyReport({
     _id: req.body._id,

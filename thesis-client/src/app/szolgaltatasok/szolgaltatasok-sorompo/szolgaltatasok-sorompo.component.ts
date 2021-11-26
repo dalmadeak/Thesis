@@ -11,7 +11,6 @@ import { Sorompo } from './sorompo.model';
 })
 export class SzolgaltatasokSorompoComponent {
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Sorompo = {
     _id : '',
     postType: '',
@@ -41,7 +40,6 @@ export class SzolgaltatasokSorompoComponent {
   }
 
   onSubmit(form: NgForm, template: TemplateRef<any>) {
-    this.message = 'Elfogadva';
     this.addNewPost(form, template);
     form.reset();
     this.modalRef.hide();
@@ -92,7 +90,6 @@ export class SzolgaltatasokSorompoComponent {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

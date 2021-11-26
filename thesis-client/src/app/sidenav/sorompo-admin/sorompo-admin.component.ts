@@ -17,7 +17,6 @@ export class SorompoAdminComponent implements OnInit{
   faCheck = faCheck;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   private sorompoObject : Sorompo[] = [];
 
@@ -60,7 +59,6 @@ export class SorompoAdminComponent implements OnInit{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/sorompo/' + postId)
       .subscribe(() => {
@@ -74,7 +72,6 @@ export class SorompoAdminComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

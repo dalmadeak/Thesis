@@ -2,14 +2,6 @@ const http = require('http');
 const app = require('./backend/app');
 const debug = require('debug')('node-angular');
 
-/*const server = http.createServer((req, res) => {
-  res.end('This is my response');
-});
-
-const port = (process.env.PORT || '3000');
-
-server.listen(port);*/
-
 const normalizedPort = val => {
   let port = parseInt(val, 10);
 
@@ -54,4 +46,4 @@ const server = http.createServer(app);
 server.on('error', onError);
 server.on('listening', onListening);
 server.listen(port);
-console.log('yay!')
+console.log('Szerver elindítva!')

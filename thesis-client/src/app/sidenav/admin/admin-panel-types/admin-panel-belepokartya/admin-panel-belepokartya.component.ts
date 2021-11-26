@@ -17,7 +17,6 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   today = new Date();
   dateNow: string = '';
@@ -63,7 +62,6 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form);
     } else if (this.mode === 'editPost') {
@@ -113,7 +111,6 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/belepokartya/' + id, post)
       .subscribe((data) => {
-        console.log(data);
       })
   }
 
@@ -135,7 +132,6 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

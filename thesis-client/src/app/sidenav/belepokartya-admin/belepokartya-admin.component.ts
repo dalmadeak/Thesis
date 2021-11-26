@@ -17,7 +17,6 @@ export class BelepokartyaAdminComponent implements OnInit{
   faCheck = faCheck;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   private belepokartyaObject : Belepokartya[] = [];
 
@@ -28,7 +27,6 @@ export class BelepokartyaAdminComponent implements OnInit{
     this.getPosts();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.belepokartyaObject].slice().reverse();
   }
@@ -55,12 +53,10 @@ export class BelepokartyaAdminComponent implements OnInit{
       }))
       .subscribe((finalPosts) => {
         this.belepokartyaObject = finalPosts;
-        console.log(this.belepokartyaObject)
       });
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/belepokartya/' + postId)
       .subscribe(() => {
@@ -74,7 +70,6 @@ export class BelepokartyaAdminComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

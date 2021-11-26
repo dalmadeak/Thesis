@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
   selectedOption : string | undefined = 'elnokseg';
 
-  constructor(private cd : ChangeDetectorRef, private router: Router){
-  }
+  constructor(private cd : ChangeDetectorRef, private router: Router){}
 
   ngOnInit(){
     if ((this.router.url).includes('szerkesztes')) {

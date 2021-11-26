@@ -19,7 +19,6 @@ export class SzervezetElnoksegComponent implements OnInit {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -44,7 +43,6 @@ export class SzervezetElnoksegComponent implements OnInit {
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.elnoksegObject];
   }
@@ -71,7 +69,6 @@ export class SzervezetElnoksegComponent implements OnInit {
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/elnokseg/' + postId)
       .subscribe(() => {
@@ -89,7 +86,6 @@ export class SzervezetElnoksegComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

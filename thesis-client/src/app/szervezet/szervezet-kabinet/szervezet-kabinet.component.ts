@@ -19,7 +19,6 @@ export class SzervezetKabinetComponent {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -44,7 +43,6 @@ export class SzervezetKabinetComponent {
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.kabinetObject];
   }
@@ -71,7 +69,6 @@ export class SzervezetKabinetComponent {
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/kabinet/' + postId)
       .subscribe(() => {
@@ -89,7 +86,6 @@ export class SzervezetKabinetComponent {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

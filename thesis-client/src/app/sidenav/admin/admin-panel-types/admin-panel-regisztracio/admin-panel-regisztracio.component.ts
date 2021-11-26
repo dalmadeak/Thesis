@@ -12,7 +12,6 @@ import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 })
 export class AdminPanelRegisztracioComponent implements OnInit {
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Felhasznalo = {
     _id : '',
     postType: '',
@@ -26,7 +25,6 @@ export class AdminPanelRegisztracioComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute,
     private modalService: BsModalService) {
   }
 
@@ -63,7 +61,6 @@ export class AdminPanelRegisztracioComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

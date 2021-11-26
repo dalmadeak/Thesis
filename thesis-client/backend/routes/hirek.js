@@ -6,7 +6,7 @@ const Post = require('../models/hirek');
 const router = express.Router();
 
 router.get('', (req,res,next) => {
-  Post.find() //returns all entries
+  Post.find()
     .then(documents => {
       res.status(200).json({
         message: 'Posts fetched successfully',
@@ -15,7 +15,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   Post.find({_id: req.params.id})
     .then(fetchedPost => {
@@ -33,7 +32,7 @@ router.post('',checkAuth, (req, res, next) => {
     content: req.body.content,
     date: req.body.date
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
+
   post.save().then( result => {
     res.status(201).json({
       message: 'Post added successfully',
@@ -42,7 +41,6 @@ router.post('',checkAuth, (req, res, next) => {
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, (req,res,next) => {
   const post = new Post({
     _id: req.body._id,

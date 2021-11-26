@@ -13,6 +13,5 @@ const hatarozatokSchema = mongoose.Schema({
   file: { type: String },
 });
 
-//this schema needs a model (a definition)
 module.exports = mongoose.model('Decision', hatarozatokSchema);
 

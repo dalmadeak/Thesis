@@ -20,7 +20,6 @@ export class SzolgaltatasokEtkezokComponent {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -45,7 +44,6 @@ export class SzolgaltatasokEtkezokComponent {
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.irodaObject].slice().reverse();
   }
@@ -75,7 +73,6 @@ export class SzolgaltatasokEtkezokComponent {
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/bufek/' + postId)
       .subscribe(() => {
@@ -89,7 +86,6 @@ export class SzolgaltatasokEtkezokComponent {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 
