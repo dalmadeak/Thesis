@@ -17,6 +17,7 @@ export class ProfilComponent implements OnInit{
   private authLevel: number = 5;
 
   modalRef: BsModalRef = new BsModalRef();
+  isValidPassword = true;
   editablePost : Felhasznalo = {
     _id : '',
     postType: '',
@@ -49,10 +50,12 @@ export class ProfilComponent implements OnInit{
     this.modalRef.hide();
   }
 
-  onSubmitPassword(form: NgForm) {
+  onSubmitPassword(form: NgForm, template: TemplateRef<any>) {
     if (form.value.passwordGroup.newPassword == form.value.passwordGroup.newPasswordAgain &&
     form.value.passwordGroup.newPassword != form.value.passwordGroup.oldPassword) {
-      this.updatePassword(this.postId, form);
+      this.updatePassword(this.postId, form, template);
+    } else {
+      this.isValidPassword = false;
     }
     form.reset();
     this.modalRef.hide();
@@ -60,6 +63,10 @@ export class ProfilComponent implements OnInit{
 
   getAuthLevel() {
     return this.authLevel;
+  }
+
+  getUserService() {
+    return this.userService;
   }
 
   updateProfile(id: string, form: NgForm) {
@@ -71,13 +78,18 @@ export class ProfilComponent implements OnInit{
       .subscribe()
   }
 
-  updatePassword(id: string, form: NgForm) {
+  updatePassword(id: string, form: NgForm, template: TemplateRef<any>) {
       const post = {
         userId: this.userData.userId,
         password: form.value.passwordGroup.newPassword,
+        oldPass: form.value.passwordGroup.oldPassword,
       }
       this.http.patch<{ message: string }>('http://localhost:3000/api/auth/register/password/' + id, post)
-        .subscribe()
+        .subscribe(message => {
+          if (message.message == 'User updated successfully') {
+            this.openModal(template);
+          }
+        })
   }
 
   openModal(template: TemplateRef<any>) {
