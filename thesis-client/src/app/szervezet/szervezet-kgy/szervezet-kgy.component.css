@@ -23,6 +23,10 @@ th {
   text-align: center;
 }
 
+tr:hover {
+  background-color: #FFFFFF;
+}
+
 .committeeBrief {
   text-align: justify;
   margin: auto;

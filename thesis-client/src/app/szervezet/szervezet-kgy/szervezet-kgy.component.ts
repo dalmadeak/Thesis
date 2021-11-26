@@ -54,7 +54,8 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
 
   //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
-    return [...this.kuldottgyulesObject].sort((a,b) => (a.fullName > b.fullName) ? 1 : ((b.fullName > a.fullName) ? -1 : 0));
+    //localeCompare az az ékezetes betűk maitt kell, mert az Á leghátul van az abc-ben :)
+    return [...this.kuldottgyulesObject].sort((a,b) => (a.fullName.localeCompare(b.fullName) > 0) ? 1 : ((a.fullName.localeCompare(b.fullName) <= 0) ? -1 : 0));
   }
 
   getPosts() {
@@ -92,12 +93,6 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
 
   getCommitteeName(committee: string) {
     switch(committee) {
-      case 'kgy':
-        return 'Küldöttgyűlés';
-      case 'elnokseg':
-        return 'Elnökség';
-      case 'kabinet':
-        return 'Kabinet';
       case 'hjb':
         return 'Hallgatói Jóléti Bizottság';
       case 'kombiz':

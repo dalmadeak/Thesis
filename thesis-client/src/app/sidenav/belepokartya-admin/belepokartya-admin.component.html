@@ -33,7 +33,7 @@
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
           </ng-template>
-          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top" class="ttipclass"><b>[M]</b></p>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="left" class="ttipclass"><b>[M]</b></p>
         </td>
         <td>
           <a [routerLink]="['/sidenav/admin/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
@@ -75,13 +75,13 @@
         <td>{{data.card}}</td>
         <td>{{data.permissions}}</td>
         <td>{{data.date}}</td>
-        <td *ngIf="data.returnDate != ' ' ">{{data.returnDate}}</td>
-        <td *ngIf="data.returnDate == ' '">-</td>
+        <td *ngIf="data.returnDate != ' ' && data.returnDate && data.returnDate != ' undefined'; else elseBlock">{{data.returnDate}}</td>
+        <ng-template #elseBlock><td>-</td></ng-template>
         <td>
           <ng-template #tooltiptemplate>
             <p>{{data.reason}}</p>
           </ng-template>
-          <p [tooltip]="tooltiptemplate" triggers="hover" placement="top" class="ttipclass"><b>[M]</b></p>
+          <p [tooltip]="tooltiptemplate" triggers="hover" placement="left" class="ttipclass"><b>[M]</b></p>
         </td>
         <td>
           <a [routerLink]="['/sidenav/admin/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>

@@ -11,23 +11,26 @@
         <!-- dinamikus colspan attribútom változtatás (one way data binding)-->
         <td class="committeeBrief" [attr.colspan]="colspan">{{ brief }}</td>
       </tr>
-      <tr *ngFor="let member of getObject()" class="membersInfo">
-        <td>{{ member.fullName }}</td>
-        <td>{{ getCommitteeName(member.firstCommittee) }}</td>
-        <td *ngIf="member.secondCommittee">{{ getCommitteeName(member.secondCommittee) }}</td>
-        <td *ngIf="isAuthenticated && getAuthLevel() == 1">
-          <div class="iconClass">
-            <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
-            <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
-            <ng-template #template>
-              <div class="modal-body text-center">
-                <p>Biztosan törlöd a bejegyzést?</p>
-                <button type="button" class="btn button-sub" (click)="deletePost(member._id)">Igen</button>
-                <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
-              </div>
-            </ng-template>
-          </div>
-        </td>
-      </tr>
+      <ng-container *ngFor="let member of getObject()" >
+        <tr *ngIf="member.firstCommittee !== 'eb' && member.firstCommittee !== 'vb'" class="membersInfo">
+          <td>{{ member.fullName }}</td>
+          <td>{{ getCommitteeName(member.firstCommittee) }}</td>
+          <td *ngIf="member.secondCommittee">{{ getCommitteeName(member.secondCommittee) }}</td>
+          <td *ngIf="!member.secondCommittee">-</td>
+          <td *ngIf="isAuthenticated && getAuthLevel() == 1">
+            <div class="iconClass">
+              <a [routerLink]="['/sidenav/admin/szerkesztes', member.postType, member._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
+              <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
+              <ng-template #template>
+                <div class="modal-body text-center">
+                  <p>Biztosan törlöd a bejegyzést?</p>
+                  <button type="button" class="btn button-sub" (click)="deletePost(member._id)">Igen</button>
+                  <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+                </div>
+              </ng-template>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
   </table>
   </div>

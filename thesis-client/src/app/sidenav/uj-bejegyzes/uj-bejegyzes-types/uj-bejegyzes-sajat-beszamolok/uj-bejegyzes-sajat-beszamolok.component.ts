@@ -94,16 +94,14 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
   }
 
   updatePost(id: string, form: NgForm, author: Felhasznalo) {
-    const post : SajatBeszamolok = {
+    const post = {
       _id: id,
-      author: author,
-      postType: 'sajat',
       year: form.value.newRegistryGroup.year,
       month: form.value.newRegistryGroup.month,
       content: form.value.newRegistryGroup.content,
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
+    this.http.patch<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
       .subscribe((data) => {
         console.log(post);
       })

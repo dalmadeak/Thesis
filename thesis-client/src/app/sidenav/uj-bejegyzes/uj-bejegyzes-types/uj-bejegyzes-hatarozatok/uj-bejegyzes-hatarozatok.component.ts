@@ -21,6 +21,7 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isFileUploaded: boolean = false;
 
   today = new Date();
   dateNow: string = ''
@@ -167,32 +168,20 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/hatarozatok/' + id, postData)
       .subscribe((data) => {
-        const newPost = {
-          _id: id,
-          postType: 'hatarozatok',
-          committee: this.form.value.committee,
-          title: this.form.value.title,
-          number: this.form.value.number,
-          decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
-          content: this.form.value.content,
-          mandate: this.form.value.mandate,
-          vote: this.form.value.vote,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: ''
-        }
       })
   }
 
   onFilePicked(event: Event) {
+    if(!(event.target as HTMLInputElement).files![0]) {
+      return;
+    }
     const file = (event.target as HTMLInputElement).files![0];
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
     //convert do data url
     const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = (reader.result as string);
-    };
+    this.isFileUploaded = true;
     reader.readAsDataURL(file);
   }
 

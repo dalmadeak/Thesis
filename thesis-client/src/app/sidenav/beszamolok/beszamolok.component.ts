@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { SajatBeszamolok } from '../sajat-beszamolok/sajat-beszamolok.model';
 
 import { map } from 'rxjs/operators'
-import { faTrash, faPencilAlt, faFileImport, faList } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPencilAlt, faList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-beszamolok',
@@ -19,7 +19,6 @@ export class BeszamolokComponent implements OnInit{
   faEdit = faPencilAlt;
   faDelete = faTrash;
   faView = faList;
-  faSummarize = faFileImport;
 
   author: string = 'Test'
 

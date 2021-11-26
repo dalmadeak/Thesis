@@ -21,6 +21,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isFileUploaded: boolean = false;
 
   today = new Date();
   dateNow: string = ''
@@ -153,15 +154,16 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   }
 
   onFilePicked(event: Event) {
+    if(!(event.target as HTMLInputElement).files![0]) {
+      return;
+    }
     const file = (event.target as HTMLInputElement).files![0];
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
     //convert do data url
     const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = (reader.result as string);
-    };
+    this.isFileUploaded = true;
     reader.readAsDataURL(file);
   }
 
