@@ -36,6 +36,10 @@ header {
   border: 1px solid #13294B;
 }
 
+.warn{
+  margin-top: -50px;
+}
+
 .group div{
   display: flex;
   flex-wrap: wrap;

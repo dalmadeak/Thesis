@@ -104,23 +104,26 @@ router.patch('/register/user/:id', (req,res,next) => {
 
 router.patch('/register/password/:id', (req,res,next) => {
   bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-      const post = {
-        password: hash
-      };
+    .then(() => {
       User.findOne({_id: req.body.userId})
       .then(user => {
-        return bcrypt.compare(hash, user.password)
+        return bcrypt.compare(req.body.oldPass, user.password)
           .then(result => {
             if(!result) {
               return res.status(401).json({
-                message: 'Authentication failed!'
+                message: 'No new password added'
               });
             } else {
-              User.updateOne({_id: req.params.id}, post).then(result => {
-                res.status(200).json({
-                  message: 'User updated successfully'
-                });
+              bcrypt.hash(req.body.password, 10)
+              .then(newHash => {
+                const post = {
+                  password: newHash
+                };
+                User.updateOne({_id: req.params.id}, post).then(result => {
+                  res.status(200).json({
+                    message: 'User updated successfully'
+                  });
+                })
               })
             }
           });

@@ -79,16 +79,24 @@
       </div>
 
       <div>
+        <p class="warn" *ngIf="!isValidPassword" style="color:red">Nem megfelelő jelszó!</p>
         <button
           type="button"
           class="btn button-main"
           (click)="openModal(template2)"
           [disabled]="!passwordForm.valid">Mentés</button>
+
           <ng-template #template2>
             <div class="modal-body text-center">
               <p>Biztosan el szeretnéd menteni a jelszómódosítást?</p>
-              <button type="submit" class="btn button-sub" (click)="onSubmitPassword(passwordForm)">Igen</button>
+              <button type="submit" class="btn button-sub" (click)="onSubmitPassword(passwordForm, template3)">Igen</button>
               <button type="button" class="btn button-sub" (click)="decline()" >Nem</button>
+            </div>
+          </ng-template>
+          <ng-template #template3>
+            <div class="modal-body text-center">
+              <p>Sikeres jelszómódosítás!</p>
+              <button class="btn button-sub" (click)="decline()">Vissza</button>
             </div>
           </ng-template>
         </div>
