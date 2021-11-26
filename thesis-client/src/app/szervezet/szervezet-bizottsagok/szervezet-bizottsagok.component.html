@@ -10,13 +10,13 @@
       <ng-container *ngFor="let member of getObject()">
         <tr *ngIf="member.firstCommittee == committee.committee" class="membersInfo">
           <td>{{ member.fullName }}</td>
-          <td>{{ member.firstPosition }}</td>
-          <td>{{ member.email }}</td>
+          <td>{{ getPosition(member.firstPosition) }}</td>
+          <td *ngIf="member.firstPosition == 'elnok'">{{ member.email }}</td>
         </tr>
         <tr *ngIf="member.secondCommittee == committee.committee" class="membersInfo">
           <td>{{ member.fullName }}</td>
-          <td>{{ member.secondPosition }}</td>
-          <td>{{ member.email }}</td>
+          <td>{{ getPosition(member.secondPosition) }}</td>
+          <td *ngIf="member.secondPosition == 'elnok'">{{ member.email }}</td>
         </tr>
       </ng-container>
   </table>

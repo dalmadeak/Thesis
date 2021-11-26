@@ -67,11 +67,9 @@ router.post('',checkAuth, (req, res, next) => {
 });
 
 //put - completely replace old resource with new one, patch - update resource
-router.put('/:id',checkAuth, (req,res,next) => {
+router.patch('/:id',checkAuth, (req,res,next) => {
   const post = new MonthlyReport({
     _id: req.body._id,
-    postType: req.body.postType,
-    author: req.authData,
     year: req.body.year,
     month: req.body.month,
     content: req.body.content,

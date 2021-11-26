@@ -26,15 +26,17 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   private myReportsObject : SajatBeszamolok[] = [];
   private userAuthSubs : Subscription | undefined;
   private user: any;
+  private authLevel: number = 5;
 
   constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
     this.user = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.user);
     this.getPosts();
     this.isAuthenticated = this.userService.getIsAuthenticated();
-    this. userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+    this.userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
     });
   }

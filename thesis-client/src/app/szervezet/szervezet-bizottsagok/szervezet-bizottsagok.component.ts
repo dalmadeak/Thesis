@@ -99,6 +99,13 @@ export class SzervezetBizottsagokComponent implements OnInit {
       })
   }
 
+  getPosition(position: string) {
+    if(position == 'elnok') {
+      return 'Bizottsági Elnök'
+    }
+    return 'Tag'
+  }
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }

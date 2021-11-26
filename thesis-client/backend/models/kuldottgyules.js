@@ -5,7 +5,7 @@ const kuldottgyulesSchema = mongoose.Schema({
   fullName: { type: String, required: true },
   firstPosition: { type: String, required: true },
   firstCommittee: { type: String, required: true },
-  secondPosition: { type: String, required: true },
+  secondPosition: { type: String },
   secondCommittee: { type: String },
   email: { type: String }
 });

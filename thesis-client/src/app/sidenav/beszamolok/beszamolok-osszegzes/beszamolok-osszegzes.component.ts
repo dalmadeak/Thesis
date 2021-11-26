@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/bejelentkezes/user.service';
 import { SajatBeszamolok } from '../../sajat-beszamolok/sajat-beszamolok.model';
 
 @Component({
@@ -18,12 +20,23 @@ export class BeszamolokOsszegzesComponent implements OnInit{
 
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  isAuthenticated = false;
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {
+  private userAuthSubs : Subscription | undefined;
+  private userData: any;
+  private authLevel: number = 5;
+
+  constructor(private http: HttpClient, private modalService: BsModalService, private userService : UserService) {
   }
 
   ngOnInit() {
-    this.getObject()
+    this.userData = this.userService.getUserInformation();
+    this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
+    this.getObject();
+    this.isAuthenticated = this.userService.getIsAuthenticated();
+    this.userAuthSubs = this.userService.getUserStatusListener().subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
+    });
   }
 
   getObject() {
@@ -43,6 +56,11 @@ export class BeszamolokOsszegzesComponent implements OnInit{
 
   updateSummarizeObject(value : any) {
     this.refreshObjectEvent.emit(value);
+  }
+
+
+  getAuthLevel() {
+    return this.authLevel;
   }
 
   openModal(template: TemplateRef<any>) {

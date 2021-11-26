@@ -30,6 +30,7 @@
         type="file"
         (change)="onFilePicked($event)"
         name="file">
+        <p *ngIf="isFileUploaded && !form.get('file').valid" style="color: red">Csak pdf vagy zip formátumú fájlt tölthetsz fel!</p>
     </div>
 
     <div>

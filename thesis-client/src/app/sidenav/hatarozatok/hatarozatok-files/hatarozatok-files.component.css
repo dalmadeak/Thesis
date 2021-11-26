@@ -44,9 +44,7 @@ a {
 td, th{
   padding: 5px;
   max-width: 350px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: wrap;
 }
 
 tr:hover {

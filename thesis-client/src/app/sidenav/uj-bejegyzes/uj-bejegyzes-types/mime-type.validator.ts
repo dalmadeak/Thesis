@@ -2,7 +2,7 @@ import { AbstractControl } from "@angular/forms";
 import { Observable, Observer, of } from "rxjs";
 
 export const mimeType = (control: AbstractControl): Promise<any> | Observable<any> => {
-  if (typeof(control.value) === 'string') {
+  if (typeof(control.value) === 'string' || !control.value) {
     return of(null);
   }
   const file = control.value as File;

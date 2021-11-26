@@ -10,7 +10,7 @@ const hatarozatokSchema = mongoose.Schema({
   mandate: { type: Number, required: true },
   vote: { type: String, required: true },
   date: { type: String, required: true },
-  file: { type: String, required: true },
+  file: { type: String },
 });
 
 //this schema needs a model (a definition)

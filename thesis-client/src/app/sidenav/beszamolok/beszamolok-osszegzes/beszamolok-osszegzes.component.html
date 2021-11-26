@@ -9,7 +9,7 @@
       <th>Hónap</th>
       <th>Beküldő</th>
       <th>Beküldés ideje</th>
-      <th>Műveletek</th>
+      <th *ngIf="isAuthenticated && getAuthLevel() == 1">Műveletek</th>
     </tr>
     <ng-container *ngFor="let data of getObject()">
       <tr class="filesData" *ngIf="summarizeObject.length">
@@ -17,7 +17,7 @@
         <td>{{data.month}}</td>
         <td>{{data.author.position}}</td>
         <td>{{data.date}}</td>
-        <td class="centeredClass">
+        <td class="centeredClass" *ngIf="isAuthenticated && getAuthLevel() == 1">
           <a [routerLink]="['/sidenav/uj-bejegyzes/szerkesztes', data.postType, data._id]"><fa-icon [icon]="faEdit" title="Szerkesztés"></fa-icon></a>
           <fa-icon [icon]="faDelete" title="Törlés" (click)="openModal(template)"></fa-icon>
           <ng-template #template>
