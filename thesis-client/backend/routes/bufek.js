@@ -6,7 +6,7 @@ const Canteen = require('../models/bufek');
 const router = express.Router();
 
 router.get('', (req,res,next) => {
-  Canteen.find() //returns all entries
+  Canteen.find()
     .then(documents => {
       res.status(200).json({
         message: 'Canteens fetched successfully',
@@ -15,7 +15,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   Canteen.find({_id: req.params.id})
     .then(fetchedPost => {
@@ -33,7 +32,6 @@ router.post('',checkAuth, (req, res, next) => {
     brief: req.body.brief,
     openHours: req.body.openHours,
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Canteen added successfully',
@@ -42,7 +40,6 @@ router.post('',checkAuth, (req, res, next) => {
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, (req,res,next) => {
   const post = new Canteen({
     _id: req.body._id,

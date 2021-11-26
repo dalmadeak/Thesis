@@ -19,7 +19,6 @@ export class SzervezetBizottsagokComponent implements OnInit {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   private kuldottgyulesObject : Kuldottgyules[] = [];
 
@@ -61,7 +60,6 @@ export class SzervezetBizottsagokComponent implements OnInit {
     this.getPosts();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.kuldottgyulesObject].sort((a,b) => (a.fullName > b.fullName) ? 1 : ((b.fullName > a.fullName) ? -1 : 0));
   }
@@ -89,16 +87,6 @@ export class SzervezetBizottsagokComponent implements OnInit {
       });
   }
 
-  deletePost(postId : string) {
-    this.message = 'Elfogadva!';
-    this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/kuldottgyules/' + postId)
-      .subscribe(() => {
-        const updatedPost = this.kuldottgyulesObject.filter(post => post._id !== postId);
-        this.kuldottgyulesObject = updatedPost;
-      })
-  }
-
   getPosition(position: string) {
     if(position == 'elnok') {
       return 'Bizottsági Elnök'
@@ -111,7 +99,6 @@ export class SzervezetBizottsagokComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

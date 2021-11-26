@@ -21,7 +21,6 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   colspan: number = 3;
   isAuthenticated = false;
 
@@ -52,9 +51,7 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
-    //localeCompare az az ékezetes betűk maitt kell, mert az Á leghátul van az abc-ben :)
     return [...this.kuldottgyulesObject].sort((a,b) => (a.fullName.localeCompare(b.fullName) > 0) ? 1 : ((a.fullName.localeCompare(b.fullName) <= 0) ? -1 : 0));
   }
 
@@ -82,7 +79,6 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/kuldottgyules/' + postId)
       .subscribe(() => {
@@ -119,7 +115,6 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

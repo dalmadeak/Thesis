@@ -7,7 +7,7 @@ const router = express.Router();
 const User = require('../models/auth');
 
 router.get('', (req,res,next) => {
-  User.find() //returns all entries
+  User.find()
     .then(documents => {
       res.status(200).json({
         message: 'Users fetched successfully',
@@ -16,7 +16,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   User.find({_id: req.params.id})
     .then(fetchedUser => {
@@ -91,7 +90,6 @@ router.post('/login', (req, res, next) => {
     })
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.patch('/register/user/:id', (req,res,next) => {
   const post = {
     fullName: req.body.fullName,
@@ -124,8 +122,6 @@ router.patch('/register/password/:id', (req,res,next) => {
                   message: 'User updated successfully'
                 });
               })
-              console.log('hash ' + hash);
-              console.log('user.pass ' + user.password)
             }
           });
     });

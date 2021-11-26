@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AtlathatosagJegyzokonyvekComponent } from './atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek.component';
+
 import { AtlathatosagBeszamolokComponent } from './atlathatosag-beszamolok/atlathatosag-beszamolok.component';
-import { AtlathatosagPalyazatokComponent } from './atlathatosag-palyazatok/atlathatosag-palyazatok.component';
+import { AtlathatosagJegyzokonyvekComponent } from './atlathatosag-jegyzokonyvek/atlathatosag-jegyzokonyvek.component';
 import { AtlathatosagKozeletikComponent } from './atlathatosag-kozeletik/atlathatosag-kozeletik.component';
+import { AtlathatosagPalyazatokComponent } from './atlathatosag-palyazatok/atlathatosag-palyazatok.component';
 
 const routes: Routes = [
   {

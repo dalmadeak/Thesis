@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 });
 
 router.get('', (req,res,next) => {
-  Record.find() //returns all entries
+  Record.find()
     .then(documents => {
       res.status(200).json({
         message: 'Record fetched successfully',
@@ -59,7 +59,6 @@ router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, 
     date: req.body.date,
     file: url + '/files/jegyzokonyvek/' + req.file.filename,
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Record added successfully',
@@ -76,7 +75,6 @@ router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, 
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, multer({storage: storage}).single('file'), (req,res,next) => {
   let filePath = req.body.file;
   if(req.file) {

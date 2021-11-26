@@ -2,12 +2,9 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
-import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/bejelentkezes/user.service';
-
 
 @Component({
   selector: 'app-profil',
@@ -20,7 +17,6 @@ export class ProfilComponent implements OnInit{
   private authLevel: number = 5;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Felhasznalo = {
     _id : '',
     postType: '',
@@ -57,12 +53,9 @@ export class ProfilComponent implements OnInit{
     if (form.value.passwordGroup.newPassword == form.value.passwordGroup.newPasswordAgain &&
     form.value.passwordGroup.newPassword != form.value.passwordGroup.oldPassword) {
       this.updatePassword(this.postId, form);
-    } else {
-      console.log('failxd')
     }
     form.reset();
     this.modalRef.hide();
-
   }
 
   getAuthLevel() {
@@ -83,7 +76,6 @@ export class ProfilComponent implements OnInit{
         userId: this.userData.userId,
         password: form.value.passwordGroup.newPassword,
       }
-      console.log(this.userData.userId)
       this.http.patch<{ message: string }>('http://localhost:3000/api/auth/register/password/' + id, post)
         .subscribe()
   }
@@ -93,7 +85,6 @@ export class ProfilComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

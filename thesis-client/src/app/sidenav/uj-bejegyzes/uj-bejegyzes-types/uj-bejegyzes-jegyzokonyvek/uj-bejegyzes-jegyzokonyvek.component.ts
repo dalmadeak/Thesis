@@ -14,13 +14,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   form: any;
-  imagePreview: string = '';
 
   private mode = 'createNewPost'
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isFileUploaded: boolean = false;
 
   today = new Date();
@@ -62,7 +60,6 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
         this.http.get<{message: string, post: any }>('http://localhost:3000/api/jegyzokonyvek/' + this.postId)
         .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
-          console.log(fetchedData.post[0]);
           this.form.setValue(
             {
               'committee': this.editablePost.committee,
@@ -82,7 +79,6 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   }
 
   onSubmit() {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost();
     } else if (this.mode === 'editPost') {
@@ -183,7 +179,6 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

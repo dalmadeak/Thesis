@@ -1,12 +1,13 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Subscription } from "rxjs";
+
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from "ngx-spinner";
+import { UserService } from "src/app/bejelentkezes/user.service";
 import { Beszamolok } from '../beszamolok.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { UserService } from "src/app/bejelentkezes/user.service";
-import { Subscription } from "rxjs";
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-atlathatosag-beszamolok-files',
@@ -25,7 +26,6 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -50,7 +50,6 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.beszamolokObject].slice().reverse();
   }
@@ -77,7 +76,6 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/beszamolok/' + postId)
       .subscribe(() => {
@@ -107,7 +105,6 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

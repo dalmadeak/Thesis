@@ -7,6 +7,5 @@ const beszamolokSchema = mongoose.Schema({
   file: { type: String, required: true },
 });
 
-//this schema needs a model (a definition)
 module.exports = mongoose.model('Report', beszamolokSchema);
 

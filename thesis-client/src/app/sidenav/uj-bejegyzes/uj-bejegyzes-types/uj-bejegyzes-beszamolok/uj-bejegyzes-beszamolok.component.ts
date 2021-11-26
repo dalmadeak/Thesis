@@ -14,13 +14,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UjBejegyzesBeszamolokComponent implements OnInit {
   form: any;
-  imagePreview: string = '';
 
   private mode = 'createNewPost'
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isFileUploaded: boolean = false;
 
   today = new Date();
@@ -73,7 +71,6 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
   }
 
   onSubmit() {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost();
     } else if (this.mode === 'editPost') {
@@ -142,7 +139,6 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
-    //convert do data url
     const reader = new FileReader();
     this.isFileUploaded = true;
     reader.readAsDataURL(file);
@@ -164,7 +160,6 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

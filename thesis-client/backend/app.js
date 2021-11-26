@@ -24,7 +24,6 @@ const elnoksegRoutes = require('./routes/elnokseg')
 const kabinetRoutes = require('./routes/kabinet')
 const kuldottgyulesRoutes = require('./routes/kuldottgyules')
 
-// xtiV4hKL05OqaLbM
 mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
   .then(() => {
     console.log('Connected to database!')
@@ -33,7 +32,6 @@ mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.ne
     console.log('Connection failed.');
   });
 
-//Ez itt azért kell, mert CORS error-t kapunk, ha a kliens és a szerver különböző host-on fut
 app.use((req,res,next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, Authorization');
@@ -41,17 +39,16 @@ app.use((req,res,next) => {
   next();
 });
 
-//Body Parser
 app.use(bodyParser.urlencoded({
   extended: true,
   limit: '50mb',
 }));
 app.use(bodyParser.json({limit: '50mb'}));
 
-//give access to the images folder
+//Hozzáférés a képek mappához
 app.use('/images', express.static(path.join('backend/images')));
 
-//give access to the files folder
+//Hozzáférés a fájlok mappához
 app.use('/files', express.static(path.join('backend/files')));
 
 
@@ -79,13 +76,11 @@ app.use('/api/havi-beszamolok', haviBeszamolokRoutes);
 /* HATÁROZATOK */
 app.use('/api/hatarozatok', hatarozatokRoutes);
 
-
 /* SOROMPÓ REGISZTRÁCIÓK */
 app.use('/api/sorompo', sorompoRoutes);
 
 /* BELÉPŐKÁRTYA REGISZTRÁCIÓK */
 app.use('/api/belepokartya', belepokartyaRoutes);
-
 
 /* IRODA NYITVATARTÁSOK */
 app.use('/api/iroda', irodaRoutes);

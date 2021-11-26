@@ -19,7 +19,6 @@ export class BeszamolokOsszegzesComponent implements OnInit{
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -44,7 +43,6 @@ export class BeszamolokOsszegzesComponent implements OnInit{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/havi-beszamolok/' + postId)
       .subscribe(() => {
@@ -58,7 +56,6 @@ export class BeszamolokOsszegzesComponent implements OnInit{
     this.refreshObjectEvent.emit(value);
   }
 
-
   getAuthLevel() {
     return this.authLevel;
   }
@@ -68,7 +65,6 @@ export class BeszamolokOsszegzesComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

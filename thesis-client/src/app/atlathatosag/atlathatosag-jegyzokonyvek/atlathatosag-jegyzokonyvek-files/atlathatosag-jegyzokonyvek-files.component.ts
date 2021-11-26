@@ -1,12 +1,13 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Subscription } from "rxjs";
+
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from "ngx-spinner";
+import { UserService } from "src/app/bejelentkezes/user.service";
 import { Jegyzokonyvek } from '../jegyzokonyvek.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from "rxjs";
-import { UserService } from "src/app/bejelentkezes/user.service";
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-atlathatosag-jegyzokonyvek-files',
@@ -26,7 +27,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private userAuthSubs : Subscription | undefined;
@@ -51,7 +51,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
     this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.jegyzokonyvekObject].slice().reverse();
   }
@@ -79,7 +78,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/jegyzokonyvek/' + postId)
       .subscribe(() => {
@@ -117,7 +115,6 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

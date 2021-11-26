@@ -1,22 +1,20 @@
 import { Injectable, TemplateRef } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Felhasznalo } from "./user.model";
-import { NgForm } from "@angular/forms";
-import { Subject } from "rxjs";
-import { Router } from "@angular/router";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
+import { Felhasznalo } from "./user.model";
+import { HttpClient } from "@angular/common/http";
+import { NgForm } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
+import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   private token : string | null = '';
   private userAuthStatus = new Subject<boolean>();
   private isAuthenticated = false;
   private tokenTimer: any;
-
   private userInfo: any;
 
   constructor(private http: HttpClient, private router: Router, private modalService: BsModalService, private spinner: NgxSpinnerService) {}
@@ -118,7 +116,6 @@ export class UserService {
   }
 
   private setUserTimer(duration: number) {
-    console.log(duration)
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000 * 60);
@@ -183,7 +180,6 @@ export class UserService {
   }
 
   back(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

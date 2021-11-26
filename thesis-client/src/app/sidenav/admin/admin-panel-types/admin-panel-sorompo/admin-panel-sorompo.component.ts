@@ -17,7 +17,6 @@ export class AdminPanelSorompoComponent implements OnInit {
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
 
   today = new Date();
   dateNow: string = '';
@@ -64,7 +63,6 @@ export class AdminPanelSorompoComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form);
     } else if (this.mode === 'editPost') {
@@ -116,7 +114,6 @@ export class AdminPanelSorompoComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/sorompo/' + id, post)
       .subscribe((data) => {
-        console.log(data);
       })
   }
 
@@ -138,7 +135,6 @@ export class AdminPanelSorompoComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

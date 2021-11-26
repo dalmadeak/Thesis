@@ -16,7 +16,6 @@ export class AdminPanelKozeletikComponent implements OnInit {
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Kozeletik = {
     _id : '',
     postType: '',
@@ -48,7 +47,6 @@ export class AdminPanelKozeletikComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost(form);
     } else if (this.mode === 'editPost') {
@@ -82,7 +80,6 @@ export class AdminPanelKozeletikComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/kozeletik/' + id, post)
       .subscribe((data) => {
-        console.log(data);
       })
   }
 
@@ -91,7 +88,6 @@ export class AdminPanelKozeletikComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

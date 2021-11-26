@@ -20,7 +20,6 @@ export class HatarozatokFilesComponent implements OnInit, OnDestroy{
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   private hatarozatokObject : Hatarozatok[] = [];
@@ -45,7 +44,6 @@ export class HatarozatokFilesComponent implements OnInit, OnDestroy{
     this.userAuthSubs?.unsubscribe();
  }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.hatarozatokObject].slice().reverse();
   }
@@ -75,7 +73,6 @@ export class HatarozatokFilesComponent implements OnInit, OnDestroy{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/hatarozatok/' + postId)
       .subscribe(() => {
@@ -101,7 +98,6 @@ export class HatarozatokFilesComponent implements OnInit, OnDestroy{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

@@ -12,7 +12,6 @@ import { Belepokartya } from './belepokartya.model';
 })
 export class SzolgaltatasokBelepokartyaComponent {
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Belepokartya = {
     _id : '',
     postType: '',
@@ -42,7 +41,6 @@ export class SzolgaltatasokBelepokartyaComponent {
   }
 
   onSubmit(form: NgForm, template: TemplateRef<any>) {
-    this.message = 'Elfogadva';
     this.addNewPost(form, template);
     form.reset();
     this.modalRef.hide();
@@ -91,7 +89,6 @@ export class SzolgaltatasokBelepokartyaComponent {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

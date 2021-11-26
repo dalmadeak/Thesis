@@ -14,5 +14,4 @@ const belepokartyaSchema = mongoose.Schema({
   isApproved: { type: Boolean }
 });
 
-//this schema needs a model (a definition)
 module.exports = mongoose.model('EntranceCard', belepokartyaSchema);

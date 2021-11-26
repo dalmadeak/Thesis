@@ -6,7 +6,7 @@ const Delegate = require('../models/kuldottgyules');
 const router = express.Router();
 
 router.get('', (req,res,next) => {
-  Delegate.find() //returns all entries
+  Delegate.find()
     .then(documents => {
       res.status(200).json({
         message: 'Delegates fetched successfully',
@@ -15,7 +15,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   Delegate.find({_id: req.params.id})
     .then(fetchedPost => {
@@ -36,7 +35,7 @@ router.post('',checkAuth, (req, res, next) => {
     secondCommittee: req.body.secondCommittee,
     email: req.body.email
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
+
   post.save().then( result => {
     res.status(201).json({
       message: 'Delegate added successfully',
@@ -45,7 +44,6 @@ router.post('',checkAuth, (req, res, next) => {
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, (req,res,next) => {
   const post = new Delegate({
     _id: req.body._id,

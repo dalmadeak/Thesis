@@ -14,13 +14,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UjBejegyzesPalyazatokComponent implements OnInit {
   form: any;
-  imagePreview: string = '';
 
   private mode = 'createNewPost'
   private postId : any;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isFileUploaded: boolean = false;
 
   today = new Date();
@@ -73,7 +71,6 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
   }
 
   onSubmit() {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost();
     } else if (this.mode === 'editPost') {
@@ -164,7 +161,6 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

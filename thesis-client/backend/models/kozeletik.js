@@ -6,6 +6,5 @@ const kozeletikSchema = mongoose.Schema({
   amount: { type: String, required: true  }
 });
 
-//this schema needs a model (a definition)
 module.exports = mongoose.model('ScholarShip', kozeletikSchema);
 

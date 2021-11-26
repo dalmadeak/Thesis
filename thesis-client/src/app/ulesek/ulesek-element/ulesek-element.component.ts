@@ -20,7 +20,6 @@ export class UlesekElementComponent implements OnInit{
   faDelete = faTrash;
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   isAuthenticated = false;
 
   p: number = 1;
@@ -47,7 +46,6 @@ export class UlesekElementComponent implements OnInit{
      this.userAuthSubs?.unsubscribe();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.ulesekObject];
   }
@@ -77,7 +75,6 @@ export class UlesekElementComponent implements OnInit{
   }
 
   deletePost(postId : string) {
-    this.message = 'Elfogadva!';
     this.modalRef.hide();
     this.http.delete('http://localhost:3000/api/ulesek/' + postId)
       .subscribe(() => {
@@ -109,7 +106,6 @@ export class UlesekElementComponent implements OnInit{
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 }

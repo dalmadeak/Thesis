@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { UserService } from "../bejelentkezes/user.service";
 import { Router } from "@angular/router";
+import { UserService } from "../bejelentkezes/user.service";
 
 @Injectable()
 export class KuldottGuard implements CanActivate{

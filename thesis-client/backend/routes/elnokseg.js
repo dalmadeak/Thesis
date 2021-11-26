@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 });
 
 router.get('', (req,res,next) => {
-  Presidium.find() //returns all entries
+  Presidium.find()
     .then(documents => {
       res.status(200).json({
         message: 'Presidiums fetched successfully',
@@ -38,7 +38,6 @@ router.get('', (req,res,next) => {
     });
 });
 
-//Get post by id
 router.get('/:id', (req,res,next) => {
   Presidium.find({_id: req.params.id})
     .then(fetchedPost => {
@@ -58,7 +57,6 @@ router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, 
     email: req.body.email,
     file: url + '/images/' + req.file.filename,
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Presidium added successfully',
@@ -74,7 +72,6 @@ router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, 
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, multer({storage: storage}).single('file'), (req,res,next) => {
   let filePath = req.body.file;
   if(req.file) {

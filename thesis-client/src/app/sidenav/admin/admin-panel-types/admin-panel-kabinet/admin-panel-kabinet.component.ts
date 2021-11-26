@@ -7,7 +7,6 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Kabinet } from 'src/app/szervezet/szervezet-kabinet/kabinet.model';
 import { mimeType } from '../mime-type.validator';
 
-
 @Component({
   selector: 'app-admin-panel-kabinet',
   templateUrl: './admin-panel-kabinet.component.html',
@@ -21,7 +20,6 @@ export class AdminPanelKabinetComponent implements OnInit {
   imagePreview: string = '';
 
   modalRef: BsModalRef = new BsModalRef();
-  message: string = '';
   editablePost : Kabinet = {
     _id : '',
     postType: '',
@@ -52,7 +50,6 @@ export class AdminPanelKabinetComponent implements OnInit {
         this.http.get<{message: string, post: any }>('http://localhost:3000/api/kabinet/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
-          console.log(this.editablePost)
           this.form.setValue(
             {
               'name': this.editablePost.name,
@@ -69,7 +66,6 @@ export class AdminPanelKabinetComponent implements OnInit {
   }
 
   onSubmit() {
-    this.message = 'Elfogadva';
     if(this.mode === 'createNewPost') {
       this.addNewPost();
     } else if (this.mode === 'editPost') {
@@ -82,14 +78,6 @@ export class AdminPanelKabinetComponent implements OnInit {
   }
 
   addNewPost() {
-    /*const newPost : Kabinet = {
-      _id: null,
-      postType: 'kabinet',
-      name: this.form.value.name,
-      position: this.form.value.position,
-      email: this.form.value.email,
-      file: this.form.value.file,
-    }*/
     const postData = new FormData();
     postData.append('_id', '');
     postData.append('postType', 'kabinet');
@@ -108,19 +96,10 @@ export class AdminPanelKabinetComponent implements OnInit {
         email: this.form.value.email,
         file: data.post.file,
       }
-      console.log(newPost);
     });
   }
 
   updatePost(id: string, file: File | string) {
-    /*const post : Kabinet = {
-      _id: id,
-      postType: 'kabinet',
-      name: this.form.value.name,
-      position: this.form.value.position,
-      email:  this.form.value.email,
-      file: this.form.value.file,
-    }*/
     let postData : Kabinet | FormData;
     if(typeof(file) === "object") {
       postData = new FormData();
@@ -143,14 +122,6 @@ export class AdminPanelKabinetComponent implements OnInit {
     }
     this.http.put<{ message: string }>('http://localhost:3000/api/kabinet/' + id, postData)
       .subscribe((data) => {
-        const newPost: Kabinet = {
-          _id: id,
-          postType: 'kabinet',
-          name: this.form.value.name,
-          position: this.form.value.position,
-          email: this.form.value.email,
-          file: ''
-        }
       })
   }
 
@@ -167,13 +138,11 @@ export class AdminPanelKabinetComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   decline(): void {
-    this.message = 'Elutasítva!';
     this.modalRef.hide();
   }
 

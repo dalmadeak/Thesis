@@ -1,11 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from "@angular/forms";
 import { NgImageSliderModule } from 'ng-image-slider';
-import { RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { RouterModule } from '@angular/router';
 
 import { HirekComponent } from "./hirek.component";
 import { HirekElementComponent } from "./hirek-element/hirek-element.component";

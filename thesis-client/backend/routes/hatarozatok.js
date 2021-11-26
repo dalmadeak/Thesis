@@ -63,7 +63,6 @@ router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, 
     date: req.body.date,
     file: url + '/files/hatarozatok/' + req.file.filename,
   });
-  // Azért kell ez a then, mert frissítés nélkül az új post id-ja null marad
   post.save().then( result => {
     res.status(201).json({
       message: 'Decision added successfully',
@@ -84,7 +83,6 @@ router.post('',checkAuth, multer({storage: storage}).single('file'), (req, res, 
   });
 });
 
-//put - completely replace old resource with new one, patch - update resource
 router.put('/:id',checkAuth, multer({storage: storage}).single('file'), (req,res,next) => {
   let filePath = req.body.file;
   if(req.file) {
