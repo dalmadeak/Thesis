@@ -36,8 +36,8 @@ export class UjBejegyzesHirekComponent implements OnInit {
     private router: Router) {
   }
 
- ngOnInit() {
-  this.editablePost.date = this.getDate();
+  ngOnInit() {
+    this.editablePost.date = this.getDate();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -53,14 +53,14 @@ export class UjBejegyzesHirekComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      await this.addNewPost(form);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      await this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/hirek']);},0);
+    this.router.navigate(['/hirek']);
   }
 
   addNewPost(form : NgForm) {
@@ -72,10 +72,12 @@ export class UjBejegyzesHirekComponent implements OnInit {
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/hirek', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/hirek', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
@@ -87,9 +89,12 @@ export class UjBejegyzesHirekComponent implements OnInit {
       content: form.value.newRegistryGroup.content,
       date: form.value.newRegistryGroup.postDate + ' ' + form.value.newRegistryGroup.postTime
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/hirek/' + id, post)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/hirek/' + id, post)
       .subscribe((data) => {
-      })
+        resolve(data);
+      });
+    });
   }
 
   getDate(){

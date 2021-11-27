@@ -50,14 +50,15 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      await this.addNewPost(form);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      await this.updatePost(this.postId, form);
     }
+
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/szervezet/kgy']);},0);
+    this.router.navigate(['/szervezet/kgy']);
   }
 
   addNewPost(form : NgForm) {
@@ -72,10 +73,12 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       email: form.value.adminGroup.email
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/kuldottgyules', newPost)
+     return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/kuldottgyules', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
@@ -90,9 +93,12 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       secondPosition: form.value.adminGroup.secondPosition,
       email: form.value.adminGroup.email
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/kuldottgyules/' + id, post)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/kuldottgyules/' + id, post)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   openModal(template: TemplateRef<any>) {

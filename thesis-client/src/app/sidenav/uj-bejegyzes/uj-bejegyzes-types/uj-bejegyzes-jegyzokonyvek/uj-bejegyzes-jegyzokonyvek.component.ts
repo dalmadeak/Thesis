@@ -42,17 +42,17 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
     private router: Router) {
   }
 
- ngOnInit() {
-   this.getDate();
-  this.form = new FormGroup({
-    'committee': new FormControl(null, {validators: [Validators.required]}),
-    'title': new FormControl(null, {validators: [Validators.required]}),
-    'decisionDate': new FormControl(null, {validators: [Validators.required]}),
-    'decisionTime': new FormControl(null, {validators: [Validators.required]}),
-    'date': new FormControl(this.dateNow, {validators: [Validators.required]}),
-    'time': new FormControl(this.timeNow, {validators: [Validators.required]}),
-    'file': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
-  });
+  ngOnInit() {
+    this.getDate();
+    this.form = new FormGroup({
+      'committee': new FormControl(null, {validators: [Validators.required]}),
+      'title': new FormControl(null, {validators: [Validators.required]}),
+      'decisionDate': new FormControl(null, {validators: [Validators.required]}),
+      'decisionTime': new FormControl(null, {validators: [Validators.required]}),
+      'date': new FormControl(this.dateNow, {validators: [Validators.required]}),
+      'time': new FormControl(this.timeNow, {validators: [Validators.required]}),
+      'file': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
+    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -78,15 +78,15 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if(this.mode === 'createNewPost') {
-      this.addNewPost();
+      await this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, this.form.value.file);
+      await this.updatePost(this.postId, this.form.value.file);
     }
     this.form.reset();
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/atlathatosag/jegyzokonyvek']);},0);
+    this.router.navigate(['/atlathatosag/jegyzokonyvek']);
   }
 
   addNewPost() {
@@ -99,17 +99,10 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
     postData.append('file', this.form.value.file, this.form.value.title);
 
-    this.http.post<{ message: string, post: Jegyzokonyvek }>('http://localhost:3000/api/jegyzokonyvek', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Jegyzokonyvek }>('http://localhost:3000/api/jegyzokonyvek', postData)
       .subscribe((data) => {
-        const newPost: Jegyzokonyvek = {
-          _id: data.post._id,
-          postType: 'jegyzokonyvek',
-          committee: this.form.value.committee,
-          title: this.form.value.title,
-          decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: data.post.file,
-        }
+        resolve(data);
+      })
     });
   }
 
@@ -135,18 +128,12 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/jegyzokonyvek/' + id, postData)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/jegyzokonyvek/' + id, postData)
       .subscribe((data) => {
-        const newPost = {
-          _id: id,
-          postType: 'jegyzokonyvek',
-          committee: this.form.value.committee,
-          title: this.form.value.title,
-          decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: ''
-        }
+        resolve(data);
       })
+    });
   }
 
   onFilePicked(event: Event) {
@@ -157,7 +144,6 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
-    //convert do data url
     const reader = new FileReader();
     this.isFileUploaded = true;
     reader.readAsDataURL(file);

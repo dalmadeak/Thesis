@@ -46,14 +46,15 @@ export class AdminPanelKozeletikComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      await this.addNewPost(form);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      await this.updatePost(this.postId, form);
     }
+
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/atlathatosag/kozeletik']);},0);
+    this.router.navigate(['/atlathatosag/kozeletik']);
   }
 
   addNewPost(form : NgForm) {
@@ -64,10 +65,12 @@ export class AdminPanelKozeletikComponent implements OnInit {
       amount: form.value.adminGroup.amount,
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/kozeletik', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/kozeletik', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
@@ -78,9 +81,12 @@ export class AdminPanelKozeletikComponent implements OnInit {
       name: form.value.adminGroup.name,
       amount: form.value.adminGroup.amount,
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/kozeletik/' + id, post)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/kozeletik/' + id, post)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   openModal(template: TemplateRef<any>) {

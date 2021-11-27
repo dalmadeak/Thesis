@@ -70,15 +70,15 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if(this.mode === 'createNewPost') {
-      this.addNewPost();
+      await this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, this.form.value.file);
+      await this.updatePost(this.postId, this.form.value.file);
     }
     this.form.reset();
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/atlathatosag/palyazatok']);},0);
+    this.router.navigate(['/atlathatosag/palyazatok']);
   }
 
   addNewPost() {
@@ -89,15 +89,10 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
     postData.append('file', this.form.value.file, this.form.value.title);
 
-    this.http.post<{ message: string, post: Palyazatok }>('http://localhost:3000/api/palyazatok', postData)
-      .subscribe((data) => {
-        const newPost : Palyazatok = {
-          _id: data.post._id,
-          postType: 'palyazatok',
-          title: this.form.value.title,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: data.post.file
-        }
+    return new Promise(resolve => {this.http.post<{ message: string, post: Palyazatok }>('http://localhost:3000/api/palyazatok', postData)
+    .subscribe((data) => {
+        resolve(data);
+      })
     });
   }
 
@@ -119,16 +114,11 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/palyazatok/' + id, postData)
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/palyazatok/' + id, postData)
       .subscribe((data) => {
-        const newPost = {
-          _id: id,
-          postType: 'palyazatok',
-          title: this.form.value.title,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: ''
-        }
+        resolve(data);
       })
+    });
   }
 
   onFilePicked(event: Event) {
@@ -139,7 +129,6 @@ export class UjBejegyzesPalyazatokComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
-    //convert do data url
     const reader = new FileReader();
     this.isFileUploaded = true;
     reader.readAsDataURL(file);

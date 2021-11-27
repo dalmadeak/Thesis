@@ -65,16 +65,16 @@ export class AdminPanelKabinetComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if(this.mode === 'createNewPost') {
-      this.addNewPost();
+      await this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, this.form.value.file);
+      await this.updatePost(this.postId, this.form.value.file);
     }
 
     this.form.reset();
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/szervezet/kabinet']);},0);
+    this.router.navigate(['/szervezet/kabinet']);
   }
 
   addNewPost() {
@@ -86,16 +86,10 @@ export class AdminPanelKabinetComponent implements OnInit {
     postData.append('email', this.form.value.email);
     postData.append('file', this.form.value.file, this.form.value.name);
 
-    this.http.post<{ message: string, post: Kabinet }>('http://localhost:3000/api/kabinet', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Kabinet }>('http://localhost:3000/api/kabinet', postData)
       .subscribe((data) => {
-      const newPost: Kabinet = {
-        _id: data.post._id,
-        postType: 'kabinet',
-        name: this.form.value.name,
-        position: this.form.value.position,
-        email: this.form.value.email,
-        file: data.post.file,
-      }
+        resolve(data);
+      })
     });
   }
 
@@ -120,9 +114,11 @@ export class AdminPanelKabinetComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/kabinet/' + id, postData)
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/kabinet/' + id, postData)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   onImagePicked(event: Event) {
@@ -130,7 +126,6 @@ export class AdminPanelKabinetComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
-    //convert do data url
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = (reader.result as string);

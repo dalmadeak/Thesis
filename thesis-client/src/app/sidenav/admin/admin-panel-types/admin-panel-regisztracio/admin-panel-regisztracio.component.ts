@@ -31,8 +31,8 @@ export class AdminPanelRegisztracioComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
-    this.addNewPost(form);
+  async onSubmit(form: NgForm) {
+    await this.addNewPost(form);
     form.reset();
     this.modalRef.hide();
   }
@@ -49,10 +49,12 @@ export class AdminPanelRegisztracioComponent implements OnInit {
       permissions: form.value.adminGroup.permissions,
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/auth/register', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/register', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 

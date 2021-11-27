@@ -62,14 +62,14 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form, this.author);
+      await this.addNewPost(form, this.author);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form, this.author);
+      await this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/sidenav/beszamolok/sajat']);},0);
+    this.router.navigate(['/sidenav/beszamolok/sajat']);
   }
 
   addNewPost(form : NgForm, author: Felhasznalo) {
@@ -83,14 +83,16 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/havi-beszamolok', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/havi-beszamolok', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
-  updatePost(id: string, form: NgForm, author: Felhasznalo) {
+  updatePost(id: string, form: NgForm) {
     const post = {
       _id: id,
       year: form.value.newRegistryGroup.year,
@@ -98,9 +100,12 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       content: form.value.newRegistryGroup.content,
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
-    this.http.patch<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
+
+    return new Promise(resolve => {this.http.patch<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   getDate(){
