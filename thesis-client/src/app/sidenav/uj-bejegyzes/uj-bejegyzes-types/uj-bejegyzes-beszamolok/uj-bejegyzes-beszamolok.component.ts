@@ -40,14 +40,14 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
     private router: Router) {
   }
 
- ngOnInit() {
-   this.getDate();
-  this.form = new FormGroup({
-    'title': new FormControl(null, {validators: [Validators.required]}),
-    'date': new FormControl(this.dateNow, {validators: [Validators.required]}),
-    'time': new FormControl(this.timeNow, {validators: [Validators.required]}),
-    'file': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
-  });
+  ngOnInit() {
+    this.getDate();
+    this.form = new FormGroup({
+      'title': new FormControl(null, {validators: [Validators.required]}),
+      'date': new FormControl(this.dateNow, {validators: [Validators.required]}),
+      'time': new FormControl(this.timeNow, {validators: [Validators.required]}),
+      'file': new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
+    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -70,15 +70,15 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if(this.mode === 'createNewPost') {
-      this.addNewPost();
+      await this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, this.form.value.file);
+      await this.updatePost(this.postId, this.form.value.file);
     }
     this.form.reset();
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/atlathatosag/beszamolok']);},0);
+    this.router.navigate(['/atlathatosag/beszamolok']);
   }
 
   addNewPost() {
@@ -89,15 +89,10 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
     postData.append('file', this.form.value.file, this.form.value.title);
 
-    this.http.post<{ message: string, post: Beszamolok }>('http://localhost:3000/api/beszamolok', postData)
-      .subscribe((data) => {
-        const newPost : Beszamolok = {
-          _id: data.post._id,
-          postType: 'beszamolok',
-          title: this.form.value.title,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: data.post.file
-        }
+    return new Promise(resolve => {this.http.post<{ message: string, post: Beszamolok }>('http://localhost:3000/api/beszamolok', postData)
+    .subscribe((data) => {
+        resolve(data);
+      })
     });
   }
 
@@ -119,16 +114,12 @@ export class UjBejegyzesBeszamolokComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/beszamolok/' + id, postData)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/beszamolok/' + id, postData)
       .subscribe((data) => {
-        const newPost = {
-          _id: id,
-          postType: 'beszamolok',
-          title: this.form.value.title,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: ''
-        }
+        resolve(data);
       })
+    });
   }
 
   onFilePicked(event: Event) {

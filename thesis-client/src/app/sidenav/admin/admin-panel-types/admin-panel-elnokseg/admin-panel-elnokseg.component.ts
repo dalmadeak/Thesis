@@ -66,16 +66,16 @@ export class AdminPanelElnoksegComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if(this.mode === 'createNewPost') {
-      this.addNewPost();
+      await this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, this.form.value.file);
+      await this.updatePost(this.postId, this.form.value.file);
     }
 
     this.form.reset();
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/szervezet/elnokseg']);},0);
+    this.router.navigate(['/szervezet/elnokseg']);
   }
 
   addNewPost() {
@@ -87,8 +87,10 @@ export class AdminPanelElnoksegComponent implements OnInit {
     postData.append('email', this.form.value.email);
     postData.append('file', this.form.value.file, this.form.value.name);
 
-    this.http.post<{ message: string, post: Elnokseg }>('http://localhost:3000/api/elnokseg', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Elnokseg }>('http://localhost:3000/api/elnokseg', postData)
       .subscribe((data) => {
+        resolve(data);
+      })
     });
   }
 
@@ -113,9 +115,12 @@ export class AdminPanelElnoksegComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/elnokseg/' + id, postData)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/elnokseg/' + id, postData)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   onImagePicked(event: Event) {

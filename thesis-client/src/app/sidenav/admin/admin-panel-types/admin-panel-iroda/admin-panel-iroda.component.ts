@@ -47,14 +47,14 @@ export class AdminPanelIrodaComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      await this.addNewPost(form);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      await this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/szolgaltatasok/iroda']);},0);
+    this.router.navigate(['/szolgaltatasok/iroda']);
   }
 
   addNewPost(form : NgForm) {
@@ -66,10 +66,12 @@ export class AdminPanelIrodaComponent implements OnInit {
       openHours: form.value.adminGroup.openHours,
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/iroda', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/iroda', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
@@ -81,9 +83,12 @@ export class AdminPanelIrodaComponent implements OnInit {
       brief: form.value.adminGroup.brief,
       openHours: form.value.adminGroup.openHours,
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/iroda/' + id, post)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/iroda/' + id, post)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   openModal(template: TemplateRef<any>) {

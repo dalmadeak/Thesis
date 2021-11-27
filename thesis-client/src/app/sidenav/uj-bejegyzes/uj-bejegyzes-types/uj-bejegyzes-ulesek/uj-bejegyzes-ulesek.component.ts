@@ -63,14 +63,14 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form, this.author);
+      await this.addNewPost(form, this.author);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form, this.author);
+      await this.updatePost(this.postId, form, this.author);
     }
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/ulesek']);},0);
+    this.router.navigate(['/ulesek']);
   }
 
   addNewPost(form : NgForm, author: Felhasznalo) {
@@ -86,14 +86,16 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/ulesek', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/ulesek', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
-  updatePost(id: string, form: NgForm, author: Felhasznalo) {
+  async updatePost(id: string, form: NgForm, author: Felhasznalo) {
     const post : Ulesek = {
       _id: id,
       postType: 'ulesek',
@@ -105,9 +107,12 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       decisionDate: form.value.newRegistryGroup.decisionDate + ' ' + form.value.newRegistryGroup.decisionTime,
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/ulesek/' + id, post)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/ulesek/' + id, post)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   onTitleClicked(form: NgForm) {

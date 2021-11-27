@@ -45,8 +45,8 @@ export class AdminPanelSorompoComponent implements OnInit {
     private router: Router) {
   }
 
- ngOnInit() {
-  this.editablePost.date = this.getDate();
+  ngOnInit() {
+    this.editablePost.date = this.getDate();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
@@ -62,14 +62,14 @@ export class AdminPanelSorompoComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     if(this.mode === 'createNewPost') {
-      this.addNewPost(form);
+      await this.addNewPost(form);
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, form);
+      await this.updatePost(this.postId, form);
     }
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/szolgaltatasok/sorompo']);},0);
+    this.router.navigate(['/szolgaltatasok/sorompo']);
   }
 
   addNewPost(form : NgForm) {
@@ -89,10 +89,12 @@ export class AdminPanelSorompoComponent implements OnInit {
       isApproved: form.value.adminGroup.isApproved
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/sorompo', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/sorompo', newPost)
       .subscribe((data) => {
-      const id = data.postId;
-      newPost._id = id;
+        const id = data.postId;
+        newPost._id = id;
+        resolve(data);
+      })
     });
   }
 
@@ -112,9 +114,12 @@ export class AdminPanelSorompoComponent implements OnInit {
       reason: form.value.adminGroup.reason,
       isApproved: form.value.adminGroup.isApproved
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/sorompo/' + id, post)
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/sorompo/' + id, post)
       .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   getDate(){

@@ -46,8 +46,8 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     private router: Router) {
   }
 
- ngOnInit() {
-   this.getDate();
+  ngOnInit() {
+  this.getDate();
   this.form = new FormGroup({
     'committee': new FormControl(null, {validators: [Validators.required]}),
     'title': new FormControl(null, {validators: [Validators.required]}),
@@ -90,15 +90,15 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if(this.mode === 'createNewPost') {
-      this.addNewPost();
+      await this.addNewPost();
     } else if (this.mode === 'editPost') {
-      this.updatePost(this.postId, this.form.value.file);
+      await this.updatePost(this.postId, this.form.value.file);
     }
     this.form.reset();
     this.modalRef.hide();
-    setTimeout(() => {this.router.navigate(['/sidenav/hatarozatok']);},0);
+    this.router.navigate(['/sidenav/hatarozatok']);
   }
 
   addNewPost() {
@@ -115,21 +115,10 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
     postData.append('file', this.form.value.file, this.form.value.title);
 
-    this.http.post<{ message: string, post: Hatarozatok }>('http://localhost:3000/api/hatarozatok', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Hatarozatok }>('http://localhost:3000/api/hatarozatok', postData)
       .subscribe((data) => {
-        const newPost: Hatarozatok = {
-          _id: data.post._id,
-          postType: 'hatarozatok',
-          committee: this.form.value.committee,
-          title: this.form.value.title,
-          number: this.form.value.number,
-          decisionDate: this.form.value.decisionDate + ' ' + this.form.value.decisionTime,
-          content: this.form.value.content,
-          mandate: this.form.value.mandate,
-          vote: this.form.value.vote,
-          date: this.form.value.date + ' ' + this.form.value.time,
-          file: data.post.file,
-        }
+        resolve(data);
+      })
     });
   }
 
@@ -163,9 +152,12 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    this.http.put<{ message: string }>('http://localhost:3000/api/hatarozatok/' + id, postData)
-      .subscribe((data) => {
+
+    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/hatarozatok/' + id, postData)
+    .subscribe((data) => {
+        resolve(data);
       })
+    });
   }
 
   onFilePicked(event: Event) {
@@ -176,7 +168,6 @@ export class UjBejegyzesHatarozatokComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
 
-    //convert do data url
     const reader = new FileReader();
     this.isFileUploaded = true;
     reader.readAsDataURL(file);

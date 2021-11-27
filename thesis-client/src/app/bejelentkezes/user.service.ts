@@ -47,9 +47,9 @@ export class UserService {
             email: response.email
           }
           this.userAuthStatus.next(true);
-          let expiration = this.getInTime(expiresIn)
-          this.saveUserData(this.token, expiration, this.userInfo)
-          this.router.navigate(['/'])
+          let expiration = this.getInTime(expiresIn);
+          this.saveUserData(this.token, expiration, this.userInfo);
+          this.router.navigate(['/']);
         }
       }, error => {
         this.userAuthStatus.next(false);
