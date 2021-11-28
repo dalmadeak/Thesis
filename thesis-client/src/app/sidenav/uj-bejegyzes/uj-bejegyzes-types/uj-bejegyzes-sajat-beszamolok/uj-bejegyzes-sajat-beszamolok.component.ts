@@ -8,6 +8,9 @@ import { SajatBeszamolok } from '../../../sajat-beszamolok/sajat-beszamolok.mode
 import { UserService } from 'src/app/bejelentkezes/user.service';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/havi-beszamolok';
+
 @Component({
   selector: 'app-uj-bejegyzes-sajat-beszamolok',
   templateUrl: './uj-bejegyzes-sajat-beszamolok.component.html',
@@ -50,7 +53,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/havi-beszamolok/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
         });

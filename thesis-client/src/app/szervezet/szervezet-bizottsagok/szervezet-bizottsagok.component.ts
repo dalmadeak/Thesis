@@ -7,6 +7,9 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 import { Kuldottgyules } from "../szervezet-kgy/kuldottgyules.model";
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/kuldottgyules';
+
 @Component ({
   selector: 'app-szervezet-bizottsagok',
   templateUrl: './szervezet-bizottsagok.component.html',
@@ -66,7 +69,7 @@ export class SzervezetBizottsagokComponent implements OnInit {
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kuldottgyules')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {

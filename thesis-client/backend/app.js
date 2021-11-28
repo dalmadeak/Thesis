@@ -24,7 +24,7 @@ const elnoksegRoutes = require('./routes/elnokseg')
 const kabinetRoutes = require('./routes/kabinet')
 const kuldottgyulesRoutes = require('./routes/kuldottgyules')
 
-mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://elnok:" + process.env.mongo_pass + "@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
   .then(() => {
     console.log('Connected to database!')
   })

@@ -8,6 +8,9 @@ import { Subscription } from "rxjs";
 import { UserService } from "src/app/bejelentkezes/user.service";
 import { NgxSpinnerService } from "ngx-spinner";
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/ulesek';
+
 @Component({
   selector: 'app-ulesek-element',
   templateUrl: './ulesek-element.component.html',
@@ -52,7 +55,7 @@ export class UlesekElementComponent implements OnInit{
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/ulesek')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -76,7 +79,7 @@ export class UlesekElementComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/ulesek/' + postId)
+    this.http.delete( BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.ulesekObject.filter(post => post._id !== postId);
         this.ulesekObject = updatedPost;

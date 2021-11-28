@@ -7,6 +7,9 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/bejelentkezes/user.service";
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/havi-beszamolok';
+
 @Component({
   selector: 'app-sajat-beszamolok',
   templateUrl: './sajat-beszamolok.component.html',
@@ -48,7 +51,7 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
   }
 
   getPosts() {
-    this.http.get<{posts: any }>('http://localhost:3000/api/havi-beszamolok')
+    this.http.get<{posts: any }>(BACKEND_URL)
       .pipe(
         map(postData => {
         return postData.posts.map((post: any) => {
@@ -70,7 +73,7 @@ export class SajatBeszamolokComponent implements OnInit, OnDestroy {
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/havi-beszamolok/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.myReportsObject.filter(post => post._id !== postId);
         this.myReportsObject = updatedPost;

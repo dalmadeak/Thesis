@@ -5,6 +5,9 @@ import { Sorompo } from '../../szolgaltatasok/szolgaltatasok-sorompo/sorompo.mod
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt, faCheck, faComment } from '@fortawesome/free-solid-svg-icons';
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/sorompo';
+
 @Component({
   selector: 'app-sorompo-admin',
   templateUrl: './sorompo-admin.component.html',
@@ -33,7 +36,7 @@ export class SorompoAdminComponent implements OnInit{
   }
 
   getPosts() {
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/sorompo')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -60,7 +63,7 @@ export class SorompoAdminComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/sorompo/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.sorompoObject.filter(post => post._id !== postId);
         this.sorompoObject = updatedPost;

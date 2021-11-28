@@ -2,8 +2,10 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
+
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/register';
 
 @Component({
   selector: 'app-admin-panel-regisztracio',
@@ -49,7 +51,7 @@ export class AdminPanelRegisztracioComponent implements OnInit {
       permissions: form.value.adminGroup.permissions,
     }
 
-    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/register', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
         const id = data.postId;
         newPost._id = id;

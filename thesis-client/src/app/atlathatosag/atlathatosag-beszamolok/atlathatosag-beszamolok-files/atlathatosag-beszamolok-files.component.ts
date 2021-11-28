@@ -9,6 +9,9 @@ import { Beszamolok } from '../beszamolok.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import { environment } from "../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/beszamolok';
+
 @Component({
   selector: 'app-atlathatosag-beszamolok-files',
   templateUrl: './atlathatosag-beszamolok-files.component.html',
@@ -56,7 +59,7 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/beszamolok')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -77,7 +80,7 @@ export class AtlathatosagBeszamolokFilesComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/beszamolok/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.beszamolokObject.filter(post => post._id !== postId);
         this.beszamolokObject = updatedPost;

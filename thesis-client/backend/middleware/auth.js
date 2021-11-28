@@ -3,7 +3,7 @@ const jsonwt = require('jsonwebtoken');
 module.exports = (req,res,next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
-    const decoded = jsonwt.verify(token, 'ikhokSecretPass_forTokenIdentification');
+    const decoded = jsonwt.verify(token, process.env.token_pass);
     req.authData = {
       identifier: decoded.identifier,
       fullName: decoded.fullName,

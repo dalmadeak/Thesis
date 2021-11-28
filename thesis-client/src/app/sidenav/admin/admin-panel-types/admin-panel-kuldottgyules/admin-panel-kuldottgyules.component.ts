@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Kuldottgyules } from 'src/app/szervezet/szervezet-kgy/kuldottgyules.model';
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/kuldottgyules';
 
 @Component({
   selector: 'app-admin-panel-kuldottgyules',
@@ -39,7 +41,7 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/kuldottgyules/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
         });
@@ -73,7 +75,7 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       email: form.value.adminGroup.email
     }
 
-     return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/kuldottgyules', newPost)
+     return new Promise(resolve => {this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
         const id = data.postId;
         newPost._id = id;
@@ -94,7 +96,7 @@ export class AdminPanelKuldottgyulesComponent implements OnInit {
       email: form.value.adminGroup.email
     }
 
-    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/kuldottgyules/' + id, post)
+    return new Promise(resolve => {this.http.put<{ message: string }>(BACKEND_URL + '/' + id, post)
       .subscribe((data) => {
         resolve(data);
       })

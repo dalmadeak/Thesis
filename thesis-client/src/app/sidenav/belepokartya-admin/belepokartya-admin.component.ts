@@ -5,6 +5,9 @@ import { Belepokartya } from '../../szolgaltatasok/szolgaltatasok-belepokartya/b
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt, faCheck, faComment } from '@fortawesome/free-solid-svg-icons';
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/belepokartya';
+
 @Component({
   selector: 'app-belepokartya-admin',
   templateUrl: './belepokartya-admin.component.html',
@@ -32,7 +35,7 @@ export class BelepokartyaAdminComponent implements OnInit{
   }
 
   getPosts() {
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/belepokartya')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -58,7 +61,7 @@ export class BelepokartyaAdminComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/belepokartya/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.belepokartyaObject.filter(post => post._id !== postId);
         this.belepokartyaObject = updatedPost;

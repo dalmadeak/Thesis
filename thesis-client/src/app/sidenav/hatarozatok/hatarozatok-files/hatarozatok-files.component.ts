@@ -7,6 +7,9 @@ import { Hatarozatok } from "../hatarozatok.model";
 import { UserService } from "src/app/bejelentkezes/user.service";
 import { Subscription } from "rxjs";
 
+import { environment } from "../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/hatarozatok';
+
 @Component({
   selector: 'app-hatarozatok-files',
   templateUrl: './hatarozatok-files.component.html',
@@ -49,7 +52,7 @@ export class HatarozatokFilesComponent implements OnInit, OnDestroy{
   }
 
   getPosts() {
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/hatarozatok')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -74,7 +77,7 @@ export class HatarozatokFilesComponent implements OnInit, OnDestroy{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/hatarozatok/' + postId)
+    this.http.delete(BACKEND_URL+ '/' + postId)
       .subscribe(() => {
         const updatedPost = this.hatarozatokObject.filter(post => post._id !== postId);
         this.hatarozatokObject = updatedPost;

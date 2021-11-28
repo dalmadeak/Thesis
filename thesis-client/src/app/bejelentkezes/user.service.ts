@@ -7,6 +7,9 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 
+import { environment } from "../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/auth/login';
+
 @Injectable({providedIn: 'root'})
 export class UserService {
   modalRef: BsModalRef = new BsModalRef();
@@ -31,7 +34,7 @@ export class UserService {
       email: '',
       permissions: ''
     }
-    this.http.post<{token: string, expiresIn: number, userId: string, fullName: string, email: string, position: string, permissions: string}>('http://localhost:3000/api/auth/login', userData)
+    this.http.post<{token: string, expiresIn: number, userId: string, fullName: string, email: string, position: string, permissions: string}>(BACKEND_URL, userData)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
