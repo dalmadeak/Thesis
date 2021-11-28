@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 
 import { environment } from "../../../../../environments/environment";
-const BACKEND_URL = environment.apiUrl + '/register';
+const BACKEND_URL = environment.apiUrl + '/auth/register';
 
 @Component({
   selector: 'app-admin-panel-regisztracio',

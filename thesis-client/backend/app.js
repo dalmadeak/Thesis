@@ -46,10 +46,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json({limit: '50mb'}));
 
 //Hozzáférés a képek mappához
-app.use('/images', express.static(path.join('backend/images')));
+app.use('/images', express.static(path.join('images')));
 
 //Hozzáférés a fájlok mappához
-app.use('/files', express.static(path.join('backend/files')));
+app.use('/files', express.static(path.join('files')));
+
+//Statikus hozzáférés az Angular mappához
+app.use('/', express.static(path.join(__dirname, 'angular')));
 
 
 /* AUTENTIKÁCIÓ */
@@ -99,5 +102,9 @@ app.use('/api/kabinet', kabinetRoutes);
 
 /* KÜLDÖTTGYŰLÉS */
 app.use('/api/kuldottgyules', kuldottgyulesRoutes);
+
+app.use((req,res,next) => {
+  res.sendFile(path.join(__dirname, "angular", "index.html"));
+});
 
 module.exports = app;
