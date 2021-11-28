@@ -1,16 +1,5 @@
-.pagination /deep/ .ngx-pagination .current {
-  background: #13294B;
-  color: white;
-}
-
-.pagination /deep/ .ngx-pagination{
-  text-align: center;
-  margin: 50px auto;
-  font-family: Montserrat, sans-serif;
-}
-
 .paginationClass {
-  width: 25%;
+  width: 15%;
   text-align: center;
   margin: auto;
 }

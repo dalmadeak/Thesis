@@ -1,6 +1,6 @@
 <div class="postContainer">
   <ngx-spinner bdColor = "rgba(0,0,0,0)" size = "medium" color = "#13294B" type = "ball-beat" [fullScreen] = "false"></ngx-spinner>
-  <ng-container *ngFor="let ules of filterObject(getObject()) | paginate: { itemsPerPage: 25, currentPage: p }">
+  <ng-container *ngFor="let ules of filterObject(getObject()) | paginate: { itemsPerPage: 24, currentPage: p }">
     <div class="post" *ngIf="filterData == undefined || filterData.id == ules.committee">
       <p class="postHeader">
         {{ules.title}}
