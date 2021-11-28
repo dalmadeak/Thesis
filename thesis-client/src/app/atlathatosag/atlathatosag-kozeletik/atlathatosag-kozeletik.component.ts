@@ -9,6 +9,8 @@ import { Kozeletik } from "./kozeletik.model";
 import { map } from 'rxjs/operators'
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/kozeletik';
 
 @Component({
   selector: 'app-atlathatosag-kozeletik',
@@ -56,7 +58,7 @@ export class AtlathatosagKozeletikComponent implements OnInit{
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kozeletik')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -75,7 +77,7 @@ export class AtlathatosagKozeletikComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/kozeletik/' + postId)
+    this.http.delete(BACKEND_URL+ '/' + postId)
       .subscribe(() => {
         const updatedPost = this.kozeletikObject.filter(post => post._id !== postId);
         this.kozeletikObject = updatedPost;

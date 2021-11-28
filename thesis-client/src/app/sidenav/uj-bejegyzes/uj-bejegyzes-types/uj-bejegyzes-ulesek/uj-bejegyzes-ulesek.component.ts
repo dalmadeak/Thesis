@@ -8,6 +8,9 @@ import { Ulesek } from '../../../../ulesek/ulesek.model';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 import { UserService } from 'src/app/bejelentkezes/user.service';
 
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/ulesek';
+
 @Component({
   selector: 'app-uj-bejegyzes-ulesek',
   templateUrl: './uj-bejegyzes-ulesek.component.html',
@@ -45,14 +48,14 @@ export class UjBejegyzesUlesekComponent implements OnInit {
     private userService: UserService) {
   }
 
- ngOnInit() {
-  this.editablePost.date = this.getDate();
-   this.author = this.userService.getUserInformation();
+  ngOnInit() {
+    this.editablePost.date = this.getDate();
+    this.author = this.userService.getUserInformation();
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/ulesek/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
         });
@@ -86,7 +89,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
     }
 
-    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/ulesek', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
         const id = data.postId;
         newPost._id = id;
@@ -108,7 +111,7 @@ export class UjBejegyzesUlesekComponent implements OnInit {
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time,
     }
 
-    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/ulesek/' + id, post)
+    return new Promise(resolve => {this.http.put<{ message: string }>(BACKEND_URL + '/' + id, post)
       .subscribe((data) => {
         resolve(data);
       })
@@ -116,14 +119,14 @@ export class UjBejegyzesUlesekComponent implements OnInit {
   }
 
   onTitleClicked(form: NgForm) {
-    this.generateMeetingTitle(form, this.author);
+    this.generateMeetingTitle(form);
   }
 
   onContentClicked(form: NgForm) {
     this.generateMeetingContent(form, this.author);
   }
 
-  generateMeetingTitle(form: NgForm, author: Felhasznalo) {
+  generateMeetingTitle(form: NgForm) {
     if(this.isTitleClicked || this.mode == 'editPost' || !this.checkInputValidity(form)) return;
     this.isTitleClicked = true;
 

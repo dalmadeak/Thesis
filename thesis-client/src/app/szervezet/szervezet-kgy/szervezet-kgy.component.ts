@@ -9,6 +9,9 @@ import { Kuldottgyules } from "./kuldottgyules.model";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/bejelentkezes/user.service";
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/kuldottgyules';
+
 @Component ({
   selector: 'app-szervezet-kgy',
   templateUrl: './szervezet-kgy.component.html',
@@ -57,7 +60,7 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/kuldottgyules')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -80,7 +83,7 @@ export class SzervezetKuldottgyulesComponent implements OnInit {
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/kuldottgyules/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.kuldottgyulesObject.filter(post => post._id !== postId);
         this.kuldottgyulesObject = updatedPost;

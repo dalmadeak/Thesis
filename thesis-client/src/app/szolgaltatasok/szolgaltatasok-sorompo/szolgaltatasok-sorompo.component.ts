@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { Sorompo } from './sorompo.model';
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/sorompo';
+
 @Component({
   selector: 'app-szolgaltatasok-sorompo',
   templateUrl: './szolgaltatasok-sorompo.component.html',
@@ -64,7 +67,7 @@ export class SzolgaltatasokSorompoComponent {
       isApproved: false
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/sorompo', newPost)
+    this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
       const id = data.postId;
       newPost._id = id;

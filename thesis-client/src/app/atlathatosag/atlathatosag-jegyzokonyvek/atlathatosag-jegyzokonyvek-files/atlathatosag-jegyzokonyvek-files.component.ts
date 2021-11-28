@@ -9,6 +9,9 @@ import { Jegyzokonyvek } from '../jegyzokonyvek.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import { environment } from "../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/jegyzokonyvek';
+
 @Component({
   selector: 'app-atlathatosag-jegyzokonyvek-files',
   templateUrl: './atlathatosag-jegyzokonyvek-files.component.html',
@@ -57,7 +60,7 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/jegyzokonyvek')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -79,7 +82,7 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/jegyzokonyvek/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.jegyzokonyvekObject.filter(post => post._id !== postId);
         this.jegyzokonyvekObject = updatedPost;
@@ -103,7 +106,7 @@ export class AtlathatosagJegyzokonyvekFilesComponent implements OnInit {
   }
 
   filterObject(data : Array<any>) {
-    let copyOfObject = data.slice().reverse();
+    let copyOfObject = data;
     if (this.filterData !== null && this.filterData !== '') {
       copyOfObject = copyOfObject.filter(el => el.committee == this.filterData.id)
     }

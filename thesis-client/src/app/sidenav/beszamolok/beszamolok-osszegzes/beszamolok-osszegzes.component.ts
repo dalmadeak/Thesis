@@ -4,7 +4,9 @@ import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/bejelentkezes/user.service';
-import { SajatBeszamolok } from '../../sajat-beszamolok/sajat-beszamolok.model';
+
+import { environment } from "../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/havi-beszamolok';
 
 @Component({
   selector: 'app-beszamolok-osszegzes',
@@ -44,7 +46,7 @@ export class BeszamolokOsszegzesComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/havi-beszamolok/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.summarizeObject.filter((post : any) => post._id !== postId);
         this.summarizeObject = updatedPost;

@@ -1,10 +1,11 @@
-import { Component, ElementRef, ViewChild, OnInit, DoCheck } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-
 import { SajatBeszamolok } from '../sajat-beszamolok/sajat-beszamolok.model';
-
 import { map } from 'rxjs/operators'
 import { faTrash, faPencilAlt, faList } from '@fortawesome/free-solid-svg-icons';
+
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/havi-beszamolok';
 
 @Component({
   selector: 'app-beszamolok',
@@ -39,7 +40,7 @@ export class BeszamolokComponent implements OnInit{
   }
 
   getPosts() {
-    this.http.get<{posts: any}>('http://localhost:3000/api/havi-beszamolok')
+    this.http.get<{posts: any}>(BACKEND_URL)
       .pipe(
         map(postData => {
         return postData.posts.map((post: any) => {

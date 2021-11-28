@@ -6,6 +6,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { Belepokartya } from 'src/app/szolgaltatasok/szolgaltatasok-belepokartya/belepokartya.model';
 
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/belepokartya';
+
 @Component({
   selector: 'app-admin-panel-belepokartya',
   templateUrl: './admin-panel-belepokartya.component.html',
@@ -50,7 +53,7 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/belepokartya/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
         });
@@ -87,7 +90,7 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
       isApproved: form.value.adminGroup.isApproved
     }
 
-    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/belepokartya', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
         const id = data.postId;
         newPost._id = id;
@@ -112,7 +115,7 @@ export class AdminPanelBelepokartyaComponent implements OnInit {
       isApproved: form.value.adminGroup.isApproved
     }
 
-    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/belepokartya/' + id, post)
+    return new Promise(resolve => {this.http.put<{ message: string }>(BACKEND_URL + '/' + id, post)
       .subscribe((data) => {
         resolve(data);
       })

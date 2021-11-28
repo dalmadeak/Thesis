@@ -6,6 +6,9 @@ import { NgForm } from '@angular/forms';
 import { Felhasznalo } from 'src/app/bejelentkezes/user.model';
 import { UserService } from 'src/app/bejelentkezes/user.service';
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/auth';
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -39,7 +42,7 @@ export class ProfilComponent implements OnInit{
     this.userData = this.userService.getUserInformation();
     this.authLevel = this.userService.getUserAuthorizationLevel(this.userData);
     this.postId = this.userData.userId;
-    this.http.get<{message: string, post: any }>('http://localhost:3000/api/auth/' + this.postId)
+    this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
     .subscribe((fetchedData) => {
       this.editablePost = fetchedData.post[0];
     });
@@ -74,7 +77,7 @@ export class ProfilComponent implements OnInit{
       fullName: form.value.adminGroup.fullName,
       email: form.value.adminGroup.email,
     }
-    this.http.patch<{ message: string }>('http://localhost:3000/api/auth/register/user/' + id, post)
+    this.http.patch<{ message: string }>(BACKEND_URL + '/register/user/' + id, post)
       .subscribe()
   }
 
@@ -84,7 +87,7 @@ export class ProfilComponent implements OnInit{
         password: form.value.passwordGroup.newPassword,
         oldPass: form.value.passwordGroup.oldPassword,
       }
-      this.http.patch<{ message: string }>('http://localhost:3000/api/auth/register/password/' + id, post)
+      this.http.patch<{ message: string }>(BACKEND_URL + '/register/password/' + id, post)
         .subscribe(message => {
           if (message.message == 'User updated successfully') {
             this.openModal(template);

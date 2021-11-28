@@ -5,12 +5,15 @@ import { NgForm } from '@angular/forms';
 
 import { Belepokartya } from './belepokartya.model';
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/belepokartya';
+
 @Component({
   selector: 'app-szolgaltatasok-belepokartya',
   templateUrl: './szolgaltatasok-belepokartya.component.html',
   styleUrls: ['./szolgaltatasok-belepokartya.component.css']
 })
-export class SzolgaltatasokBelepokartyaComponent {
+export class SzolgaltatasokBelepokartyaComponent implements OnInit{
   modalRef: BsModalRef = new BsModalRef();
   editablePost : Belepokartya = {
     _id : '',
@@ -36,9 +39,7 @@ export class SzolgaltatasokBelepokartyaComponent {
     private modalService: BsModalService) {
   }
 
- ngOnInit() {
-
-  }
+ ngOnInit() {}
 
   onSubmit(form: NgForm, template: TemplateRef<any>) {
     this.addNewPost(form, template);
@@ -47,7 +48,6 @@ export class SzolgaltatasokBelepokartyaComponent {
   }
 
   addNewPost(form : NgForm, template: TemplateRef<any>) {
-    let today = new Date();
     const newPost : Belepokartya = {
       _id: null,
       postType: 'belepokartya',
@@ -63,7 +63,7 @@ export class SzolgaltatasokBelepokartyaComponent {
       isApproved: false
     }
 
-    this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/belepokartya', newPost)
+    this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
       const id = data.postId;
       newPost._id = id;

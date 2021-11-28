@@ -7,6 +7,9 @@ import { Jegyzokonyvek } from '../../../../atlathatosag/atlathatosag-jegyzokonyv
 import { mimeType } from '../mime-type.validator';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/jegyzokonyvek';
+
 @Component({
   selector: 'app-uj-bejegyzes-jegyzokonyvek',
   templateUrl: './uj-bejegyzes-jegyzokonyvek.component.html',
@@ -57,7 +60,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/jegyzokonyvek/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
         .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
           this.form.setValue(
@@ -99,7 +102,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
     postData.append('date', this.form.value.date + ' ' + this.form.value.time);
     postData.append('file', this.form.value.file, this.form.value.title);
 
-    return new Promise(resolve => {this.http.post<{ message: string, post: Jegyzokonyvek }>('http://localhost:3000/api/jegyzokonyvek', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Jegyzokonyvek }>(BACKEND_URL, postData)
       .subscribe((data) => {
         resolve(data);
       })
@@ -129,7 +132,7 @@ export class UjBejegyzesJegyzokonyvekComponent implements OnInit {
       }
     }
 
-    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/jegyzokonyvek/' + id, postData)
+    return new Promise(resolve => {this.http.put<{ message: string }>(BACKEND_URL + '/' + id, postData)
       .subscribe((data) => {
         resolve(data);
       })

@@ -7,6 +7,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Kabinet } from 'src/app/szervezet/szervezet-kabinet/kabinet.model';
 import { mimeType } from '../mime-type.validator';
 
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/kabinet';
+
 @Component({
   selector: 'app-admin-panel-kabinet',
   templateUrl: './admin-panel-kabinet.component.html',
@@ -47,7 +50,7 @@ export class AdminPanelKabinetComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/kabinet/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
           this.form.setValue(
@@ -86,7 +89,7 @@ export class AdminPanelKabinetComponent implements OnInit {
     postData.append('email', this.form.value.email);
     postData.append('file', this.form.value.file, this.form.value.name);
 
-    return new Promise(resolve => {this.http.post<{ message: string, post: Kabinet }>('http://localhost:3000/api/kabinet', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Kabinet }>(BACKEND_URL, postData)
       .subscribe((data) => {
         resolve(data);
       })
@@ -114,7 +117,7 @@ export class AdminPanelKabinetComponent implements OnInit {
         file: this.form.value.file,
       }
     }
-    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/kabinet/' + id, postData)
+    return new Promise(resolve => {this.http.put<{ message: string }>(BACKEND_URL + '/' + id, postData)
       .subscribe((data) => {
         resolve(data);
       })

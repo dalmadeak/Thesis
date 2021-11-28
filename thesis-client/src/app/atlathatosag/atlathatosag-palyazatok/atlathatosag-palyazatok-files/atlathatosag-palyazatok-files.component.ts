@@ -9,6 +9,9 @@ import { Palyazatok } from '../palyazatok.model';
 import { map } from 'rxjs/operators'
 import { faDownload, faFile, faFilePdf, faFileArchive, faChevronDown, faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import { environment } from "../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/palyazatok';
+
 @Component({
   selector: 'app-atlathatosag-palyazatok-files',
   templateUrl: './atlathatosag-palyazatok-files.component.html',
@@ -56,7 +59,7 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/palyazatok')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -77,7 +80,7 @@ export class AtlathatosagPalyazatokFilesComponent implements OnInit{
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/palyazatok/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.palyazatokObject.filter(post => post._id !== postId);
         this.palyazatokObject = updatedPost;

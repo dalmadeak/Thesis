@@ -72,7 +72,7 @@ router.post('/login', (req, res, next) => {
         position: fetchedUser.position,
         email: fetchedUser.email,
         permissions: fetchedUser.permissions,
-      }, 'ikhokSecretPass_forTokenIdentification', { expiresIn: '1h'});
+      }, process.env.token_pass, { expiresIn: '1h'});
       res.status(200).json({
         token: token,
         expiresIn: '60',

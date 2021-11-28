@@ -7,6 +7,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Elnokseg } from 'src/app/szervezet/szervezet-elnokseg/elnokseg.model';
 import { mimeType } from '../mime-type.validator';
 
+import { environment } from "../../../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/elnokseg';
+
 
 @Component({
   selector: 'app-admin-panel-elnokseg',
@@ -48,7 +51,7 @@ export class AdminPanelElnoksegComponent implements OnInit {
       if (paramMap.has('id')) {
         this.mode = 'editPost';
         this.postId = paramMap.get('id');
-        this.http.get<{message: string, post: any }>('http://localhost:3000/api/elnokseg/' + this.postId)
+        this.http.get<{message: string, post: any }>(BACKEND_URL + '/' + this.postId)
           .subscribe((fetchedData) => {
           this.editablePost = fetchedData.post[0];
           this.form.setValue(
@@ -87,7 +90,7 @@ export class AdminPanelElnoksegComponent implements OnInit {
     postData.append('email', this.form.value.email);
     postData.append('file', this.form.value.file, this.form.value.name);
 
-    return new Promise(resolve => {this.http.post<{ message: string, post: Elnokseg }>('http://localhost:3000/api/elnokseg', postData)
+    return new Promise(resolve => {this.http.post<{ message: string, post: Elnokseg }>(BACKEND_URL, postData)
       .subscribe((data) => {
         resolve(data);
       })
@@ -116,7 +119,7 @@ export class AdminPanelElnoksegComponent implements OnInit {
       }
     }
 
-    return new Promise(resolve => {this.http.put<{ message: string }>('http://localhost:3000/api/elnokseg/' + id, postData)
+    return new Promise(resolve => {this.http.put<{ message: string }>(BACKEND_URL + '/' + id, postData)
       .subscribe((data) => {
         resolve(data);
       })

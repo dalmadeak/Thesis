@@ -9,6 +9,9 @@ import { Elnokseg } from "./elnokseg.model";
 import { UserService } from "src/app/bejelentkezes/user.service";
 import { Subscription } from "rxjs";
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/elnokseg';
+
 @Component({
   selector: 'app-szervezet-elnokseg',
   templateUrl: './szervezet-elnokseg.component.html',
@@ -49,7 +52,7 @@ export class SzervezetElnoksegComponent implements OnInit {
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/elnokseg')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -70,7 +73,7 @@ export class SzervezetElnoksegComponent implements OnInit {
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/elnokseg/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.elnoksegObject.filter(post => post._id !== postId);
         this.elnoksegObject = updatedPost;

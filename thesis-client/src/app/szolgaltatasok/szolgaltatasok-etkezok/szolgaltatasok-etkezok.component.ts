@@ -9,6 +9,9 @@ import { Bufek } from "./bufek.model";
 import { UserService } from "src/app/bejelentkezes/user.service";
 import { Subscription } from "rxjs";
 
+import { environment } from "../../../environments/environment";
+const BACKEND_URL = environment.apiUrl + '/bufek';
+
 @Component({
   selector: 'app-szolgaltatasok-etkezok',
   templateUrl: './szolgaltatasok-etkezok.component.html',
@@ -50,7 +53,7 @@ export class SzolgaltatasokEtkezokComponent {
 
   getPosts() {
     this.spinner.show();
-    this.http.get<{message: string, posts: any }>('http://localhost:3000/api/bufek')
+    this.http.get<{message: string, posts: any }>(BACKEND_URL)
       .pipe(map(postData => {
         return postData.posts.map((post: any) => {
          return {
@@ -74,7 +77,7 @@ export class SzolgaltatasokEtkezokComponent {
 
   deletePost(postId : string) {
     this.modalRef.hide();
-    this.http.delete('http://localhost:3000/api/bufek/' + postId)
+    this.http.delete(BACKEND_URL + '/' + postId)
       .subscribe(() => {
         const updatedPost = this.irodaObject.filter(post => post._id !== postId);
         this.irodaObject = updatedPost;
