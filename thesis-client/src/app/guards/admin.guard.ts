@@ -16,5 +16,4 @@ export class AdminGuard implements CanActivate{
     }
     return isAuthenticated && userData.permissions == 'admin';
   }
-
 }

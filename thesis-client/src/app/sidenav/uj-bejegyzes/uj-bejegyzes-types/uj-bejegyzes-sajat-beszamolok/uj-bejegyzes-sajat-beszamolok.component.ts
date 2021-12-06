@@ -86,7 +86,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
 
-    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>('http://localhost:3000/api/havi-beszamolok', newPost)
+    return new Promise(resolve => {this.http.post<{ message: string, postId: string }>(BACKEND_URL, newPost)
       .subscribe((data) => {
         const id = data.postId;
         newPost._id = id;
@@ -104,7 +104,7 @@ export class UjBejegyzesSajatBeszamolokComponent implements OnInit {
       date: form.value.newRegistryGroup.date + ' ' + form.value.newRegistryGroup.time
     }
 
-    return new Promise(resolve => {this.http.patch<{ message: string }>('http://localhost:3000/api/havi-beszamolok/' + id, post)
+    return new Promise(resolve => {this.http.patch<{ message: string }>(BACKEND_URL + '/' + id, post)
       .subscribe((data) => {
         resolve(data);
       })

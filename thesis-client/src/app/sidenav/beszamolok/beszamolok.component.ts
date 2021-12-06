@@ -30,7 +30,6 @@ export class BeszamolokComponent implements OnInit{
     this.getPosts();
   }
 
-  //Ez csak egy kopija az eredetinek, mert inmutable-nek kéne maradni
   getObject() {
     return [...this.myReportsObject].slice().reverse();
   }

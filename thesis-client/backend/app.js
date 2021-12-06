@@ -24,12 +24,12 @@ const elnoksegRoutes = require('./routes/elnokseg')
 const kabinetRoutes = require('./routes/kabinet')
 const kuldottgyulesRoutes = require('./routes/kuldottgyules')
 
-mongoose.connect("mongodb+srv://elnok:" + process.env.mongo_pass + "@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://elnok:xtiV4hKL05OqaLbM@cluster0.pz2bf.mongodb.net/ikhokDatabase?retryWrites=true&w=majority")
   .then(() => {
-    console.log('Connected to database!')
+    console.log('Sikeres csatlakozás az adatbázishoz!')
   })
   .catch(() => {
-    console.log('Connection failed.');
+    console.log('Sikertelen csatlakozás.');
   });
 
 app.use((req,res,next) => {
@@ -45,10 +45,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json({limit: '50mb'}));
 
-//Hozzáférés a képek mappához
+//Statikus hozzáférés a képek mappához
 app.use('/images', express.static(path.join('images')));
 
-//Hozzáférés a fájlok mappához
+//Statikus hozzáférés a fájlok mappához
 app.use('/files', express.static(path.join('files')));
 
 //Statikus hozzáférés az Angular mappához
